@@ -1,0 +1,7 @@
+-review group contract/peer evaluation and sign
+-product backlog
+-sprint backlog
+-using git and importing eclipse project
+-see issues in git
+-make sure everyone has all necessary programs and is updated to correct versions
+
