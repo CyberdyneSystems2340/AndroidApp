@@ -14,7 +14,8 @@ local.properties
 .settings/
 .loadpath
 gen/
-R.java
+/R.java
+/gen/
 
 # External tool builders
 .externalToolBuilders/
