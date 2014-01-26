@@ -22,12 +22,21 @@ public class MainActivity extends Activity {
         return true;
     }
     
-    public void welcomeLoginClicked(View V){
-    	Intent intent = new Intent(this, TestActivity.class);
+    
+    /**
+     * This method is on call from the activity_main button. TestActivity was removed
+     * and now lies within LoginActivity which activity_login will now link to 
+     * activity_test. (K3n0b1)
+     * 
+     * @param v
+     */
+    public void welcomeLoginClicked(View v){
+    	// Removed TestActivity and replace LoginActivity
+    	Intent intent = new Intent(this, LoginActivity.class); 
     	startActivity(intent);
     }
     
-    public void welcomeRegisterClicked(View V) {
+    public void welcomeRegisterClicked(View v) {
     	
     }
     

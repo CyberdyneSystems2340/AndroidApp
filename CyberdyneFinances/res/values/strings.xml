@@ -7,5 +7,9 @@
     <string name="login_button_text">Login</string>
     <string name="register_button_text">Register</string>
     <string name="title_activity_test">It works!</string>
+    <string name="username_text">Username</string>
+    <string name="password_text">Password</string>
+    <string name="login_button">Login</string>
+    <string name="title_activity_login">LoginActivity</string>
 
 </resources>
