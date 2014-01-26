@@ -1,0 +1,8 @@
+-assign assignment submission person
+-talk about design of the app
+	theme
+	layout
+	colors
+-use cases for M3?
+-login screen
+-app icon
