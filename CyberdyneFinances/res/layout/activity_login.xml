@@ -14,7 +14,7 @@
         android:layout_marginTop="124dp"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="@string/username_text" >
+        android:hint="@string/username_text" >
 
         <requestFocus />
     </EditText>
@@ -25,10 +25,11 @@
         android:layout_height="wrap_content"
         android:layout_alignLeft="@+id/usernameEditText"
         android:layout_below="@+id/usernameEditText"
+        android:layout_centerInParent="true"
         android:layout_marginTop="14dp"
         android:ems="10"
-        android:inputType="numberPassword|textPassword"
-        android:text="@string/password_text" />
+        android:hint="@string/password_text"
+        android:inputType="textPassword" />
 
     <Button
         android:id="@+id/loginButton"
