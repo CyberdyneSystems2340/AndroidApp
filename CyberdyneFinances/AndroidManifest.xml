@@ -14,29 +14,28 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.cyberdynefinances.MainActivity"
+            android:name="com.cyberdynefinances.WelcomeActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name="com.cyberdynefinances.TestActivity"
             android:label="@string/title_activity_test"
-            android:parentActivityName="com.cyberdynefinances.MainActivity" >
+            android:parentActivityName="com.cyberdynefinances.WelcomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.cyberdynefinances.MainActivity" />
+                android:value="com.cyberdynefinances.WelcomeActivity" />
         </activity>
         <activity
             android:name="com.cyberdynefinances.LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName="com.example.myfirstap.MainActivity" >
+            android:parentActivityName="com.cyberdyne.WelcomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.myfirstap.MainActivity" />
+                android:value="com.example.myfirstap.WelcomeActivity" />
         </activity>
     </application>
 
