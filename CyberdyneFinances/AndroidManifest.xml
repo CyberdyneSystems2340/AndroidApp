@@ -32,10 +32,10 @@
         <activity
             android:name="com.cyberdynefinances.LoginActivity"
             android:label="@string/title_activity_login"
-            android:parentActivityName="com.cyberdyne.WelcomeActivity" >
+            android:parentActivityName="com.cyberdynefinances.WelcomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.myfirstap.WelcomeActivity" />
+                android:value="com.cyberdynefinances.WelcomeActivity" />
         </activity>
     </application>
 
