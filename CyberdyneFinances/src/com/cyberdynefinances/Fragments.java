@@ -12,64 +12,50 @@ import android.widget.EditText;
 
 public class Fragments 
 {
-
-	public static class CardWelcomeFragment extends Fragment {
+	
+	public static class WelcomeFragment extends Fragment 
+	{
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            return inflater.inflate(R.layout.activity_main, container, false);
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+        {
+            return inflater.inflate(R.layout.activity_welcome, container, false);
         }
     }
 	
-	public static class CardLoginFragment extends Fragment implements OnClickListener{
-		View root;
+	public static class LoginFragment extends Fragment
+	{
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        	View view = inflater.inflate(R.layout.activity_test, container, false);
-     	    Button button = (Button) view.findViewById(R.id.login_screen_login_button);
-     	    button.setOnClickListener(this);
-     	    root = view;
-            return view;
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+        {
+            return inflater.inflate(R.layout.activity_login, container, false);
         }
-
-		@Override
-		public void onClick(View view) 
-		{
-			
-			Intent intent = new Intent(this.getActivity(), SuccessActivity.class);
-			EditText editText = (EditText) root.findViewById(R.id.edit_message);
-			String message = editText.getText().toString();
-			intent.putExtra("M", message);
-			startActivity(intent);
-			
-			//Animation.flipCard(new Fragments.CardSuccessFragment(), getFragmentManager(), R.id.containerFrame);
-		}
     }
-	
-	public static class CardRegisterFragment extends Fragment {
+	/*
+	public static class RegisterFragment extends Fragment 
+	{
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+        {
             return inflater.inflate(R.layout.activity_register, container, false);
         }
     }
 	
-	public static class CardSuccessFragment extends Fragment {
-		ViewGroup root;
+	public static class SuccessFragment extends Fragment 
+	{
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+        {
         	return inflater.inflate(R.layout.activity_success, container, false);
         }
     }
 	
-	public static class GenericFragment extends Fragment {
-		ViewGroup root;
+	public static class GenericFragment extends Fragment 
+	{
         @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+        {
         	return inflater.inflate(R.layout.activity_generic, container, false);
         }
     }
-	
+    */
 }
