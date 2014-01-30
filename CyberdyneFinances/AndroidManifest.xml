@@ -24,10 +24,10 @@
         <activity
             android:name="com.cyberdynefinances.TestActivity"
             android:label="@string/title_activity_test"
-            android:parentActivityName="com.cyberdynefinances.WelcomeActivity" >
+            android:parentActivityName="com.cyberdynefinances.LoginActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.cyberdynefinances.WelcomeActivity" />
+                android:value="com.cyberdynefinances.LoginActivity" />
         </activity>
         <activity
             android:name="com.cyberdynefinances.LoginActivity"

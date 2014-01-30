@@ -1,9 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?>
 <!-- Current login screen, DO NOT LAUGH AT MY BACKGROUND!!!(K3n0bi) -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/coin_bg" >
+    android:background="@drawable/background_3" >
 
     <EditText
         android:id="@+id/usernameEditText"
@@ -15,7 +14,6 @@
         android:ems="10"
         android:inputType="textPersonName"
         android:hint="@string/username_text" >
-
         <requestFocus />
     </EditText>
 

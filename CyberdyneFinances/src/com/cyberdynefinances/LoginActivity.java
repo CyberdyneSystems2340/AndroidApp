@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.support.v4.app.NavUtils;
 
 public class LoginActivity extends Activity {
@@ -13,9 +14,10 @@ public class LoginActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        this.requestWindowFeature(Window.FEATURE_NO_TITLE);	//disables the action bar
 		setContentView(R.layout.activity_login);
 		// Show the Up button in the action bar.
-		setupActionBar();
+		//setupActionBar();		Not needed if there isnt going to be an action bar also gives nullPointerError is called when action bar is disabled
 	}
 
 	/**
@@ -61,5 +63,4 @@ public class LoginActivity extends Activity {
 		}
 		return super.onOptionsItemSelected(item);
 	}
-
 }
