@@ -18,8 +18,8 @@
 
     <Button
         android:id="@+id/welcome_screen_register_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="68dp"
+        android:layout_height="30dp"
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:paddingRight="30dp"
