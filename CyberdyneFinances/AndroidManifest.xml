@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.cyberdynefinances.WelcomeActivity"
+            android:name="com.cyberdynefinances.WelcomeContainer"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,10 +24,10 @@
         <activity
             android:name="com.cyberdynefinances.TestActivity"
             android:label="@string/title_activity_test"
-            android:parentActivityName="com.cyberdynefinances.LoginActivity" >
+            android:parentActivityName="com.cyberdynefinances.WelcomeContainer" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.cyberdynefinances.LoginActivity" />
+                android:value="com.cyberdynefinances.WelcomeContainer" />
         </activity>
         <activity
             android:name="com.cyberdynefinances.LoginActivity"
@@ -35,7 +35,7 @@
             android:parentActivityName="com.cyberdynefinances.WelcomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.cyberdynefinances.WelcomeActivity" />
+                android:value="com.cyberdynefinances.WelcomeContainer" />
         </activity>
     </application>
 

@@ -42,7 +42,8 @@ public final class R {
         public static final int icon=0x7f020006;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0005;
+        public static final int action_settings=0x7f0a0006;
+        public static final int container_welcome=0x7f0a0005;
         public static final int loginButton=0x7f0a0002;
         public static final int passwordEditText=0x7f0a0001;
         public static final int usernameEditText=0x7f0a0000;
@@ -57,6 +58,7 @@ public final class R {
         public static final int activity_login=0x7f030000;
         public static final int activity_test=0x7f030001;
         public static final int activity_welcome=0x7f030002;
+        public static final int frame_welcome=0x7f030003;
     }
     public static final class menu {
         public static final int login=0x7f090000;

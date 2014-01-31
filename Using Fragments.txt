@@ -1,0 +1,61 @@
+In order to animate transitions between activites fragments must be used.
+Fragments are similar to activites in a few ways.
+	-They use the same kind of xml file to define their layouts
+	-Well I guess that is the only way they are similar
+
+So fragments cant exist by themselves, they need something to contain them.
+The container is used to actually display the fragments through the use of the FragmentManager.
+
+CONTAINER
+The container is a normal activity. In the code it is called WelcomeContainer.
+It will contain all the fragments relating to and steming from the welcome screen like login and register.
+The container's xml layout is really simple and set with this line
+	setContentView(R.layout.frame_welcome); just like a normal activity
+	the xml layout file fram_welcome is extremely simple it doesnt actually display anything but is needed as the parent of the fragments.
+	Note it uses the FrameLayout format.
+The few lines following tell the container what fragment to display when the container is created.
+	 if (savedInstanceState == null) 
+	 {
+            getFragmentManager()
+                    .beginTransaction()
+                    .add(R.id.container_welcome, new Fragments.WelcomeFragment())
+                    .commit();
+         }
+	This reads..
+		If this container has a saved state which it doesnt on first creation
+		get the fragment manager, start a new transaction. Telling it we will be modifiying the fragments it is managing.
+		add the fragment to display specifing the container through its ID and creating a new fragment object.
+		then commit these changes telling the manager we are done modifiying stuff.
+IMPORTANT: That is pretty much it for the container the last thing to note is that any button click methods for any of the fragments that this container is holding are called in the container class. This can be changed to button clicks go to the fragment class.
+
+FRAGMENTS
+Now to look at coding a new fragment in the Fragments class.
+Fragments are really simple classes composed of only an onCreateView method which is used to tell the fragment what xml layout file to use and a container telling it what container it is a part of.
+	If you wanted you can handle a fragments button clicks within its class instead of in its container. This is done by creating a listener and stuff. If you are want to or need to do this I can show you.
+
+ANIMATION
+Animating transitions between fragments is pretty easy. I made it so it would be.
+For the most part a transition is to a different fragment is called when a button is clicked so in the container class you will see calls to aniamtion methods in the button clicked methods.
+The animation methods take care of setting appropriate animations and adding the new fragment to the fragment manager.
+	public static void flip(Fragment frag, FragmentManager manager, int container) 
+	{
+        manager.beginTransaction()
+        		.setCustomAnimations(R.anim.card_flip_right_in, R.anim.card_flip_right_out,R.anim.card_flip_left_in, R.anim.card_flip_left_out)
+        		.replace(container, frag)
+        		.addToBackStack(null)
+                .commit();
+    	}
+	We start a new transaction with the appropriate fragment manager, 
+	set custom animations defined in xml files, 
+	replace the current fragment in the container with the new one, 
+	add to the back of the fragment stack so the right fragments are shown when the back button is pressed, 
+	and then commit the changes.
+The setCustomAnimations takes four parameters an enter, exit, popEnter, and popExit animation.
+	enter is the animation when going to the fragment
+	exit: when leaving the fragment to go to a new one
+	popEnter: going back from a previous fragment to this one entering this one
+	popExit: going to a previous fragment from this one leaving
+
+That's it on how to use the container, fragments, and animations.
+Youll probably want to look at the code to assit in understanding this.
+Definatly ask me any questions or concerns you have about this stuff

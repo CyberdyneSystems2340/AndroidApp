@@ -1,7 +1,6 @@
 package com.cyberdynefinances;
 
 import android.app.Fragment;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -27,28 +26,28 @@ public class Fragments
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
         {
-            return inflater.inflate(R.layout.activity_login, container, false);
+        	return inflater.inflate(R.layout.activity_login, container, false);
         }
     }
-	/*
+	
 	public static class RegisterFragment extends Fragment 
 	{
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
         {
-            return inflater.inflate(R.layout.activity_register, container, false);
+            return inflater.inflate(R.layout.activity_test, container, false);
         }
     }
 	
-	public static class SuccessFragment extends Fragment 
+	public static class TestFragment extends Fragment 
 	{
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
         {
-        	return inflater.inflate(R.layout.activity_success, container, false);
+        	return inflater.inflate(R.layout.activity_test, container, false);
         }
     }
-	
+	/*
 	public static class GenericFragment extends Fragment 
 	{
         @Override
