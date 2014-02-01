@@ -1,0 +1,27 @@
+Use Case: 
+	Register New User
+
+Primary Actor:
+	New User
+
+Stakeholders and their Goals:
+	New User: Wants to create an account to use the app
+
+Preconditions:
+	User has opened the app and indicated they would like to register
+
+Postconditions:
+	Username and password are saved to the system and the user can now log in
+
+Main Success Scenario:
+	1. New user opens the application and indicates they would like to register.
+	2. System displays a screen where user will input their information.
+	3. User inputs information to the system, including username and password.
+	4. System saves information such that the user can now log in.
+	5. User proceeds to login.
+
+Extensions/Alternative Flows:
+	*
+	3.1 Username is already taken and cannot be saved to the system.
+	3.2 System displays screen where user will input his or her information with a message stating the username was already taken.
+	3.3 Repeat 3.1 and 3.2 until a username is input that is not taken, then proceed with step 4.
