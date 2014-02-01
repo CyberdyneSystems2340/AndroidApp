@@ -24,7 +24,7 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-    	android:alpha="0"
+        android:background="@drawable/register_button_icon"
         android:onClick="welcomeRegisterClicked" />
 
 </RelativeLayout>

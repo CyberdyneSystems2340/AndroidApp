@@ -7,8 +7,7 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.Button;
-import android.widget.EditText;
+//import android.widget.EditText;
 
 public class WelcomeContainer extends Activity
 {
@@ -55,7 +54,7 @@ public class WelcomeContainer extends Activity
     
     public void loginClicked(View view)
     {
-    	EditText editText = (EditText) view.findViewById(R.id.usernameEditText);
+    	//EditText editText = (EditText) view.findViewById(R.id.usernameEditText);
     	//were username and password would be retrieved from the text fields and passed to a verifing class
     	
     	Animation.fade(new Fragments.TestFragment(), getFragmentManager(), R.id.container_welcome);
