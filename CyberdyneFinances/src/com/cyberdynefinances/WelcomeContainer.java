@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -52,13 +53,4 @@ public class WelcomeContainer extends Activity
     {
     	Animation.fade(new Fragments.RegisterFragment(), getFragmentManager(), R.id.container_welcome);
     }
-    
-    public void loginClicked(View view)
-    {
-    	EditText editText = (EditText) view.findViewById(R.id.usernameEditText);
-    	//were username and password would be retrieved from the text fields and passed to a verifing class
-    	
-    	Animation.fade(new Fragments.TestFragment(), getFragmentManager(), R.id.container_welcome);
-    }
-	
 }

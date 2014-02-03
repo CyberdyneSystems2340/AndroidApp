@@ -4,9 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 
 public class Animation 
-{
-
-	
+{	
 	public static void flip(Fragment frag, FragmentManager manager, int container) 
 	{
         manager.beginTransaction()
@@ -16,7 +14,6 @@ public class Animation
                 .commit();
     }
     
-	
 	public static void slide(Fragment frag, FragmentManager manager, int container) 
 	{
         manager.beginTransaction()
@@ -34,5 +31,4 @@ public class Animation
         		.addToBackStack(null)
                 .commit();
     }
-	
 }
