@@ -1,0 +1,11 @@
+-go over containers, fragments, and animations
+-Assign people to M4 tasks
+	checking username and password
+	if above is correct
+		transition screens
+	else
+		error notification for incorrect info
+
+-Design part of M4
+-Schedule either a skype call or another meeting to complete M4
+	dont really like meeting thursday as it is too close to when the assignment is due
