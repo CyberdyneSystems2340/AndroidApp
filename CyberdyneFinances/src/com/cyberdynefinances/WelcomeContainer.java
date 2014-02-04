@@ -18,6 +18,7 @@ public class WelcomeContainer extends Activity
     protected void onCreate(Bundle savedInstanceState) 
 	{
         super.onCreate(savedInstanceState);
+        LoginHandler.readTable(getSharedPreferences("CyberdynePrefsFile",0));
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.frame_welcome);
         if (savedInstanceState == null) {
@@ -42,6 +43,13 @@ public class WelcomeContainer extends Activity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+    
+    @Override
+    public void onStop()
+    {
+    	super.onStop();
+    	LoginHandler.writeTable(getSharedPreferences("CyberdynePrefsFile",0));
     }
     
     public void welcomeLoginClicked(View view)
