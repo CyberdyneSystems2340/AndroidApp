@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -16,6 +17,7 @@ public class WelcomeContainer extends Activity
     protected void onCreate(Bundle savedInstanceState) 
 	{
         super.onCreate(savedInstanceState);
+        LoginHandler.readTable(getSharedPreferences("CyberdynePrefsFile",0));
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.frame_welcome);
         if (savedInstanceState == null) {
@@ -42,6 +44,13 @@ public class WelcomeContainer extends Activity
         return super.onOptionsItemSelected(item);
     }
     
+    @Override
+    public void onStop()
+    {
+    	super.onStop();
+    	LoginHandler.writeTable(getSharedPreferences("CyberdynePrefsFile",0));
+    }
+    
     public void welcomeLoginClicked(View view)
     {
     	Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome);
@@ -59,5 +68,4 @@ public class WelcomeContainer extends Activity
     	
     	Animation.fade(new Fragments.TestFragment(), getFragmentManager(), R.id.container_welcome);
     }
-	
 }

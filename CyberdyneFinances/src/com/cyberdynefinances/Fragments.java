@@ -18,13 +18,35 @@ public class Fragments
         }
     }
 	
-	public static class LoginFragment extends Fragment
+	public static class LoginFragment extends Fragment implements OnClickListener
 	{
+		View root;
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
         {
-        	return inflater.inflate(R.layout.activity_login, container, false);
+        	root = inflater.inflate(R.layout.activity_login, container, false);
+        	Button loginButton = (Button) root.findViewById(R.id.loginButton);
+        	loginButton.setOnClickListener(this);
+        	return root;
         }
+
+		@Override
+		public void onClick(View view) 
+		{
+			EditText editText = (EditText) root.findViewById(R.id.usernameEditText);
+	    	String username = editText.getText().toString();
+	    	editText = (EditText) root.findViewById(R.id.passwordEditText);
+	    	String password = editText.getText().toString();
+	    	if(LoginHandler.isValidLogin(username, password))
+	    	{
+	    		Animation.fade(new Fragments.TestFragment(), getFragmentManager(), R.id.container_welcome);
+	    	}
+	    	else
+	    	{
+	    		//show login error
+	    	}
+		}
+        
     }
 	
 	public static class RegisterFragment extends Fragment 
