@@ -2,9 +2,7 @@ package com.cyberdynefinances;
 
 import java.util.Hashtable;
 import java.util.Map.Entry;
-import android.app.Activity;
 import android.content.SharedPreferences;
-import android.util.Log;
 
 public class LoginHandler 
 {
