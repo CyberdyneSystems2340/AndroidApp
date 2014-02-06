@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 
 public class Animation 
 {	
+	//Flip animation
 	public static void flip(Fragment frag, FragmentManager manager, int container) 
 	{
         manager.beginTransaction()
@@ -14,6 +15,7 @@ public class Animation
                 .commit();
     }
     
+	//Slide animation
 	public static void slide(Fragment frag, FragmentManager manager, int container) 
 	{
         manager.beginTransaction()
@@ -23,6 +25,7 @@ public class Animation
                 .commit();
     }
 	
+	//Fade animation
 	public static void fade(Fragment frag, FragmentManager manager, int container) 
 	{
         manager.beginTransaction()

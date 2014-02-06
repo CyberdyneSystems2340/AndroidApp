@@ -10,10 +10,12 @@ import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class WelcomeContainer extends Activity
 {
 
+	//Called when this activity is created sets up the fragmentManager and makes the Welcome Fragment the initial fragment to display
 	@Override
     protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -45,6 +47,7 @@ public class WelcomeContainer extends Activity
         return super.onOptionsItemSelected(item);
     }
     
+    //Called when the app is closed to write out data that needs to be stored
     @Override
     public void onStop()
     {
@@ -52,13 +55,34 @@ public class WelcomeContainer extends Activity
     	LoginHandler.writeTable(getSharedPreferences("CyberdynePrefsFile",0));
     }
     
+    //Login button on the welcome screen
     public void welcomeLoginClicked(View view)
     {
     	Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome);
     }
     
+    //Register button on the welcome screen
     public void welcomeRegisterClicked(View view)
     {
     	Animation.fade(new Fragments.RegisterFragment(), getFragmentManager(), R.id.container_welcome);
+    }
+    
+    //Login button on the login screen
+    //Gets the text inside the text fields and calls a validation method in LoginHandler to then transition to the next screen or display an error notification
+    public void loginClicked(View view)
+    {
+    	View root = Fragments.LoginFragment.root;
+    	EditText editText = (EditText) root.findViewById(R.id.usernameEditText);
+    	String username = editText.getText().toString();
+    	editText = (EditText) root.findViewById(R.id.passwordEditText);
+    	String password = editText.getText().toString();
+    	if(LoginHandler.isValidLogin(username, password))
+    	{
+    		Animation.fade(new Fragments.TestFragment(), getFragmentManager(), R.id.container_welcome);
+    	}
+    	else
+    	{
+    		Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_LONG).show();
+    	}
     }
 }
