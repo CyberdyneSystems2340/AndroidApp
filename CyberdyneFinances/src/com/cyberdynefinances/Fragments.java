@@ -8,6 +8,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class Fragments 
 {
@@ -46,7 +47,7 @@ public class Fragments
 	    	}
 	    	else
 	    	{
-	    		//show login error
+	    		Toast.makeText(getActivity(), "Incorrect username or password", Toast.LENGTH_LONG).show();
 	    	}
 		}
         
