@@ -55,13 +55,12 @@ public class Fragments
     }
 	
 	//Fragment for the register screen
-	//Needs appropriate layout xml
 	public static class RegisterFragment extends Fragment 
 	{
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
         {
-            return inflater.inflate(R.layout.activity_test, container, false);
+            return inflater.inflate(R.layout.activity_register, container, false);
         }
     }
 	

@@ -13,7 +13,7 @@ import android.widget.Toast;
 public class WelcomeContainer extends Activity
 {
 
-	//Called when this activity is created sets up the fragmentManager and makes the Welcome Fragment the initial fragment to display
+	//Called when this activity  is created sets up the fragmentManager and makes the Welcome Fragment the initial fragment to display
 	@Override
     protected void onCreate(Bundle savedInstanceState) 
 	{
