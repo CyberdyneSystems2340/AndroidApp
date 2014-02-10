@@ -50,4 +50,20 @@ public class Fragments
         	return inflater.inflate(R.layout.activity_test, container, false);
         }
     }
+	
+	//Fragment for coin flip loading animation
+	public static class CoinflipFragment extends Fragment 
+	{
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+        {
+        	View root = inflater.inflate(R.layout.activity_coinflip, container, false);
+        	ImageView coinImage = (ImageView) root.findViewById(R.id.coinflip);
+        	coinImage.setBackgroundResource(R.anim.coinflip);
+
+        	AnimationDrawable coinAnimation = (AnimationDrawable) coinImage.getBackground();
+        	coinAnimation.start();
+        	return root;
+        }
+    }
 }
