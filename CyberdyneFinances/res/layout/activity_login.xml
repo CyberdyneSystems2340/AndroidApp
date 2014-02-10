@@ -17,6 +17,7 @@
         <requestFocus />
     </EditText>
 
+    
     <EditText
         android:id="@+id/passwordEditText"
         android:layout_width="wrap_content"

@@ -11,5 +11,5 @@
     <string name="password_text">Password</string>
     <string name="login_button">Login</string>
     <string name="title_activity_login">LoginActivity</string>
-
+	<string name="balance_text">Balance</string>
 </resources>

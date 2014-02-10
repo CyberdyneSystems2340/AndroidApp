@@ -43,12 +43,18 @@ public final class R {
         public static final int register_button_icon=0x7f020007;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0005;
-        public static final int container_welcome=0x7f0a0004;
+        public static final int RegisterButton=0x7f0a0008;
+        public static final int action_settings=0x7f0a000b;
+        public static final int container_welcome=0x7f0a000a;
         public static final int loginButton=0x7f0a0002;
         public static final int passwordEditText=0x7f0a0001;
+        public static final int registerBalance=0x7f0a0006;
+        public static final int registerInterest=0x7f0a0007;
+        public static final int registerPassword=0x7f0a0003;
+        public static final int registerPasswordVerification=0x7f0a0005;
+        public static final int registerUsername=0x7f0a0004;
         public static final int usernameEditText=0x7f0a0000;
-        public static final int welcome_screen_register_button=0x7f0a0003;
+        public static final int welcome_screen_register_button=0x7f0a0009;
     }
     public static final class integer {
         public static final int card_flip_time_full=0x7f060001;
@@ -56,9 +62,10 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_login=0x7f030000;
-        public static final int activity_test=0x7f030001;
-        public static final int activity_welcome=0x7f030002;
-        public static final int frame_welcome=0x7f030003;
+        public static final int activity_register=0x7f030001;
+        public static final int activity_test=0x7f030002;
+        public static final int activity_welcome=0x7f030003;
+        public static final int frame_welcome=0x7f030004;
     }
     public static final class menu {
         public static final int login=0x7f090000;
@@ -68,6 +75,7 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
+        public static final int balance_text=0x7f07000a;
         public static final int hello_world=0x7f070002;
         public static final int login_button=0x7f070008;
         public static final int login_button_text=0x7f070003;
