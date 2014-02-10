@@ -13,12 +13,13 @@ public final class R {
         public static final int card_flip_left_out=0x7f040001;
         public static final int card_flip_right_in=0x7f040002;
         public static final int card_flip_right_out=0x7f040003;
-        public static final int fade_in=0x7f040004;
-        public static final int fade_out=0x7f040005;
-        public static final int slide_left_in=0x7f040006;
-        public static final int slide_left_out=0x7f040007;
-        public static final int slide_right_in=0x7f040008;
-        public static final int slide_right_out=0x7f040009;
+        public static final int coinflip=0x7f040004;
+        public static final int fade_in=0x7f040005;
+        public static final int fade_out=0x7f040006;
+        public static final int slide_left_in=0x7f040007;
+        public static final int slide_left_out=0x7f040008;
+        public static final int slide_right_in=0x7f040009;
+        public static final int slide_right_out=0x7f04000a;
     }
     public static final class attr {
     }
@@ -38,33 +39,53 @@ public final class R {
         public static final int background_4=0x7f020002;
         public static final int bg_place_holder=0x7f020003;
         public static final int coin_bg=0x7f020004;
-        public static final int ic_launcher=0x7f020005;
-        public static final int icon=0x7f020006;
+        public static final int coin_small1=0x7f020005;
+        public static final int coin_small10=0x7f020006;
+        public static final int coin_small11=0x7f020007;
+        public static final int coin_small12=0x7f020008;
+        public static final int coin_small13=0x7f020009;
+        public static final int coin_small14=0x7f02000a;
+        public static final int coin_small15=0x7f02000b;
+        public static final int coin_small16=0x7f02000c;
+        public static final int coin_small17=0x7f02000d;
+        public static final int coin_small18=0x7f02000e;
+        public static final int coin_small2=0x7f02000f;
+        public static final int coin_small3=0x7f020010;
+        public static final int coin_small4=0x7f020011;
+        public static final int coin_small5=0x7f020012;
+        public static final int coin_small6=0x7f020013;
+        public static final int coin_small7=0x7f020014;
+        public static final int coin_small8=0x7f020015;
+        public static final int coin_small9=0x7f020016;
+        public static final int ic_launcher=0x7f020017;
+        public static final int icon=0x7f020018;
     }
     public static final class id {
-        public static final int RegisterButton=0x7f0a0008;
-        public static final int action_settings=0x7f0a000b;
-        public static final int container_welcome=0x7f0a000a;
-        public static final int loginButton=0x7f0a0002;
-        public static final int passwordEditText=0x7f0a0001;
-        public static final int registerBalance=0x7f0a0006;
-        public static final int registerInterest=0x7f0a0007;
-        public static final int registerPassword=0x7f0a0004;
-        public static final int registerPasswordVerification=0x7f0a0005;
-        public static final int registerUsername=0x7f0a0003;
-        public static final int usernameEditText=0x7f0a0000;
-        public static final int welcome_screen_register_button=0x7f0a0009;
+        public static final int RegisterButton=0x7f0a0009;
+        public static final int action_settings=0x7f0a000c;
+        public static final int coinflip=0x7f0a0000;
+        public static final int container_welcome=0x7f0a000b;
+        public static final int loginButton=0x7f0a0003;
+        public static final int passwordEditText=0x7f0a0002;
+        public static final int registerBalance=0x7f0a0007;
+        public static final int registerInterest=0x7f0a0008;
+        public static final int registerPassword=0x7f0a0005;
+        public static final int registerPasswordVerification=0x7f0a0006;
+        public static final int registerUsername=0x7f0a0004;
+        public static final int usernameEditText=0x7f0a0001;
+        public static final int welcome_screen_register_button=0x7f0a000a;
     }
     public static final class integer {
         public static final int card_flip_time_full=0x7f060001;
         public static final int card_flip_time_half=0x7f060000;
     }
     public static final class layout {
-        public static final int activity_login=0x7f030000;
-        public static final int activity_register=0x7f030001;
-        public static final int activity_test=0x7f030002;
-        public static final int activity_welcome=0x7f030003;
-        public static final int frame_welcome=0x7f030004;
+        public static final int activity_coinflip=0x7f030000;
+        public static final int activity_login=0x7f030001;
+        public static final int activity_register=0x7f030002;
+        public static final int activity_test=0x7f030003;
+        public static final int activity_welcome=0x7f030004;
+        public static final int frame_welcome=0x7f030005;
     }
     public static final class menu {
         public static final int login=0x7f090000;
