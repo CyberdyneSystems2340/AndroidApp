@@ -83,4 +83,10 @@ public class WelcomeContainer extends Activity
     		Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_LONG).show();
     	}
     }
+    
+    public void registerClicked(View view)
+    {
+    	//check textfields here
+    	Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome);
+    }
 }
