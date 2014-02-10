@@ -1,0 +1,24 @@
+<animation-list xmlns:android="http://schemas.android.com/apk/res/android"
+    android:oneshot="false" 
+    android:id="@+id/coinflip" >
+    
+    <item android:drawable="@drawable/coin_small1" android:duration="400" />
+    <item android:drawable="@drawable/coin_small2" android:duration="30" />
+    <item android:drawable="@drawable/coin_small3" android:duration="30" />
+    <item android:drawable="@drawable/coin_small4" android:duration="30" />
+    <item android:drawable="@drawable/coin_small5" android:duration="30" />
+    <item android:drawable="@drawable/coin_small6" android:duration="30" />
+    <item android:drawable="@drawable/coin_small7" android:duration="30" />
+    <item android:drawable="@drawable/coin_small8" android:duration="30" />
+    <item android:drawable="@drawable/coin_small9" android:duration="30" />
+    <item android:drawable="@drawable/coin_small10" android:duration="30" />
+    <item android:drawable="@drawable/coin_small11" android:duration="30" />
+    <item android:drawable="@drawable/coin_small12" android:duration="30" />
+    <item android:drawable="@drawable/coin_small13" android:duration="30" />
+    <item android:drawable="@drawable/coin_small14" android:duration="30" />
+    <item android:drawable="@drawable/coin_small15" android:duration="30" />
+    <item android:drawable="@drawable/coin_small16" android:duration="30" />
+    <item android:drawable="@drawable/coin_small17" android:duration="30" />
+    <item android:drawable="@drawable/coin_small18" android:duration="30" />
+
+</animation-list>
