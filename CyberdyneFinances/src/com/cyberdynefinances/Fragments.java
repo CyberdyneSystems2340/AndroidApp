@@ -57,10 +57,14 @@ public class Fragments
 	//Fragment for the register screen
 	public static class RegisterFragment extends Fragment 
 	{
+		public static View root;
+		
         @Override
+        //This method sets the current view to that of the registration activity for the user.
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
         {
-            return inflater.inflate(R.layout.activity_register, container, false);
+            root = inflater.inflate(R.layout.activity_register, container, false);
+            return root;
         }
     }
 	

@@ -7,12 +7,10 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-<<<<<<< HEAD
 //import android.widget.EditText;
-=======
 import android.widget.EditText;
 import android.widget.Toast;
->>>>>>> 91da6ac8069a625985486fe712b4afe3dadd61f8
+
 
 public class WelcomeContainer extends Activity
 {
@@ -69,14 +67,7 @@ public class WelcomeContainer extends Activity
     	Animation.fade(new Fragments.RegisterFragment(), getFragmentManager(), R.id.container_welcome);
     }
     
-<<<<<<< HEAD
-    public void loginClicked(View view)
-    {
-    	//EditText editText = (EditText) view.findViewById(R.id.usernameEditText);
-    	//were username and password would be retrieved from the text fields and passed to a verifing class
-    	
-    	Animation.fade(new Fragments.TestFragment(), getFragmentManager(), R.id.container_welcome);
-=======
+
     //Login button on the login screen
     //Gets the text inside the text fields and calls a validation method in LoginHandler to then transition to the next screen or display an error notification
     public void loginClicked(View view)
@@ -94,6 +85,5 @@ public class WelcomeContainer extends Activity
     	{
     		Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_LONG).show();
     	}
->>>>>>> 91da6ac8069a625985486fe712b4afe3dadd61f8
     }
 }
