@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Cyberdyne Finances</string>
@@ -11,5 +10,8 @@
     <string name="password_text">Password</string>
     <string name="login_button">Login</string>
     <string name="title_activity_login">LoginActivity</string>
-	<string name="balance_text">Balance</string>
+	<string name="register_balance">Balance</string>
+	<string name="register_interest">Interest Rate(%)</string>
+	<string name="register_retypePassword">Retype Password</string>
+	
 </resources>

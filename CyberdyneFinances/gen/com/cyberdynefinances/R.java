@@ -50,9 +50,9 @@ public final class R {
         public static final int passwordEditText=0x7f0a0001;
         public static final int registerBalance=0x7f0a0006;
         public static final int registerInterest=0x7f0a0007;
-        public static final int registerPassword=0x7f0a0003;
+        public static final int registerPassword=0x7f0a0004;
         public static final int registerPasswordVerification=0x7f0a0005;
-        public static final int registerUsername=0x7f0a0004;
+        public static final int registerUsername=0x7f0a0003;
         public static final int usernameEditText=0x7f0a0000;
         public static final int welcome_screen_register_button=0x7f0a0009;
     }
@@ -75,12 +75,14 @@ public final class R {
     public static final class string {
         public static final int action_settings=0x7f070001;
         public static final int app_name=0x7f070000;
-        public static final int balance_text=0x7f07000a;
         public static final int hello_world=0x7f070002;
         public static final int login_button=0x7f070008;
         public static final int login_button_text=0x7f070003;
         public static final int password_text=0x7f070007;
+        public static final int register_balance=0x7f07000a;
         public static final int register_button_text=0x7f070004;
+        public static final int register_interest=0x7f07000b;
+        public static final int register_retypePassword=0x7f07000c;
         public static final int title_activity_login=0x7f070009;
         public static final int title_activity_test=0x7f070005;
         public static final int username_text=0x7f070006;

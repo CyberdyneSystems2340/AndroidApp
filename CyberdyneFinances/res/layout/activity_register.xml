@@ -9,6 +9,19 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".TestActivity" >
 
+	<EditText
+        android:id="@+id/registerUsername"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:ems="10"
+        android:hint="@string/username_text"
+        android:inputType="textPersonName" >
+        <requestFocus />
+    </EditText>
+    
     <EditText
         android:id="@+id/registerPassword"
         android:layout_width="wrap_content"
@@ -28,7 +41,7 @@
         android:layout_below="@+id/registerPassword"
         android:layout_marginTop="14dp"
         android:ems="10"
-        android:hint="Retype Password"
+        android:hint="@string/register_retypePassword"
         android:inputType="textPassword" />
 
     <EditText
@@ -40,9 +53,8 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="14dp"
         android:ems="10"
-        android:hint="@string/balance_text"
-        android:inputType="number" />
-"
+        android:hint="@string/register_balance"
+        android:inputType="numberDecimal" />
 
     <EditText
         android:id="@+id/registerInterest"
@@ -53,8 +65,8 @@
         android:layout_centerInParent="true"
         android:layout_marginTop="14dp"
         android:ems="10"
-        android:hint="Interest Rate(%)"
-        android:inputType="number" />
+        android:hint="@string/register_interest"
+        android:inputType="numberDecimal" />"
 
     <Button
         android:id="@+id/RegisterButton"
@@ -66,31 +78,4 @@
         android:onClick="registrationClicked"
         android:text="@string/register_button_text" />
 
-    <EditText
-        android:id="@+id/registerUsername"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="54dp"
-        android:ems="10"
-        android:hint="@string/username_text"
-        android:inputType="textPersonName" >
-
-        <requestFocus />
-    </EditText>
-
 </RelativeLayout>
-<!--
-Full name - EditTextfield
-
-Username
-
-Password
-
-Password verification
-
-Balance
-
-Interest rate
--->

@@ -1,10 +1,12 @@
 package com.cyberdynefinances;
 
 import android.app.Fragment;
+import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 public class Fragments 
 {
@@ -27,31 +29,8 @@ public class Fragments
         {
         	//Actual view relating to the fragment needed to gain access to elements of the login screen like text fields
         	root = inflater.inflate(R.layout.activity_login, container, false);
-        	//Button loginButton = (Button) root.findViewById(R.id.loginButton);
-        	//loginButton.setOnClickListener(this);
         	return root;
         }
-
-        //Moved to WelcomeContainer using normal button click method
-        //A button listener click method has to be set in this class rather than the container in order to gain access to elements of the login screen like text fields
-        /*
-		@Override
-		public void onClick(View view) 
-		{
-			EditText editText = (EditText) root.findViewById(R.id.usernameEditText);
-	    	String username = editText.getText().toString();
-	    	editText = (EditText) root.findViewById(R.id.passwordEditText);
-	    	String password = editText.getText().toString();
-	    	if(LoginHandler.isValidLogin(username, password))
-	    	{
-	    		Animation.fade(new Fragments.TestFragment(), getFragmentManager(), R.id.container_welcome);
-	    	}
-	    	else
-	    	{
-	    		Toast.makeText(getActivity(), "Incorrect username or password", Toast.LENGTH_LONG).show();
-	    	}
-		}
-        */
     }
 	
 	//Fragment for the register screen
@@ -75,6 +54,22 @@ public class Fragments
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
         {
         	return inflater.inflate(R.layout.activity_test, container, false);
+        }
+    }
+	
+	//Fragment for coin flip loading animation
+	public static class CoinflipFragment extends Fragment 
+	{
+        @Override
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+        {
+        	View root = inflater.inflate(R.layout.activity_coinflip, container, false);
+        	ImageView coinImage = (ImageView) root.findViewById(R.id.coinflip);
+        	coinImage.setBackgroundResource(R.anim.coinflip);
+
+        	AnimationDrawable coinAnimation = (AnimationDrawable) coinImage.getBackground();
+        	coinAnimation.start();
+        	return root;
         }
     }
 }
