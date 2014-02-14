@@ -39,9 +39,7 @@ public class WelcomeContainer extends Activity
                 // See http://developer.android.com/design/patterns/navigation.html for more.
                 NavUtils.navigateUpTo(this, new Intent(this, WelcomeContainer.class));
                 return true;
-
         }
-
         return super.onOptionsItemSelected(item);
     }
     
@@ -98,31 +96,32 @@ public class WelcomeContainer extends Activity
     	// Checks for blank username
     	if(newName.length() == 0)
     	{
-    		Toast.makeText(this, "Give a username", Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "Invalid username", Toast.LENGTH_LONG).show();
     	}
     	
     	// Check if the name exists or not
     	else if(LoginHandler.containsName(newName))
     	{
-    		Toast.makeText(this, "Username already taken", Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "Username already exists", Toast.LENGTH_LONG).show();
     	}
     	
     	// Verify the password
     	else if(!(newPassword.equals(verifyPassword)))
     	{
-    		Toast.makeText(this, "Passwords are not the same", Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "Retype Password", Toast.LENGTH_LONG).show();
     	}
     	
     	// Then you only need to check the first password and see if it matches the given properties
     	// Then return back to the welcome screen
     	else if((newPassword.length() < 6) || !(newPassword.matches(".*\\d.*")))
     	{
-    		Toast.makeText(this, "Password needs 6 characters or more and atleast one number",Toast.LENGTH_LONG).show();
+    		Toast.makeText(this, "Password must contain 6 or more characters and a number",Toast.LENGTH_LONG).show();
     	}
     	
     	else
     	{
     		LoginHandler.register(newName, newPassword); // Yay! you are a user now!!!!!
+    		Toast.makeText(this, "Registration Successful",Toast.LENGTH_LONG).show();
     		Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome);
     	}
     }

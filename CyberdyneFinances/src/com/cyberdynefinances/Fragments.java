@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ImageView;
 
 public class Fragments 
@@ -31,6 +32,15 @@ public class Fragments
         	root = inflater.inflate(R.layout.activity_login, container, false);
         	return root;
         }
+        
+        //clears the text fields when the fragment is paused
+        @Override
+        public void onPause()
+        {
+        	super.onPause();
+    		((EditText) root.findViewById(R.id.usernameEditText)).setText("");
+    		((EditText) root.findViewById(R.id.passwordEditText)).setText("");
+        }
     }
 	
 	//Fragment for the register screen
@@ -42,6 +52,18 @@ public class Fragments
         {
         	root2 = inflater.inflate(R.layout.activity_register, container, false);
         	return root2;
+        }
+        
+        //clears the text fields when the fragment is paused
+        @Override
+        public void onPause()
+        {
+        	super.onPause();
+        	((EditText) root2.findViewById(R.id.registerUsername)).setText("");
+    		((EditText) root2.findViewById(R.id.registerPassword)).setText("");
+    		((EditText) root2.findViewById(R.id.registerPasswordVerification)).setText("");
+    		((EditText) root2.findViewById(R.id.registerBalance)).setText("");
+    		((EditText) root2.findViewById(R.id.registerInterest)).setText("");
         }
     }
 	
