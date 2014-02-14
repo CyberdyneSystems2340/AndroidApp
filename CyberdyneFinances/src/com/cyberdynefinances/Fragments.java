@@ -36,10 +36,12 @@ public class Fragments
 	//Fragment for the register screen
 	public static class RegisterFragment extends Fragment 
 	{
+		public static View root2; // Copied Al >:D
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
         {
-            return inflater.inflate(R.layout.activity_register, container, false);
+        	root2 = inflater.inflate(R.layout.activity_register, container, false);
+        	return root2;
         }
     }
 	

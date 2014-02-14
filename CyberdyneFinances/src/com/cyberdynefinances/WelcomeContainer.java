@@ -84,9 +84,46 @@ public class WelcomeContainer extends Activity
     	}
     }
     
+    // Right now this is just adding the username and password to the hashmap
     public void registerClicked(View view)
     {
-    	//check textfields here
-    	Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome);
+    	View root2 = Fragments.RegisterFragment.root2;
+    	EditText editText = (EditText) root2.findViewById(R.id.registerUsername);
+    	String newName = editText.getText().toString();
+    	editText = (EditText) root2.findViewById(R.id.registerPassword);
+    	String newPassword = editText.getText().toString();
+    	editText = (EditText) root2.findViewById(R.id.registerPasswordVerification);
+    	String verifyPassword = editText.getText().toString();
+    	
+    	// Checks for blank username
+    	if(newName.length() == 0)
+    	{
+    		Toast.makeText(this, "Give a username", Toast.LENGTH_LONG).show();
+    	}
+    	
+    	// Check if the name exists or not
+    	else if(LoginHandler.containsName(newName))
+    	{
+    		Toast.makeText(this, "Username already taken", Toast.LENGTH_LONG).show();
+    	}
+    	
+    	// Verify the password
+    	else if(!(newPassword.equals(verifyPassword)))
+    	{
+    		Toast.makeText(this, "Passwords are not the same", Toast.LENGTH_LONG).show();
+    	}
+    	
+    	// Then you only need to check the first password and see if it matches the given properties
+    	// Then return back to the welcome screen
+    	else if((newPassword.length() < 6) || !(newPassword.matches(".*\\d.*")))
+    	{
+    		Toast.makeText(this, "Password needs 6 characters or more and atleast one number",Toast.LENGTH_LONG).show();
+    	}
+    	
+    	else
+    	{
+    		LoginHandler.register(newName, newPassword); // Yay! you are a user now!!!!!
+    		Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome);
+    	}
     }
 }

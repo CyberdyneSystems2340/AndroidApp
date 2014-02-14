@@ -54,4 +54,10 @@ public class LoginHandler
 	{
 		table.put(username, password.hashCode());
 	}
+	
+	//Checks if the hashmap contains the key(username)
+	public static boolean containsName(String userName)
+	{
+		return table.containsKey(userName);
+	}
 }
