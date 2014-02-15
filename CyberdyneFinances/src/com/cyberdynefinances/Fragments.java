@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 public class Fragments 
 {
@@ -92,4 +93,19 @@ public class Fragments
         	return root;
         }
     }
+	
+	//test account fragment to display account info
+	public static class AccountFragment extends Fragment
+	{
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+	    {
+			View root = inflater.inflate(R.layout.activity_account, container, false);
+
+        	((TextView) root.findViewById(R.id.account_username)).setText("Username: "+AccountManager.getActiveUser());
+    		((TextView) root.findViewById(R.id.account_name)).setText(AccountManager.getActiveAccount().getAccountInfo());
+    		
+			return root;
+	    }
+	}
 }

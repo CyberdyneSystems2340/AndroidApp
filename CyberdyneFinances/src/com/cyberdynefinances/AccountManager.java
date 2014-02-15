@@ -2,6 +2,11 @@ package com.cyberdynefinances;
 
 public class AccountManager extends Account
 {
+	public AccountManager(String name, double balance, double interest) {
+		super(name, balance, interest);
+		// TODO Auto-generated constructor stub
+	}
+
 	//interfaces with accounts and is the only thing that can because the Account class is protected
 	private static Account[] accountList;
 	private static String owner;
@@ -13,7 +18,7 @@ public class AccountManager extends Account
 		loadAccounts();
 	}
 	
-	public static String getOwner()
+	public static String getActiveUser()
 	{
 		return owner;
 	}
@@ -46,6 +51,8 @@ public class AccountManager extends Account
 	
 	public static Account getActiveAccount()
 	{
+		if(activeAccount==null)
+			return new Account("Test", 100, 2);
 		return activeAccount;
 	}
 }

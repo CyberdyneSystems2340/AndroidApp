@@ -74,7 +74,19 @@ public class WelcomeContainer extends Activity
     	String password = editText.getText().toString();
     	if(LoginHandler.isValidLogin(username, password))
     	{
-    		Animation.fade(new Fragments.TestFragment(), getFragmentManager(), R.id.container_welcome);
+    		//if admin display admin specific activity
+    		if(username.equals("admin"))
+    		{
+	    		Intent intent = new Intent(this, AdminActivity.class);
+	    		startActivity(intent);
+    		}
+    		//normal user load their accounts and display the normal account viewing activity
+    		else
+	    	{
+	    		AccountManager.loadUser(username);
+	    		Intent intent = new Intent(this, AccountContainer.class);
+	    		startActivity(intent);
+	    	}
     	}
     	else
     	{

@@ -2,9 +2,16 @@ package com.cyberdynefinances;
 
 public class Account 
 {
-
-	protected String accountName = "";
+	protected String accountName;
 	protected double balance = 0.0;
+	protected double interest = 0.0;
+	
+	public Account(String name, double balance, double interest)
+	{
+		accountName = name;
+		this.balance = balance;
+		this.interest = interest;
+	}
 	
 	protected void withdraw(double amount)
 	{
@@ -25,9 +32,10 @@ public class Account
 	protected String getAccountInfo()
 	{
 		String string = "";
-		string += "Account: "+ accountName;
-		string += "Owner: " + AccountManager.getOwner();
-		string += "Balance: " + balance;
+		string += "Account Name: "+ accountName + "\n";
+		string += "Owner: " + AccountManager.getActiveUser() + "\n";
+		string += "Balance: " + balance + "\n";
+		string += "Interest: " + interest + "\n";
 		string += "Transaction History:\n" + getTransactionHist();
 		return string;
 	}

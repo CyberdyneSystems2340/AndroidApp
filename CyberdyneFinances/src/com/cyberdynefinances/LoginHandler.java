@@ -1,5 +1,6 @@
 package com.cyberdynefinances;
 
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map.Entry;
 import android.content.SharedPreferences;
@@ -59,5 +60,19 @@ public class LoginHandler
 	public static boolean containsName(String userName)
 	{
 		return table.containsKey(userName);
+	}
+	
+	public static String getUsernames()
+	{
+		Enumeration<String> e = table.keys();
+		String s = "";
+		while(e.hasMoreElements())
+		{
+			String name = e.nextElement();
+			if(name.equals("admin"))
+				continue;
+			s += name+"\n";
+		}
+		return s;
 	}
 }
