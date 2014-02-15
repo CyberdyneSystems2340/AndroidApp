@@ -1,5 +1,7 @@
 package com.cyberdynefinances;
 
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map.Entry;
@@ -62,17 +64,17 @@ public class LoginHandler
 		return table.containsKey(userName);
 	}
 	
-	public static String getUsernames()
+	public static ArrayList<String> getUsernames()
 	{
 		Enumeration<String> e = table.keys();
-		String s = "";
+		ArrayList<String> arr = new ArrayList<String>();
 		while(e.hasMoreElements())
 		{
 			String name = e.nextElement();
 			if(name.equals("admin"))
 				continue;
-			s += name+"\n";
+			arr.add(name);
 		}
-		return s;
+		return arr;
 	}
 }
