@@ -6,7 +6,6 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -14,11 +13,11 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.RelativeLayout;
-import android.widget.ScrollView;
-import android.widget.TextView;
 
 public class AdminActivity extends Activity
 {
+	Button del;
+	
 	@Override
     protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -48,7 +47,6 @@ public class AdminActivity extends Activity
     	OnClick l = new OnClick();
     	ArrayList<String> names = LoginHandler.getUsernames();
     	int prevId = 1;
-    	ScrollView sv = (ScrollView)this.findViewById(R.id.admin_scroll);
     	RelativeLayout rl = (RelativeLayout)this.findViewById(R.id.admin_relative);
     	for(String name : names)
     	{
@@ -62,10 +60,15 @@ public class AdminActivity extends Activity
     			lp.addRule(RelativeLayout.BELOW, prevId);
     		lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
     		rl.addView(b, lp);
+    		
     		b.setOnClickListener(l);
     		
     		prevId = id;
     	}
+    	
+    	del = new Button(this);
+    	del.setText("Delete");
+    	del.setOnClickListener(new OnClickDel());
     }
     
     private int findId(int id)
@@ -86,14 +89,51 @@ public class AdminActivity extends Activity
 			Button b = (Button)view;
 			String name = (String) b.getText();
 			b.setClickable(false);
+			b.setPivotX(0f);
+			b.setScaleX(0.75f);
+			del.setId(b.getId()+100);
+			
+			View v = (View) view.getParent();
+			RelativeLayout rl = (RelativeLayout)v.findViewById(R.id.admin_relative);
+			
 			if(prevButton!=null)
 			{
+				rl.removeView(del);
 				prevButton.setClickable(true);
+				prevButton.setPivotX(0f);
+				prevButton.setScaleX(1.0f);
 			}
-			Log.e("tag", name);
 			prevButton = b;
+			
+			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
+    		lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+    		lp.addRule(RelativeLayout.BELOW, b.getId()-2);
+    		rl.addView(del, lp);
 		}
     	
+    }
+    
+    class OnClickDel implements OnClickListener
+    {
+		@Override
+		public void onClick(View view) 
+		{
+			Button b = (Button)view;
+			int usernameId = b.getId()-100;
+			View v = (View) view.getParent();
+			Button nameButton = (Button) v.findViewById(usernameId);
+			String name = nameButton.getText().toString();
+			LoginHandler.remove(name);
+			
+			v = (View) view.getParent();
+			RelativeLayout rl = (RelativeLayout)v.findViewById(R.id.admin_relative);
+			rl.removeView(nameButton);
+			rl.removeView(del);
+			rl.removeAllViews();
+			
+			AdminActivity.this.populateView();
+		}
+    
     }
 	
 }

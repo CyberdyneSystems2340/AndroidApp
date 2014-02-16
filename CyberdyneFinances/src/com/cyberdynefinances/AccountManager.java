@@ -2,6 +2,7 @@ package com.cyberdynefinances;
 
 public class AccountManager extends Account
 {
+	//not used as this is a static class
 	public AccountManager(String name, double balance, double interest) {
 		super(name, balance, interest);
 		// TODO Auto-generated constructor stub
