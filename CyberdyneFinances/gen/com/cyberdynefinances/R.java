@@ -39,11 +39,6 @@ public final class R {
         public static final int background_4=0x7f020002;
         public static final int bg_place_holder=0x7f020003;
         public static final int coin_bg=0x7f020004;
-<<<<<<< HEAD
-        public static final int ic_launcher=0x7f020005;
-        public static final int icon=0x7f020006;
-        public static final int register_button_icon=0x7f020007;
-=======
         public static final int coin_small1=0x7f020005;
         public static final int coin_small10=0x7f020006;
         public static final int coin_small11=0x7f020007;
@@ -64,7 +59,7 @@ public final class R {
         public static final int coin_small9=0x7f020016;
         public static final int ic_launcher=0x7f020017;
         public static final int icon=0x7f020018;
->>>>>>> 40a5d3379835ea4dfda9192bb174b631545a10e1
+        public static final int register_button_icon=0x7f020019;
     }
     public static final class id {
         public static final int RegisterButton=0x7f0a0009;
