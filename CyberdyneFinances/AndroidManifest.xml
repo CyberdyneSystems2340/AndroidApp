@@ -11,7 +11,9 @@
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme" >
+        android:theme="@style/AppTheme"
+        android:name="com.cyberdynefinances.MyApplication" >
+        
         <activity
             android:name="com.cyberdynefinances.WelcomeContainer"
             android:label="@string/app_name" >
