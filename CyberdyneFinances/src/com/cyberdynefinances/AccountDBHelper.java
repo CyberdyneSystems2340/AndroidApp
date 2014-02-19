@@ -8,15 +8,30 @@ import android.database.sqlite.SQLiteOpenHelper;
 import android.provider.BaseColumns;
 
 public final class AccountDBHelper extends SQLiteOpenHelper {
-	private static final String TEXT_TYPE = " TEXT", COMMA_SEP = ",",
-			SQL_CREATE_ENTRIES = "CREATE TABLE " + DBEntry.TABLE_NAME + " (" +
-					DBEntry._ID + " INTEGER PRIMARY KEY," +
-					DBEntry.COLUMN_NAME_ID + TEXT_TYPE + COMMA_SEP +
-					DBEntry.COLUMN_NAME_BALANCE + TEXT_TYPE + COMMA_SEP +
-					DBEntry.COLUMN_NAME_WITHDRAWAL + TEXT_TYPE + COMMA_SEP +
-					DBEntry.COLUMN_NAME_DEPOSIT + TEXT_TYPE + COMMA_SEP +
-					DBEntry.COLUMN_NAME_TIMESTAMP + TEXT_TYPE + COMMA_SEP,	
-			SQL_DELETE_ENTRIES = "DROP TABLE IF EXISTS " + DBEntry.TABLE_NAME;
+	private static final String 
+			//SQL Commands for creating the account, user, and transaction tables.
+			SQL_CREATE_ACCOUNT_ENTRIES = "CREATE TABLE " + 
+			DBEntry.ACCOUNT_TABLE_NAME + " (" +
+			DBEntry.ACCOUNT_COLUMN_NAME_ID + " INTEGER PRIMARY KEY," +
+			DBEntry.ACCOUNT_COLUMN_NAME_BALANCE + " TEXT," +
+			DBEntry.ACCOUNT_COLUMN_NAME_INTEREST + " TEXT);",
+			
+			SQL_CREATE_USER_ENTRIES = "CREATE TABLE " +
+			DBEntry.USER_TABLE_NAME + " (" +
+			DBEntry.USER_COLUMN_NAME_ID + " TEXT PRIMARY KEY," +
+			DBEntry.USER_COLUMN_NAME_PASSWORD + " TEXT," +
+			DBEntry.USER_COLUMN_NAME_ACCOUNTS + " TEXT);",
+			
+			SQL_CREATE_TRANSACTION_ENTRIES = "CREATE TABLE " +
+			DBEntry.TRANSACTION_TABLE_NAME + " (" +
+			DBEntry.TRANSACTION_COLUMN_NAME_ID + " TEXT," +
+			DBEntry.TRANSACTION_COLUMN_NAME_TRANSACTION + " INTEGER," +
+			DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP + " TEXT);",
+			
+			//SQL Commands to delete any of the above created tables.
+			SQL_DELETE_ACCOUNT_ENTRIES = "DROP TABLE IF EXISTS " + DBEntry.ACCOUNT_TABLE_NAME + ";",
+			SQL_DELETE_USER_ENTRIES = "DROP TABLE IF EXISTS " + DBEntry.USER_TABLE_NAME + ";",
+			SQL_DELETE_TRANSACTION_ENTRIES = "DROP TABLE IF EXISTS " + DBEntry.TRANSACTION_TABLE_NAME + ";";
 
 	
 	public static final int DATABASE_VERSION = 1;
@@ -29,24 +44,14 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 	
 	@Override
 	public void onCreate(SQLiteDatabase db) {
-		db.execSQL(SQL_CREATE_ENTRIES);
+		db.execSQL(SQL_CREATE_USER_ENTRIES + SQL_CREATE_ACCOUNT_ENTRIES + SQL_CREATE_TRANSACTION_ENTRIES);
 	}
 	
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-		db.execSQL(SQL_DELETE_ENTRIES);
+		db.execSQL(SQL_DELETE_USER_ENTRIES + SQL_DELETE_ACCOUNT_ENTRIES + SQL_DELETE_TRANSACTION_ENTRIES);
         onCreate(db);
 	}
 	
 	public static void onOpen() {}
-	
-	
-	
-	public static abstract class MakeEntry implements BaseColumns{
-		public static final String TABLE_NAME = "Accounts", COLUMN_NAME_ID = "ID",
-				COLUMN_NAME_BALANCE = "Balance", COLUMN_NAME_WITHDRAWAL = "Withdrawal",
-				COLUMN_NAME_DEPOSIT = "Deposit", COLUMN_NAME_TIMESTAMP = "Date";
-		
-		
-	}
 }

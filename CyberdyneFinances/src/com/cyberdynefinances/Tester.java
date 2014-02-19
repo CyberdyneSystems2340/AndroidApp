@@ -10,16 +10,12 @@ public class Tester {
 		SQLiteDatabase db = dbHelper.getWritableDatabase();
 		
 		ContentValues values = new ContentValues();
-		values.put(DBReaderContract.DBEntry.COLUMN_NAME_ID, "TestID");
-		values.put(DBReaderContract.DBEntry.COLUMN_NAME_BALANCE, "$$TestBalance$$");
-		values.put(DBReaderContract.DBEntry.COLUMN_NAME_WITHDRAWAL, ":(");
-		values.put(DBReaderContract.DBEntry.COLUMN_NAME_DEPOSIT, ":D");
-		values.put(DBReaderContract.DBEntry.COLUMN_NAME_TIMESTAMP, "TestTime");
+		values.put(DBReaderContract.DBEntry.USER_COLUMN_NAME_ID, "TestID");
 		
 		long newRowId;
 		newRowId = db.insert(
-				DBReaderContract.DBEntry.TABLE_NAME,
-				DBReaderContract.DBEntry.COLUMN_NAME_ID,
+				DBReaderContract.DBEntry.USER_TABLE_NAME,
+				DBReaderContract.DBEntry.USER_COLUMN_NAME_ID,
 				values);
 		
 		
