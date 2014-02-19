@@ -38,6 +38,22 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cyberdynefinances.WelcomeContainer" />
         </activity>
+        <activity
+            android:name="com.cyberdynefinances.AccountContainer"
+            android:label="@string/title_activity_login"
+            android:parentActivityName="com.cyberdynefinances.WelcomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cyberdynefinances.WelcomeContainer" />
+        </activity>
+        <activity
+            android:name="com.cyberdynefinances.AdminActivity"
+            android:label="@string/title_activity_login"
+            android:parentActivityName="com.cyberdynefinances.WelcomeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cyberdynefinances.WelcomeContainer" />
+        </activity>
     </application>
 
 </manifest>

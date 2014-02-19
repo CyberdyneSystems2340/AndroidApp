@@ -1,5 +1,10 @@
 package com.cyberdynefinances;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map.Entry;
 import android.content.SharedPreferences;
@@ -53,5 +58,32 @@ public class LoginHandler
 	public static void register(String username, String password)
 	{
 		table.put(username, password.hashCode());
+	}
+	
+	//Checks if the hashmap contains the key(username)
+	public static boolean containsName(String userName)
+	{
+		return table.containsKey(userName);
+	}
+	
+	public static ArrayList<String> getUsernames()
+	{
+		Enumeration<String> e = table.keys();
+		ArrayList<String> arr = new ArrayList<String>();
+		while(e.hasMoreElements())
+		{
+			String name = e.nextElement();
+			if(name.equals("admin"))
+				continue;
+			arr.add(name);
+		}
+		Collections.sort(arr);
+		
+		return arr;
+	}
+	
+	public static void remove(String username)
+	{
+		table.remove(username);
 	}
 }
