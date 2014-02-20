@@ -16,7 +16,7 @@ public class Dbtester_activity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dbtester_activity);
-		/*
+		
 		TextView tView = (TextView) findViewById(R.id.dbtester_textview);
 		
 		AccountDBHelper dbHelper = new AccountDBHelper(MyApplication.getAppContext());
@@ -41,7 +41,7 @@ public class Dbtester_activity extends Activity {
 		c.moveToFirst();
 		String itemID = c.getString(c.getColumnIndex(DBEntry.USER_COLUMN_NAME_ID));
 		
-		tView.setText(itemID);*/
+		tView.setText(itemID);
 	}
 
 	@Override

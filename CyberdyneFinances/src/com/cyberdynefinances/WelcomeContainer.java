@@ -140,4 +140,8 @@ public class WelcomeContainer extends Activity
     		Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome);
     	}
     }
+    
+    public void testDBClicked(View view) {    	
+		startActivity(new Intent(this, Dbtester_activity.class));
+    }
 }
