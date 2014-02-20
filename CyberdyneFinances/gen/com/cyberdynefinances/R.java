@@ -62,26 +62,26 @@ public final class R {
         public static final int register_button_icon=0x7f020019;
     }
     public static final class id {
-        public static final int RegisterButton=0x7f0a000f;
+        public static final int RegisterButton=0x7f0a000e;
         public static final int account_name=0x7f0a0001;
         public static final int account_username=0x7f0a0000;
         public static final int action_settings=0x7f0a0013;
-        public static final int admin_relative=0x7f0a0004;
-        public static final int admin_scroll=0x7f0a0003;
-        public static final int coinflip=0x7f0a0005;
+        public static final int admin_relative=0x7f0a0003;
+        public static final int admin_scroll=0x7f0a0002;
+        public static final int coinflip=0x7f0a0004;
         public static final int container_account=0x7f0a0011;
         public static final int container_welcome=0x7f0a0012;
-        public static final int dbtester_textview=0x7f0a0006;
-        public static final int loginButton=0x7f0a0009;
-        public static final int passwordEditText=0x7f0a0008;
-        public static final int registerBalance=0x7f0a000d;
-        public static final int registerInterest=0x7f0a000e;
-        public static final int registerPassword=0x7f0a000b;
-        public static final int registerPasswordVerification=0x7f0a000c;
-        public static final int registerUsername=0x7f0a000a;
-        public static final int testDbButton=0x7f0a0002;
-        public static final int usernameEditText=0x7f0a0007;
-        public static final int welcome_screen_register_button=0x7f0a0010;
+        public static final int dbtester_textview=0x7f0a0005;
+        public static final int loginButton=0x7f0a0008;
+        public static final int passwordEditText=0x7f0a0007;
+        public static final int registerBalance=0x7f0a000c;
+        public static final int registerInterest=0x7f0a000d;
+        public static final int registerPassword=0x7f0a000a;
+        public static final int registerPasswordVerification=0x7f0a000b;
+        public static final int registerUsername=0x7f0a0009;
+        public static final int testDbButton=0x7f0a0010;
+        public static final int usernameEditText=0x7f0a0006;
+        public static final int welcome_screen_register_button=0x7f0a000f;
     }
     public static final class integer {
         public static final int card_flip_time_full=0x7f060001;

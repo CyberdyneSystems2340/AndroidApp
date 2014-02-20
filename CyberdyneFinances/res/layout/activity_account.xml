@@ -18,14 +18,5 @@
         android:layout_below="@+id/account_username"
         android:layout_centerInParent="true"
         android:text="" />
-
-    <Button
-        android:id="@+id/testDbButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Test"
-        android:onClick="testDBClicked" />
-
+    
 </RelativeLayout>
