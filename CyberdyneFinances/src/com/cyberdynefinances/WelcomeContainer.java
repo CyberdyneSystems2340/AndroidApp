@@ -100,7 +100,7 @@ public class WelcomeContainer extends Activity
     // Right now this is just adding the username and password to the hashmap
     public void registerClicked(View view)
     {
-    	View root2 = Fragments.RegisterFragment.root2;
+    	View root2 = Fragments.RegisterFragment.root;
     	EditText editText = (EditText) root2.findViewById(R.id.registerUsername);
     	String newName = editText.getText().toString();
     	editText = (EditText) root2.findViewById(R.id.registerPassword);

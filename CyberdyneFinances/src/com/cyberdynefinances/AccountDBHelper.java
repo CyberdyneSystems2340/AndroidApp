@@ -1,6 +1,5 @@
 package com.cyberdynefinances;
 
-<<<<<<< HEAD
 import com.cyberdynefinances.DBReaderContract.DBEntry;
 
 import android.content.Context;
@@ -55,9 +54,4 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 	}
 	
 	public static void onOpen() {}
-=======
-public final class AccountDBHelper {
-	public AccountDBHelper() {}
-	
->>>>>>> 6d25405557bf9751400c335049491c6b822239ca
 }

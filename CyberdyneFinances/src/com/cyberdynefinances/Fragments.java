@@ -47,22 +47,14 @@ public class Fragments
 	//Fragment for the register screen
 	public static class RegisterFragment extends Fragment 
 	{
-<<<<<<< HEAD
-		public static View root;
-		
-=======
-		public static View root2; // Copied Al >:D
->>>>>>> 6d25405557bf9751400c335049491c6b822239ca
+		public static View root;	
+
         @Override
         //This method sets the current view to that of the registration activity for the user.
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
         {
-<<<<<<< HEAD
             root = inflater.inflate(R.layout.activity_register, container, false);
             return root;
-=======
-        	root2 = inflater.inflate(R.layout.activity_register, container, false);
-        	return root2;
         }
         
         //clears the text fields when the fragment is paused
@@ -70,12 +62,11 @@ public class Fragments
         public void onPause()
         {
         	super.onPause();
-        	((EditText) root2.findViewById(R.id.registerUsername)).setText("");
-    		((EditText) root2.findViewById(R.id.registerPassword)).setText("");
-    		((EditText) root2.findViewById(R.id.registerPasswordVerification)).setText("");
-    		((EditText) root2.findViewById(R.id.registerBalance)).setText("");
-    		((EditText) root2.findViewById(R.id.registerInterest)).setText("");
->>>>>>> 6d25405557bf9751400c335049491c6b822239ca
+        	((EditText) root.findViewById(R.id.registerUsername)).setText("");
+    		((EditText) root.findViewById(R.id.registerPassword)).setText("");
+    		((EditText) root.findViewById(R.id.registerPasswordVerification)).setText("");
+    		((EditText) root.findViewById(R.id.registerBalance)).setText("");
+    		((EditText) root.findViewById(R.id.registerInterest)).setText("");
         }
     }
 	
