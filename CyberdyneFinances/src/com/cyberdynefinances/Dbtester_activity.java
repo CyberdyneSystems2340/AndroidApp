@@ -26,18 +26,26 @@ public class Dbtester_activity extends Activity {
 		String dbName = dbHelper.getDatabaseName();
 		String tableName = DBReaderContract.DBEntry.USER_TABLE_NAME;
 		int columns = c.getColumnCount();
-		String columnName0 = c.getColumnName(0);
-		String columnName1 = c.getColumnName(1);
-		String columnName2 = c.getColumnName(2);
-		String row1 = "";
+		int column0 = c.getColumnIndex("UserID");
+		int column1 = c.getColumnIndex("Password");
+		int column2 = c.getColumnIndex("Accounts");
+		c.moveToFirst();
+		String rows = "";
+		if (c != null) {
+			do {
+				String name = c.getString(column0);
+				String pass = c.getString(column1);
+				String accounts = c.getString(column2);
+				rows = "Name: " + name + ", Pass: " + pass + ", Accounts: " + accounts; 
+			} while (c.moveToNext());
+		}
 		
 //		writeToDB(dbHelper);
 //		String itemID = readFromDB(dbHelper);		
 
-		tView.setText("DbName: " + dbName + ",\n\nTableName: " + tableName +
-					  "\n\nColumns: " + columnName0 + ", " + columnName1 + ", " + columnName2 +
-					  "\n\nFirstRow: " +row1
-					  );
+		tView.setText("DbName: " + dbName + "\n\nTableName: " + tableName +
+					  "\n\nColumns: " + c.getColumnName(0) + ", " + c.getColumnName(1) + ", " + c.getColumnName(2) +
+					  "\n\nFirstRow: " +rows);
 	}
 
 	@Override
