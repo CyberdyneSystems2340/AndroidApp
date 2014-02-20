@@ -5,7 +5,6 @@ import com.cyberdynefinances.DBReaderContract.DBEntry;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.provider.BaseColumns;
 
 public final class AccountDBHelper extends SQLiteOpenHelper {
 	private static final String 
