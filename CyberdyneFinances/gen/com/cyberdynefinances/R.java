@@ -116,6 +116,7 @@ public final class R {
         public static final int register_button_text=0x7f070004;
         public static final int register_interest=0x7f07000b;
         public static final int register_retypePassword=0x7f07000c;
+        public static final int test=0x7f07000e;
         public static final int title_activity_dbtester_activity=0x7f07000d;
         public static final int title_activity_login=0x7f070009;
         public static final int title_activity_test=0x7f070005;
