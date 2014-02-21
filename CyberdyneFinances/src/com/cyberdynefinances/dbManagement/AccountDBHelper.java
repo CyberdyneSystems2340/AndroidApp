@@ -24,6 +24,7 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 			DBEntry.TRANSACTION_TABLE_NAME + " (" +
 			DBEntry.TRANSACTION_COLUMN_NAME_ID + " TEXT," +
 			DBEntry.TRANSACTION_COLUMN_NAME_TRANSACTION + " INTEGER," +
+			DBEntry.TRANSACTION_COLUMN_NAME_TYPE +" TEXT," +
 			DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP + " TEXT);",
 		
 			//SQL Commands to delete any of the above created tables.
