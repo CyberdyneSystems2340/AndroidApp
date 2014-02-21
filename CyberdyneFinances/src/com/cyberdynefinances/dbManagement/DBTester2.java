@@ -56,7 +56,7 @@ public class DBTester2 extends Activity {
 				c.moveToNext();
 			}
 		}
-		
+//
 		//Write new row to DB if UserID not allready taken.
 		TextView textView = (TextView) findViewById(R.id.dbtest_userid_text);
 		String str = textView.getText().toString();
