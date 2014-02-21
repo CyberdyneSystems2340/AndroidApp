@@ -17,7 +17,7 @@ public class DBTester2 extends Activity {
 	private AccountDBHelper dbHelper;
 	private TextView tView;
 	private Button writeButton,readButton,clearButton;
-	
+//	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

@@ -20,7 +20,7 @@ public final class DBReaderContract {
 		public static final String USER_COLUMN_NAME_PASSWORD = "Password";
 		
 		
-		
+//		
 		
 	}
 }
