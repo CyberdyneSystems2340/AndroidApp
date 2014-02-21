@@ -61,7 +61,7 @@ public class DBTester extends Activity {
 		String testID = ((TextView) findViewById(R.id.dbtest_userid_text)).getText().toString(),
 				testAccount = ((TextView) findViewById(R.id.dbtest_accounts_text)).getText().toString();
 		new DBHandler().addAccount(testID, testAccount);
-		System.out.println("addAccount got run!");
+		//System.out.println("addAccount got run!");
 	}
 	
 	private void addButtonListeners() {
@@ -94,7 +94,7 @@ public class DBTester extends Activity {
 			@Override
 			public void onClick(View v) {
 				addAccount();
-				System.out.println("I got clicked!");
+				//System.out.println("I got clicked!");
 			}
 		});
 	}

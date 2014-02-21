@@ -82,21 +82,24 @@ public class DBHandler {
 	 * @return True if the account was added, false if an error occurred or the userID was invalid.
 	 * */
 	public boolean addAccount(String userID, String newAccount) { 
-		//String currentAccounts = "";
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		ContentValues values = new ContentValues();
-		values.put(DBEntry.USER_COLUMN_NAME_ACCOUNTS, newAccount);
-		db.update(DBEntry.USER_TABLE_NAME, values, DBEntry.USER_COLUMN_NAME_ID + " = ?", new String[] {userID});
-		//System.out.println("Updated Successfully!");
-		/*
+		String currentAccounts = "";
 		try {
 			SQLiteDatabase db = dbHelper.getWritableDatabase();
-			db.rawQuery("INSERT INTO " + DBEntry.USER_TABLE_NAME + " SET " +
-					DBEntry.USER_COLUMN_NAME_ACCOUNTS +
-					" = " + newAccount + " WHERE "+DBEntry.USER_COLUMN_NAME_ID+" = '"+userID+"';", null);
-			System.out.println("Updated Successfully!");
+			Cursor c = db.rawQuery("SELECT Accounts FROM " + DBEntry.USER_TABLE_NAME +
+					" WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);		
+			if (null != c && 0 != c.getCount()) {
+				c.moveToFirst();
+				if (isValid(c.getString(0))) {
+					currentAccounts = c.getString(0) + "_";
+				}
+			}
+			ContentValues values = new ContentValues();
+			values.put(DBEntry.USER_COLUMN_NAME_ACCOUNTS, currentAccounts + newAccount);
+			db.update(DBEntry.USER_TABLE_NAME, values, DBEntry.USER_COLUMN_NAME_ID + " = ?", new String[] {userID});
 			return true;
-		} catch(Exception e) { e.printStackTrace();}*/
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return false;
 	}
 	
