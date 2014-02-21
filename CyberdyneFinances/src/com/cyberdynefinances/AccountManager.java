@@ -61,6 +61,7 @@ public class AccountManager extends Account
 			return new Account("Test", 100, 2);
 		return activeAccount;
 	}
+	
 	public static void addAccount(Account acc)
 	{
 		accountList.add(acc);
