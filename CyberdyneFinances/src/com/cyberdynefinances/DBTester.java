@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class DBTester extends Activity {
 	private AccountDBHelper dbHelper;
 	private TextView tView;
-	private Button writeButton,readButton,clearButton;
+	private Button writeButton,readButton,clearButton,addAccountButton;
 //	
 
 	@Override
@@ -36,30 +36,39 @@ public class DBTester extends Activity {
 		return true;
 	}
 	
+	//This method tests writing a new user.
 	private void writeNewUserToDB(){
 		String testID = ((TextView) findViewById(R.id.dbtest_userid_text)).getText().toString(),
 				testPass = ((TextView) findViewById(R.id.dbtest_pass_text)).getText().toString();
 
 		new DBHandler().addUser(testID, testPass);
-
 	}
 	
+	//This method tests reading all the user accounts stored.
 	private void readFromDB() {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor c = db.rawQuery("SELECT * FROM " + DBReaderContract.DBEntry.USER_TABLE_NAME, null);
 		String dbName = dbHelper.getDatabaseName();
 		String tableName = DBReaderContract.DBEntry.USER_TABLE_NAME;
 
-		String rows = new DBHandler().getUser("Robert");
+		String rows = new DBHandler().getUser(((TextView) findViewById(R.id.dbtest_userid_text)).getText().toString());
 		tView.setText("DbName: " + dbName + "\n\nTableName: " + tableName +
 					  "\n\nColumns: " + c.getColumnName(0) + ", " + c.getColumnName(1) + ", " + c.getColumnName(2) +
 					  "\n\nRows: " + rows);
+	}
+	
+	private void addAccount() {
+		String testID = ((TextView) findViewById(R.id.dbtest_userid_text)).getText().toString(),
+				testAccount = ((TextView) findViewById(R.id.dbtest_accounts_text)).getText().toString();
+		new DBHandler().addAccount(testID, testAccount);
+		System.out.println("addAccount got run!");
 	}
 	
 	private void addButtonListeners() {
 		writeButton = (Button) findViewById(R.id.dbtest_write_button);
 		readButton = (Button) findViewById(R.id.dbtest_read_button);
 		clearButton = (Button) findViewById(R.id.dbtest_clear_button);
+		addAccountButton = (Button) findViewById(R.id.dbtest_addAccount_button);
 		
 		writeButton.setOnClickListener(new View.OnClickListener() {			
 			@Override
@@ -78,6 +87,14 @@ public class DBTester extends Activity {
 			@Override
 			public void onClick(View v) {
 				dbHelper.clearUserTable(dbHelper.getWritableDatabase());
+			}
+		});
+		addAccountButton.setOnClickListener(new View.OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				addAccount();
+				System.out.println("I got clicked!");
 			}
 		});
 	}

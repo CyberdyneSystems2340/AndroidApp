@@ -70,6 +70,14 @@
         android:layout_toRightOf="@+id/dbtest_read_button"
         android:text="Clear" />
 
+    <Button
+        android:id="@+id/dbtest_addAccount_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dbtest_write_button"
+        android:layout_below="@+id/dbtest_write_button"
+        android:text="AddAccount" />
+
 "
 
 </RelativeLayout>
