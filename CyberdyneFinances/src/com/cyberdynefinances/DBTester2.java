@@ -2,7 +2,10 @@ package com.cyberdynefinances;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
+import android.widget.TextView;
 
 public class DBTester2 extends Activity {
 
@@ -10,34 +13,31 @@ public class DBTester2 extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dbtester2);
-		/*		
-		TextView tView = (TextView) findViewById(R.id.dbtester_textview);
+		
+		TextView tView = (TextView) findViewById(R.id.dbtester2_textview);
 		AccountDBHelper dbHelper = new AccountDBHelper(MyApplication.getAppContext());
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor c = db.rawQuery("SELECT * FROM " + DBReaderContract.DBEntry.USER_TABLE_NAME, null);
 		String dbName = dbHelper.getDatabaseName();
 		String tableName = DBReaderContract.DBEntry.USER_TABLE_NAME;
-		int columns = c.getColumnCount();
-		int column0 = c.getColumnIndex("UserID");
-		int column1 = c.getColumnIndex("Password");
-		int column2 = c.getColumnIndex("Accounts");
-		c.moveToFirst();
+
+		int col0 = c.getColumnIndex("UserID");
+		int col1 = c.getColumnIndex("Password");
+		int col2 = c.getColumnIndex("Accounts");
+		c.moveToLast();
 		String rows = "";
-		if (c != null) {
+/*		if (c != null) {
 			do {
-				String name = c.getString(column0);
-				String pass = c.getString(column1);
-				String accounts = c.getString(column2);
-				rows = "Name: " + name + ", Pass: " + pass + ", Accounts: " + accounts; 
+				rows = "UserID: " + c.getString(col0) + ", Pass: " + c.getString(col1) + ", Accounts: " + c.getString(col2); 
 			} while (c.moveToNext());
 		}
-		
+*/
 //		writeToDB(dbHelper);
 //		String itemID = readFromDB(dbHelper);		
 
 		tView.setText("DbName: " + dbName + "\n\nTableName: " + tableName +
-					  "\n\nColumns: " + c.getColumnName(0) + ", " + c.getColumnName(1) + ", " + c.getColumnName(2) +
-					  "\n\nFirstRow: " +rows);*/
+					  "\n\nColumns: " + c.getColumnName(col0) + ", " + c.getColumnName(col1) + ", " + c.getColumnName(col2) +
+					  "\n\nRows: " +rows);
 	}
 
 	@Override

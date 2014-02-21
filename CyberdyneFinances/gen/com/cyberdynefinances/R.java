@@ -71,7 +71,7 @@ public final class R {
         public static final int coinflip=0x7f0a0004;
         public static final int container_account=0x7f0a0011;
         public static final int container_welcome=0x7f0a0012;
-        public static final int dbtester_textview=0x7f0a0005;
+        public static final int dbtester2_textview=0x7f0a0005;
         public static final int loginButton=0x7f0a0008;
         public static final int passwordEditText=0x7f0a0007;
         public static final int registerBalance=0x7f0a000c;
@@ -91,14 +91,13 @@ public final class R {
         public static final int activity_account=0x7f030000;
         public static final int activity_admin=0x7f030001;
         public static final int activity_coinflip=0x7f030002;
-        public static final int activity_dbtester=0x7f030003;
-        public static final int activity_dbtester2=0x7f030004;
-        public static final int activity_login=0x7f030005;
-        public static final int activity_register=0x7f030006;
-        public static final int activity_test=0x7f030007;
-        public static final int activity_welcome=0x7f030008;
-        public static final int frame_account=0x7f030009;
-        public static final int frame_welcome=0x7f03000a;
+        public static final int activity_dbtester2=0x7f030003;
+        public static final int activity_login=0x7f030004;
+        public static final int activity_register=0x7f030005;
+        public static final int activity_test=0x7f030006;
+        public static final int activity_welcome=0x7f030007;
+        public static final int frame_account=0x7f030008;
+        public static final int frame_welcome=0x7f030009;
     }
     public static final class menu {
         public static final int dbtester2=0x7f090000;
