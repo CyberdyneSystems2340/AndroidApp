@@ -7,7 +7,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.TextView;
 
@@ -53,7 +52,9 @@ public class DBTester2 extends Activity {
 		}
 		
 		//Write new row to DB if UserID not allready taken.
-		if (!idTaken) {
+		TextView textView = (TextView) findViewById(R.id.dbtest_userid_text);
+		String str = textView.getText().toString();
+		if (!idTaken && null != str && !str.isEmpty()) {
 			db = dbHelper.getWritableDatabase();
 			
 			ContentValues values = new ContentValues();
@@ -78,7 +79,7 @@ public class DBTester2 extends Activity {
 		int col2 = c.getColumnIndex("Accounts");
 		String rows = "";
 		if (null != c && 0 != c.getCount()) {
-			c.moveToNext();
+			c.moveToFirst();
 			do{
 				rows += "\nUserID: " + c.getString(col0) + ", Pass: " + c.getString(col1) + ", Accounts: " + c.getString(col2); 
 			} while(c.moveToNext());
@@ -88,11 +89,7 @@ public class DBTester2 extends Activity {
 					  "\n\nColumns: " + c.getColumnName(col0) + ", " + c.getColumnName(col1) + ", " + c.getColumnName(col2) +
 					  "\n\nRows: " + rows);
 	}
-/*	
-	private void clearDB() {
-		dbHelper.clear(dbHelper.getWritableDatabase());
-	}
-*/
+	
 	private void addButtonListeners() {
 		writeButton = (Button) findViewById(R.id.dbtest_write_button);
 		readButton = (Button) findViewById(R.id.dbtest_read_button);
@@ -114,7 +111,7 @@ public class DBTester2 extends Activity {
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dbHelper.onUpgrade(dbHelper.getWritableDatabase(),0,0);
+				dbHelper.clear(dbHelper.getWritableDatabase());
 			}
 		});
 	}
