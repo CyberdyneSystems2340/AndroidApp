@@ -6,13 +6,19 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.view.Window;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
+import android.widget.TextView;
 
 public class AdminActivity extends Activity
 {
@@ -25,7 +31,26 @@ public class AdminActivity extends Activity
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_admin);
 
-        populateView();
+        
+        ArrayList<String> names = LoginHandler.getUsernames();
+        Spinner s = (Spinner) this.findViewById(R.id.spinner);
+		String[] spinnerArray = new String[names.size()];
+		int i=0;
+		for(String name: names)
+		{
+			spinnerArray[i++] = name;
+		}
+    	ArrayAdapter a = new ArrayAdapter(this, R.layout.layout_spinner, spinnerArray);
+    	s.setAdapter(a);
+		s.setOnItemSelectedListener(new OnClick());
+    }
+	
+    //Called when the app is closed to write out data that needs to be stored
+    @Override
+    public void onStop()
+    {
+    	super.onStop();
+    	LoginHandler.writeTable(getSharedPreferences("CyberdynePrefsFile",0));
     }
 
     @Override
@@ -42,98 +67,61 @@ public class AdminActivity extends Activity
         return super.onOptionsItemSelected(item);
     }
     
-    private void populateView()
+    private void updateView()
     {
-    	OnClick l = new OnClick();
     	ArrayList<String> names = LoginHandler.getUsernames();
-    	int prevId = 1;
-    	RelativeLayout rl = (RelativeLayout)this.findViewById(R.id.admin_relative);
-    	for(String name : names)
-    	{
-    		Button b = new Button(this);
-    		b.setText(name);
-    		int id = findId(prevId);
-    		b.setId(id);
-    		
-    		RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-    		if(prevId!=1)
-    			lp.addRule(RelativeLayout.BELOW, prevId);
-    		lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
-    		rl.addView(b, lp);
-    		
-    		b.setOnClickListener(l);
-    		
-    		prevId = id;
-    	}
-    	
-    	del = new Button(this);
-    	del.setText("Delete");
-    	del.setOnClickListener(new OnClickDel());
-    }
-    
-    private int findId(int id)
-    {  
-        View v = findViewById(id);  
-        while (v != null){  
-            v = findViewById(++id);  
-        }  
-        return ++id;  
-    }
-    
-    class OnClick implements OnClickListener
-    {
-    	Button prevButton;
-		@Override
-		public void onClick(View view) 
+        Spinner s = (Spinner) this.findViewById(R.id.spinner);
+		String[] spinnerArray = new String[names.size()];
+		int i=0;
+		for(String name: names)
 		{
-			Button b = (Button)view;
-			String name = (String) b.getText();
-			b.setClickable(false);
-			b.setPivotX(0f);
-			b.setScaleX(0.75f);
-			del.setId(b.getId()+100);
+			spinnerArray[i++] = name;
+		}
+    	ArrayAdapter a = new ArrayAdapter(this, R.layout.layout_spinner, spinnerArray);
+    	s.setAdapter(a);
+    }
+    
+    class OnClick implements OnItemSelectedListener
+    {
+		@Override
+		public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2,
+				long arg3) 
+		{
+			TextView s = (TextView)arg1;
+			Log.e("tag", s.getText().toString());
 			
-			View v = (View) view.getParent();
-			RelativeLayout rl = (RelativeLayout)v.findViewById(R.id.admin_relative);
+		}
+		@Override
+		public void onNothingSelected(AdapterView<?> arg0) 
+		{
+			// TODO Auto-generated method stub
 			
-			if(prevButton!=null)
-			{
-				rl.removeView(del);
-				prevButton.setClickable(true);
-				prevButton.setPivotX(0f);
-				prevButton.setScaleX(1.0f);
-			}
-			prevButton = b;
-			
-			RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
-    		lp.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
-    		lp.addRule(RelativeLayout.BELOW, b.getId()-2);
-    		rl.addView(del, lp);
 		}
     	
     }
     
-    class OnClickDel implements OnClickListener
-    {
-		@Override
-		public void onClick(View view) 
-		{
-			Button b = (Button)view;
-			int usernameId = b.getId()-100;
-			View v = (View) view.getParent();
-			Button nameButton = (Button) v.findViewById(usernameId);
-			String name = nameButton.getText().toString();
-			LoginHandler.remove(name);
-			
-			v = (View) view.getParent();
-			RelativeLayout rl = (RelativeLayout)v.findViewById(R.id.admin_relative);
-			rl.removeView(nameButton);
-			rl.removeView(del);
-			rl.removeAllViews();
-			
-			AdminActivity.this.populateView();
-		}
+
+	public void delete(View view) 
+	{
+		Button b = (Button)view;
+		View v = (View) view.getParent();
+		Spinner s = (Spinner) v.findViewById(R.id.spinner);
+		String name = s.getSelectedItem().toString();
+		LoginHandler.remove(name);
+		AdminActivity.this.updateView();
+	}
+	
+	public void reset(View view)
+	{
+		Button b = (Button)view;
+		View v = (View) view.getParent();
+		Spinner s = (Spinner) v.findViewById(R.id.spinner);
+		String name = s.getSelectedItem().toString();
+		LoginHandler.remove(name);
+		LoginHandler.register(name, "pass123");
+		AdminActivity.this.updateView();
+	}
     
-    }
+    
 	
 }

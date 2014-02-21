@@ -1,13 +1,34 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/admin_scroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical" >
-    
-    <RelativeLayout 
-        android:id="@+id/admin_relative"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+    android:orientation="vertical" 
+    android:background="@drawable/background_admin">
+ 
+	<Spinner
+	    android:id="@+id/spinner"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content" 
+	    android:isScrollContainer="true"
+	    android:layout_above="@+id/reset_password"
+	    android:layout_marginBottom="25dp"/>
+	
+	<Button
+	    android:id="@+id/reset_password"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_centerInParent="true"
+	    android:text="Reset Password" 
+	    android:onClick="reset"/>
+	
+	<Button
+	    android:id="@+id/delete"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content"
+	    android:layout_below="@+id/reset_password"
+	    android:layout_marginTop="20dp"
+	    android:text="Delete" 
+	    android:onClick="delete"/>
         
 	   <!--  <TextView
 	        android:id="@+id/admin_usernamelist"
@@ -17,5 +38,5 @@
 	        android:text="" /> -->
     
 	    
-	</RelativeLayout>
-</ScrollView>
+</RelativeLayout>
+
