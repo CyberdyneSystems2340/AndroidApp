@@ -60,7 +60,7 @@
             android:label="@string/title_activity_dbtester_activity" >
         </activity>
         <activity
-            android:name="com.cyberdynefinances.DBTester2"
+            android:name="com.cyberdynefinances.dbManagement.DBTester2"
             android:label="@string/title_activity_dbtester2" >
         </activity>
     </application>

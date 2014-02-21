@@ -1,4 +1,10 @@
-package com.cyberdynefinances;
+package com.cyberdynefinances.dbManagement;
+
+import com.cyberdynefinances.MyApplication;
+import com.cyberdynefinances.R;
+import com.cyberdynefinances.R.id;
+import com.cyberdynefinances.R.layout;
+import com.cyberdynefinances.R.menu;
 
 import android.os.Bundle;
 import android.app.Activity;

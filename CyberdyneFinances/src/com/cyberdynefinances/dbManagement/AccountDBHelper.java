@@ -1,6 +1,4 @@
-package com.cyberdynefinances;
-
-import com.cyberdynefinances.DBReaderContract.DBEntry;
+package com.cyberdynefinances.dbManagement;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,10 +8,10 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 	private static final String 
 			//SQL Commands for creating the account, user, and transaction tables.
 			SQL_CREATE_USER_ENTRIES = "CREATE TABLE " +
-			DBEntry.USER_TABLE_NAME + " (" +
-			DBEntry.USER_COLUMN_NAME_ID + " TEXT PRIMARY KEY," +
-			DBEntry.USER_COLUMN_NAME_PASSWORD + " TEXT," +
-			DBEntry.USER_COLUMN_NAME_ACCOUNTS + " TEXT);",
+			DBReaderContract.DBEntry.USER_TABLE_NAME + " (" +
+			DBReaderContract.DBEntry.USER_COLUMN_NAME_ID + " TEXT PRIMARY KEY," +
+			DBReaderContract.DBEntry.USER_COLUMN_NAME_PASSWORD + " TEXT," +
+			DBReaderContract.DBEntry.USER_COLUMN_NAME_ACCOUNTS + " TEXT);",
 /*			
 			SQL_CREATE_ACCOUNT_ENTRIES = "CREATE TABLE " + 
 			DBEntry.ACCOUNT_TABLE_NAME + " (" +
@@ -28,9 +26,9 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 			DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP + " TEXT);",
 	*/		
 			//SQL Commands to delete any of the above created tables.
-			SQL_DELETE_USER_ENTRIES = "DROP TABLE IF EXISTS " + DBEntry.USER_TABLE_NAME + ";";
-/*			SQL_DELETE_ACCOUNT_ENTRIES = "DROP TABLE IF EXISTS " + DBEntry.ACCOUNT_TABLE_NAME + ";",
-			SQL_DELETE_TRANSACTION_ENTRIES = "DROP TABLE IF EXISTS " + DBEntry.TRANSACTION_TABLE_NAME + ";";
+			SQL_DELETE_USER_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.USER_TABLE_NAME + ";";
+/*			SQL_DELETE_ACCOUNT_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.ACCOUNT_TABLE_NAME + ";",
+			SQL_DELETE_TRANSACTION_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.TRANSACTION_TABLE_NAME + ";";
 */
 	
 	public static final int DATABASE_VERSION = 1;
