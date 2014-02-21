@@ -14,4 +14,60 @@
         android:text="@string/hello_world"
         android:id="@+id/dbtester2_textview" />
 
+    <EditText
+        android:id="@+id/dbtest_userid_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:ems="10"
+        android:hint="UserID" >
+
+        <requestFocus />
+    </EditText>
+
+    <EditText
+        android:id="@+id/dbtest_pass_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dbtest_userid_text"
+        android:layout_below="@+id/dbtest_userid_text"
+        android:ems="10"
+        android:hint="Password" />
+
+    <EditText
+        android:id="@+id/dbtest_accounts_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dbtest_pass_text"
+        android:layout_below="@+id/dbtest_pass_text"
+        android:ems="10"
+        android:hint="Accounts" />
+
+    <Button
+        android:id="@+id/dbtest_write_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/dbtest_accounts_text"
+        android:layout_below="@+id/dbtest_accounts_text"
+        android:text="Write" />
+
+    <Button
+        android:id="@+id/dbtest_read_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dbtest_write_button"
+        android:layout_alignBottom="@+id/dbtest_write_button"
+        android:layout_toRightOf="@+id/dbtest_write_button"
+        android:text="Read" />
+
+    <Button
+        android:id="@+id/dbtest_clear_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dbtest_read_button"
+        android:layout_alignBottom="@+id/dbtest_read_button"
+        android:layout_toRightOf="@+id/dbtest_read_button"
+        android:text="Clear" />
+
 </RelativeLayout>

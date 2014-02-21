@@ -55,6 +55,12 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 		db.execSQL(SQL_DELETE_TRANSACTION_ENTRIES);*/
         onCreate(db);
 	}
+	
+	public void clear(SQLiteDatabase db){
+		db.execSQL(SQL_DELETE_USER_ENTRIES);/*
+		db.execSQL(SQL_DELETE_ACCOUNT_ENTRIES);
+		db.execSQL(SQL_DELETE_TRANSACTION_ENTRIES);*/
+	}
 
 	public static void onOpen() {}
 }

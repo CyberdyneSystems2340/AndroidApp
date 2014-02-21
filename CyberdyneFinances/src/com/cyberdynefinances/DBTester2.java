@@ -6,20 +6,26 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class DBTester2 extends Activity {
+	private AccountDBHelper dbHelper;
+	private TextView tView;
+	private Button writeButton,readButton,clearButton;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dbtester2);
-		
-		TextView tView = (TextView) findViewById(R.id.dbtester2_textview);
-		AccountDBHelper dbHelper = new AccountDBHelper(MyApplication.getAppContext());
-
-		writeToDB(dbHelper);
-		tView.setText(readFromDB(dbHelper));
+		dbHelper = new AccountDBHelper(MyApplication.getAppContext());
+		tView = (TextView) findViewById(R.id.dbtester2_textview);
+		addButtonListeners();
+		//writeToDB();
+		//tView.setText(readFromDB());
 	}
 
 	@Override
@@ -29,33 +35,39 @@ public class DBTester2 extends Activity {
 		return true;
 	}
 	
-	private void writeToDB(AccountDBHelper dbHelper){
-		SQLiteDatabase db = dbHelper.getWritableDatabase();
-		
-		ContentValues values = new ContentValues();
-		String testID = "TestID3";
-		values.put(DBReaderContract.DBEntry.USER_COLUMN_NAME_ID, testID);
-		values.put(DBReaderContract.DBEntry.USER_COLUMN_NAME_PASSWORD, "123456");
-		values.put(DBReaderContract.DBEntry.USER_COLUMN_NAME_ACCOUNTS, "None");
-		SQLiteDatabase db2 = dbHelper.getReadableDatabase();
-		Cursor c = db2.rawQuery("SELECT * FROM " + DBReaderContract.DBEntry.USER_TABLE_NAME, null);
-		boolean userIDTaken = false;/*
+	private void writeToDB(){
+		String testID = ((TextView) findViewById(R.id.dbtest_userid_text)).getText().toString(),
+				testPass = ((TextView) findViewById(R.id.dbtest_pass_text)).getText().toString(),
+				testAccounts = ((TextView) findViewById(R.id.dbtest_accounts_text)).getText().toString();
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		Cursor c = db.rawQuery("SELECT * FROM " + DBReaderContract.DBEntry.USER_TABLE_NAME, null);
 		c.moveToFirst();
-		if (null != c) {
-			for (int i = c.getCount(); i > 0; i--){
-				userIDTaken = c.getString(c.getColumnIndex("UserID")) == testID;
+		boolean idTaken = false;
+		if (null != c || c.getCount() != 0) {
+			for(int i = 0; i < c.getCount(); i++){
+				if (c.getString(0).equals(testID)) {
+					idTaken = true;
+				}
 				c.moveToNext();
 			}
-			if (!userIDTaken) {
-				db.insert(DBReaderContract.DBEntry.USER_TABLE_NAME,
+		}
+		
+		//Write new row to DB if UserID not allready taken.
+		if (!idTaken) {
+			db = dbHelper.getWritableDatabase();
+			
+			ContentValues values = new ContentValues();
+			values.put(DBReaderContract.DBEntry.USER_COLUMN_NAME_ID, testID);
+			values.put(DBReaderContract.DBEntry.USER_COLUMN_NAME_PASSWORD, testPass);
+			values.put(DBReaderContract.DBEntry.USER_COLUMN_NAME_ACCOUNTS, testAccounts);
+			db.insert(DBReaderContract.DBEntry.USER_TABLE_NAME,
 					  DBReaderContract.DBEntry.USER_COLUMN_NAME_ACCOUNTS,
 					  values);
-			}
-		}*/
+		}
 //		((TextView) findViewById(R.id.dbtester2_textview)).setText("Success!");
 	}
 	
-	private String readFromDB(AccountDBHelper dbHelper) {
+	private void readFromDB() {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor c = db.rawQuery("SELECT * FROM " + DBReaderContract.DBEntry.USER_TABLE_NAME, null);
 		String dbName = dbHelper.getDatabaseName();
@@ -72,10 +84,38 @@ public class DBTester2 extends Activity {
 			} while(c.moveToNext());
 		}
 
-		return "DbName: " + dbName + "\n\nTableName: " + tableName +
+		tView.setText("DbName: " + dbName + "\n\nTableName: " + tableName +
 					  "\n\nColumns: " + c.getColumnName(col0) + ", " + c.getColumnName(col1) + ", " + c.getColumnName(col2) +
-					  "\n\nRows: " + rows;
+					  "\n\nRows: " + rows);
 	}
-
-
+/*	
+	private void clearDB() {
+		dbHelper.clear(dbHelper.getWritableDatabase());
+	}
+*/
+	private void addButtonListeners() {
+		writeButton = (Button) findViewById(R.id.dbtest_write_button);
+		readButton = (Button) findViewById(R.id.dbtest_read_button);
+		clearButton = (Button) findViewById(R.id.dbtest_clear_button);
+		
+		writeButton.setOnClickListener(new View.OnClickListener() {			
+			@Override
+			public void onClick(View v) {
+				writeToDB();
+				
+			}
+		});
+		readButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				readFromDB();
+			}
+		});
+		clearButton.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				dbHelper.onUpgrade(dbHelper.getWritableDatabase(),0,0);
+			}
+		});
+	}
 }
