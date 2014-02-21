@@ -142,6 +142,6 @@ public class WelcomeContainer extends Activity
     }
     
     public void testDBClicked(View view) {    	
-		startActivity(new Intent(this, Dbtester_activity.class));
+		startActivity(new Intent(this, DBTester2.class));
     }
 }

@@ -1,4 +1,4 @@
-
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Cyberdyne Finances</string>
@@ -16,5 +16,6 @@
     <string name="register_retypePassword">Retype Password</string>
     <string name="title_activity_dbtester_activity">Dbtester_activity</string>
     <string name="test">Test</string>
+    <string name="title_activity_dbtester2">DBTester2</string>
 
 </resources>
