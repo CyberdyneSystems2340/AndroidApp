@@ -1,3 +1,3 @@
 Table1: Table where each row is for a unique user, each row shows all account names associated with this user, also stores password columns.
-Table2: Table which records all transactions, stores each row with account number, money added/deducted, category, timestamp columns.
+Table2: Table which records all transactions, stores each row with account number, money added/deducted, type, timestamp columns.
 Table3: Table which records per account settings, each row is unique according to account, stores account number and interest rate columns.

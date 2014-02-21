@@ -2,11 +2,11 @@ package com.cyberdynefinances;
 
 import com.cyberdynefinances.R;
 import com.cyberdynefinances.dbManagement.AccountDBHelper;
+import com.cyberdynefinances.dbManagement.DBHandler;
 import com.cyberdynefinances.dbManagement.DBReaderContract;
 
 import android.os.Bundle;
 import android.app.Activity;
-import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
@@ -38,38 +38,12 @@ public class DBTester extends Activity {
 		return true;
 	}
 	
-	private void writeToDB(){
+	private void writeNewUserToDB(){
 		String testID = ((TextView) findViewById(R.id.dbtest_userid_text)).getText().toString(),
-				testPass = ((TextView) findViewById(R.id.dbtest_pass_text)).getText().toString(),
-				testAccounts = ((TextView) findViewById(R.id.dbtest_accounts_text)).getText().toString();
-		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		Cursor c = db.rawQuery("SELECT * FROM " + DBReaderContract.DBEntry.USER_TABLE_NAME, null);
-		c.moveToFirst();
-		boolean idTaken = false;
-		if (null != c || c.getCount() != 0) {
-			for(int i = 0; i < c.getCount(); i++){
-				if (c.getString(0).equals(testID)) {
-					idTaken = true;
-				}
-				c.moveToNext();
-			}
-		}
-//
-		//Write new row to DB if UserID not allready taken.
-		TextView textView = (TextView) findViewById(R.id.dbtest_userid_text);
-		String str = textView.getText().toString();
-		if (!idTaken && null != str && !str.isEmpty()) {
-			db = dbHelper.getWritableDatabase();
-			
-			ContentValues values = new ContentValues();
-			values.put(DBReaderContract.DBEntry.USER_COLUMN_NAME_ID, testID);
-			values.put(DBReaderContract.DBEntry.USER_COLUMN_NAME_PASSWORD, testPass);
-			values.put(DBReaderContract.DBEntry.USER_COLUMN_NAME_ACCOUNTS, testAccounts);
-			db.insert(DBReaderContract.DBEntry.USER_TABLE_NAME,
-					  DBReaderContract.DBEntry.USER_COLUMN_NAME_ACCOUNTS,
-					  values);
-		}
-//		((TextView) findViewById(R.id.dbtester2_textview)).setText("Success!");
+				testPass = ((TextView) findViewById(R.id.dbtest_pass_text)).getText().toString();
+
+		new DBHandler().addUser(testID, testPass);
+
 	}
 	
 	private void readFromDB() {
@@ -78,19 +52,9 @@ public class DBTester extends Activity {
 		String dbName = dbHelper.getDatabaseName();
 		String tableName = DBReaderContract.DBEntry.USER_TABLE_NAME;
 
-		int col0 = c.getColumnIndex("UserID");
-		int col1 = c.getColumnIndex("Password");
-		int col2 = c.getColumnIndex("Accounts");
-		String rows = "";
-		if (null != c && 0 != c.getCount()) {
-			c.moveToFirst();
-			do{
-				rows += "\nUserID: " + c.getString(col0) + ", Pass: " + c.getString(col1) + ", Accounts: " + c.getString(col2); 
-			} while(c.moveToNext());
-		}
-
+		String rows = new DBHandler().getUser("Robert");
 		tView.setText("DbName: " + dbName + "\n\nTableName: " + tableName +
-					  "\n\nColumns: " + c.getColumnName(col0) + ", " + c.getColumnName(col1) + ", " + c.getColumnName(col2) +
+					  "\n\nColumns: " + c.getColumnName(0) + ", " + c.getColumnName(1) + ", " + c.getColumnName(2) +
 					  "\n\nRows: " + rows);
 	}
 	
@@ -102,7 +66,7 @@ public class DBTester extends Activity {
 		writeButton.setOnClickListener(new View.OnClickListener() {			
 			@Override
 			public void onClick(View v) {
-				writeToDB();
+				writeNewUserToDB();
 				
 			}
 		});
