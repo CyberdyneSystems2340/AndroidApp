@@ -27,8 +27,6 @@ public class DBTester extends Activity {
 		dbHelper = new AccountDBHelper(MyApplication.getAppContext());
 		tView = (TextView) findViewById(R.id.dbtester_textview);
 		addButtonListeners();
-		//writeToDB();
-		//tView.setText(readFromDB());
 	}
 
 	@Override
