@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string-array name="report_array">
+        <item>Report1</item>
+        <item>Report2</item>
+        <item>Report3</item>
+        <item>Report4</item>
+    </string-array>
+    
+</resources>
