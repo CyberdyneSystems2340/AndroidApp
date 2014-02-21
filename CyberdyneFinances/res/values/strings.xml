@@ -13,5 +13,7 @@
 	<string name="register_balance">Balance</string>
 	<string name="register_interest">Interest Rate(%)</string>
 	<string name="register_retypePassword">Retype Password</string>
+	<string name="accountName">Account Name</string>
+	<string name="createAccount">Create</string>
 	
 </resources>

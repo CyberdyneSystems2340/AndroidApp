@@ -63,8 +63,6 @@ public class Fragments
         	((EditText) root2.findViewById(R.id.registerUsername)).setText("");
     		((EditText) root2.findViewById(R.id.registerPassword)).setText("");
     		((EditText) root2.findViewById(R.id.registerPasswordVerification)).setText("");
-    		((EditText) root2.findViewById(R.id.registerBalance)).setText("");
-    		((EditText) root2.findViewById(R.id.registerInterest)).setText("");
         }
     }
 	
@@ -105,6 +103,16 @@ public class Fragments
         	((TextView) root.findViewById(R.id.account_username)).setText("Username: "+AccountManager.getActiveUser());
     		((TextView) root.findViewById(R.id.account_name)).setText(AccountManager.getActiveAccount().getAccountInfo());
     		
+			return root;
+	    }
+	}
+	
+	public static class AccountCreationFragment extends Fragment
+	{
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+	    {
+			View root = inflater.inflate(R.layout.activity_account_creation, container, false);
 			return root;
 	    }
 	}

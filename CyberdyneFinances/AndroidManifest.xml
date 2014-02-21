@@ -52,6 +52,14 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cyberdynefinances.WelcomeContainer" />
         </activity>
+               <activity
+            android:name="com.cyberdynefinances.AccountCreationActivity"
+            android:label="@string/title_activity_test"
+            android:parentActivityName="com.cyberdynefinances.AccountContainer" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.cyberdynefinances.AccountContainer" />
+        </activity>
     </application>
 
 </manifest>

@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_4"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".activityAccountCreation" >
+
+    <EditText
+        android:id="@+id/account_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="58dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="@string/accountName" >
+
+    </EditText>
+
+    <EditText
+        android:id="@+id/balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/account_name"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="43dp"
+        android:ems="10"
+        android:hint="@string/register_balance"
+        android:inputType="numberDecimal" />
+
+    <EditText
+        android:id="@+id/interest"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/balance"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="42dp"
+        android:ems="10"
+        android:hint="@string/register_interest"
+        android:inputType="numberDecimal" />
+
+    <Button
+        android:id="@+id/account_creation_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/interest"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="45dp"
+         android:onClick="accountCreation"
+        android:text="@string/createAccount" />
+
+</RelativeLayout>
