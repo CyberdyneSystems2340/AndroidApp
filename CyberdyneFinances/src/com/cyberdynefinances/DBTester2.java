@@ -1,7 +1,8 @@
-package com.cyberdynefinances.dbManagement;
+package com.cyberdynefinances;
 
-import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.R;
+import com.cyberdynefinances.dbManagement.AccountDBHelper;
+import com.cyberdynefinances.dbManagement.DBReaderContract;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -114,7 +115,7 @@ public class DBTester2 extends Activity {
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dbHelper.clear(dbHelper.getWritableDatabase());
+				dbHelper.clearUserTable(dbHelper.getWritableDatabase());
 			}
 		});
 	}

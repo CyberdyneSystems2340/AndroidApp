@@ -18,9 +18,5 @@ public final class DBReaderContract {
 		
 		//This is where the non-unique columns for the user table are specified.
 		public static final String USER_COLUMN_NAME_PASSWORD = "Password";
-		
-		
-//		
-		
 	}
 }
