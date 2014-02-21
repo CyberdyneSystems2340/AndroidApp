@@ -14,7 +14,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-public class DBTester2 extends Activity {
+public class DBTester extends Activity {
 	private AccountDBHelper dbHelper;
 	private TextView tView;
 	private Button writeButton,readButton,clearButton;
@@ -23,9 +23,9 @@ public class DBTester2 extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_dbtester2);
+		setContentView(R.layout.activity_dbtester);
 		dbHelper = new AccountDBHelper(MyApplication.getAppContext());
-		tView = (TextView) findViewById(R.id.dbtester2_textview);
+		tView = (TextView) findViewById(R.id.dbtester_textview);
 		addButtonListeners();
 		//writeToDB();
 		//tView.setText(readFromDB());

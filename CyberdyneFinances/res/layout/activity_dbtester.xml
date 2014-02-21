@@ -6,13 +6,13 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context=".DBTester2" >
+    tools:context=".DBTester" >
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world"
-        android:id="@+id/dbtester2_textview" />
+        android:id="@+id/dbtester_textview" />
 
     <EditText
         android:id="@+id/dbtest_userid_text"
@@ -21,28 +21,28 @@
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
         android:ems="10"
-        android:hint="UserID" >
-
-        <requestFocus />
-    </EditText>
+        android:hint="@string/username_text" />
 
     <EditText
         android:id="@+id/dbtest_pass_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/dbtest_userid_text"
         android:layout_below="@+id/dbtest_userid_text"
+        android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="Password" />
+        android:hint="@string/password_text" >
+
+        <requestFocus />
+    </EditText>
 
     <EditText
         android:id="@+id/dbtest_accounts_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/dbtest_pass_text"
         android:layout_below="@+id/dbtest_pass_text"
+        android:layout_centerHorizontal="true"
         android:ems="10"
-        android:hint="Accounts" />
+        android:hint="@string/accounts_text" />
 
     <Button
         android:id="@+id/dbtest_write_button"
@@ -69,5 +69,7 @@
         android:layout_alignBottom="@+id/dbtest_read_button"
         android:layout_toRightOf="@+id/dbtest_read_button"
         android:text="Clear" />
+
+"
 
 </RelativeLayout>

@@ -17,5 +17,7 @@
     <string name="title_activity_dbtester_activity">Dbtester_activity</string>
     <string name="test">Test</string>
     <string name="title_activity_dbtester2">DBTester2</string>
+    <string name="title_activity_dbtester">DBTester</string>
+    <string name="accounts_text">Accounts</string>
 
 </resources>
