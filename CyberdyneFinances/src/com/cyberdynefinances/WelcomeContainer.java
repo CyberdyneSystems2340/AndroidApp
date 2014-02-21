@@ -1,7 +1,5 @@
 package com.cyberdynefinances;
 
-import com.cyberdynefinances.dbmanagement.DBTester2;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;

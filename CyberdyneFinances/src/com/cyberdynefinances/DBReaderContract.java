@@ -1,4 +1,4 @@
-package com.cyberdynefinances.dbmanagement;
+package com.cyberdynefinances;
 import android.provider.BaseColumns;
 public final class DBReaderContract {	
 	public DBReaderContract() {}
