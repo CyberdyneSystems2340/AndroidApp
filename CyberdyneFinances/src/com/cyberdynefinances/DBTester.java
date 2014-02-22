@@ -59,7 +59,7 @@ public class DBTester extends Activity {
     		}
 		}
 		tView.setText("DbName: " + dbName + "\n\nTableName: " + tableName +
-					  "\n\nColumns: " + c.getColumnName(0) + ", " + c.getColumnName(1) + ", " + c.getColumnName(2) +
+					  "\n\nColumns: " + c.getColumnName(0) + ", " + c.getColumnName(1) + ", Accounts" +
 					  "\n\nRows: " + rows);
 	}
 	

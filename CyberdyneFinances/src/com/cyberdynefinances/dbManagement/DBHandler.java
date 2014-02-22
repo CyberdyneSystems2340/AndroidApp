@@ -39,7 +39,7 @@ public class DBHandler {
 			ContentValues values = new ContentValues();
 			values.put(DBEntry.USER_COLUMN_NAME_ID, userID);
 			values.put(DBEntry.USER_COLUMN_NAME_PASSWORD, password);
-			db.insert(DBEntry.USER_TABLE_NAME, DBEntry.USER_COLUMN_NAME_ACCOUNTS, values);
+			db.insert(DBEntry.USER_TABLE_NAME, null, values);
 			return true;
 		}
 		return false;
@@ -62,9 +62,20 @@ public class DBHandler {
 			if (null != c && 0 != c.getCount()) {
 				c.moveToFirst();
 				info[0] = c.getString(0);
-				info[1] = c.getString(1);
-				info[2] = c.getString(2); 
-			} 
+				info[1] = c.getString(1); 
+			}
+			
+			c = db.rawQuery("SELECT "+DBEntry.ACCOUNT_COLUMN_NAME_ID+" FROM " + DBEntry.ACCOUNT_TABLE_NAME +
+					" WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);
+			
+			if (null != c && 0 != c.getCount()) {
+				c.moveToFirst();
+				String accounts = c.getString(0);
+				while (c.moveToNext()) {
+					accounts += "_" + c.getString(0);
+				}
+				info[2] = accounts;
+			} else { info[2] = "None";}
 		} catch (Exception e) {e.printStackTrace();}
 		return info;
 	}
@@ -102,29 +113,15 @@ public class DBHandler {
 	 * 
 	 * @param userID - The user to whom this account will belong.
 	 * @param newAccount - The new account to add to the user.
-	 * @return True if the account was added, false if an error occurred or the userID was invalid.
+	 * @return True if the account was added, false if an error occurred, the account was already taken, or the userID was invalid.
 	 * */
 	public boolean addAccount(String userID, String newAccount) { 
-		String currentAccounts = "";
 		try {
 			SQLiteDatabase db = dbHelper.getWritableDatabase();
-			Cursor c = db.rawQuery("SELECT Accounts FROM " + DBEntry.USER_TABLE_NAME +
-					" WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);		
-			if (null != c && 0 != c.getCount()) {
-				c.moveToFirst();
-				if (isValid(c.getString(0))) {
-					currentAccounts = c.getString(0) + "_";
-				}
-			}
-			ContentValues values = new ContentValues();
-			values.put(DBEntry.USER_COLUMN_NAME_ACCOUNTS, currentAccounts + newAccount);
-			db.update(DBEntry.USER_TABLE_NAME, values, DBEntry.USER_COLUMN_NAME_ID + " = ?", new String[] {userID});
-			//Change to this form of storing the accounts later
-			/*
 			ContentValues val = new ContentValues();
 			val.put(DBEntry.ACCOUNT_COLUMN_NAME_ID, newAccount);
 			val.put(DBEntry.USER_COLUMN_NAME_ID, userID);
-			db.insert(DBEntry.ACCOUNT_TABLE_NAME, null, val);*/
+			db.insert(DBEntry.ACCOUNT_TABLE_NAME, null, val);
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();

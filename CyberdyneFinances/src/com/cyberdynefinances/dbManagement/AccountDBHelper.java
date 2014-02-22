@@ -6,31 +6,31 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBEntry;;
 
 public final class AccountDBHelper extends SQLiteOpenHelper {
-	private static final String 
-			//SQL Commands for creating the account, user, and transaction tables.
-			SQL_CREATE_USER_ENTRIES = "CREATE TABLE " +
+	//SQL Commands for creating the account, user, and transaction tables.
+	private static final String SQL_CREATE_USER_ENTRIES = "CREATE TABLE " +
 			DBEntry.USER_TABLE_NAME + " (" +
 			DBEntry.USER_COLUMN_NAME_ID + " TEXT PRIMARY KEY," +
-			DBEntry.USER_COLUMN_NAME_PASSWORD + " TEXT," +
-			DBEntry.USER_COLUMN_NAME_ACCOUNTS + " TEXT);",
-			
-			SQL_CREATE_ACCOUNT_ENTRIES = "CREATE TABLE " + 
+			DBEntry.USER_COLUMN_NAME_PASSWORD + " TEXT)";
+	
+	private static final String SQL_CREATE_ACCOUNT_ENTRIES = "CREATE TABLE " + 
 			DBEntry.ACCOUNT_TABLE_NAME + " (" +
-			DBEntry.ACCOUNT_COLUMN_NAME_ID + " INTEGER PRIMARY KEY," +
+			DBEntry.ACCOUNT_COLUMN_NAME_ID + " TEXT PRIMARY KEY," +
+			DBEntry.USER_COLUMN_NAME_ID + " TEXT," +
 			DBEntry.ACCOUNT_COLUMN_NAME_BALANCE + " TEXT," +
-			DBEntry.ACCOUNT_COLUMN_NAME_INTEREST + " TEXT);",
-			
-			SQL_CREATE_TRANSACTION_ENTRIES = "CREATE TABLE " +
+			DBEntry.ACCOUNT_COLUMN_NAME_INTEREST + " TEXT)";
+	/*
+	private static final String SQL_CREATE_TRANSACTION_ENTRIES = "CREATE TABLE " +
 			DBEntry.TRANSACTION_TABLE_NAME + " (" +
-			DBEntry.TRANSACTION_COLUMN_NAME_ID + " TEXT," +
+			DBEntry.ACCOUNT_COLUMN_NAME_ID + " TEXT," +
 			DBEntry.TRANSACTION_COLUMN_NAME_TRANSACTION + " INTEGER," +
 			DBEntry.TRANSACTION_COLUMN_NAME_TYPE +" TEXT," +
-			DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP + " TEXT);",
-		
-			//SQL Commands to delete any of the above created tables.
-			SQL_DELETE_USER_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.USER_TABLE_NAME + ";",
-			SQL_DELETE_ACCOUNT_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.ACCOUNT_TABLE_NAME + ";",
-			SQL_DELETE_TRANSACTION_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.TRANSACTION_TABLE_NAME + ";";
+			DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP + " TEXT)";*/
+	
+	//SQL Commands to delete any of the above created tables.
+	private static final String	
+			SQL_DELETE_USER_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.USER_TABLE_NAME,
+			SQL_DELETE_ACCOUNT_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.ACCOUNT_TABLE_NAME;
+//			SQL_DELETE_TRANSACTION_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.TRANSACTION_TABLE_NAME;
 
 	
 	public static final int DATABASE_VERSION = 1;
@@ -45,14 +45,14 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(SQL_CREATE_USER_ENTRIES);
 		db.execSQL(SQL_CREATE_ACCOUNT_ENTRIES);
-		db.execSQL(SQL_CREATE_TRANSACTION_ENTRIES);
+//		db.execSQL(SQL_CREATE_TRANSACTION_ENTRIES);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL(SQL_DELETE_USER_ENTRIES);
 		db.execSQL(SQL_DELETE_ACCOUNT_ENTRIES);
-		db.execSQL(SQL_DELETE_TRANSACTION_ENTRIES);
+//		db.execSQL(SQL_DELETE_TRANSACTION_ENTRIES);
         onCreate(db);
 	}
 	
@@ -65,10 +65,10 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 		db.execSQL(SQL_DELETE_ACCOUNT_ENTRIES);
 		db.execSQL(SQL_CREATE_ACCOUNT_ENTRIES);
 	}
-	
+	/*
 	public void clearTransactionTable(SQLiteDatabase db) {
 		db.execSQL(SQL_DELETE_TRANSACTION_ENTRIES);
 		db.execSQL(SQL_CREATE_TRANSACTION_ENTRIES);
 
-	}
+	}*/
 }
