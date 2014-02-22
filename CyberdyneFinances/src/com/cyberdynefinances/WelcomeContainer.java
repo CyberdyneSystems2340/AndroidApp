@@ -94,7 +94,6 @@ public class WelcomeContainer extends Activity
     	}
     }
     
-    // Right now this is just adding the username and password to the hashmap
     public void registerClicked(View view)
     {
     	View root2 = Fragments.RegisterFragment.root2;
@@ -136,5 +135,11 @@ public class WelcomeContainer extends Activity
     		Toast.makeText(this, "Registration Successful",Toast.LENGTH_LONG).show();
     		Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome);
     	}
+    }
+    
+    //opens the account home page for testing
+    public void test(View view)
+    {
+    	Animation.fade(new Fragments.AccountHomeFragment(), getFragmentManager(), R.id.container_welcome);
     }
 }
