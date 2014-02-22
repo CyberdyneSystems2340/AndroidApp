@@ -119,11 +119,12 @@ public class DBHandler {
 			ContentValues values = new ContentValues();
 			values.put(DBEntry.USER_COLUMN_NAME_ACCOUNTS, currentAccounts + newAccount);
 			db.update(DBEntry.USER_TABLE_NAME, values, DBEntry.USER_COLUMN_NAME_ID + " = ?", new String[] {userID});
-			
+			//Change to this form of storing the accounts later
+			/*
 			ContentValues val = new ContentValues();
 			val.put(DBEntry.ACCOUNT_COLUMN_NAME_ID, newAccount);
 			val.put(DBEntry.USER_COLUMN_NAME_ID, userID);
-			db.insert(DBEntry.ACCOUNT_TABLE_NAME, null, val);
+			db.insert(DBEntry.ACCOUNT_TABLE_NAME, null, val);*/
 			return true;
 		} catch (Exception e) {
 			e.printStackTrace();
