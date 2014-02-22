@@ -17,7 +17,7 @@ public class DBHandler {
      * 
      * @return True if the user exists, false if not.
      */
-    public boolean userExists(String userID){
+    public boolean containsUser(String userID){
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME + " WHERE " +
                                 DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);
@@ -34,7 +34,7 @@ public class DBHandler {
 	 * @return True if user was added successfully, false if user already exists or an error occurred.
 	 */
 	public boolean addUser(String userID, String password){
-		if (!userExists(userID) && isValid(userID) && isValid(password)) {
+		if (!containsUser(userID) && isValid(userID) && isValid(password)) {
 		    SQLiteDatabase db = dbHelper.getWritableDatabase();			
 			ContentValues values = new ContentValues();
 			values.put(DBEntry.USER_COLUMN_NAME_ID, userID);
@@ -64,18 +64,10 @@ public class DBHandler {
 				info[0] = c.getString(0);
 				info[1] = c.getString(1); 
 			}
+			for(String account: getAccountsForUser(userID)){
+			    info[2] = account;
+			}
 			
-			c = db.rawQuery("SELECT "+DBEntry.ACCOUNT_COLUMN_NAME_ID+" FROM " + DBEntry.ACCOUNT_TABLE_NAME +
-					" WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);
-			
-			if (null != c && 0 != c.getCount()) {
-				c.moveToFirst();
-				String accounts = c.getString(0);
-				while (c.moveToNext()) {
-					accounts += "_" + c.getString(0);
-				}
-				info[2] = accounts;
-			} else { info[2] = "None";}
 		} catch (Exception e) {e.printStackTrace();}
 		return info;
 	}
@@ -105,8 +97,6 @@ public class DBHandler {
 		return users;
 	}
 
-	//TODO: Change the way the accounts are stored. DO NOT store the account numbers in the users table.
-	//     Only store userID and passwords in the users table, then in the accounts table add a userID column.
 	/**
 	 * This method creates and associates a new account with a current user.
 	 * userID provided MUST be valid, otherwise the account will not be created.
@@ -116,7 +106,7 @@ public class DBHandler {
 	 * @return True if the account was added, false if an error occurred, the account was already taken, or the userID was invalid.
 	 * */
 	public boolean addAccount(String userID, String newAccount) {
-		if (!accountAlreadyExists(newAccount)) {
+		if (!containsAccount(newAccount)) {
 			try {
 				SQLiteDatabase db = dbHelper.getWritableDatabase();
 				ContentValues val = new ContentValues();
@@ -131,7 +121,32 @@ public class DBHandler {
 		return false;
 	}
 
-	//TODO:Write method to read accounts owned by user.
+	/**
+	 * This method returns all the accounts associated with a supplied user id.
+	 * 
+	 * @param userID The user id to check for accounts.
+	 * @return An array that holds the accounts for a specified user.
+	 * 
+	 */
+	public String[] getAccountsForUser(String userID){
+		String[] accounts = new String[]{"None"};
+		try {
+			SQLiteDatabase db = dbHelper.getReadableDatabase();
+			Cursor c = db.rawQuery("SELECT "+DBEntry.ACCOUNT_COLUMN_NAME_ID+" FROM " + DBEntry.ACCOUNT_TABLE_NAME +
+					" WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);
+			
+			if (null != c && 0 != c.getCount()) {
+				c.moveToFirst();
+				accounts = new String[c.getCount()];
+				accounts[0] = c.getString(0);
+				int i = 0;
+				while (c.moveToNext()) {
+					accounts[i++] = c.getString(0);
+				}
+			}
+		} catch (Exception e) {e.printStackTrace();}
+		return accounts;
+	}
 	
 	//TODO:Write method to update account for user.
 	
@@ -143,7 +158,7 @@ public class DBHandler {
 	private boolean isValid(String str){ return (null != str && !str.isEmpty());}
 	
 	//This method checks to see if this account has already been 
-	private boolean accountAlreadyExists(String str) {
+	private boolean containsAccount(String str) {
 		SQLiteDatabase db = dbHelper.getReadableDatabase();
 		Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.ACCOUNT_TABLE_NAME + " WHERE " +
                 DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + str + "'", null);
