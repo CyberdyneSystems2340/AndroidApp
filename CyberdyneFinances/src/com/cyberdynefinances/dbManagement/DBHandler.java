@@ -115,16 +115,18 @@ public class DBHandler {
 	 * @param newAccount - The new account to add to the user.
 	 * @return True if the account was added, false if an error occurred, the account was already taken, or the userID was invalid.
 	 * */
-	public boolean addAccount(String userID, String newAccount) { 
-		try {
-			SQLiteDatabase db = dbHelper.getWritableDatabase();
-			ContentValues val = new ContentValues();
-			val.put(DBEntry.ACCOUNT_COLUMN_NAME_ID, newAccount);
-			val.put(DBEntry.USER_COLUMN_NAME_ID, userID);
-			db.insert(DBEntry.ACCOUNT_TABLE_NAME, null, val);
-			return true;
-		} catch (Exception e) {
-			e.printStackTrace();
+	public boolean addAccount(String userID, String newAccount) {
+		if (!accountAlreadyExists(newAccount)) {
+			try {
+				SQLiteDatabase db = dbHelper.getWritableDatabase();
+				ContentValues val = new ContentValues();
+				val.put(DBEntry.ACCOUNT_COLUMN_NAME_ID, newAccount);
+				val.put(DBEntry.USER_COLUMN_NAME_ID, userID);
+				db.insert(DBEntry.ACCOUNT_TABLE_NAME, null, val);
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		return false;
 	}
@@ -141,7 +143,10 @@ public class DBHandler {
 	private boolean isValid(String str){ return (null != str && !str.isEmpty());}
 	
 	//This method checks to see if this account has already been 
-/*	private boolean accountAlreadyExists(String str) {
-	    
-	}*/
+	private boolean accountAlreadyExists(String str) {
+		SQLiteDatabase db = dbHelper.getReadableDatabase();
+		Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.ACCOUNT_TABLE_NAME + " WHERE " +
+                DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + str + "'", null);
+		return 0 < c.getCount();
+	}
 }
