@@ -1,15 +1,20 @@
 package com.cyberdynefinances;
 
+import java.util.ArrayList;
+
+import android.util.Log;
+
 public class AccountManager extends Account
 {
 	//not used as this is a static class
-	public AccountManager(String name, double balance, double interest) {
+	public AccountManager(String name, double balance, double interest) 
+	{
 		super(name, balance, interest);
 		// TODO Auto-generated constructor stub
 	}
 
 	//interfaces with accounts and is the only thing that can because the Account class is protected
-	private static Account[] accountList;
+	private static ArrayList<Account> accountList=new ArrayList<Account>();
 	private static String owner;
 	private static Account activeAccount;
 	
@@ -45,7 +50,7 @@ public class AccountManager extends Account
 		//set activeAccount to first account in list
 	}
 	
-	public static Account[] getAccountList()
+	public static ArrayList<Account> getAccountList()
 	{
 		return accountList;
 	}
@@ -57,5 +62,10 @@ public class AccountManager extends Account
 		return activeAccount;
 	}
 	
-	//TODO: method to add account to account list for user
+	public static void addAccount(Account acc)
+	{
+		accountList.add(acc);
+		Log.e("tag", acc.toString());
+		activeAccount = acc;
+	}
 }

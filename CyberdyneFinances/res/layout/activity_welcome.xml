@@ -18,6 +18,7 @@
         android:onClick="welcomeRegisterClicked" />
     
     <Button
+<<<<<<< HEAD
         android:id="@+id/testDbButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -25,5 +26,12 @@
         android:layout_centerHorizontal="true"
         android:text=""
         android:onClick="testDBClicked" />
+=======
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:onClick="test" />
+>>>>>>> 1af1e5ab7624448c7c50154a32f5c40ee28e5474
 
 </RelativeLayout>

@@ -11,6 +11,7 @@
     <string name="password_text">Password</string>
     <string name="login_button">Login</string>
     <string name="title_activity_login">LoginActivity</string>
+<<<<<<< HEAD
     <string name="register_balance">Balance</string>
     <string name="register_interest">Interest Rate(%)</string>
     <string name="register_retypePassword">Retype Password</string>
@@ -20,4 +21,12 @@
     <string name="title_activity_dbtester">DBTester</string>
     <string name="accounts_text">Accounts</string>
 
+=======
+	<string name="register_balance">Balance</string>
+	<string name="register_interest">Interest Rate(%)</string>
+	<string name="register_retypePassword">Retype Password</string>
+	<string name="accountName">Account Name</string>
+	<string name="createAccount">Create</string>
+	
+>>>>>>> 1af1e5ab7624448c7c50154a32f5c40ee28e5474
 </resources>
