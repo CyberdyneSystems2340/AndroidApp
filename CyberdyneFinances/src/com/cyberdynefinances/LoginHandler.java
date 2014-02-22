@@ -7,6 +7,9 @@ import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Hashtable;
 import java.util.Map.Entry;
+
+import com.cyberdynefinances.dbManagement.DBHandler;
+
 import android.content.SharedPreferences;
 
 public class LoginHandler 
@@ -57,13 +60,13 @@ public class LoginHandler
 	//Adds a new username and password combination to the hashtable
 	public static void register(String username, String password)
 	{
-		table.put(username, password.hashCode());
+		new DBHandler().addUser(username, password);
 	}
 	
 	//Checks if the hashmap contains the key(username)
 	public static boolean containsName(String userName)
 	{
-		return table.containsKey(userName);
+		return new DBHandler().userExists(userName);
 	}
 	
 	public static ArrayList<String> getUsernames()

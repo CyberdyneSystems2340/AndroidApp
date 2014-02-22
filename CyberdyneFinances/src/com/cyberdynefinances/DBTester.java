@@ -51,7 +51,11 @@ public class DBTester extends Activity {
 		String dbName = dbHelper.getDatabaseName();
 		String tableName = DBReaderContract.DBEntry.USER_TABLE_NAME;
 
-		String rows = new DBHandler().getUser(((TextView) findViewById(R.id.dbtest_userid_text)).getText().toString());
+		String[][] users = new DBHandler().getAllUsersInfo();
+		String rows = "";
+		for (String[] user : users) {
+		    rows += "\nName: " + user[0] + ", Password: " + user[1] + ", Accounts: " + user[2];
+		}
 		tView.setText("DbName: " + dbName + "\n\nTableName: " + tableName +
 					  "\n\nColumns: " + c.getColumnName(0) + ", " + c.getColumnName(1) + ", " + c.getColumnName(2) +
 					  "\n\nRows: " + rows);
