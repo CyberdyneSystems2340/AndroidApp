@@ -92,7 +92,7 @@ public class DBTester extends Activity {
 		clearButton.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				dbHelper.clearUserTable(dbHelper.getWritableDatabase());
+				dbHelper.clearAllTables(new AccountDBHelper(MyApplication.getAppContext()).getReadableDatabase());
 			}
 		});
 		addAccountButton.setOnClickListener(new View.OnClickListener() {

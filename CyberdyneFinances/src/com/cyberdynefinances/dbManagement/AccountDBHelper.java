@@ -56,6 +56,10 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
         onCreate(db);
 	}
 	
+	public void clearAllTables(SQLiteDatabase db){
+	    onUpgrade(db,0,0);
+	} 
+	
 	public void clearUserTable(SQLiteDatabase db){
 		db.execSQL(SQL_DELETE_USER_ENTRIES);
 		db.execSQL(SQL_CREATE_USER_ENTRIES);
