@@ -125,6 +125,7 @@ public class Fragments
 	{
 		//TODO: change the welcomeRegisterClicked method in WelcomeContainer back to Fragments.RegisterFragment()
 		//Change TestFragment back to R.layout.activity_test
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	    {
@@ -132,7 +133,7 @@ public class Fragments
 			
 			//things you may find useful
 			String activeUser = AccountManager.getActiveUser(); //the name of the current user
-			Double balance = AccountManager.getActiveAccount().balance; //the balance of the current account
+			Double balance = AccountManager.getActiveAccount().getBalance(); //the balance of the current account
 			ArrayList<Account> accountList = AccountManager.getAccountList(); //an arraylist of all accounts the current user has
 			String accountInfo = AccountManager.getActiveAccount().getAccountInfo();//basic info about the account like name, owner, balance, interest, transaction history(which is blank) separated by newlines
 			

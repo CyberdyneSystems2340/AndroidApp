@@ -2,26 +2,20 @@ package com.cyberdynefinances;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 public class AccountManager extends Account
 {
 	//not used as this is a static class
-	public AccountManager(String name, double balance, double interest) 
-	{
-		super(name, balance, interest);
-		// TODO Auto-generated constructor stub
-	}
+	public AccountManager(String name, double balance, double interest) {super(name, balance, interest);}
 
 	//interfaces with accounts and is the only thing that can because the Account class is protected
-	private static ArrayList<Account> accountList=new ArrayList<Account>();
+	private static ArrayList<Account> accountList = new ArrayList<Account>();
 	private static String owner;
 	private static Account activeAccount;
 	
 	public static void loadUser(String user)
 	{
 		owner = user;
-		loadAccounts();
+		readAccounts();
 	}
 	
 	public static String getActiveUser()
@@ -34,20 +28,25 @@ public class AccountManager extends Account
 		return account.getAccountInfo();
 	}
 	
-	public static void deposit(Account account, double amount)
+	public static void deposit(Account account, String category, double amount)
 	{
-		account.deposit(amount);
+		account.deposit(category, amount);
 	}
 	
-	public static void withdraw(Account account, double amount)
+	public static void withdraw(Account account, String category, double amount)
 	{
-		account.withdraw(amount);
+		account.withdraw(category, amount);
 	}
 	
-	public static void loadAccounts()
+	public static void readAccounts()
 	{
-		//load list of accounts owned by acctive user into accountList
+		//load list of accounts owned by active user into accountList
 		//set activeAccount to first account in list
+	}
+	
+	public static void writeAccounts()
+	{
+		//writes all accounts in account list to the database
 	}
 	
 	public static ArrayList<Account> getAccountList()
@@ -65,7 +64,6 @@ public class AccountManager extends Account
 	public static void addAccount(Account acc)
 	{
 		accountList.add(acc);
-		Log.e("tag", acc.toString());
 		activeAccount = acc;
 	}
 }
