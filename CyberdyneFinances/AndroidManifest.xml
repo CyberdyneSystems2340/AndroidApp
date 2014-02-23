@@ -55,7 +55,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cyberdynefinances.WelcomeContainer" />
         </activity>
-<<<<<<< HEAD
         <activity
             android:name="com.cyberdynefinances.DBTester"
             android:label="@string/title_activity_login"
@@ -63,16 +62,16 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cyberdynefinances.WelcomeContainer" />
-=======
-               <activity
-            android:name="com.cyberdynefinances.AccountCreationActivity"
-            android:label="@string/title_activity_test"
-            android:parentActivityName="com.cyberdynefinances.AccountContainer" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.cyberdynefinances.AccountContainer" />
->>>>>>> 1af1e5ab7624448c7c50154a32f5c40ee28e5474
         </activity>
+        <activity
+	       android:name="com.cyberdynefinances.AccountCreationActivity"
+	       android:label="@string/title_activity_test"
+	       android:parentActivityName="com.cyberdynefinances.AccountContainer" >
+	       <meta-data
+	       android:name="android.support.PARENT_ACTIVITY"
+	       android:value="com.cyberdynefinances.AccountContainer" />
+        </activity>
+        
     </application>
 
 </manifest>

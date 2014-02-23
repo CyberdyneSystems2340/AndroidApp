@@ -66,17 +66,9 @@ public class Fragments
         public void onPause()
         {
         	super.onPause();
-<<<<<<< HEAD
         	((EditText) root.findViewById(R.id.registerUsername)).setText("");
     		((EditText) root.findViewById(R.id.registerPassword)).setText("");
     		((EditText) root.findViewById(R.id.registerPasswordVerification)).setText("");
-    		((EditText) root.findViewById(R.id.registerBalance)).setText("");
-    		((EditText) root.findViewById(R.id.registerInterest)).setText("");
-=======
-        	((EditText) root2.findViewById(R.id.registerUsername)).setText("");
-    		((EditText) root2.findViewById(R.id.registerPassword)).setText("");
-    		((EditText) root2.findViewById(R.id.registerPasswordVerification)).setText("");
->>>>>>> 1af1e5ab7624448c7c50154a32f5c40ee28e5474
         }
     }
 	

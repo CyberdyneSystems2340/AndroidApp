@@ -140,14 +140,12 @@ public class WelcomeContainer extends Activity
     	}
     }
     
-<<<<<<< HEAD
     public void testDBClicked(View view) {    	
 		startActivity(new Intent(this, DBTester.class));
-=======
+    }	
     //opens the account home page for testing
     public void test(View view)
     {
     	Animation.fade(new Fragments.AccountHomeFragment(), getFragmentManager(), R.id.container_welcome);
->>>>>>> 1af1e5ab7624448c7c50154a32f5c40ee28e5474
     }
 }

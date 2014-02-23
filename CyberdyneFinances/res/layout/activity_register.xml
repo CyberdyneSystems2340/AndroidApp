@@ -44,33 +44,7 @@
         android:hint="@string/register_retypePassword"
         android:inputType="textPassword" />
 
-<<<<<<< HEAD
-    <EditText
-        android:id="@+id/registerBalance"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/registerPasswordVerification"
-        android:layout_below="@+id/registerPasswordVerification"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="14dp"
-        android:ems="10"
-        android:hint="@string/register_balance"
-        android:inputType="numberDecimal" />
 
-    <EditText
-        android:id="@+id/registerInterest"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/registerBalance"
-        android:layout_below="@+id/registerBalance"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="14dp"
-        android:ems="10"
-        android:hint="@string/register_interest"
-        android:inputType="numberDecimal" />
-
-=======
->>>>>>> 1af1e5ab7624448c7c50154a32f5c40ee28e5474
     <Button
         android:id="@+id/RegisterButton"
         android:layout_width="wrap_content"

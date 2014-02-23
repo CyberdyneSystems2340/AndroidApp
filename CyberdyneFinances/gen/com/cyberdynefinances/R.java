@@ -66,65 +66,41 @@ public final class R {
         public static final int register_button_icon=0x7f02001a;
     }
     public static final class id {
-<<<<<<< HEAD
-        public static final int RegisterButton=0x7f0a0017;
-        public static final int account_name=0x7f0a0001;
-        public static final int account_username=0x7f0a0000;
-        public static final int action_settings=0x7f0a001d;
-        public static final int admin_scroll=0x7f0a0002;
-        public static final int coinflip=0x7f0a0006;
-        public static final int container_account=0x7f0a001a;
-        public static final int container_welcome=0x7f0a001b;
-        public static final int dbtest_accounts_text=0x7f0a000a;
-        public static final int dbtest_addAccount_button=0x7f0a000e;
-        public static final int dbtest_clear_button=0x7f0a000d;
-        public static final int dbtest_pass_text=0x7f0a0009;
-        public static final int dbtest_read_button=0x7f0a000c;
-        public static final int dbtest_userid_text=0x7f0a0008;
-        public static final int dbtest_write_button=0x7f0a000b;
-        public static final int dbtester_textview=0x7f0a0007;
-        public static final int delete=0x7f0a0005;
-        public static final int loginButton=0x7f0a0011;
-        public static final int passwordEditText=0x7f0a0010;
-        public static final int registerBalance=0x7f0a0015;
-        public static final int registerInterest=0x7f0a0016;
-        public static final int registerPassword=0x7f0a0013;
-        public static final int registerPasswordVerification=0x7f0a0014;
-        public static final int registerUsername=0x7f0a0012;
-        public static final int reset_password=0x7f0a0004;
-        public static final int spinner=0x7f0a0003;
-        public static final int spinnerlayout=0x7f0a001c;
-        public static final int testDbButton=0x7f0a0019;
-        public static final int usernameEditText=0x7f0a000f;
-        public static final int welcome_screen_register_button=0x7f0a0018;
-=======
-        public static final int RegisterButton=0x7f0b0014;
+        public static final int RegisterButton=0x7f0b001c;
         public static final int account_balance=0x7f0b0005;
         public static final int account_creation_button=0x7f0b0004;
         public static final int account_name=0x7f0b0001;
         public static final int account_username=0x7f0b0000;
-        public static final int action_settings=0x7f0b0019;
+        public static final int action_settings=0x7f0b0022;
         public static final int admin_scroll=0x7f0b0009;
         public static final int balance=0x7f0b0002;
         public static final int coinflip=0x7f0b000d;
-        public static final int container_account=0x7f0b0016;
-        public static final int container_welcome=0x7f0b0017;
+        public static final int container_account=0x7f0b001f;
+        public static final int container_welcome=0x7f0b0020;
+        public static final int dbtest_accounts_text=0x7f0b0011;
+        public static final int dbtest_addAccount_button=0x7f0b0015;
+        public static final int dbtest_clear_button=0x7f0b0014;
+        public static final int dbtest_pass_text=0x7f0b0010;
+        public static final int dbtest_read_button=0x7f0b0013;
+        public static final int dbtest_userid_text=0x7f0b000f;
+        public static final int dbtest_write_button=0x7f0b0012;
+        public static final int dbtester_textview=0x7f0b000e;
         public static final int delete=0x7f0b000c;
         public static final int deposit_button=0x7f0b0006;
         public static final int interest=0x7f0b0003;
-        public static final int loginButton=0x7f0b0010;
-        public static final int passwordEditText=0x7f0b000f;
-        public static final int registerPassword=0x7f0b0012;
-        public static final int registerPasswordVerification=0x7f0b0013;
-        public static final int registerUsername=0x7f0b0011;
+        public static final int loginButton=0x7f0b0018;
+        public static final int passwordEditText=0x7f0b0017;
+        public static final int registerPassword=0x7f0b001a;
+        public static final int registerPasswordVerification=0x7f0b001b;
+        public static final int registerUsername=0x7f0b0019;
         public static final int report_spinner=0x7f0b0008;
         public static final int reset_password=0x7f0b000b;
         public static final int spinner=0x7f0b000a;
-        public static final int spinnerlayout=0x7f0b0018;
-        public static final int usernameEditText=0x7f0b000e;
-        public static final int welcome_screen_register_button=0x7f0b0015;
+        public static final int spinnerlayout=0x7f0b0021;
+        public static final int testDbButton=0x7f0b001e;
+        public static final int usernameEditText=0x7f0b0016;
+        public static final int welcome_screen_register_button=0x7f0b001d;
         public static final int withdraw_button=0x7f0b0007;
->>>>>>> 1af1e5ab7624448c7c50154a32f5c40ee28e5474
     }
     public static final class integer {
         public static final int card_flip_time_full=0x7f060001;
@@ -132,80 +108,48 @@ public final class R {
     }
     public static final class layout {
         public static final int activity_account=0x7f030000;
-<<<<<<< HEAD
-        public static final int activity_admin=0x7f030001;
-        public static final int activity_coinflip=0x7f030002;
-        public static final int activity_dbtester=0x7f030003;
-        public static final int activity_login=0x7f030004;
-        public static final int activity_register=0x7f030005;
-        public static final int activity_test=0x7f030006;
-        public static final int activity_welcome=0x7f030007;
-        public static final int frame_account=0x7f030008;
-        public static final int frame_welcome=0x7f030009;
-        public static final int layout_spinner=0x7f03000a;
-    }
-    public static final class menu {
-        public static final int dbtester=0x7f090000;
-        public static final int dbtester2=0x7f090001;
-        public static final int dbtester_activity=0x7f090002;
-        public static final int login=0x7f090003;
-        public static final int main=0x7f090004;
-        public static final int test=0x7f090005;
-    }
-    public static final class string {
-        public static final int accounts_text=0x7f070011;
-        public static final int action_settings=0x7f070001;
-        public static final int app_name=0x7f070000;
-        public static final int hello_world=0x7f070002;
-        public static final int login_button=0x7f070008;
-        public static final int login_button_text=0x7f070003;
-        public static final int password_text=0x7f070007;
-        public static final int register_balance=0x7f07000a;
-        public static final int register_button_text=0x7f070004;
-        public static final int register_interest=0x7f07000b;
-        public static final int register_retypePassword=0x7f07000c;
-        public static final int test=0x7f07000e;
-        public static final int title_activity_dbtester=0x7f070010;
-        public static final int title_activity_dbtester2=0x7f07000f;
-        public static final int title_activity_dbtester_activity=0x7f07000d;
-        public static final int title_activity_login=0x7f070009;
-        public static final int title_activity_test=0x7f070005;
-        public static final int username_text=0x7f070006;
-=======
         public static final int activity_account_creation=0x7f030001;
         public static final int activity_account_homepage=0x7f030002;
         public static final int activity_admin=0x7f030003;
         public static final int activity_coinflip=0x7f030004;
-        public static final int activity_login=0x7f030005;
-        public static final int activity_register=0x7f030006;
-        public static final int activity_test=0x7f030007;
-        public static final int activity_welcome=0x7f030008;
-        public static final int frame_account=0x7f030009;
-        public static final int frame_welcome=0x7f03000a;
-        public static final int layout_spinner=0x7f03000b;
+        public static final int activity_dbtester=0x7f030005;
+        public static final int activity_login=0x7f030006;
+        public static final int activity_register=0x7f030007;
+        public static final int activity_test=0x7f030008;
+        public static final int activity_welcome=0x7f030009;
+        public static final int frame_account=0x7f03000a;
+        public static final int frame_welcome=0x7f03000b;
+        public static final int layout_spinner=0x7f03000c;
     }
     public static final class menu {
-        public static final int login=0x7f0a0000;
-        public static final int main=0x7f0a0001;
-        public static final int test=0x7f0a0002;
+        public static final int dbtester=0x7f0a0000;
+        public static final int dbtester2=0x7f0a0001;
+        public static final int dbtester_activity=0x7f0a0002;
+        public static final int login=0x7f0a0003;
+        public static final int main=0x7f0a0004;
+        public static final int test=0x7f0a0005;
     }
     public static final class string {
-        public static final int accountName=0x7f08000d;
+        public static final int accountName=0x7f080012;
+        public static final int accounts_text=0x7f08000e;
         public static final int action_settings=0x7f080001;
         public static final int app_name=0x7f080000;
-        public static final int createAccount=0x7f08000e;
+        public static final int createAccount=0x7f080013;
         public static final int hello_world=0x7f080002;
         public static final int login_button=0x7f080008;
         public static final int login_button_text=0x7f080003;
         public static final int password_text=0x7f080007;
-        public static final int register_balance=0x7f08000a;
+        public static final int register_balance=0x7f08000f;
         public static final int register_button_text=0x7f080004;
-        public static final int register_interest=0x7f08000b;
-        public static final int register_retypePassword=0x7f08000c;
+        public static final int register_interest=0x7f080010;
+        public static final int register_retypePassword=0x7f080011;
+        public static final int test=0x7f08000b;
+        public static final int title_activity_dbtester=0x7f08000d;
+        public static final int title_activity_dbtester2=0x7f08000c;
+        public static final int title_activity_dbtester_activity=0x7f08000a;
         public static final int title_activity_login=0x7f080009;
         public static final int title_activity_test=0x7f080005;
         public static final int username_text=0x7f080006;
->>>>>>> 1af1e5ab7624448c7c50154a32f5c40ee28e5474
     }
     public static final class style {
         /** 
