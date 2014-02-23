@@ -2,9 +2,9 @@ package com.cyberdynefinances;
 
 public class Account 
 {
-	protected String accountName;
-	protected double balance = 0.0;
-	protected double interest = 0.0;
+	private String accountName;
+	private double balance = 0.0;
+	private double interest = 0.0;
 	
 	public Account(String name, double balance, double interest)
 	{
@@ -13,14 +13,18 @@ public class Account
 		this.interest = interest;
 	}
 	
-	protected void withdraw(double amount)
+	protected void withdraw(String category, double amount)
 	{
 		//remove amount from balance and register the transaction
+		balance -= amount;
+		registerTransaction("Withdraw", category, amount);
 	}
 	
-	protected void deposit(double amount)
+	protected void deposit(String category, double amount)
 	{
 		//add amount to balance and register the transaction
+		balance += amount;
+		registerTransaction("Deposit", category, amount);
 	}
 	
 	private String getTransactionHist()
@@ -40,9 +44,19 @@ public class Account
 		return string;
 	}
 	
-	private void registerTransaction(String type, double amount)
+	private void registerTransaction(String type, String category, double amount)
 	{
-		//writes the type, amount and timestamp/date of the transaction to the account file
+		//writes the type, category, amount, and timestamp/date of the transaction to the database
+	}
+	
+	public double getBalance()
+	{
+		return balance;
+	}
+	
+	public double getInterest()
+	{
+		return interest;
 	}
 	
 	@Override
