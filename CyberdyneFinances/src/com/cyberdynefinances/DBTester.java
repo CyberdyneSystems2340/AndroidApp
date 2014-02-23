@@ -66,7 +66,7 @@ public class DBTester extends Activity {
 	private void addAccount() {
 		String testID = ((TextView) findViewById(R.id.dbtest_userid_text)).getText().toString(),
 				testAccount = ((TextView) findViewById(R.id.dbtest_accounts_text)).getText().toString();
-		new DBHandler().addAccount(testID, testAccount);
+		new DBHandler().addAccount(testID, testAccount, 0, 0);
 		//System.out.println("addAccount got run!");
 	}
 	

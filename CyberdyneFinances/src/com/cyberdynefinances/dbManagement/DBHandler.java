@@ -105,13 +105,15 @@ public class DBHandler {
 	 * @param newAccount - The new account to add to the user.
 	 * @return True if the account was added, false if an error occurred, the account was already taken, or the userID was invalid.
 	 * */
-	public boolean addAccount(String userID, String newAccount) {
+	public boolean addAccount(String userID, String newAccount, double balance, double interest) {
 		if (!containsAccount(newAccount)) {
 			try {
 				SQLiteDatabase db = dbHelper.getWritableDatabase();
 				ContentValues val = new ContentValues();
 				val.put(DBEntry.ACCOUNT_COLUMN_NAME_ID, newAccount);
 				val.put(DBEntry.USER_COLUMN_NAME_ID, userID);
+				val.put(DBEntry.ACCOUNT_COLUMN_NAME_BALANCE, balance);
+				val.put(DBEntry.ACCOUNT_COLUMN_NAME_INTEREST, interest);
 				db.insert(DBEntry.ACCOUNT_TABLE_NAME, null, val);
 				return true;
 			} catch (Exception e) {
@@ -147,6 +149,8 @@ public class DBHandler {
 		} catch (Exception e) {e.printStackTrace();}
 		return accounts;
 	}
+	
+	//TODO:Write method to retrieve specified account info.
 	
 	//TODO:Write method to update account for user.
 	
