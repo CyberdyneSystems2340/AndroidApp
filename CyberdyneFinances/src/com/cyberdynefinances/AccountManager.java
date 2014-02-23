@@ -2,6 +2,8 @@ package com.cyberdynefinances;
 
 import java.util.ArrayList;
 
+import com.cyberdynefinances.dbManagement.DBHandler;
+
 public class AccountManager extends Account
 {
 	//not used as this is a static class
@@ -63,6 +65,7 @@ public class AccountManager extends Account
 	
 	public static void addAccount(Account acc)
 	{
+	    new DBHandler().addAccount(owner, acc.getName(), acc.getBalance(), acc.getInterest());
 		accountList.add(acc);
 		activeAccount = acc;
 	}

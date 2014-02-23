@@ -51,11 +51,20 @@ public class DBTester extends Activity {
 		String dbName = dbHelper.getDatabaseName();
 		String tableName = DBReaderContract.DBEntry.USER_TABLE_NAME;
 
-		String[][] users = new DBHandler().getAllUsersInfo();
-		String rows = "";
+		DBHandler dbHandler = new DBHandler();
+		String[][] users = dbHandler.getAllUsersInfo();
+		String rows = "", accountStr = "";
+		String[] accounts = null, accountInfo = null;
 		if (null != users) {
     		for (String[] user : users) {
     		    rows += "\nName: " + user[0] + ", Password: " + user[1] + ", Accounts: " + user[2];
+    		    accounts = dbHandler.getAccountsForUser(user[0]);
+    		    for (String account: accounts) {
+    		        accountInfo = dbHandler.getAccountInfo(account);
+    		        accountStr += "\n Account: " + accountInfo[0] + ", Owner: " + accountInfo[1] +
+    		                ", Balance: " + accountInfo[2] + ", Interest: " + accountInfo[3]; 
+    		    }
+    		    rows += accountStr;
     		}
 		}
 		tView.setText("DbName: " + dbName + "\n\nTableName: " + tableName +
@@ -67,7 +76,6 @@ public class DBTester extends Activity {
 		String testID = ((TextView) findViewById(R.id.dbtest_userid_text)).getText().toString(),
 				testAccount = ((TextView) findViewById(R.id.dbtest_accounts_text)).getText().toString();
 		new DBHandler().addAccount(testID, testAccount, 0, 0);
-		//System.out.println("addAccount got run!");
 	}
 	
 	private void addButtonListeners() {
@@ -100,7 +108,6 @@ public class DBTester extends Activity {
 			@Override
 			public void onClick(View v) {
 				addAccount();
-				//System.out.println("I got clicked!");
 			}
 		});
 	}

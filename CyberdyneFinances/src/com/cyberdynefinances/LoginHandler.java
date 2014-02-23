@@ -13,7 +13,7 @@ public class LoginHandler
 {
 	@SuppressWarnings("serial")
 	//Hashtable to store username and password combinations. Stores the password as its hash for security
-	private static Hashtable<String, Integer> table = new Hashtable<String, Integer>() {{ put("admin", ("pass123".hashCode()));}};
+	//private static Hashtable<String, Integer> table = new Hashtable<String, Integer>() {{ put("admin", ("pass123".hashCode()));}};
 	private static DBHandler dbHandler = new DBHandler();
 	
 	//Compares the given username and password to that in the database
@@ -25,7 +25,7 @@ public class LoginHandler
 	}
 	
 	//Reads in data from the SharedPreferences file to populate the hashtable
-	public static void readTable(SharedPreferences settings)
+/*	public static void readTable(SharedPreferences settings)
 	{
 		int count=0;
 		while(true)
@@ -52,8 +52,8 @@ public class LoginHandler
 	    }
 	    editor.commit();
 	}
-	
-	//Adds a new username and password combination to the hashtable
+*/
+	//Adds a new username and password combination to the database
 	public static void register(String username, String password)
 	{
 		dbHandler.addUser(username, password);
@@ -83,6 +83,6 @@ public class LoginHandler
 	
 	public static void remove(String username)
 	{
-		table.remove(username);
+		dbHandler.deleteUser(username);
 	}
 }

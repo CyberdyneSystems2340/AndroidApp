@@ -17,7 +17,7 @@ public class DBHandler {
      * 
      * @return True if the user exists, false if not.
      */
-    public boolean containsUser(String userID){
+    public boolean containsUser(String userID) {
         SQLiteDatabase db = dbHelper.getReadableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME + " WHERE " +
                                 DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);
@@ -33,7 +33,7 @@ public class DBHandler {
 	 * 
 	 * @return True if user was added successfully, false if user already exists or an error occurred.
 	 */
-	public boolean addUser(String userID, String password){
+	public boolean addUser(String userID, String password) {
 		if (!containsUser(userID) && isValid(userID) && isValid(password)) {
 		    SQLiteDatabase db = dbHelper.getWritableDatabase();			
 			ContentValues values = new ContentValues();
@@ -51,9 +51,9 @@ public class DBHandler {
 	 * 
 	 * @param userID - The id of the user that you wish to gain information about.
 	 * @return An array containing the data about the user from the database, returns null if user does not exist.
-	 * Array order is such: [0] = userID, [1] = password, [3] = accounts.
+	 * Array order is such: [0] = userID, [1] = password, [2] = accounts.
 	 * */
-	public String[] getUserInfo(String userID){
+	public String[] getUserInfo(String userID) {
 		String[] info = new String[3];
 		try {
 			SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -64,8 +64,10 @@ public class DBHandler {
 				info[0] = c.getString(0);
 				info[1] = c.getString(1); 
 			}
-			for(String account: getAccountsForUser(userID)){
-			    info[2] = account;
+			String[] accounts = getAccountsForUser(userID);
+			info[2] = accounts[0];
+			for(int i = 1; 1 < accounts.length; i++){
+			    info[2] += "_" + accounts[i];
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
@@ -130,7 +132,7 @@ public class DBHandler {
 	 * @return An array that holds the accounts for a specified user.
 	 * 
 	 */
-	public String[] getAccountsForUser(String userID){
+	public String[] getAccountsForUser(String userID) {
 		String[] accounts = new String[]{"None"};
 		try {
 			SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -140,26 +142,87 @@ public class DBHandler {
 			if (null != c && 0 != c.getCount()) {
 				c.moveToFirst();
 				accounts = new String[c.getCount()];
-				accounts[0] = c.getString(0);
-				int i = 0;
-				while (c.moveToNext()) {
-					accounts[i++] = c.getString(0);
+				for (int i = 0; i < c.getCount(); i++) {
+				    accounts[i] = c.getString(0);
+				    c.moveToNext();
 				}
 			}
 		} catch (Exception e) {e.printStackTrace();}
 		return accounts;
 	}
 	
-	//TODO:Write method to retrieve specified account info.
+	/**
+	 * This method returns all the basic info for the specified account.
+	 * 
+	 * @param account - The account to get the information for.
+	 * @return String array as such: [0] - account, [1] - owner, [2] - balance, [3] - interest.
+	 *         Null if no account exists.
+	 * */
+	public String[] getAccountInfo(String account){
+	    String[] info = null;
+	    try {
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.ACCOUNT_TABLE_NAME +
+                    " WHERE " + DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account + "'", null);
+            
+            if (null != c) {
+                c.moveToFirst();
+                info = new String[4];
+                info[0] = c.getString(0);
+                info[1] = c.getString(1);
+                info[2] = c.getString(2);
+                info[3] = c.getString(3);
+             }
+        } catch (Exception e) {e.printStackTrace();}
+	    return info;
+	}
+
 	
-	//TODO:Write method to update account for user.
-	
-	//TODO:Write method to remove account from user.
-	
+	/**
+	 * Deletes a specified account from the  database.
+	 * Also, deletes all transaction history for that account.
+	 * 
+	 * @param account - The account to delete.
+	 * @return True if account deleted successfully, false if an error occurred.
+	 */
+	public boolean deleteAccount(String account) {
+    	try {
+    	    SQLiteDatabase db = dbHelper.getWritableDatabase();
+    	    //TODO: Get Transaction table working!
+    	    //db.delete(DBEntry.TRANSACTION_TABLE_NAME, DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account + "'", null);
+    	    db.delete(DBEntry.ACCOUNT_TABLE_NAME, DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account +"'", null);
+    	    return true;
+	    } catch(Exception e) { e.printStackTrace();}
+	    return false;
+	}
+
+	/**
+	 * This method deletes a specified user from the database.
+	 * It also removes all the accounts associated to that user.
+	 * 
+	 * @param userID - The user to delete.
+	 * @return True if user was deleted, or was never present. False if an error occurred.
+	 */
+    public boolean deleteUser(String userID) {
+        try {
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
+            String[] accounts = getAccountsForUser(userID);
+            for (String account : accounts) {
+                deleteAccount(account);
+            }
+            db.delete(DBEntry.USER_TABLE_NAME,
+                    DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);
+            return true;
+        } catch (Exception e) { e.printStackTrace();}
+        return false;
+    }
+    
 	//TODO:Write a method to make a transaction for the user.
-	
+
+    //TODO:Write method to update account for user.
+    
 	//This method checks to see if a string is valid for being added to the db.
-	private boolean isValid(String str){ return (null != str && !str.isEmpty());}
+	private boolean isValid(String str) { return (null != str && !str.isEmpty());}
 	
 	//This method checks to see if this account has already been 
 	private boolean containsAccount(String str) {

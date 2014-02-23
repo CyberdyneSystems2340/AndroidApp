@@ -40,7 +40,7 @@ public class AdminActivity extends Activity
     public void onStop()
     {
     	super.onStop();
-    	LoginHandler.writeTable(getSharedPreferences("CyberdynePrefsFile",0));
+    	//LoginHandler.writeTable(getSharedPreferences("CyberdynePrefsFile",0));
     }
 
     @Override

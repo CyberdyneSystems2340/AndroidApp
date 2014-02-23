@@ -59,6 +59,10 @@ public class Account
 		return interest;
 	}
 	
+	public String getName() {
+	    return accountName;
+	}
+	
 	@Override
 	public String toString()
 	{
