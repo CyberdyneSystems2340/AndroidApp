@@ -18,7 +18,7 @@ public class Account
 		//remove amount from balance and register the transaction
 		balance -= amount;
 		registerTransaction("Withdraw", category, amount);
-	}
+}
 	
 	protected void deposit(String category, double amount)
 	{
@@ -46,6 +46,7 @@ public class Account
 	
 	private void registerTransaction(String type, String category, double amount)
 	{
+        //TODO: Interact with DB
 		//writes the type, category, amount, and timestamp/date of the transaction to the database
 	}
 	

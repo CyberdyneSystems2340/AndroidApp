@@ -27,27 +27,32 @@ public class AccountManager extends Account
 	
 	public static String getTransactionHist(Account account)
 	{
-		return account.getAccountInfo();
+        //TODO: Interact with DB
+	    return account.getAccountInfo();
 	}
 	
 	public static void deposit(Account account, String category, double amount)
 	{
+        //TODO: Interact with DB
 		account.deposit(category, amount);
 	}
 	
 	public static void withdraw(Account account, String category, double amount)
 	{
+        //TODO: Interact with DB
 		account.withdraw(category, amount);
 	}
 	
 	public static void readAccounts()
 	{
+	    //TODO: Interact with DB
 		//load list of accounts owned by active user into accountList
 		//set activeAccount to first account in list
 	}
 	
 	public static void writeAccounts()
 	{
+        //TODO: Interact with DB
 		//writes all accounts in account list to the database
 	}
 	
