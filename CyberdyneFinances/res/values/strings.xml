@@ -15,5 +15,9 @@
 	<string name="register_retypePassword">Retype Password</string>
 	<string name="accountName">Account Name</string>
 	<string name="createAccount">Create</string>
+	<string name="input_amount">Input Amount</string>
+	<string name="withdrawal">Withdrawal</string>
+	<string name="deposit">Deposit</string>
+	<string name="confirm">Confirm</string>
 	
 </resources>
