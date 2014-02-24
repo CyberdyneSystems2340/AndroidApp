@@ -1,6 +1,7 @@
 package com.cyberdynefinances;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -93,6 +94,21 @@ public class WelcomeContainer extends Activity
     		Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_LONG).show();
     	}
     }
+    
+    
+    
+    public void buttonWithdrawal(View view){
+		AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
+		alertDialogBuilder.setTitle("Withdrawal");
+		alertDialogBuilder.setCancelable(true);
+		
+		
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		
+		alertDialog.show();
+	}
+    
+    
     
     public void registerClicked(View view)
     {

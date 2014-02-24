@@ -1,6 +1,7 @@
 package com.cyberdynefinances;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -56,5 +57,11 @@ public class AccountContainer extends Activity
 	
 	public void buttonWithdrawal(View view){
 		AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
+		alertDialogBuilder.setTitle("Withdrawal");
+		
+		
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		
+		alertDialog.show();
 	}
 }
