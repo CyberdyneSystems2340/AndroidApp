@@ -9,47 +9,55 @@
     tools:context=".DBTester" >
 
     <TextView
-        android:id="@+id/dbtester_textview"
+        android:id="@+id/dbtest_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/hello_world" />
-
-    <EditText
-        android:id="@+id/dbtest_amount_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dbtest_account_text"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:hint="@string/transaction_amount_text" />
-
-    <Button
-        android:id="@+id/dbtest_transaction_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/dbtest_amount_text"
-        android:layout_below="@+id/dbtest_amount_text"
-        android:text="@string/transaction_button_text" />
-
-    <EditText
-        android:id="@+id/dbtest_account_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/dbtest_amount_text"
-        android:layout_centerVertical="true"
-        android:ems="10"
-        android:hint="@string/accountName" >
-
-        <requestFocus />
-    </EditText>
 
     <Button
         android:id="@+id/dbtest_read_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/dbtest_transaction_button"
-        android:layout_alignBottom="@+id/dbtest_transaction_button"
-        android:layout_alignRight="@+id/dbtest_amount_text"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:text="Read" />
+
+    <Button
+        android:id="@+id/dbtest_deposit_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/dbtest_read_button"
+        android:text="@string/deposit" />
+
+    <Button
+        android:id="@+id/dbtest_withdraw_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/dbtest_deposit_button"
+        android:layout_alignBottom="@+id/dbtest_deposit_button"
+        android:layout_toRightOf="@+id/dbtest_deposit_button"
+        android:text="@string/withdraw" />
+
+    <EditText
+        android:id="@+id/dbtest_amount_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/dbtest_read_button"
+        android:layout_alignLeft="@+id/dbtest_read_button"
+        android:ems="10"
+        android:hint="@string/transaction_amount_text" />
+
+    <EditText
+        android:id="@+id/dbtest_account_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/dbtest_amount_text"
+        android:layout_alignLeft="@+id/dbtest_amount_text"
+        android:ems="10"
+        android:hint="@string/accountName" >
+
+        <requestFocus />
+    </EditText>
     
 </RelativeLayout>

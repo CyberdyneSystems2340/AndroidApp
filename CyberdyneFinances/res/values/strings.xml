@@ -21,14 +21,11 @@
 	<string name="register_retypePassword">Retype Password</string>
 	<string name="accountName">Account Name</string>
 	<string name="createAccount">Create</string>
-<<<<<<< HEAD
 	<string name="transaction_amount_text">Amount</string>
 	<string name="transaction_button_text">Transaction</string>
-=======
 	<string name="input_amount">Input Amount</string>
-	<string name="withdrawal">Withdrawal</string>
+	<string name="withdraw">Withdraw</string>
 	<string name="deposit">Deposit</string>
 	<string name="confirm">Confirm</string>
 	
->>>>>>> 6da3f1a423d320624c4034896457a54fed62b451
 </resources>

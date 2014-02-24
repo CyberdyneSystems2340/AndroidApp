@@ -17,7 +17,7 @@ import android.widget.TextView;
 public class DBTester extends Activity {
 	private AccountDBHelper dbHelper;
 	private TextView tView;
-	private Button readButton, transactionButton;//addAccountButton;
+	private Button readButton, withdrawButton, depositButton;
 //	
 
 	@Override
@@ -25,7 +25,7 @@ public class DBTester extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dbtester);
 		dbHelper = new AccountDBHelper(MyApplication.getAppContext());
-		tView = (TextView) findViewById(R.id.dbtester_textview);
+		tView = (TextView) findViewById(R.id.dbtest_textview);
 		addButtonListeners();
 	}
 
@@ -35,15 +35,7 @@ public class DBTester extends Activity {
 		getMenuInflater().inflate(R.menu.dbtester_activity, menu);
 		return true;
 	}
-/*	
-	//This method tests writing a new user.
-	private void writeNewUserToDB(){
-		String testID = ((TextView) findViewById(R.id.dbtest_account_text)).getText().toString(),
-				testPass = ((TextView) findViewById(R.id.dbtest_pass_text)).getText().toString();
 
-		new DBHandler().addUser(testID, testPass);
-	}
-*/
 	//This method tests reading all the user accounts stored.
 	private void readFromDB() {
 
@@ -66,63 +58,50 @@ public class DBTester extends Activity {
 		tView.setText("\n\nRows: " + rows);
 	}
 	
-	private void transact() {
+	private void withdraw() {
 	    DBHandler dbHandler = new DBHandler();
-	    
+	    String account = (String) ((TextView) findViewById(R.id.dbtest_account_text)).getText();
+        double amount = Double.parseDouble((String) ((TextView) findViewById(R.id.dbtest_account_text)).getText());	    
+	    dbHandler.makeTransaction(account, amount, "WITHDRAW", "NONE");
 	    
 	}
-/*	
-	private void addAccount() {
-		String testID = ((TextView) findViewById(R.id.dbtest_account_text)).getText().toString(),
-				testAccount = ((TextView) findViewById(R.id.dbtest_amount_text)).getText().toString();
-		new DBHandler().addAccount(testID, testAccount, 0, 0);
+	
+	private void deposit() {
+	    DBHandler dbHandler = new DBHandler();
+        String account = (String) ((TextView) findViewById(R.id.dbtest_account_text)).getText();
+        double amount = Double.parseDouble((String) ((TextView) findViewById(R.id.dbtest_account_text)).getText());     
+        dbHandler.makeTransaction(account, amount, "DEPOSIT", "NONE");
 	}
-*/
-	private void addButtonListeners() {
-//		writeButton = (Button) findViewById(R.id.dbtest_write_button);
+
+	private void addButtonListeners()
+	{
 		readButton = (Button) findViewById(R.id.dbtest_read_button);
-		transactionButton = (Button) findViewById(R.id.dbtest_transaction_button);
+		withdrawButton = (Button) findViewById(R.id.dbtest_withdraw_button);
+		depositButton = (Button) findViewById(R.id.dbtest_deposit_button);
 		
-//		clearButton = (Button) findViewById(R.id.dbtest_clear_button);
-		
-//		addAccountButton = (Button) findViewById(R.id.dbtest_addAccount_button);
-/*		
-		writeButton.setOnClickListener(new View.OnClickListener() {			
+		readButton.setOnClickListener(new View.OnClickListener()
+		{
 			@Override
-			public void onClick(View v) {
-				writeNewUserToDB();
-				
-			}
-		});*/
-		readButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
+			public void onClick(View v)
+			{
 				readFromDB();
 			}
 		});
-		transactionButton.setOnClickListener(new View.OnClickListener()
+		withdrawButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View v)
             {
-                transact();                
+                withdraw();                
             }
         });
-		/*
-		clearButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				dbHelper.clearAllTables(new AccountDBHelper(MyApplication.getAppContext()).getReadableDatabase());
-			}
-		});
-		*/
-		/*
-		addAccountButton.setOnClickListener(new View.OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				addAccount();
-			}
-		});*/
+		depositButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                deposit();
+            }
+        });
 	}
 }
