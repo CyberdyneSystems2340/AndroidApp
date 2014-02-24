@@ -18,19 +18,19 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 			DBEntry.USER_COLUMN_NAME_ID + " TEXT," +
 			DBEntry.ACCOUNT_COLUMN_NAME_BALANCE + " TEXT," +
 			DBEntry.ACCOUNT_COLUMN_NAME_INTEREST + " TEXT)";
-	/*
+	
 	private static final String SQL_CREATE_TRANSACTION_ENTRIES = "CREATE TABLE " +
 			DBEntry.TRANSACTION_TABLE_NAME + " (" +
 			DBEntry.ACCOUNT_COLUMN_NAME_ID + " TEXT," +
-			DBEntry.TRANSACTION_COLUMN_NAME_TRANSACTION + " INTEGER," +
+			DBEntry.TRANSACTION_COLUMN_NAME_TRANSACTION + " TEXT," +
 			DBEntry.TRANSACTION_COLUMN_NAME_TYPE +" TEXT," +
-			DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP + " TEXT)";*/
+			DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP + " TEXT PRIMARY KEY)";
 	
 	//SQL Commands to delete any of the above created tables.
 	private static final String	
 			SQL_DELETE_USER_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.USER_TABLE_NAME,
-			SQL_DELETE_ACCOUNT_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.ACCOUNT_TABLE_NAME;
-//			SQL_DELETE_TRANSACTION_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.TRANSACTION_TABLE_NAME;
+			SQL_DELETE_ACCOUNT_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.ACCOUNT_TABLE_NAME,
+			SQL_DELETE_TRANSACTION_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.TRANSACTION_TABLE_NAME;
 
 	
 	public static final int DATABASE_VERSION = 1;
@@ -45,14 +45,14 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 	public void onCreate(SQLiteDatabase db) {
 		db.execSQL(SQL_CREATE_USER_ENTRIES);
 		db.execSQL(SQL_CREATE_ACCOUNT_ENTRIES);
-//		db.execSQL(SQL_CREATE_TRANSACTION_ENTRIES);
+		db.execSQL(SQL_CREATE_TRANSACTION_ENTRIES);
 	}
 
 	@Override
 	public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
 		db.execSQL(SQL_DELETE_USER_ENTRIES);
 		db.execSQL(SQL_DELETE_ACCOUNT_ENTRIES);
-//		db.execSQL(SQL_DELETE_TRANSACTION_ENTRIES);
+		db.execSQL(SQL_DELETE_TRANSACTION_ENTRIES);
         onCreate(db);
 	}
 	
@@ -69,10 +69,10 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 		db.execSQL(SQL_DELETE_ACCOUNT_ENTRIES);
 		db.execSQL(SQL_CREATE_ACCOUNT_ENTRIES);
 	}
-	/*
+
 	public void clearTransactionTable(SQLiteDatabase db) {
 		db.execSQL(SQL_DELETE_TRANSACTION_ENTRIES);
 		db.execSQL(SQL_CREATE_TRANSACTION_ENTRIES);
 
-	}*/
+	}
 }

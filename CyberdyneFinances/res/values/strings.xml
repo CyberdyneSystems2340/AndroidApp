@@ -21,4 +21,6 @@
 	<string name="register_retypePassword">Retype Password</string>
 	<string name="accountName">Account Name</string>
 	<string name="createAccount">Create</string>
+	<string name="transaction_amount_text">Amount</string>
+	<string name="transaction_button_text">Transaction</string>
 </resources>

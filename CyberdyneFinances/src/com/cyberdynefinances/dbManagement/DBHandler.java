@@ -188,8 +188,7 @@ public class DBHandler {
 	public boolean deleteAccount(String account) {
     	try {
     	    SQLiteDatabase db = dbHelper.getWritableDatabase();
-    	    //TODO: Get Transaction table working!
-    	    //db.delete(DBEntry.TRANSACTION_TABLE_NAME, DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account + "'", null);
+    	    db.delete(DBEntry.TRANSACTION_TABLE_NAME, DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account + "'", null);
     	    db.delete(DBEntry.ACCOUNT_TABLE_NAME, DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account +"'", null);
     	    return true;
 	    } catch(Exception e) { e.printStackTrace();}
@@ -218,7 +217,29 @@ public class DBHandler {
     }
     
 	//TODO:Write a method to make a transaction for the user.
-
+    /**
+     * This method makes a transaction with a specified account.
+     * If the amount provided is a positive double, a deposit is made.
+     * If the amount provided is a negative double and the account balance > amount, a withdrawal is made.
+     * 
+     * @param account -The account to make a transaction with.
+     * @param amount - The amount of money to deposit or withdraw.
+     * @return True, if transaction was made, false if invalid transaction or an error occurred.
+     */
+    public boolean makeTransaction(String account, double amount) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        String type = (amount > 0) ? "Deposit" : "Withdrawal";        
+        if (amount > 0) {
+            Cursor c = db.rawQuery(
+                        "SELECT " + DBEntry.ACCOUNT_COLUMN_NAME_BALANCE +
+                        " FROM " + DBEntry.ACCOUNT_TABLE_NAME +
+                        " WHERE " + DBEntry.ACCOUNT_COLUMN_NAME_ID +
+                        " = '" + account + "'", null);
+        //TODO: Finish make Transaction method    
+        }
+        
+        return false;
+    }
     //TODO:Write method to update account for user.
     
 	//This method checks to see if a string is valid for being added to the db.
