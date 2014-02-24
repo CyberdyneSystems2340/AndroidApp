@@ -11,8 +11,10 @@ public final class DBReaderContract {
 		public static final String ACCOUNT_COLUMN_NAME_ID = "AccountNumber", USER_COLUMN_NAME_ID = "UserID";
 		
 		//This is where the non-unique columns for the transaction table are specified.
-		public static final String TRANSACTION_COLUMN_NAME_TRANSACTION = "Transaction",
-				TRANSACTION_COLUMN_NAME_TYPE = "Type",TRANSACTION_COLUMN_NAME_TIMESTAMP = "Date";
+		public static final String TRANSACTION_COLUMN_NAME_AMOUNT = "Amount",
+				TRANSACTION_COLUMN_NAME_TYPE = "Type",
+				TRANSACTION_COLUMN_NAME_TIMESTAMP = "Date",
+				TRANSACTION_COLUMN_NAME_CATEGORY = "Category";
 		
 		//This is where the non-unique columns for the account table are specified.
 		public static final String ACCOUNT_COLUMN_NAME_INTEREST = "Interest", ACCOUNT_COLUMN_NAME_BALANCE = "Balance";

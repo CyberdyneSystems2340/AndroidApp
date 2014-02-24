@@ -3,6 +3,8 @@ package com.cyberdynefinances.dbManagement;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.text.format.Time;
+
 import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBEntry;
 
@@ -215,31 +217,45 @@ public class DBHandler {
         } catch (Exception e) { e.printStackTrace();}
         return false;
     }
-    
-	//TODO:Write a method to make a transaction for the user.
+
     /**
      * This method makes a transaction with a specified account.
-     * If the amount provided is a positive double, a deposit is made.
-     * If the amount provided is a negative double and the account balance > amount, a withdrawal is made.
+     * The amount will be either deducted or deposited to the account.
+     * The transactionType will dictate whether the money should be deducted or deposited.
+     * The category will show what category this transaction fits under.
      * 
-     * @param account -The account to make a transaction with.
+     * @param account - The account to make a transaction with.
      * @param amount - The amount of money to deposit or withdraw.
+     * @param transactionType - The amount type, 'Deposit' and 'Withdrawal'
+     * @param category - The category this transaction is associated with.
      * @return True, if transaction was made, false if invalid transaction or an error occurred.
      */
-    public boolean makeTransaction(String account, double amount) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase();
-        String type = (amount > 0) ? "Deposit" : "Withdrawal";        
-        if (amount > 0) {
-            Cursor c = db.rawQuery(
-                        "SELECT " + DBEntry.ACCOUNT_COLUMN_NAME_BALANCE +
-                        " FROM " + DBEntry.ACCOUNT_TABLE_NAME +
-                        " WHERE " + DBEntry.ACCOUNT_COLUMN_NAME_ID +
-                        " = '" + account + "'", null);
+    public boolean makeTransaction(String account, double amount, String transactionType, String category) {
+        SQLiteDatabase db = dbHelper.getWritableDatabase(); 
+        String[] accountInfo = getAccountInfo(account);
+        double balance = Double.parseDouble(accountInfo[2]);
+        ContentValues cv = new ContentValues();
+        if (transactionType.equalsIgnoreCase("Deposit")) {
+            double newBalance = balance + amount; 
+            cv.put(DBEntry.ACCOUNT_COLUMN_NAME_BALANCE, newBalance);
+            db.update(DBEntry.ACCOUNT_TABLE_NAME, cv,
+                    DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account + "'", null);
+            cv = new ContentValues();
+            cv.put(DBEntry.ACCOUNT_COLUMN_NAME_ID, account);
+            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_AMOUNT, amount);
+            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_TYPE, "DEPOSIT");
+            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_CATEGORY, category);
+            Time time = new Time();
+            time.setToNow();            
+            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP, time.toString());
+            
+            
         //TODO: Finish make Transaction method    
         }
         
         return false;
     }
+
     //TODO:Write method to update account for user.
     
 	//This method checks to see if a string is valid for being added to the db.
