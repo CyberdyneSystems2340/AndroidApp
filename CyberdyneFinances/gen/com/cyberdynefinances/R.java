@@ -71,7 +71,7 @@ public final class R {
         public static final int account_name=0x7f0b0001;
         public static final int account_spinner=0x7f0b0009;
         public static final int account_username=0x7f0b0000;
-        public static final int action_settings=0x7f0b001c;
+        public static final int action_settings=0x7f0b001d;
         public static final int add_account_button=0x7f0b000a;
         public static final int admin_scroll=0x7f0b000c;
         public static final int balance=0x7f0b0002;
@@ -81,6 +81,7 @@ public final class R {
         public static final int delete=0x7f0b000f;
         public static final int deposit_button=0x7f0b0006;
         public static final int interest=0x7f0b0003;
+        public static final int layout_report_spinner=0x7f0b001b;
         public static final int loginButton=0x7f0b0013;
         public static final int logout_button=0x7f0b000b;
         public static final int passwordEditText=0x7f0b0012;
@@ -90,7 +91,7 @@ public final class R {
         public static final int report_spinner=0x7f0b0008;
         public static final int reset_password=0x7f0b000e;
         public static final int spinner=0x7f0b000d;
-        public static final int spinnerlayout=0x7f0b001b;
+        public static final int spinnerlayout=0x7f0b001c;
         public static final int usernameEditText=0x7f0b0011;
         public static final int welcome_screen_register_button=0x7f0b0018;
         public static final int withdraw_button=0x7f0b0007;
@@ -111,7 +112,8 @@ public final class R {
         public static final int activity_welcome=0x7f030008;
         public static final int frame_account=0x7f030009;
         public static final int frame_welcome=0x7f03000a;
-        public static final int layout_spinner=0x7f03000b;
+        public static final int layout_report_spinner=0x7f03000b;
+        public static final int layout_spinner=0x7f03000c;
     }
     public static final class menu {
         public static final int login=0x7f0a0000;
