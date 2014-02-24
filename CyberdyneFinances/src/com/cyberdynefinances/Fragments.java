@@ -145,8 +145,13 @@ public class Fragments
 			//all spinners have adapters, they tell the spinner things like what to show and how it should look
 			//the second parameter is a layout file for the spinner for things like text size, the one it is using is a custom one i wrote for the admin account spinner. you can take a look at it and write your own for each spinner 
 			//the last parameter is an array of strings containing things the spinner should have as options
-			ArrayAdapter a = new ArrayAdapter(view.getContext(), R.layout.layout_spinner, test); 
+			ArrayAdapter a = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, test); 
 			s.setAdapter(a);
+			
+			Spinner s2 = (Spinner) view.findViewById(R.id.account_spinner); //parameter is the id of the spinner in this case it is report_spinner
+			String[] test2 = {"test"};
+			ArrayAdapter a2 = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, test2); 
+			s2.setAdapter(a2);
 			
 			return view;
 	    }

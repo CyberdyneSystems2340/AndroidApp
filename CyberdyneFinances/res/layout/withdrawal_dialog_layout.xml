@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal" android:background="#ffffff"
+    android:orientation="vertical" android:padding="10dp">
+    
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/withdrawal" />
+    
+    <Spinner android:id="@+id/withdrawal_dialog_menu" android:layout_width="fill_parent"
+    android:layout_height="wrap_content" />
+    
+    <EditText android:id="@+id/withdrawal_dialog_text" android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="numberDecimal"
+        android:hint="@string/input_amount"/>
+    
+     <Button
+        android:id="@+id/withdrawal_dialog_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="22dp"
+        android:onClick="confirmWithdrawal"
+        android:text="@string/confirm"/>
+
+</LinearLayout>

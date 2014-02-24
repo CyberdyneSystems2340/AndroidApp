@@ -1,6 +1,7 @@
 package com.cyberdynefinances;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -52,5 +53,15 @@ public class AccountContainer extends Activity
 		Account account=new Account(accountName,balanceDouble,interestDouble);
 		AccountManager.addAccount(account);
 		Animation.fade(new Fragments.AccountFragment(), getFragmentManager(), R.id.container_account);
+	}
+	
+	public void buttonWithdrawal(View view){
+		AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
+		alertDialogBuilder.setTitle("Withdrawal");
+		
+		
+		AlertDialog alertDialog = alertDialogBuilder.create();
+		
+		alertDialog.show();
 	}
 }

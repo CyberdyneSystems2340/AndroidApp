@@ -2,6 +2,7 @@ package com.cyberdynefinances;
 
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
@@ -9,6 +10,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 
@@ -96,6 +98,32 @@ public class WelcomeContainer extends Activity
     		Toast.makeText(this, "Incorrect username or password", Toast.LENGTH_LONG).show();
     	}
     }
+    
+    
+    
+    public void buttonWithdrawal(View view){
+		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+		
+		View dialog_layout = getLayoutInflater().inflate(R.layout.withdrawal_dialog_layout, null);
+		 // Create the text field in the alert dialog...
+		EditText text = (EditText) dialog_layout.findViewById(R.id.withdrawal_dialog_text);
+		Spinner menu = (Spinner) dialog_layout.findViewById(R.id.withdrawal_dialog_menu);        
+
+		alertDialog.setView(dialog_layout);
+		alertDialog.show();
+    }
+    public void buttonDeposit(View view){
+		final AlertDialog alertDialog = new AlertDialog.Builder(this).create();
+		
+		View dialog_layout = getLayoutInflater().inflate(R.layout.deposit_dialog_layout, null);
+		 // Create the text field in the alert dialog...
+		EditText text = (EditText) dialog_layout.findViewById(R.id.deposit_dialog_text);
+		Spinner menu = (Spinner) dialog_layout.findViewById(R.id.deposit_dialog_menu);        
+
+		alertDialog.setView(dialog_layout);
+		alertDialog.show();
+    }
+    
     
     public void registerClicked(View view)
     {
