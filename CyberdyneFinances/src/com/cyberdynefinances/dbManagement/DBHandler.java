@@ -226,37 +226,20 @@ public class DBHandler {
      * 
      * @param account - The account to make a transaction with.
      * @param amount - The amount of money to deposit or withdraw.
-     * @param transactionType - The amount type, 'Deposit' and 'Withdrawal'
+     * @param transactionType - The amount type, 'Deposit' or 'Withdraw', case doesn't matter.
      * @param category - The category this transaction is associated with.
      * @return True, if transaction was made, false if invalid transaction or an error occurred.
      */
     public boolean makeTransaction(String account, double amount, String transactionType, String category) {
-        SQLiteDatabase db = dbHelper.getWritableDatabase(); 
-        String[] accountInfo = getAccountInfo(account);
-        double balance = Double.parseDouble(accountInfo[2]);
-        ContentValues cv = new ContentValues();
-        if (transactionType.equalsIgnoreCase("Deposit")) {
-            double newBalance = balance + amount; 
-            cv.put(DBEntry.ACCOUNT_COLUMN_NAME_BALANCE, newBalance);
-            db.update(DBEntry.ACCOUNT_TABLE_NAME, cv,
-                    DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account + "'", null);
-            cv = new ContentValues();
-            cv.put(DBEntry.ACCOUNT_COLUMN_NAME_ID, account);
-            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_AMOUNT, amount);
-            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_TYPE, "DEPOSIT");
-            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_CATEGORY, category);
-            Time time = new Time();
-            time.setToNow();            
-            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP, time.toString());
-            
-            
-        //TODO: Finish make Transaction method    
-        }
-        
+        double balance = Double.parseDouble(getAccountInfo(account)[2]);
+        if (transactionType.equalsIgnoreCase("DEPOSIT")) {
+            return updateBalance(dbHelper.getWritableDatabase(),new ContentValues(),account,balance,amount,"DEPOSIT",category);
+        } 
+        if (transactionType.equalsIgnoreCase("WITHDRAW")) {    
+            return updateBalance(dbHelper.getWritableDatabase(),new ContentValues(),account,balance,-amount,"WITHDRAW",category);
+        }       
         return false;
     }
-
-    //TODO:Write method to update account for user.
     
 	//This method checks to see if a string is valid for being added to the db.
 	private boolean isValid(String str) { return (null != str && !str.isEmpty());}
@@ -267,5 +250,26 @@ public class DBHandler {
 		Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.ACCOUNT_TABLE_NAME + " WHERE " +
                 DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + str + "'", null);
 		return 0 < c.getCount();
+	}
+	
+	//This method adds an amount to an account in the db.
+	private boolean updateBalance(SQLiteDatabase db, ContentValues cv,
+	        String account, double balance, double amount, String type, String category) {
+	    try {
+    	    cv.put(DBEntry.ACCOUNT_COLUMN_NAME_BALANCE, balance + amount);
+            db.update(DBEntry.ACCOUNT_TABLE_NAME, cv,
+                    DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account + "'", null);
+            cv = new ContentValues();
+            cv.put(DBEntry.ACCOUNT_COLUMN_NAME_ID, account);
+            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_AMOUNT, amount);
+            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_TYPE, type);
+            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_CATEGORY, category);
+            Time time = new Time();
+            time.setToNow();            
+            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP, time.toString());
+            db.insert(DBEntry.TRANSACTION_TABLE_NAME, DBEntry.TRANSACTION_COLUMN_NAME_CATEGORY, cv);
+            return true;
+	    } catch(Exception e) { e.printStackTrace();}	    
+	    return false;
 	}
 }
