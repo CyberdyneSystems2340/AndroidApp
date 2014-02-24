@@ -53,4 +53,8 @@ public class AccountContainer extends Activity
 		AccountManager.addAccount(account);
 		Animation.fade(new Fragments.AccountFragment(), getFragmentManager(), R.id.container_account);
 	}
+	
+	public void buttonWithdrawal(View view){
+		AlertDialog.Builder alertDialogBuilder=new AlertDialog.Builder(this);
+	}
 }
