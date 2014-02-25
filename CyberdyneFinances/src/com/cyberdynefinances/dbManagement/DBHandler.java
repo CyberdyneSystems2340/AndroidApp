@@ -135,7 +135,7 @@ public class DBHandler {
 	 * 
 	 */
 	public String[] getAccountsForUser(String userID) {
-		String[] accounts = new String[]{"None"};
+		String[] accounts = new String[]{"0"};
 		try {
 			SQLiteDatabase db = dbHelper.getReadableDatabase();
 			Cursor c = db.rawQuery("SELECT "+DBEntry.ACCOUNT_COLUMN_NAME_ID+" FROM " + DBEntry.ACCOUNT_TABLE_NAME +
@@ -167,7 +167,7 @@ public class DBHandler {
             Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.ACCOUNT_TABLE_NAME +
                     " WHERE " + DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account + "'", null);
             
-            if (null != c) {
+            if (null != c && c.getCount() != 0) {
                 c.moveToFirst();
                 info = new String[4];
                 info[0] = c.getString(0);

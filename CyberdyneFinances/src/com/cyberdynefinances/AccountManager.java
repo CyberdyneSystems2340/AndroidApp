@@ -47,14 +47,17 @@ public class AccountManager extends Account
 	
 	public static void readAccounts()
 	{
-        String[] dbAccounts = dbHandler.getAccountsForUser(owner);
-        if (null != dbAccounts && dbAccounts.length > 0) {
-            for (String dbAccount: dbAccounts) {
-                String[] curAcc = dbHandler.getAccountInfo(dbAccount);
-                accountList.add(new Account(dbAccount, Double.parseDouble(curAcc[2]), Double.parseDouble(curAcc[3])));
-            }
-            activeAccount = accountList.get(0);
-        }
+	    try {
+	        String[] dbAccounts = dbHandler.getAccountsForUser(owner);
+	        if (null != dbAccounts && dbAccounts.length > 0) {
+                for (String dbAccount: dbAccounts) {
+                    String[] curAcc = dbHandler.getAccountInfo(dbAccount);
+                    if (null != curAcc[2] && null != curAcc[3])
+                    accountList.add(new Account(dbAccount, Double.parseDouble(curAcc[2]), Double.parseDouble(curAcc[3])));
+                }
+                activeAccount = accountList.get(0);
+	        }
+	    } catch(Exception e) { e.printStackTrace();}
 	}
 	
 	public static void writeAccounts()
