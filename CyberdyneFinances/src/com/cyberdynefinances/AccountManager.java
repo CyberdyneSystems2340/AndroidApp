@@ -6,6 +6,8 @@ import com.cyberdynefinances.dbManagement.DBHandler;
 
 public class AccountManager extends Account
 {
+    private static DBHandler dbHandler = new DBHandler();
+
 	//not used as this is a static class
 	public AccountManager(String name, double balance, double interest) {super(name, balance, interest);}
 
@@ -45,14 +47,22 @@ public class AccountManager extends Account
 	
 	public static void readAccounts()
 	{
-	    //TODO: Interact with DB
+        String[] dbAccounts = dbHandler.getAccountsForUser(owner);
+        if (null != dbAccounts && dbAccounts.length > 0) {
+            for (String dbAccount: dbAccounts) {
+                String[] curAcc = dbHandler.getAccountInfo(dbAccount);
+                accountList.add(new Account(dbAccount, Double.parseDouble(curAcc[2]), Double.parseDouble(curAcc[3])));
+            }
+            activeAccount = accountList.get(0);
+        }
 		//load list of accounts owned by active user into accountList
 		//set activeAccount to first account in list
 	}
 	
 	public static void writeAccounts()
 	{
-        //TODO: Interact with DB
+
+        //TODO: writeAccounts to DB
 		//writes all accounts in account list to the database
 	}
 	
