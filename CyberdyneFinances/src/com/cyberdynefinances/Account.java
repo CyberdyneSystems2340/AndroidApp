@@ -1,23 +1,36 @@
 package com.cyberdynefinances;
 
+import java.util.ArrayList;
+
 public class Account 
 {
 	private String accountName;
 	private double balance = 0.0;
 	private double interest = 0.0;
+	private ArrayList<String> categoriesDeposit = new ArrayList<String>();
+	private ArrayList<String> categoriesWithdraw = new ArrayList<String>();
 	
 	public Account(String name, double balance, double interest)
 	{
 		accountName = name;
 		this.balance = balance;
 		this.interest = interest;
+		String[] s = {"Birthday", "Parents", "Salary", "Scholarship"};
+		for(String item:s)
+			categoriesDeposit.add(item);
+		String[] d = {"Clothing", "Entertainment", "Food", "Rent"};
+		for(String item:d)
+			categoriesWithdraw.add(item);
 	}
 	
-	protected void withdraw(String category, double amount)
+	protected boolean withdraw(String category, double amount)
 	{
 		//remove amount from balance and register the transaction
+		if(balance - amount < 0.00)
+			return false;
 		balance -= amount;
 		registerTransaction("Withdraw", category, amount);
+		return true;
 	}
 	
 	protected void deposit(String category, double amount)
@@ -46,6 +59,17 @@ public class Account
 	
 	private void registerTransaction(String type, String category, double amount)
 	{
+		if(type.equalsIgnoreCase("deposit"))
+		{
+			if(!categoriesDeposit.contains(category))
+				categoriesDeposit.add(category);
+		}
+		else
+		{
+			if(!categoriesWithdraw.contains(category))
+				categoriesWithdraw.add(category);
+		}
+			
 		//writes the type, category, amount, and timestamp/date of the transaction to the database
 	}
 	
@@ -57,6 +81,16 @@ public class Account
 	public double getInterest()
 	{
 		return interest;
+	}
+	
+	public ArrayList<String> getCategoriesDeposit()
+	{
+		return categoriesDeposit;
+	}
+	
+	public ArrayList<String> getCategoriseWithdraw()
+	{
+		return categoriesWithdraw;
 	}
 	
 	@Override

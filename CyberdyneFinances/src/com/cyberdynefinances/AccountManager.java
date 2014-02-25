@@ -2,15 +2,13 @@ package com.cyberdynefinances;
 
 import java.util.ArrayList;
 
-public class AccountManager extends Account
+public class AccountManager
 {
-	//not used as this is a static class
-	public AccountManager(String name, double balance, double interest) {super(name, balance, interest);}
 
 	//interfaces with accounts and is the only thing that can because the Account class is protected
 	private static ArrayList<Account> accountList = new ArrayList<Account>();
 	private static String owner;
-	private static Account activeAccount;
+	private static Account activeAccount = new Account("Test", 100, 2);
 	
 	public static void loadUser(String user)
 	{
@@ -23,19 +21,19 @@ public class AccountManager extends Account
 		return owner;
 	}
 	
-	public static String getTransactionHist(Account account)
+	public static String getTransactionHist()
 	{
-		return account.getAccountInfo();
+		return activeAccount.getAccountInfo();
 	}
 	
-	public static void deposit(Account account, String category, double amount)
+	public static void deposit(String category, double amount)
 	{
-		account.deposit(category, amount);
+		activeAccount.deposit(category, amount);
 	}
 	
-	public static void withdraw(Account account, String category, double amount)
+	public static boolean withdraw(String category, double amount)
 	{
-		account.withdraw(category, amount);
+		return activeAccount.withdraw(category, amount);
 	}
 	
 	public static void readAccounts()
@@ -46,7 +44,7 @@ public class AccountManager extends Account
 	
 	public static void writeAccounts()
 	{
-		//writes all accounts in account list to the database
+		//writes all accounts in account list to the database including their lists of categories
 	}
 	
 	public static ArrayList<Account> getAccountList()

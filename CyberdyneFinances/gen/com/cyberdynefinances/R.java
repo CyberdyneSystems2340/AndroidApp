@@ -71,17 +71,22 @@ public final class R {
         public static final int account_name=0x7f0b0001;
         public static final int account_spinner=0x7f0b0009;
         public static final int account_username=0x7f0b0000;
-        public static final int action_settings=0x7f0b001d;
+        public static final int action_settings=0x7f0b0026;
         public static final int add_account_button=0x7f0b000a;
         public static final int admin_scroll=0x7f0b000c;
         public static final int balance=0x7f0b0002;
+        public static final int categorySpinnerlayout=0x7f0b001f;
         public static final int coinflip=0x7f0b0010;
-        public static final int container_account=0x7f0b0019;
-        public static final int container_welcome=0x7f0b001a;
+        public static final int container_account=0x7f0b001d;
+        public static final int container_welcome=0x7f0b001e;
         public static final int delete=0x7f0b000f;
         public static final int deposit_button=0x7f0b0006;
+        public static final int deposit_dialog_button=0x7f0b001c;
+        public static final int deposit_dialog_menu=0x7f0b0019;
+        public static final int deposit_dialog_other=0x7f0b001a;
+        public static final int deposit_dialog_text=0x7f0b001b;
         public static final int interest=0x7f0b0003;
-        public static final int layout_report_spinner=0x7f0b001b;
+        public static final int layout_report_spinner=0x7f0b0020;
         public static final int loginButton=0x7f0b0013;
         public static final int logout_button=0x7f0b000b;
         public static final int passwordEditText=0x7f0b0012;
@@ -91,10 +96,14 @@ public final class R {
         public static final int report_spinner=0x7f0b0008;
         public static final int reset_password=0x7f0b000e;
         public static final int spinner=0x7f0b000d;
-        public static final int spinnerlayout=0x7f0b001c;
+        public static final int spinnerlayout=0x7f0b0021;
         public static final int usernameEditText=0x7f0b0011;
         public static final int welcome_screen_register_button=0x7f0b0018;
         public static final int withdraw_button=0x7f0b0007;
+        public static final int withdraw_dialog_other=0x7f0b0023;
+        public static final int withdrawal_dialog_button=0x7f0b0025;
+        public static final int withdrawal_dialog_menu=0x7f0b0022;
+        public static final int withdrawal_dialog_text=0x7f0b0024;
     }
     public static final class integer {
         public static final int card_flip_time_full=0x7f060001;
@@ -110,10 +119,13 @@ public final class R {
         public static final int activity_register=0x7f030006;
         public static final int activity_test=0x7f030007;
         public static final int activity_welcome=0x7f030008;
-        public static final int frame_account=0x7f030009;
-        public static final int frame_welcome=0x7f03000a;
-        public static final int layout_report_spinner=0x7f03000b;
-        public static final int layout_spinner=0x7f03000c;
+        public static final int deposit_dialog_layout=0x7f030009;
+        public static final int frame_account=0x7f03000a;
+        public static final int frame_welcome=0x7f03000b;
+        public static final int layout_category_spinner=0x7f03000c;
+        public static final int layout_report_spinner=0x7f03000d;
+        public static final int layout_spinner=0x7f03000e;
+        public static final int withdrawal_dialog_layout=0x7f03000f;
     }
     public static final class menu {
         public static final int login=0x7f0a0000;
@@ -124,10 +136,14 @@ public final class R {
         public static final int accountName=0x7f08000d;
         public static final int action_settings=0x7f080001;
         public static final int app_name=0x7f080000;
+        public static final int confirm=0x7f080012;
         public static final int createAccount=0x7f08000e;
+        public static final int deposit=0x7f080011;
         public static final int hello_world=0x7f080002;
+        public static final int input_amount=0x7f08000f;
         public static final int login_button=0x7f080008;
         public static final int login_button_text=0x7f080003;
+        public static final int other=0x7f080013;
         public static final int password_text=0x7f080007;
         public static final int register_balance=0x7f08000a;
         public static final int register_button_text=0x7f080004;
@@ -136,6 +152,7 @@ public final class R {
         public static final int title_activity_login=0x7f080009;
         public static final int title_activity_test=0x7f080005;
         public static final int username_text=0x7f080006;
+        public static final int withdrawal=0x7f080010;
     }
     public static final class style {
         /** 

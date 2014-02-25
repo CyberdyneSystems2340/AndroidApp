@@ -1,5 +1,6 @@
 package com.cyberdynefinances;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 
 import android.app.Fragment;
@@ -130,7 +131,7 @@ public class Fragments
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	    {
 			View view = inflater.inflate(R.layout.activity_account_homepage, container, false);
-			
+			view.setTag("homepage");
 			//things you may find useful
 			String activeUser = AccountManager.getActiveUser(); //the name of the current user
 			Double balance = AccountManager.getActiveAccount().getBalance(); //the balance of the current account
@@ -150,6 +151,9 @@ public class Fragments
 			String[] test2 = {"test"};
 			ArrayAdapter a2 = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, test2); 
 			s2.setAdapter(a2);
+			
+			TextView balanceText = (TextView) view.findViewById(R.id.account_balance);
+			balanceText.setText("Balance: "+NumberFormat.getCurrencyInstance().format(balance));
 			
 			return view;
 	    }
