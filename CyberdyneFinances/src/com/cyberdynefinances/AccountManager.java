@@ -55,8 +55,6 @@ public class AccountManager extends Account
             }
             activeAccount = accountList.get(0);
         }
-		//load list of accounts owned by active user into accountList
-		//set activeAccount to first account in list
 	}
 	
 	public static void writeAccounts()
