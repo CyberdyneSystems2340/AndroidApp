@@ -140,7 +140,7 @@ public class Fragments
 			
 			//the findViewById method lets you get objects from the layout like textFields, buttons, spinners you just need to give it the id of what you want and cast it to that object
 			Spinner s = (Spinner) view.findViewById(R.id.report_spinner); //parameter is the id of the spinner in this case it is report_spinner
-			String[] test = {"test"};
+			String[] test = {"Transaction History", "Spending Category Report", "Income Source Report", "Cash Flow Report"};
 			//all spinners have adapters, they tell the spinner things like what to show and how it should look
 			//the second parameter is a layout file for the spinner for things like text size, the one it is using is a custom one i wrote for the admin account spinner. you can take a look at it and write your own for each spinner 
 			//the last parameter is an array of strings containing things the spinner should have as options
@@ -148,7 +148,7 @@ public class Fragments
 			s.setAdapter(a);
 			
 			Spinner s2 = (Spinner) view.findViewById(R.id.account_spinner); //parameter is the id of the spinner in this case it is report_spinner
-			String[] test2 = {"test"};
+			String[] test2 = {"Account 1", "Account 2"};
 			ArrayAdapter a2 = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, test2); 
 			s2.setAdapter(a2);
 			
