@@ -97,21 +97,6 @@ public class Fragments
         }
     }
 	
-	//test account fragment to display account info
-	public static class AccountFragment extends Fragment
-	{
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-	    {
-			View root = inflater.inflate(R.layout.activity_account, container, false);
-
-        	((TextView) root.findViewById(R.id.account_username)).setText("Username: "+AccountManager.getActiveUser());
-    		((TextView) root.findViewById(R.id.account_name)).setText(AccountManager.getActiveAccount().getAccountInfo());
-    		
-			return root;
-	    }
-	}
-	
 	public static class AccountCreationFragment extends Fragment
 	{
 		@Override
@@ -131,7 +116,6 @@ public class Fragments
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	    {
 			View view = inflater.inflate(R.layout.activity_account_homepage, container, false);
-			view.setTag("homepage");
 			//things you may find useful
 			String activeUser = AccountManager.getActiveUser(); //the name of the current user
 			Double balance = AccountManager.getActiveAccount().getBalance(); //the balance of the current account

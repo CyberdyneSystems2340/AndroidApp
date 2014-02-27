@@ -313,7 +313,7 @@ public class WelcomeContainer extends Activity
     	{
     		LoginHandler.register(newName, newPassword); // Yay! you are a user now!!!!!
     		Toast.makeText(this, "Registration Successful",Toast.LENGTH_LONG).show();
-    		Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome);
+    		Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome, true);
     	}
     }
     

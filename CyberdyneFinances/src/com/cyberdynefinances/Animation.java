@@ -34,4 +34,14 @@ public class Animation
         		.addToBackStack(null)
                 .commit();
     }
+	
+	//Fade animation but wont add the fragment to the fragment stack so you cant go back to this fragment once you leave it. In order for it to work properly call it when you are leaving the fragment you dont want to go back to
+	public static void fade(Fragment frag, FragmentManager manager, int container, boolean b) 
+	{
+        manager.beginTransaction()
+        		.disallowAddToBackStack()
+        		.setCustomAnimations(R.anim.fade_in, R.anim.fade_out,R.anim.fade_in, R.anim.fade_out)
+        		.replace(container, frag)
+                .commit();
+    }
 }

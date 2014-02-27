@@ -4,15 +4,16 @@ import java.util.ArrayList;
 
 public class AccountManager
 {
-
 	//interfaces with accounts and is the only thing that can because the Account class is protected
 	private static ArrayList<Account> accountList = new ArrayList<Account>();
 	private static String owner;
-	private static Account activeAccount = new Account("Test", 100, 2);
+	private static Account activeAccount = null;
 	
 	public static void loadUser(String user)
 	{
 		owner = user;
+		accountList.clear();
+		//activeAccount = null;
 		readAccounts();
 	}
 	
