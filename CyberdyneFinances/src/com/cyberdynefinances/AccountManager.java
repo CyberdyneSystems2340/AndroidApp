@@ -3,7 +3,7 @@ package com.cyberdynefinances;
 import java.util.ArrayList;
 import com.cyberdynefinances.dbManagement.DBHandler;
 
-public class AccountManager extends Account
+public class AccountManager
 {
     private static DBHandler dbHandler = new DBHandler();
 
@@ -11,9 +11,6 @@ public class AccountManager extends Account
 	private static ArrayList<Account> accountList = new ArrayList<Account>();
 	private static String owner;
 	private static Account activeAccount = null;
-	
-	//not used as this is a static class
-    public AccountManager(String name, double balance, double interest) {super(name, balance, interest);}
 	
 	public static void loadUser(String user)
 	{
