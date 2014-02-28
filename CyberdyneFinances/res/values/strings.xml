@@ -24,11 +24,7 @@
 	<string name="transaction_amount_text">Amount</string>
 	<string name="transaction_button_text">Transaction</string>
 	<string name="input_amount">Input Amount</string>
-<<<<<<< HEAD
 	<string name="withdraw">Withdraw</string>
-=======
-	<string name="withdrawal">Withdraw</string>
->>>>>>> c9a359a5239915fef69d038d9f51db7ea559a15d
 	<string name="deposit">Deposit</string>
 	<string name="confirm">Confirm</string>
 	<string name="other">Other Category</string>
