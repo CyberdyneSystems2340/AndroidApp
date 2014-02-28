@@ -243,7 +243,56 @@ public class DBHandler {
         }       
         return false;
     }
+
+    /**
+     * This method returns the transaction history of a specified account.
+     * 
+     * @param account The account of which to grab the transaction history.
+     * @return A two-dimensional array where each row row holds the separate fields of a specific transaction.
+     * The array is as follows: [0] - account, [1] - amount, [2] - type, [3] - category, [4] - timestamp
+     */
+    public String[][] getTransactionHistory(String account) {
+        String[][] history = null;
+        try {
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.TRANSACTION_TABLE_NAME, null);       
+            if (null != c && 0 != c.getCount()) {
+                c.moveToFirst();
+                int i = 0;
+                history = new String[c.getCount()][];
+                do{
+                    history[i++]= getTransactionInfo(c.getString(c.getColumnIndex("Timestamp"))); 
+                } while(c.moveToNext());
+            } 
+        } catch(Exception e){e.printStackTrace();}
+        return history;
+    }
     
+    /**
+     * This method returns the transaction history of a specified timestamp.
+     * 
+     * @param timeOfTransaction - The time of the transaction to get.
+     * @return An array of this transaction, the array is as follows:
+     *  [0] - Account, [1] - Amount, [2] - Type, [3] - Category, [4] - Timestamp.
+     *  Null if invalid timestamp.*/
+    public String[] getTransactionInfo(String timeOfTransaction){
+        String[] transaction = null;
+        try {
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.TRANSACTION_TABLE_NAME +
+                    " WHERE " + DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP + " = '" + timeOfTransaction + "'", null);       
+            if (null != c && 0 != c.getCount()) {
+                c.moveToFirst();
+                transaction = new String[c.getColumnCount()];
+                transaction[0] = c.getString(0);
+                transaction[1] = c.getString(1);
+                transaction[2] = c.getString(2);
+                transaction[3] = c.getString(3);
+                transaction[4] = c.getString(4);
+            } 
+        } catch(Exception e){e.printStackTrace();}
+        return transaction;
+    }
 	//This method checks to see if a string is valid for being added to the db.
 	private boolean isValid(String str) { return (null != str && !str.isEmpty());}
 	
@@ -269,7 +318,7 @@ public class DBHandler {
             cv.put(DBEntry.TRANSACTION_COLUMN_NAME_CATEGORY, category);
             Time time = new Time();
             time.setToNow();            
-            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP, time.toString());
+            cv.put(DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP, time.format("%d.%m.%Y %H:%M:%S"));
             db.insert(DBEntry.TRANSACTION_TABLE_NAME, DBEntry.TRANSACTION_COLUMN_NAME_CATEGORY, cv);
             return true;
 	    } catch(Exception e) { e.printStackTrace();}	    

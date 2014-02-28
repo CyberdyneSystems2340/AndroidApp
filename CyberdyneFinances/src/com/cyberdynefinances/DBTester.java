@@ -10,7 +10,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class DBTester extends Activity {
-	private TextView tView;
+	private TextView tView,transView;
 	private Button readButton, withdrawButton, depositButton,addButton;
 //	
 
@@ -19,6 +19,7 @@ public class DBTester extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dbtester);
 		tView = (TextView) findViewById(R.id.dbtest_textview);
+		transView = (TextView) findViewById(R.id.dbtest_transaction_textview);
 		addButtonListeners();
 	}
 
@@ -53,7 +54,8 @@ public class DBTester extends Activity {
     		    }
     		}
 		}
-		tView.setText("\n\nRows: " + rows);
+		tView.setText("\nRows: " + rows);
+		readTransaction();
 	}
 	
 	private void withdraw() {
@@ -61,7 +63,7 @@ public class DBTester extends Activity {
 	    String account = (String)((TextView) findViewById(R.id.dbtest_account_text)).getText().toString();
         double amount = Double.parseDouble((String)((TextView) findViewById(R.id.dbtest_amount_text)).getText().toString());	    
 	    dbHandler.makeTransaction(account, amount, "WITHDRAW", "NONE");
-	    
+	    readTransaction();
 	}
 	
 	private void deposit() {
@@ -69,13 +71,30 @@ public class DBTester extends Activity {
         String account = (String)((TextView) findViewById(R.id.dbtest_account_text)).getText().toString();
         double amount = Double.parseDouble((String)((TextView) findViewById(R.id.dbtest_amount_text)).getText().toString());     
         dbHandler.makeTransaction(account, amount, "DEPOSIT", "NONE");
+        readTransaction();
 	}
 	
 	private void addAccount(){
 	    DBHandler dbHandler = new DBHandler();
 	    String userID = ((TextView) findViewById(R.id.dbtester_username_text)).getText().toString();
-	    dbHandler.addAccount(userID, "Test", 101, .03);
+	    String account = (String)((TextView) findViewById(R.id.dbtest_account_text)).getText().toString();
+	    dbHandler.addAccount(userID, account, 101, .03);
+	    readFromDB();
 	};
+	
+	private void readTransaction(){
+	    DBHandler dbHandler = new DBHandler();
+	    String[][] transactions = dbHandler.getTransactionHistory((String)((TextView) findViewById(R.id.dbtest_account_text)).getText().toString());
+	    String rows = "";
+	    if (null != transactions) {
+	        for (String[] transaction : transactions) {
+	            rows += "\nAccount: " + transaction[0] + ", Amount: " + transaction[1] +
+	                    ", Type: " + transaction[2] + ", Category: " + transaction[3] +
+	                    ", Timestamp: " + transaction[4];
+	        }
+	    }
+	    transView.setText("\nTransactions: " + rows);
+	}
 
 	private void addButtonListeners()
 	{
