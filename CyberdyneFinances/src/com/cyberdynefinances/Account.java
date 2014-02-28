@@ -30,12 +30,8 @@ public class Account
 			return false;
 		balance -= amount;
 		registerTransaction("Withdraw", category, amount);
-<<<<<<< HEAD
-}
-=======
 		return true;
 	}
->>>>>>> c9a359a5239915fef69d038d9f51db7ea559a15d
 	
 	protected void deposit(String category, double amount)
 	{
@@ -63,9 +59,6 @@ public class Account
 	
 	private void registerTransaction(String type, String category, double amount)
 	{
-<<<<<<< HEAD
-        //TODO: Interact with DB
-=======
 		if(type.equalsIgnoreCase("deposit"))
 		{
 			if(!categoriesDeposit.contains(category))
@@ -76,8 +69,6 @@ public class Account
 			if(!categoriesWithdraw.contains(category))
 				categoriesWithdraw.add(category);
 		}
-			
->>>>>>> c9a359a5239915fef69d038d9f51db7ea559a15d
 		//writes the type, category, amount, and timestamp/date of the transaction to the database
 	}
 	
@@ -91,10 +82,9 @@ public class Account
 		return interest;
 	}
 	
-<<<<<<< HEAD
 	public String getName() {
 	    return accountName;
-=======
+    }
 	public ArrayList<String> getCategoriesDeposit()
 	{
 		return categoriesDeposit;
@@ -103,7 +93,6 @@ public class Account
 	public ArrayList<String> getCategoriseWithdraw()
 	{
 		return categoriesWithdraw;
->>>>>>> c9a359a5239915fef69d038d9f51db7ea559a15d
 	}
 	
 	@Override

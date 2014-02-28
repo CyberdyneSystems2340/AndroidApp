@@ -1,11 +1,8 @@
 package com.cyberdynefinances;
 
-<<<<<<< HEAD
-=======
+
 import java.text.NumberFormat;
 import java.util.ArrayList;
->>>>>>> c9a359a5239915fef69d038d9f51db7ea559a15d
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
