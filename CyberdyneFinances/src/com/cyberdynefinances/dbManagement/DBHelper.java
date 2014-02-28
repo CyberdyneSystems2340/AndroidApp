@@ -60,6 +60,8 @@ public final class DBHelper extends SQLiteOpenHelper {
         onCreate(db);
 	}
 	
+	//These methods should only be used for testing! 
+	/*
 	public void clearAllTables(SQLiteDatabase db){
 	    onUpgrade(db,0,0);
 	} 
@@ -78,5 +80,5 @@ public final class DBHelper extends SQLiteOpenHelper {
 		db.execSQL(SQL_DELETE_TRANSACTION_ENTRIES);
 		db.execSQL(SQL_CREATE_TRANSACTION_ENTRIES);
 
-	}
+	}*/
 }
