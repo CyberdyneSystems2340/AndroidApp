@@ -9,9 +9,9 @@ import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBEntry;
 
 public class DBHandler {
-	AccountDBHelper dbHelper;
+	DBHelper dbHelper;
 	public DBHandler() {
-		dbHelper = new AccountDBHelper(MyApplication.getAppContext());
+		dbHelper = new DBHelper(MyApplication.getAppContext());
 	}
     
     /**
@@ -67,9 +67,12 @@ public class DBHandler {
 				info[1] = c.getString(1); 
 			}
 			String[] accounts = getAccountsForUser(userID);
-			info[2] = accounts[0];
-			for(int i = 1; i < accounts.length; i++){
-			    info[2] += "_" + accounts[i];
+			info[2] = "None";
+			if (null != accounts[0]) {
+			    info[2] = accounts[0];
+    			for(int i = 1; i < accounts.length; i++){
+    			    info[2] += "_" + accounts[i];
+    			}
 			}
 			
 		} catch (Exception e) {e.printStackTrace();}
@@ -135,7 +138,7 @@ public class DBHandler {
 	 * 
 	 */
 	public String[] getAccountsForUser(String userID) {
-		String[] accounts = new String[]{"0"};
+		String[] accounts = null;
 		try {
 			SQLiteDatabase db = dbHelper.getReadableDatabase();
 			Cursor c = db.rawQuery("SELECT "+DBEntry.ACCOUNT_COLUMN_NAME_ID+" FROM " + DBEntry.ACCOUNT_TABLE_NAME +
@@ -158,7 +161,7 @@ public class DBHandler {
 	 * 
 	 * @param account - The account to get the information for.
 	 * @return String array as such: [0] - account, [1] - owner, [2] - balance, [3] - interest.
-	 *         Null if no account exists.
+	 *         Null if account name invalid.
 	 * */
 	public String[] getAccountInfo(String account){
 	    String[] info = null;

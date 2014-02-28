@@ -1,30 +1,23 @@
 package com.cyberdynefinances;
 
 import com.cyberdynefinances.R;
-import com.cyberdynefinances.dbManagement.AccountDBHelper;
 import com.cyberdynefinances.dbManagement.DBHandler;
-import com.cyberdynefinances.dbManagement.DBReaderContract;
-
 import android.os.Bundle;
 import android.app.Activity;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
 import android.view.Menu;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
 public class DBTester extends Activity {
-	private AccountDBHelper dbHelper;
 	private TextView tView;
-	private Button readButton, withdrawButton, depositButton;
+	private Button readButton, withdrawButton, depositButton,addButton;
 //	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_dbtester);
-		dbHelper = new AccountDBHelper(MyApplication.getAppContext());
 		tView = (TextView) findViewById(R.id.dbtest_textview);
 		addButtonListeners();
 	}
@@ -46,13 +39,18 @@ public class DBTester extends Activity {
 		if (null != users) {
     		for (String[] user : users) {
     		    rows += "\nName: " + user[0] + ", Password: " + user[1] + ", Accounts: " + user[2];
+    		    
     		    accounts = dbHandler.getAccountsForUser(user[0]);
-    		    for (String account: accounts) {
-    		        accountInfo = dbHandler.getAccountInfo(account);
-    		        accountStr += "\n Account: " + accountInfo[0] + ", Owner: " + accountInfo[1] +
-    		                ", Balance: " + accountInfo[2] + ", Interest: " + accountInfo[3]; 
+    		    if(null != accounts) {
+        		    for (String account: accounts) {
+        		        
+        		        accountInfo = dbHandler.getAccountInfo(account);
+        		    
+        		        accountStr += "\n Account: " + accountInfo[0] + ", Owner: " + accountInfo[1] +
+        		                ", Balance: " + accountInfo[2] + ", Interest: " + accountInfo[3]; 
+        		    }
+        		    rows += accountStr;
     		    }
-    		    rows += accountStr;
     		}
 		}
 		tView.setText("\n\nRows: " + rows);
@@ -60,24 +58,31 @@ public class DBTester extends Activity {
 	
 	private void withdraw() {
 	    DBHandler dbHandler = new DBHandler();
-	    String account = (String) ((TextView) findViewById(R.id.dbtest_account_text)).getText();
-        double amount = Double.parseDouble((String) ((TextView) findViewById(R.id.dbtest_account_text)).getText());	    
+	    String account = (String)((TextView) findViewById(R.id.dbtest_account_text)).getText().toString();
+        double amount = Double.parseDouble((String)((TextView) findViewById(R.id.dbtest_amount_text)).getText().toString());	    
 	    dbHandler.makeTransaction(account, amount, "WITHDRAW", "NONE");
 	    
 	}
 	
 	private void deposit() {
 	    DBHandler dbHandler = new DBHandler();
-        String account = (String) ((TextView) findViewById(R.id.dbtest_account_text)).getText();
-        double amount = Double.parseDouble((String) ((TextView) findViewById(R.id.dbtest_account_text)).getText());     
+        String account = (String)((TextView) findViewById(R.id.dbtest_account_text)).getText().toString();
+        double amount = Double.parseDouble((String)((TextView) findViewById(R.id.dbtest_amount_text)).getText().toString());     
         dbHandler.makeTransaction(account, amount, "DEPOSIT", "NONE");
 	}
+	
+	private void addAccount(){
+	    DBHandler dbHandler = new DBHandler();
+	    String userID = ((TextView) findViewById(R.id.dbtester_username_text)).getText().toString();
+	    dbHandler.addAccount(userID, "Test", 101, .03);
+	};
 
 	private void addButtonListeners()
 	{
 		readButton = (Button) findViewById(R.id.dbtest_read_button);
 		withdrawButton = (Button) findViewById(R.id.dbtest_withdraw_button);
 		depositButton = (Button) findViewById(R.id.dbtest_deposit_button);
+		addButton = (Button) findViewById(R.id.dbtest_add_button);
 		
 		readButton.setOnClickListener(new View.OnClickListener()
 		{
@@ -101,6 +106,14 @@ public class DBTester extends Activity {
             public void onClick(View v)
             {
                 deposit();
+            }
+        });
+		addButton.setOnClickListener(new View.OnClickListener() {
+            
+            @Override
+            public void onClick(View v) {
+                addAccount();
+                
             }
         });
 	}

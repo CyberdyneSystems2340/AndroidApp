@@ -3,9 +3,11 @@ package com.cyberdynefinances.dbManagement;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBEntry;;
 
-public final class AccountDBHelper extends SQLiteOpenHelper {
+public final class DBHelper extends SQLiteOpenHelper {
 	//SQL Commands for creating the account, user, and transaction tables.
 	private static final String SQL_CREATE_USER_ENTRIES = "CREATE TABLE " +
 			DBEntry.USER_TABLE_NAME + " (" +
@@ -24,6 +26,7 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 			DBEntry.ACCOUNT_COLUMN_NAME_ID + " TEXT," +
 			DBEntry.TRANSACTION_COLUMN_NAME_AMOUNT + " TEXT," +
 			DBEntry.TRANSACTION_COLUMN_NAME_TYPE +" TEXT," +
+			DBEntry.TRANSACTION_COLUMN_NAME_CATEGORY + " TEXT," +
 			DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP + " TEXT PRIMARY KEY)";
 	
 	//SQL Commands to delete any of the above created tables.
@@ -37,8 +40,9 @@ public final class AccountDBHelper extends SQLiteOpenHelper {
 	public static final String DATABASE_NAME = "CyberdyneFinancesDB";
 	
 	
-	public AccountDBHelper(Context context) {
-		super(context, DATABASE_NAME, null, DATABASE_VERSION);
+	public DBHelper(Context context) {
+		super(MyApplication.getAppContext(), DATABASE_NAME, null, DATABASE_VERSION);
+		
 	}
 	
 	@Override

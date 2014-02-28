@@ -38,6 +38,14 @@
         android:layout_alignBottom="@+id/dbtest_deposit_button"
         android:layout_toRightOf="@+id/dbtest_deposit_button"
         android:text="@string/withdraw" />
+    
+    <Button
+        android:id="@+id/dbtest_add_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/dbtest_amount_text"
+        android:layout_alignParentRight="true"
+        android:text="Add" />
 
     <EditText
         android:id="@+id/dbtest_amount_text"
@@ -59,5 +67,14 @@
 
         <requestFocus />
     </EditText>
+
+    <EditText
+        android:id="@+id/dbtester_username_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/dbtest_account_text"
+        android:layout_alignLeft="@+id/dbtest_account_text"
+        android:ems="10"
+        android:hint="@string/username_text" />
     
 </RelativeLayout>
