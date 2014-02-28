@@ -182,7 +182,6 @@ public class DBHandler {
 	    return info;
 	}
 
-	
 	/**
 	 * Deletes a specified account from the  database.
 	 * Also, deletes all transaction history for that account.
