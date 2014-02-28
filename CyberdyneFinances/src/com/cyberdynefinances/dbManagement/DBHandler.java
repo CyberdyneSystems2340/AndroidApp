@@ -273,7 +273,7 @@ public class DBHandler {
      * @param timeOfTransaction - The time of the transaction to get.
      * @return An array of this transaction, the array is as follows:
      *  [0] - Account, [1] - Amount, [2] - Type, [3] - Category, [4] - Timestamp.
-     *  Null if invalid timestamp.*/
+     *  Null if invalid time stamp.*/
     public String[] getTransactionInfo(String timeOfTransaction){
         String[] transaction = null;
         try {
