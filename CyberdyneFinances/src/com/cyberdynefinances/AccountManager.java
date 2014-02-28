@@ -2,8 +2,11 @@ package com.cyberdynefinances;
 
 import java.util.ArrayList;
 
+import com.cyberdynefinances.dbManagement.DBHandler;
+
 public class AccountManager
 {
+	private static DBHandler dbHandler = new DBHandler();
 	//interfaces with accounts and is the only thing that can because the Account class is protected
 	private static ArrayList<Account> accountList = new ArrayList<Account>();
 	private static String owner;
@@ -39,8 +42,17 @@ public class AccountManager
 	
 	public static void readAccounts()
 	{
-		//load list of accounts owned by active user into accountList
-		//set activeAccount to first account in list
+	    try {
+	        String[] dbAccounts = dbHandler.getAccountsForUser(owner);
+	        if (null != dbAccounts && dbAccounts.length > 0) {
+                for (String dbAccount: dbAccounts) {
+                    String[] curAcc = dbHandler.getAccountInfo(dbAccount);
+                    if (null != curAcc[2] && null != curAcc[3])
+                    accountList.add(new Account(dbAccount, Double.parseDouble(curAcc[2]), Double.parseDouble(curAcc[3])));
+                }
+                activeAccount = accountList.get(0);
+	        }
+	    } catch(Exception e) { e.printStackTrace();}
 	}
 	
 	public static void writeAccounts()
@@ -55,13 +67,14 @@ public class AccountManager
 	
 	public static Account getActiveAccount()
 	{
-		if(activeAccount==null)
-			return new Account("Test", 100, 2);
+		//if(activeAccount==null)
+		//	return new Account("Test", 100, 2);
 		return activeAccount;
 	}
 	
 	public static void addAccount(Account acc)
 	{
+		dbHandler.addAccount(owner, acc.getName(), acc.getBalance(), acc.getInterest());
 		accountList.add(acc);
 		activeAccount = acc;
 	}

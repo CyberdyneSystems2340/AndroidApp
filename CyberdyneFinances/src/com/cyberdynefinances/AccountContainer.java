@@ -73,7 +73,6 @@ public class AccountContainer extends Activity
 		Account account=new Account(accountName,balanceDouble,interestDouble);
 		AccountManager.addAccount(account);
 		Animation.fade(new Fragments.AccountHomeFragment(), getFragmentManager(), R.id.container_account, true);
-		
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
