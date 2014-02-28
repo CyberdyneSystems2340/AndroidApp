@@ -51,7 +51,7 @@
         android:layout_below="@+id/interest"
         android:layout_centerInParent="true"
         android:layout_marginTop="45dp"
-         android:onClick="accountCreation"
+         android:onClick="accountCreationClicked"
         android:text="@string/createAccount" />
 
 </RelativeLayout>
