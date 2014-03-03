@@ -257,4 +257,9 @@ public class AccountContainer extends Activity
     	}
     	text.setText(NumberFormat.getCurrencyInstance().format(AccountManager.getActiveAccount().getBalance()));
     }
+    
+    public void addAccountButton(View view)
+    {
+    	Animation.fade(new Fragments.AccountCreationFragment(), getFragmentManager(), R.id.container_account);
+    }
 }
