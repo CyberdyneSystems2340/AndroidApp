@@ -245,6 +245,16 @@ public class AccountContainer extends Activity
     private void updateBalance()
     {
     	TextView text = (TextView) this.findViewById(R.id.account_balance);
-    	text.setText("Balance: "+NumberFormat.getCurrencyInstance().format(AccountManager.getActiveAccount().getBalance()));
+    	if(AccountManager.getActiveAccount().getBalance()>=1000000000f)
+    	{
+    		text.setScaleX(0.8f);
+    		text.setScaleY(0.8f);
+    	}
+    	else
+    	{
+    		text.setScaleX(1f);
+    		text.setScaleY(1f);
+    	}
+    	text.setText(NumberFormat.getCurrencyInstance().format(AccountManager.getActiveAccount().getBalance()));
     }
 }

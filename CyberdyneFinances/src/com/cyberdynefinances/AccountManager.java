@@ -67,8 +67,6 @@ public class AccountManager
 	
 	public static Account getActiveAccount()
 	{
-		//if(activeAccount==null)
-		//	return new Account("Test", 100, 2);
 		return activeAccount;
 	}
 	

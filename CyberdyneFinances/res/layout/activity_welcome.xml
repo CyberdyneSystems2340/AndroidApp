@@ -16,12 +16,5 @@
         android:layout_alignParentBottom="true"
     	android:alpha="0"
         android:onClick="welcomeRegisterClicked" />
-    
-    <Button
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:onClick="test" />
 
 </RelativeLayout>

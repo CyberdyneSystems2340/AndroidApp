@@ -137,7 +137,17 @@ public class Fragments
 			
 			Double balance = AccountManager.getActiveAccount().getBalance();
 			TextView balanceText = (TextView) view.findViewById(R.id.account_balance);
-			balanceText.setText("Balance: "+NumberFormat.getCurrencyInstance().format(balance));
+	    	if(AccountManager.getActiveAccount().getBalance()>=1000000000f) //textField only fits so many digits, scale the textField when that number is exceeded
+	    	{
+	    		balanceText.setScaleX(0.8f);
+	    		balanceText.setScaleY(0.8f);
+	    	}
+	    	else
+	    	{
+	    		balanceText.setScaleX(1f);
+	    		balanceText.setScaleY(1f);
+	    	}
+			balanceText.setText(NumberFormat.getCurrencyInstance().format(balance));
 			
 			return view;
 	    }
