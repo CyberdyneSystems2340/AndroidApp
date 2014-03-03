@@ -2,6 +2,9 @@ package com.cyberdynefinances;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import android.app.Fragment;
 import android.graphics.drawable.AnimationDrawable;
@@ -131,7 +134,12 @@ public class Fragments
 			reportSpinner.setAdapter(a);
 			
 			Spinner accountSpinner = (Spinner) view.findViewById(R.id.account_spinner); //parameter is the id of the spinner in this case it is report_spinner
-			String[] accountSpinnerList = {"Account 1", "Account 2"};
+			int len = accountList.size();
+			String[] accountSpinnerList = new String[len];
+			for(int i = 0; i < len; i++){
+				accountSpinnerList[i] = accountList.get(i).getName();
+			}
+			Arrays.sort(accountSpinnerList);
 			ArrayAdapter a2 = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, accountSpinnerList); 
 			accountSpinner.setAdapter(a2);
 			
