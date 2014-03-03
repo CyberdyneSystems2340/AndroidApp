@@ -68,7 +68,7 @@ public class DBHandler {
 			}
 			String[] accounts = getAccountsForUser(userID);
 			info[2] = "None";
-			if (null != accounts[0]) {
+			if (null != accounts && accounts.length > 0) {
 			    info[2] = accounts[0];
     			for(int i = 1; i < accounts.length; i++){
     			    info[2] += "_" + accounts[i];
