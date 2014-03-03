@@ -27,11 +27,13 @@ public class DBHandler {
      * @return True if the user exists, false if not.
      */
     public boolean containsUser(String userID) {
-        SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME +
+        try {
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME +
                 " WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'",
                 null);
-        return 0 < c.getCount();
+            return 0 < c.getCount();
+        } catch(Exception e) { return false;}
     }
 
 	/**
@@ -338,11 +340,13 @@ public class DBHandler {
 	
 	//This method checks to see if this account has already been 
 	private boolean containsAccount(String str) {
-		SQLiteDatabase db = dbHelper.getReadableDatabase();
-		Cursor c = db.rawQuery("SELECT * FROM " +
+	    try {
+	        SQLiteDatabase db = dbHelper.getReadableDatabase();
+		    Cursor c = db.rawQuery("SELECT * FROM " +
 		        DBEntry.ACCOUNT_TABLE_NAME + " WHERE " +
                 DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + str + "'", null);
-		return 0 < c.getCount();
+	      return 0 < c.getCount();
+	    } catch(Exception e) { return false;}
 	}
 	
 	//This method adds an amount to an account in the db.
