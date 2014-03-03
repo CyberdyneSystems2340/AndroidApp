@@ -3,9 +3,6 @@ package com.cyberdynefinances;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-
 import android.app.Fragment;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -120,9 +117,9 @@ public class Fragments
 	    {
 			View view = inflater.inflate(R.layout.activity_account_homepage, container, false);
 			//things you may find useful
-			String activeUser = AccountManager.getActiveUser(); //the name of the current user
+	//		String activeUser = AccountManager.getActiveUser(); //the name of the current user
 			ArrayList<Account> accountList = AccountManager.getAccountList(); //an arraylist of all accounts the current user has
-			String accountInfo = AccountManager.getActiveAccount().getAccountInfo();//basic info about the account like name, owner, balance, interest, transaction history(which is blank) separated by newlines
+//			String accountInfo = AccountManager.getActiveAccount().getAccountInfo();//basic info about the account like name, owner, balance, interest, transaction history(which is blank) separated by newlines
 			
 			//the findViewById method lets you get objects from the layout like textFields, buttons, spinners you just need to give it the id of what you want and cast it to that object
 			Spinner reportSpinner = (Spinner) view.findViewById(R.id.report_spinner); //parameter is the id of the spinner in this case it is report_spinner
