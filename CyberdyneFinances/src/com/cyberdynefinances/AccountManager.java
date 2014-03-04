@@ -82,10 +82,14 @@ public class AccountManager
 		}
 	}
 	
-	public static void addAccount(Account acc)
+	public static boolean addAccount(Account acc)
 	{
-		dbHandler.addAccount(owner, acc.getName(), acc.getBalance(), acc.getInterest());
-		accountList.add(acc);
-		activeAccount = acc;
+		boolean accountAdded  = dbHandler.addAccount(owner, acc.getName(), acc.getBalance(), acc.getInterest());
+		if(accountAdded)
+		{
+		    accountList.add(acc);
+	        activeAccount = acc;
+		}
+		return accountAdded;
 	}
 }
