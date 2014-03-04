@@ -58,6 +58,9 @@ public class DBHandler {
 		return false;
 	}
 	
+    
+    //TODO: Make method to change user password.
+
 	/**
 	 * This method retrieves a specified user's data from the users table.
 	 * It returns the userID, Password, and the Accounts for with this user.
@@ -333,6 +336,7 @@ public class DBHandler {
         } catch(Exception e){e.printStackTrace();}
         return transaction;
     }
+
 	//This method checks to see if a string is valid for being added to the db.
 	private boolean isValid(String str) {
 	    return (null != str && !str.isEmpty());

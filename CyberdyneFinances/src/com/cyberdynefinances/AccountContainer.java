@@ -146,7 +146,7 @@ public class AccountContainer extends Activity
         				Toast.makeText(AccountContainer.this, "Withdrawal of "+NumberFormat.getCurrencyInstance().format(amount)+" Successful", Toast.LENGTH_LONG).show();
         			else
         			{
-        				Toast.makeText(AccountContainer.this, "Amount of "+NumberFormat.getCurrencyInstance().format(amount)+" Exceds Current Balance", Toast.LENGTH_LONG).show();
+        				Toast.makeText(AccountContainer.this, "Amount of "+NumberFormat.getCurrencyInstance().format(amount)+" Exceeds Current Balance", Toast.LENGTH_LONG).show();
         				return;
         			}
         		}
