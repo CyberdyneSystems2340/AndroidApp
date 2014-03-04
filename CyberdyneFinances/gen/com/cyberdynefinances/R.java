@@ -80,7 +80,7 @@ public final class R {
         public static final int container_account=0x7f0b001e;
         public static final int container_welcome=0x7f0b001f;
         public static final int delete=0x7f0b0010;
-        public static final int deposit_button=0x7f0b0006;
+        public static final int deposit_button=0x7f0b0007;
         public static final int deposit_dialog_button=0x7f0b001d;
         public static final int deposit_dialog_menu=0x7f0b001a;
         public static final int deposit_dialog_other=0x7f0b001b;
@@ -98,7 +98,7 @@ public final class R {
         public static final int spinnerlayout=0x7f0b0020;
         public static final int usernameEditText=0x7f0b0012;
         public static final int welcome_screen_register_button=0x7f0b0019;
-        public static final int withdraw_button=0x7f0b0007;
+        public static final int withdraw_button=0x7f0b0006;
         public static final int withdraw_dialog_other=0x7f0b0022;
         public static final int withdrawal_dialog_button=0x7f0b0024;
         public static final int withdrawal_dialog_menu=0x7f0b0021;

@@ -1,5 +1,5 @@
 /**
- * This class is what we use to interect with the database that stores all
+ * This class is what we use to interact with the database that stores all
  * user information and account histories.
  * ONLY USE THIS CLASS TO ACCESS DB!!!
  * 
