@@ -58,8 +58,24 @@ public class DBHandler {
 		return false;
 	}
 	
-    
-    //TODO: Make method to change user password.
+    /**
+     * This method allows the password of a specified user to be changed.
+     * 
+     * @param userID The user id of the user to change the password.
+     * @param newPassword The new password to set for the user.
+     * @return True if password change successful, false if not.
+     */
+	public boolean changePassword(String userID, String password){
+	    try {
+	        SQLiteDatabase db = dbHelper.getWritableDatabase();
+	        ContentValues cv = new ContentValues();
+	        cv.put(DBEntry.USER_COLUMN_NAME_PASSWORD, password);
+            db.update(DBEntry.USER_TABLE_NAME, cv,
+                    DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);
+            return true;
+	    } catch(Exception e) { e.printStackTrace();}
+	    return false;
+	}
 
 	/**
 	 * This method retrieves a specified user's data from the users table.
