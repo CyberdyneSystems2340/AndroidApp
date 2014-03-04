@@ -70,6 +70,18 @@ public class AccountManager
 		return activeAccount;
 	}
 	
+	public static void setActiveAccount(String name)
+	{
+		for(Account acc: accountList)
+		{
+			if(acc.getName().equals(name))
+			{
+				activeAccount = acc;
+				break;
+			}
+		}
+	}
+	
 	public static void addAccount(Account acc)
 	{
 		dbHandler.addAccount(owner, acc.getName(), acc.getBalance(), acc.getInterest());

@@ -6,14 +6,18 @@ import java.util.Arrays;
 import android.app.Fragment;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
 
 public class Fragments 
 {
@@ -109,28 +113,19 @@ public class Fragments
 	
 	public static class AccountHomeFragment extends Fragment
 	{
-		//TODO: change the welcomeRegisterClicked method in WelcomeContainer back to Fragments.RegisterFragment()
-		//Change TestFragment back to R.layout.activity_test
 		@SuppressWarnings({ "unchecked", "rawtypes" })
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	    {
 			View view = inflater.inflate(R.layout.activity_account_homepage, container, false);
-			//things you may find useful
-	//		String activeUser = AccountManager.getActiveUser(); //the name of the current user
 			ArrayList<Account> accountList = AccountManager.getAccountList(); //an arraylist of all accounts the current user has
-//			String accountInfo = AccountManager.getActiveAccount().getAccountInfo();//basic info about the account like name, owner, balance, interest, transaction history(which is blank) separated by newlines
-			
-			//the findViewById method lets you get objects from the layout like textFields, buttons, spinners you just need to give it the id of what you want and cast it to that object
-			Spinner reportSpinner = (Spinner) view.findViewById(R.id.report_spinner); //parameter is the id of the spinner in this case it is report_spinner
+
+			Spinner reportSpinner = (Spinner) view.findViewById(R.id.report_spinner);
 			String[] reports = {"Transaction History", "Spending Category Report", "Income Source Report", "Cash Flow Report"};
-			//all spinners have adapters, they tell the spinner things like what to show and how it should look
-			//the second parameter is a layout file for the spinner for things like text size, the one it is using is a custom one i wrote for the admin account spinner. you can take a look at it and write your own for each spinner 
-			//the last parameter is an array of strings containing things the spinner should have as options
 			ArrayAdapter a = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, reports); 
 			reportSpinner.setAdapter(a);
 			
-			Spinner accountSpinner = (Spinner) view.findViewById(R.id.account_spinner); //parameter is the id of the spinner in this case it is report_spinner
+			Spinner accountSpinner = (Spinner) view.findViewById(R.id.account_spinner); 
 			int len = accountList.size();
 			String[] accountSpinnerList = new String[len];
 			for(int i = 0; i < len; i++){
@@ -138,8 +133,33 @@ public class Fragments
 			}
 			Arrays.sort(accountSpinnerList);
 			ArrayAdapter a2 = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, accountSpinnerList); 
+			accountSpinner.setOnItemSelectedListener(new OnItemSelectedListener() 
+			{
+				@Override
+				public void onItemSelected(AdapterView<?> arg0, View view1,int arg2, long arg3) 
+				{
+					TextView textField = (TextView) view1;
+					AccountManager.setActiveAccount(textField.getText().toString());
+					Double balance = AccountManager.getActiveAccount().getBalance();
+					View view = view1.getRootView();
+					TextView balanceText = (TextView) view.findViewById(R.id.account_balance);
+			    	if(AccountManager.getActiveAccount().getBalance()>=1000000000f) //textField only fits so many digits, scale the textField when that number is exceeded
+			    	{
+			    		balanceText.setScaleX(0.8f);
+			    		balanceText.setScaleY(0.8f);
+			    	}
+			    	else
+			    	{
+			    		balanceText.setScaleX(1f);
+			    		balanceText.setScaleY(1f);
+			    	}
+					balanceText.setText(NumberFormat.getCurrencyInstance().format(balance));
+				}
+
+				@Override
+				public void onNothingSelected(AdapterView<?> arg0) {}
+			});
 			accountSpinner.setAdapter(a2);
-			
 			Double balance = AccountManager.getActiveAccount().getBalance();
 			TextView balanceText = (TextView) view.findViewById(R.id.account_balance);
 	    	if(AccountManager.getActiveAccount().getBalance()>=1000000000f) //textField only fits so many digits, scale the textField when that number is exceeded
