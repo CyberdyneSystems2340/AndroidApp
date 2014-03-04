@@ -67,12 +67,34 @@ public class AccountContainer extends Activity
 		EditText name=(EditText)v.findViewById(R.id.account_name);
 		EditText balance=(EditText)v.findViewById(R.id.balance);
 		EditText interest=(EditText)v.findViewById(R.id.interest);
-		String accountName=name.getText().toString();
-		double balanceDouble=Double.parseDouble(balance.getText().toString());
-		double interestDouble=Double.parseDouble(interest.getText().toString());
-		Account account=new Account(accountName,balanceDouble,interestDouble);
-		AccountManager.addAccount(account);
-		Animation.fade(new Fragments.AccountHomeFragment(), getFragmentManager(), R.id.container_account, true);
+		if (null == name || name.getText().toString().equals("")) {
+		    Toast.makeText(this, "Incorrect Account Name ", Toast.LENGTH_LONG).show();
+		    return;
+		} else if (null == balance || balance.getText().toString().equals("")) {
+		    Toast.makeText(this, "Incorrect Balance ", Toast.LENGTH_LONG).show();
+            return;
+		} else if (null == interest || interest.getText().toString().equals("")) {
+		    Toast.makeText(this, "Incorrect interest ", Toast.LENGTH_LONG).show();
+	        return;
+		} else {
+    		String accountName=name.getText().toString();
+    		ArrayList<Account> accounts = AccountManager.getAccountList();
+            for (Account account:accounts) {
+                if (account.getName().equals(accountName)) {
+                    Toast.makeText(this, "Account Already Exists", Toast.LENGTH_LONG).show();
+                    return;
+                }
+            }            
+    		double balanceDouble=Double.parseDouble(balance.getText().toString());
+    		double interestDouble=Double.parseDouble(interest.getText().toString());
+    		Account account=new Account(accountName,balanceDouble,interestDouble);    		
+    		if (AccountManager.addAccount(account)) {
+    		    Toast.makeText(this, "Account Creation Successful", Toast.LENGTH_LONG).show();
+    		    Animation.fade(new Fragments.AccountHomeFragment(), getFragmentManager(), R.id.container_account, true);
+    		} else {
+    		    Toast.makeText(this, "Account Creation failed", Toast.LENGTH_LONG).show();
+    		}
+		}
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
