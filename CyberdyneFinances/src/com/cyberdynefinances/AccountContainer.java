@@ -73,7 +73,6 @@ public class AccountContainer extends Activity
 		Account account=new Account(accountName,balanceDouble,interestDouble);
 		AccountManager.addAccount(account);
 		Animation.fade(new Fragments.AccountHomeFragment(), getFragmentManager(), R.id.container_account, true);
-		
 	}
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
@@ -144,7 +143,7 @@ public class AccountContainer extends Activity
         				Toast.makeText(AccountContainer.this, "Withdrawal of "+NumberFormat.getCurrencyInstance().format(amount)+" Successful", Toast.LENGTH_LONG).show();
         			else
         			{
-        				Toast.makeText(AccountContainer.this, "Amount of "+NumberFormat.getCurrencyInstance().format(amount)+" Exceds Current Balance", Toast.LENGTH_LONG).show();
+        				Toast.makeText(AccountContainer.this, "Amount of "+NumberFormat.getCurrencyInstance().format(amount)+" Exceeds Current Balance", Toast.LENGTH_LONG).show();
         				return;
         			}
         		}
@@ -246,6 +245,21 @@ public class AccountContainer extends Activity
     private void updateBalance()
     {
     	TextView text = (TextView) this.findViewById(R.id.account_balance);
-    	text.setText("Balance: "+NumberFormat.getCurrencyInstance().format(AccountManager.getActiveAccount().getBalance()));
+    	if(AccountManager.getActiveAccount().getBalance()>=1000000000f)
+    	{
+    		text.setScaleX(0.8f);
+    		text.setScaleY(0.8f);
+    	}
+    	else
+    	{
+    		text.setScaleX(1f);
+    		text.setScaleY(1f);
+    	}
+    	text.setText(NumberFormat.getCurrencyInstance().format(AccountManager.getActiveAccount().getBalance()));
+    }
+    
+    public void addAccountButton(View view)
+    {
+    	Animation.fade(new Fragments.AccountCreationFragment(), getFragmentManager(), R.id.container_account);
     }
 }

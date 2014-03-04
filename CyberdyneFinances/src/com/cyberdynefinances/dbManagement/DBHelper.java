@@ -1,9 +1,15 @@
+/**
+ * This class is used be the DBHandler to interact with the database.
+ * It sets up the tables for the database.
+ * 
+ * @author Robert
+ * @version 3.14
+ */
+
 package com.cyberdynefinances.dbManagement;
-//
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-
 import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBEntry;;
 
@@ -20,8 +26,9 @@ public final class DBHelper extends SQLiteOpenHelper {
 			DBEntry.USER_COLUMN_NAME_ID + " TEXT," +
 			DBEntry.ACCOUNT_COLUMN_NAME_BALANCE + " TEXT," +
 			DBEntry.ACCOUNT_COLUMN_NAME_INTEREST + " TEXT)";
-	
-	private static final String SQL_CREATE_TRANSACTION_ENTRIES = "CREATE TABLE " +
+
+	private static final String SQL_CREATE_TRANSACTION_ENTRIES =
+	        "CREATE TABLE " +
 			DBEntry.TRANSACTION_TABLE_NAME + " (" +
 			DBEntry.ACCOUNT_COLUMN_NAME_ID + " TEXT," +
 			DBEntry.TRANSACTION_COLUMN_NAME_AMOUNT + " TEXT," +
@@ -31,18 +38,19 @@ public final class DBHelper extends SQLiteOpenHelper {
 	
 	//SQL Commands to delete any of the above created tables.
 	private static final String	
-			SQL_DELETE_USER_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.USER_TABLE_NAME,
-			SQL_DELETE_ACCOUNT_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.ACCOUNT_TABLE_NAME,
-			SQL_DELETE_TRANSACTION_ENTRIES = "DROP TABLE IF EXISTS " + DBReaderContract.DBEntry.TRANSACTION_TABLE_NAME;
-
+			SQL_DELETE_USER_ENTRIES = "DROP TABLE IF EXISTS " +
+			        DBReaderContract.DBEntry.USER_TABLE_NAME,
+			SQL_DELETE_ACCOUNT_ENTRIES = "DROP TABLE IF EXISTS " +
+			        DBReaderContract.DBEntry.ACCOUNT_TABLE_NAME,
+			SQL_DELETE_TRANSACTION_ENTRIES = "DROP TABLE IF EXISTS " +
+			        DBReaderContract.DBEntry.TRANSACTION_TABLE_NAME;
 	
 	public static final int DATABASE_VERSION = 1;
 	public static final String DATABASE_NAME = "CyberdyneFinancesDB";
-	
-	
+
 	public DBHelper(Context context) {
-		super(MyApplication.getAppContext(), DATABASE_NAME, null, DATABASE_VERSION);
-		
+		super(MyApplication.getAppContext(), DATABASE_NAME, null,
+		        DATABASE_VERSION);		
 	}
 	
 	@Override
@@ -59,7 +67,9 @@ public final class DBHelper extends SQLiteOpenHelper {
 		db.execSQL(SQL_DELETE_TRANSACTION_ENTRIES);
         onCreate(db);
 	}
-	
+
+	//These methods should only be used for testing! 
+	/*
 	public void clearAllTables(SQLiteDatabase db){
 	    onUpgrade(db,0,0);
 	} 
@@ -77,6 +87,5 @@ public final class DBHelper extends SQLiteOpenHelper {
 	public void clearTransactionTable(SQLiteDatabase db) {
 		db.execSQL(SQL_DELETE_TRANSACTION_ENTRIES);
 		db.execSQL(SQL_CREATE_TRANSACTION_ENTRIES);
-
-	}
+	}*/
 }
