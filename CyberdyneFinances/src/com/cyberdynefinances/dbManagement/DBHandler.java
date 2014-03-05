@@ -32,8 +32,16 @@ public class DBHandler {
             Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME +
                 " WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'",
                 null);
-            return 0 < c.getCount();
-        } catch(Exception e) { return false;}
+            int rows = c.getCount();
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
+            return 0 < rows;
+        } catch(NullPointerException e) { e.printStackTrace();}
+        return false;
     }
 
 	/**
@@ -42,22 +50,25 @@ public class DBHandler {
 	 * 
 	 * @param userID - The new user ID.
 	 * @param password - The new users password.
-	 * 
+	 *
 	 * @return True if user was added successfully,
 	 *  false if user already exists or an error occurred.
 	 */
 	public boolean addUser(String userID, String password) {
 		if (!containsUser(userID) && isValid(userID) && isValid(password)) {
-		    SQLiteDatabase db = dbHelper.getWritableDatabase();			
+		    SQLiteDatabase db = dbHelper.getWritableDatabase();
 			ContentValues values = new ContentValues();
 			values.put(DBEntry.USER_COLUMN_NAME_ID, userID);
 			values.put(DBEntry.USER_COLUMN_NAME_PASSWORD, password);
 			db.insert(DBEntry.USER_TABLE_NAME, null, values);
+            if (null != db) {
+                db.close();
+            }
 			return true;
 		}
 		return false;
 	}
-	
+
     /**
      * This method allows the password of a specified user to be changed.
      * 
@@ -72,6 +83,9 @@ public class DBHandler {
 	        cv.put(DBEntry.USER_COLUMN_NAME_PASSWORD, password);
             db.update(DBEntry.USER_TABLE_NAME, cv,
                     DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);
+            if (null != db) {
+                db.close();
+            }
             return true;
 	    } catch(Exception e) { e.printStackTrace();}
 	    return false;
@@ -92,12 +106,18 @@ public class DBHandler {
 			SQLiteDatabase db = dbHelper.getReadableDatabase();
 			Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME +
 					" WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID +
-					"'", null);		
+					"'", null);
 			if (null != c && 0 != c.getCount()) {
 				c.moveToFirst();
 				info[0] = c.getString(0);
 				info[1] = c.getString(1); 
 			}
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
 			String[] accounts = getAccountsForUser(userID);
 			info[2] = "None";
 			if (null != accounts && 0 < accounts.length) {
@@ -125,7 +145,7 @@ public class DBHandler {
 		try {
 			SQLiteDatabase db = dbHelper.getReadableDatabase();
 			Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME,
-			        null);		
+			        null);
 			if (null != c && 0 != c.getCount()) {
 				c.moveToFirst();
 				int i = 0;
@@ -133,7 +153,13 @@ public class DBHandler {
 				do{
 					users[i++]= getUserInfo(c.getString(0)); 
 				} while(c.moveToNext());
-			} 
+			}
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
 		} catch (Exception e) {e.printStackTrace();}
 		return users;
 	}
@@ -158,6 +184,9 @@ public class DBHandler {
 				val.put(DBEntry.ACCOUNT_COLUMN_NAME_BALANCE, balance);
 				val.put(DBEntry.ACCOUNT_COLUMN_NAME_INTEREST, interest);
 				db.insert(DBEntry.ACCOUNT_TABLE_NAME, null, val);
+	            if (null != db) {
+	                db.close();
+	            }
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -181,7 +210,7 @@ public class DBHandler {
 			        " FROM " + DBEntry.ACCOUNT_TABLE_NAME +
 					" WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID +
 					"'", null);
-			
+
 			if (null != c && 0 != c.getCount()) {
 				c.moveToFirst();
 				accounts = new String[c.getCount()];
@@ -190,6 +219,12 @@ public class DBHandler {
 				    c.moveToNext();
 				}
 			}
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
 		} catch (Exception e) {e.printStackTrace();}
 		return accounts;
 	}
@@ -219,6 +254,12 @@ public class DBHandler {
                 info[2] = c.getString(2);
                 info[3] = c.getString(3);
              }
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
         } catch (Exception e) {e.printStackTrace();}
 	    return info;
 	}
@@ -239,6 +280,9 @@ public class DBHandler {
     	    db.delete(DBEntry.ACCOUNT_TABLE_NAME,
     	              DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account +"'",
     	              null);
+            if (null != db) {
+                db.close();
+            }
     	    return true;
 	    } catch(Exception e) { e.printStackTrace();}
 	    return false;
@@ -261,6 +305,9 @@ public class DBHandler {
             }
             db.delete(DBEntry.USER_TABLE_NAME,
                     DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);
+            if (null != db) {
+                db.close();
+            }
             return true;
         } catch (Exception e) { e.printStackTrace();}
         return false;
@@ -309,16 +356,22 @@ public class DBHandler {
         try {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             Cursor c = db.rawQuery("SELECT * FROM " +
-                                   DBEntry.TRANSACTION_TABLE_NAME, null);       
+                                   DBEntry.TRANSACTION_TABLE_NAME, null);
             if (null != c && 0 != c.getCount()) {
                 c.moveToFirst();
                 int i = 0;
                 history = new String[c.getCount()][];
                 do{
                     history[i++]= getTransactionInfo(
-                            c.getString(c.getColumnIndex("Timestamp"))); 
+                            c.getString(c.getColumnIndex("Timestamp")));
                 } while(c.moveToNext());
-            } 
+            }
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
         } catch(Exception e){e.printStackTrace();}
         return history;
     }
@@ -339,7 +392,7 @@ public class DBHandler {
             Cursor c = db.rawQuery("SELECT * FROM " +
                     DBEntry.TRANSACTION_TABLE_NAME +
                     " WHERE " + DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP +
-                    " = '" + timeOfTransaction + "'", null);       
+                    " = '" + timeOfTransaction + "'", null);
             if (null != c && 0 != c.getCount()) {
                 c.moveToFirst();
                 transaction = new String[c.getColumnCount()];
@@ -348,7 +401,13 @@ public class DBHandler {
                 transaction[2] = c.getString(2);
                 transaction[3] = c.getString(3);
                 transaction[4] = c.getString(4);
-            } 
+            }
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
         } catch(Exception e){e.printStackTrace();}
         return transaction;
     }
@@ -365,8 +424,16 @@ public class DBHandler {
 		    Cursor c = db.rawQuery("SELECT * FROM " +
 		        DBEntry.ACCOUNT_TABLE_NAME + " WHERE " +
                 DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + str + "'", null);
-	      return 0 < c.getCount();
-	    } catch(Exception e) { return false;}
+		    int rows = c.getCount();
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
+	      return 0 < rows;
+	    } catch(Exception e) { e.printStackTrace();}
+	    return false;
 	}
 	
 	//This method adds an amount to an account in the db.
@@ -384,11 +451,14 @@ public class DBHandler {
             cv.put(DBEntry.TRANSACTION_COLUMN_NAME_TYPE, type);
             cv.put(DBEntry.TRANSACTION_COLUMN_NAME_CATEGORY, category);
             Time time = new Time();
-            time.setToNow();            
+            time.setToNow();
             cv.put(DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP,
                     time.format("%d.%m.%Y %H:%M:%S"));
             db.insert(DBEntry.TRANSACTION_TABLE_NAME,
                     DBEntry.TRANSACTION_COLUMN_NAME_CATEGORY, cv);
+            if (null != db) {
+                db.close();
+            }
             return true;
 	    } catch(Exception e) { e.printStackTrace();}	    
 	    return false;
