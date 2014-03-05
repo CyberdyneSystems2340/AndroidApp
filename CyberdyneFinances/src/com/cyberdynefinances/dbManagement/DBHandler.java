@@ -28,7 +28,7 @@ public class DBHandler {
      */
     public boolean containsUser(String userID) {
         try {
-            SQLiteDatabase db = dbHelper.getReadableDatabase();
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
             Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME +
                 " WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'",
                 null);
