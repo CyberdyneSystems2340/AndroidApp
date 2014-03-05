@@ -7,7 +7,6 @@
  */
 
 package com.cyberdynefinances.dbManagement;
-import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import com.cyberdynefinances.MyApplication;
@@ -48,7 +47,7 @@ public final class DBHelper extends SQLiteOpenHelper {
 	public static final int DATABASE_VERSION = 1;
 	public static final String DATABASE_NAME = "CyberdyneFinancesDB";
 
-	public DBHelper(Context context) {
+	public DBHelper() {
 		super(MyApplication.getAppContext(), DATABASE_NAME, null,
 		        DATABASE_VERSION);		
 	}
