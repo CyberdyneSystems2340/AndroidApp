@@ -32,8 +32,16 @@ public class DBHandler {
             Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME +
                 " WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'",
                 null);
-            return 0 < c.getCount();
-        } catch(Exception e) { return false;}
+            int rows = c.getCount();
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
+            return 0 < rows;
+        } catch(NullPointerException e) { e.printStackTrace();}
+        return false;
     }
 
 	/**
@@ -53,6 +61,9 @@ public class DBHandler {
 			values.put(DBEntry.USER_COLUMN_NAME_ID, userID);
 			values.put(DBEntry.USER_COLUMN_NAME_PASSWORD, password);
 			db.insert(DBEntry.USER_TABLE_NAME, null, values);
+            if (null != db) {
+                db.close();
+            }
 			return true;
 		}
 		return false;
@@ -72,6 +83,9 @@ public class DBHandler {
 	        cv.put(DBEntry.USER_COLUMN_NAME_PASSWORD, password);
             db.update(DBEntry.USER_TABLE_NAME, cv,
                     DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);
+            if (null != db) {
+                db.close();
+            }
             return true;
 	    } catch(Exception e) { e.printStackTrace();}
 	    return false;
@@ -98,6 +112,12 @@ public class DBHandler {
 				info[0] = c.getString(0);
 				info[1] = c.getString(1); 
 			}
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
 			String[] accounts = getAccountsForUser(userID);
 			info[2] = "None";
 			if (null != accounts && 0 < accounts.length) {
@@ -133,7 +153,13 @@ public class DBHandler {
 				do{
 					users[i++]= getUserInfo(c.getString(0)); 
 				} while(c.moveToNext());
-			} 
+			}
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
 		} catch (Exception e) {e.printStackTrace();}
 		return users;
 	}
@@ -158,6 +184,9 @@ public class DBHandler {
 				val.put(DBEntry.ACCOUNT_COLUMN_NAME_BALANCE, balance);
 				val.put(DBEntry.ACCOUNT_COLUMN_NAME_INTEREST, interest);
 				db.insert(DBEntry.ACCOUNT_TABLE_NAME, null, val);
+	            if (null != db) {
+	                db.close();
+	            }
 				return true;
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -190,6 +219,12 @@ public class DBHandler {
 				    c.moveToNext();
 				}
 			}
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
 		} catch (Exception e) {e.printStackTrace();}
 		return accounts;
 	}
@@ -219,6 +254,12 @@ public class DBHandler {
                 info[2] = c.getString(2);
                 info[3] = c.getString(3);
              }
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
         } catch (Exception e) {e.printStackTrace();}
 	    return info;
 	}
@@ -239,6 +280,9 @@ public class DBHandler {
     	    db.delete(DBEntry.ACCOUNT_TABLE_NAME,
     	              DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account +"'",
     	              null);
+            if (null != db) {
+                db.close();
+            }
     	    return true;
 	    } catch(Exception e) { e.printStackTrace();}
 	    return false;
@@ -261,6 +305,9 @@ public class DBHandler {
             }
             db.delete(DBEntry.USER_TABLE_NAME,
                     DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'", null);
+            if (null != db) {
+                db.close();
+            }
             return true;
         } catch (Exception e) { e.printStackTrace();}
         return false;
@@ -318,7 +365,13 @@ public class DBHandler {
                     history[i++]= getTransactionInfo(
                             c.getString(c.getColumnIndex("Timestamp")));
                 } while(c.moveToNext());
-            } 
+            }
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
         } catch(Exception e){e.printStackTrace();}
         return history;
     }
@@ -348,7 +401,13 @@ public class DBHandler {
                 transaction[2] = c.getString(2);
                 transaction[3] = c.getString(3);
                 transaction[4] = c.getString(4);
-            } 
+            }
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
         } catch(Exception e){e.printStackTrace();}
         return transaction;
     }
@@ -365,8 +424,16 @@ public class DBHandler {
 		    Cursor c = db.rawQuery("SELECT * FROM " +
 		        DBEntry.ACCOUNT_TABLE_NAME + " WHERE " +
                 DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + str + "'", null);
-	      return 0 < c.getCount();
-	    } catch(Exception e) { return false;}
+		    int rows = c.getCount();
+            if (null != c) {
+                c.close();
+            }
+            if (null != db) {
+                db.close();
+            }
+	      return 0 < rows;
+	    } catch(Exception e) { e.printStackTrace();}
+	    return false;
 	}
 	
 	//This method adds an amount to an account in the db.
@@ -389,6 +456,9 @@ public class DBHandler {
                     time.format("%d.%m.%Y %H:%M:%S"));
             db.insert(DBEntry.TRANSACTION_TABLE_NAME,
                     DBEntry.TRANSACTION_COLUMN_NAME_CATEGORY, cv);
+            if (null != db) {
+                db.close();
+            }
             return true;
 	    } catch(Exception e) { e.printStackTrace();}	    
 	    return false;
