@@ -55,17 +55,19 @@ public class DBHandler {
 	 *  false if user already exists or an error occurred.
 	 */
 	public boolean addUser(String userID, String password) {
-		if (!containsUser(userID) && isValid(userID) && isValid(password)) {
-		    SQLiteDatabase db = dbHelper.getWritableDatabase();
-			ContentValues values = new ContentValues();
-			values.put(DBEntry.USER_COLUMN_NAME_ID, userID);
-			values.put(DBEntry.USER_COLUMN_NAME_PASSWORD, password);
-			db.insert(DBEntry.USER_TABLE_NAME, null, values);
-            if (null != db) {
-                db.close();
-            }
-			return true;
-		}
+	    try {
+    		if (!containsUser(userID) && isValid(userID) && isValid(password)) {
+    		    SQLiteDatabase db = dbHelper.getWritableDatabase();
+    			ContentValues values = new ContentValues();
+    			values.put(DBEntry.USER_COLUMN_NAME_ID, userID);
+    			values.put(DBEntry.USER_COLUMN_NAME_PASSWORD, password);
+    			db.insert(DBEntry.USER_TABLE_NAME, null, values);
+                if (null != db) {
+                    db.close();
+                }
+    			return true;
+    		}
+	    } catch (NullPointerException e) { e.printStackTrace(); }
 		return false;
 	}
 
