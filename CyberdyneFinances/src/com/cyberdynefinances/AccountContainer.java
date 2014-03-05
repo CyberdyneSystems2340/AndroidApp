@@ -7,6 +7,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -145,7 +146,7 @@ public class AccountContainer extends Activity
             public void onClick(View v)
             {
         		double amount = 0.0;
-        		if(!text.getText().toString().equals("")) //check to make sure if there is something in the text field
+        		if(!text.getText().toString().equals("") && !text.getText().toString().equals(".")) //check to make sure if there is something in the text field
         			amount = Double.parseDouble(text.getText().toString());
         		
         		String category = menu.getSelectedItem().toString();
@@ -159,7 +160,7 @@ public class AccountContainer extends Activity
         			}
         		}
 
-        		if(amount!=0.0) //if amount is valid withdraw and notify user
+        		if(amount>=0.01) //if amount is valid withdraw and notify user
         		{
         			if(AccountManager.withdraw(category, amount))
         				Toast.makeText(AccountContainer.this, "Withdrawal of "+NumberFormat.getCurrencyInstance().format(amount)+" Successful", Toast.LENGTH_LONG).show();
@@ -231,7 +232,8 @@ public class AccountContainer extends Activity
             public void onClick(View v)
             {
         		double amount = 0.0;
-        		if(!text.getText().toString().equals(""))
+        		Log.e("tag", text.getText().toString()+"");
+        		if(!text.getText().toString().equals("") && !text.getText().toString().equals("."))
         			amount = Double.parseDouble(text.getText().toString());
         		
         		String category = menu.getSelectedItem().toString();
@@ -245,7 +247,7 @@ public class AccountContainer extends Activity
         			}
         		}
         		
-        		if(amount!=0.0)
+        		if(amount>=0.01)
         		{
         			AccountManager.deposit(category, amount);
         			Toast.makeText(AccountContainer.this, "Deposit of "+NumberFormat.getCurrencyInstance().format(amount)+" Successful", Toast.LENGTH_LONG).show();
