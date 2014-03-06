@@ -17,7 +17,7 @@ import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBFactory;
 
 public class DBHandler {
-    private static DBHelper dbHelper;
+    private static DBHelper dbHelper = new DBHelper(MyApplication.getAppContext());
     private static String withdrawText = "WITHDRAW";
     private static String depositText = "DEPOSIT";
     private static String equal = " = '";
@@ -25,9 +25,6 @@ public class DBHandler {
     private static String selectAll = "SELECT * FROM ";
     private static String apastrophy = "'";
 
-    public DBHandler() {
-        dbHelper = new DBHelper(MyApplication.getAppContext());
-    }
     /**
      * This method checks to see if the user table contains the specified user.
      *
