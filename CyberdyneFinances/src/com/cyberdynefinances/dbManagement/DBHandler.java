@@ -53,13 +53,13 @@ public class DBHandler {
 	 */
 	public boolean addUser(String userID, String password) {
 	    try {
-    		if ( isValid(userID) && isValid(password) && !containsUser(userID)) {
+    		if ( isValid(userID) && isValid(password)) {
     		    SQLiteDatabase db = dbHelper.getWritableDatabase();
     			ContentValues values = new ContentValues();
     			values.put(DBEntry.USER_COLUMN_NAME_ID, userID);
     			values.put(DBEntry.USER_COLUMN_NAME_PASSWORD, password);
-    			db.insert(DBEntry.USER_TABLE_NAME, null, values);
-    			return true;
+    			long i = db.insert(DBEntry.USER_TABLE_NAME, null, values);
+    			return -1 != i;
     		}
 	    } catch (NullPointerException e) { e.printStackTrace(); }
 		return false;
