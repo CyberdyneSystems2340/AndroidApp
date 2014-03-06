@@ -83,8 +83,7 @@ public class DBTester extends Activity {
 	};
 	
 	private void readTransaction(){
-	    DBHandler dbHandler = new DBHandler();
-	    String[][] transactions = dbHandler.getTransactionHistory((String)((TextView) findViewById(R.id.dbtest_account_text)).getText().toString());
+	    String[][] transactions = DBHandler.getTransactionHistory((String)((TextView) findViewById(R.id.dbtest_account_text)).getText().toString());
 	    String rows = "";
 	    if (null != transactions) {
 	        for (String[] transaction : transactions) {
