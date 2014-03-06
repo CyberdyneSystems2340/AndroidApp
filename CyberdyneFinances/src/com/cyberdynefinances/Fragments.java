@@ -139,6 +139,8 @@ public class Fragments
 				public void onItemSelected(AdapterView<?> arg0, View view1,int arg2, long arg3) 
 				{
 					TextView textField = (TextView) view1;
+					if(textField==null)
+						return;
 					AccountManager.setActiveAccount(textField.getText().toString());
 					Double balance = AccountManager.getActiveAccount().getBalance();
 					View view = view1.getRootView();
