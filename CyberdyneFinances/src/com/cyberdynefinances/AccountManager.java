@@ -5,7 +5,6 @@ import com.cyberdynefinances.dbManagement.DBHandler;
 
 public class AccountManager
 {
-	private static DBHandler dbHandler = new DBHandler();
 	//interfaces with accounts and is the only thing that can because the Account class is protected
 	private static ArrayList<Account> accountList = new ArrayList<Account>();
 	private static String owner;
@@ -42,10 +41,10 @@ public class AccountManager
 	public static void readAccounts()
 	{
 	    try {
-	        String[] dbAccounts = dbHandler.getAccountsForUser(owner);
+	        String[] dbAccounts = DBHandler.getAccountsForUser(owner);
 	        if (null != dbAccounts && dbAccounts.length > 0) {
                 for (String dbAccount: dbAccounts) {
-                    String[] curAcc = dbHandler.getAccountInfo(dbAccount);
+                    String[] curAcc = DBHandler.getAccountInfo(dbAccount);
                     if (null != curAcc[2] && null != curAcc[3])
                     accountList.add(new Account(dbAccount, Double.parseDouble(curAcc[2]), Double.parseDouble(curAcc[3])));
                 }
@@ -83,7 +82,7 @@ public class AccountManager
 	
 	public static boolean addAccount(Account acc)
 	{
-		boolean accountAdded  = dbHandler.addAccount(owner, acc.getName(), acc.getBalance(), acc.getInterest());
+		boolean accountAdded  = DBHandler.addAccount(owner, acc.getName(), acc.getBalance(), acc.getInterest());
 		if(accountAdded)
 		{
 		    accountList.add(acc);

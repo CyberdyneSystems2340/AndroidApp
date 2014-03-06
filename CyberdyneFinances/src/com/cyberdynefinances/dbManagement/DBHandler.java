@@ -16,17 +16,14 @@ import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBEntry;
 
 public class DBHandler {
-	private static DBHelper dbHelper;
-	public DBHandler() {
-		dbHelper = new DBHelper(MyApplication.getAppContext());
-	}
+	private static DBHelper dbHelper = new DBHelper(MyApplication.getAppContext());
     
     /**
      * This method checks to see if the user table contains the specified user. 
      * 
      * @return True if the user exists, false if not.
      */
-    public boolean containsUser(String userID) {
+    public static boolean containsUser(String userID) {
         try {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME +
@@ -51,9 +48,10 @@ public class DBHandler {
 	 * @return True if user was added successfully,
 	 *  false if user already exists or an error occurred.
 	 */
-	public boolean addUser(String userID, String password) {
+	public static boolean addUser(String userID, String password) {
 	    try {
     		if ( isValid(userID) && isValid(password)) {
+
     		    SQLiteDatabase db = dbHelper.getWritableDatabase();
     			ContentValues values = new ContentValues();
     			values.put(DBEntry.USER_COLUMN_NAME_ID, userID);
@@ -72,7 +70,7 @@ public class DBHandler {
      * @param newPassword The new password to set for the user.
      * @return True if password change successful, false if not.
      */
-	public boolean changePassword(String userID, String password){
+	public static boolean changePassword(String userID, String password){
 	    try {
 	        SQLiteDatabase db = dbHelper.getWritableDatabase();
 	        ContentValues cv = new ContentValues();
@@ -93,7 +91,7 @@ public class DBHandler {
 	 *     returns null if user does not exist.
 	 *     Array order is such: [0] = userID, [1] = password, [2] = accounts.
 	 * */
-	public String[] getUserInfo(String userID) {
+	public static String[] getUserInfo(String userID) {
 		String[] info = new String[3];
 		try {
 
@@ -131,7 +129,7 @@ public class DBHandler {
 	 *     The user information in each row of the array, is an array.
 	 *     Array is stored as such:[0] = userID, [1] = password, [3] = accounts.
 	 */
-	public String[][] getAllUsersInfo() {
+	public static String[][] getAllUsersInfo() {
 		String[][] users = null;
 		try {
 			SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -161,7 +159,7 @@ public class DBHandler {
 	 * @return True if the account was added, false if an error occurred,
 	 *  the account was already taken, or the userID was invalid.
 	 * */
-	public boolean addAccount(String userID, String newAccount, double balance,
+	public static boolean addAccount(String userID, String newAccount, double balance,
 	        double interest) {
 		if (!containsAccount(newAccount)) {
 			try {
@@ -188,7 +186,7 @@ public class DBHandler {
 	 * @return An array that holds the accounts for a specified user.
 	 * 
 	 */
-	public String[] getAccountsForUser(String userID) {
+	public static String[] getAccountsForUser(String userID) {
 		String[] accounts = null;
 		try {
 			SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -220,7 +218,7 @@ public class DBHandler {
 	 *     [0] - account, [1] - owner, [2] - balance, [3] - interest.
 	 *     Null if account name invalid.
 	 * */
-	public String[] getAccountInfo(String account){
+	public static String[] getAccountInfo(String account){
 	    String[] info = null;
 	    try {
 
@@ -252,7 +250,7 @@ public class DBHandler {
 	 * @param account - The account to delete.
 	 * @return True if account deleted successfully, false if an error occurred.
 	 */
-	public boolean deleteAccount(String account) {
+	public static boolean deleteAccount(String account) {
     	try {
 
     	    SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -275,7 +273,7 @@ public class DBHandler {
 	 * @return True if user was deleted, or was never present.
 	 *  False if an error occurred.
 	 */
-    public boolean deleteUser(String userID) {
+    public static boolean deleteUser(String userID) {
         try {
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -304,7 +302,7 @@ public class DBHandler {
      * @return True, if transaction was made,
      *       false if invalid transaction or an error occurred.
      */
-    public boolean makeTransaction(String account, double amount,
+    public static boolean makeTransaction(String account, double amount,
             String transactionType, String category) {
         double balance = Double.parseDouble(getAccountInfo(account)[2]);
         if (transactionType.equalsIgnoreCase("DEPOSIT")) {
@@ -385,12 +383,12 @@ public class DBHandler {
     }
 
 	//This method checks to see if a string is valid for being added to the db.
-	private boolean isValid(String str) {
+	private static boolean isValid(String str) {
 	    return (null != str && !str.isEmpty());
 	}
 	
 	//This method checks to see if this account has already been 
-	private boolean containsAccount(String str) {
+	private static boolean containsAccount(String str) {
 	    try {
 	        SQLiteDatabase db = dbHelper.getReadableDatabase();
 		    Cursor c = db.rawQuery("SELECT * FROM " +
@@ -406,7 +404,7 @@ public class DBHandler {
 	}
 	
 	//This method adds an amount to an account in the db.
-	private boolean updateBalanceAndTransactionHistory(SQLiteDatabase db,
+	private static boolean updateBalanceAndTransactionHistory(SQLiteDatabase db,
 	        ContentValues cv, String account, double balance, double amount,
 	        String type, String category) {
 	    try {

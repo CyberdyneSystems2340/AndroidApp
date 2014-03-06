@@ -6,7 +6,6 @@ import com.cyberdynefinances.dbManagement.DBHandler;
 
 public class Account 
 {
-	private static DBHandler dbHandler = new DBHandler();
 	private String accountName;
 	private double balance = 0.0;
 	private double interest = 0.0;
@@ -62,7 +61,7 @@ public class Account
 	
 	private void registerTransaction(String type, String category, double amount)
 	{
-		dbHandler.makeTransaction(accountName, amount, type, category);
+		DBHandler.makeTransaction(accountName, amount, type, category);
 		if(type.equalsIgnoreCase("deposit"))
 		{
 			if(!categoriesDeposit.contains(category))

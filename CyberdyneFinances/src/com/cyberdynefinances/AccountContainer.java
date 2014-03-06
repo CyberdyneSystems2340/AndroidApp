@@ -2,6 +2,9 @@ package com.cyberdynefinances;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+
+import com.cyberdynefinances.dbManagement.DBHandler;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -71,11 +74,11 @@ public class AccountContainer extends Activity
 		if (null == name || name.getText().toString().equals("")) {
 		    Toast.makeText(this, "Incorrect Account Name ", Toast.LENGTH_LONG).show();
 		    return;
-		} else if (null == balance || balance.getText().toString().equals("")) {
+		} else if (null == balance || balance.getText().toString().equals("") || balance.getText().toString().equals(".")) {
 		    Toast.makeText(this, "Incorrect Balance ", Toast.LENGTH_LONG).show();
             return;
-		} else if (null == interest || interest.getText().toString().equals("")) {
-		    Toast.makeText(this, "Incorrect interest ", Toast.LENGTH_LONG).show();
+		} else if (null == interest || interest.getText().toString().equals("") || interest.getText().toString().equals(".")) {
+		    Toast.makeText(this, "Incorrect Interest ", Toast.LENGTH_LONG).show();
 	        return;
 		} else {
     		String accountName=name.getText().toString();
@@ -87,13 +90,23 @@ public class AccountContainer extends Activity
                 }
             }            
     		double balanceDouble=Double.parseDouble(balance.getText().toString());
+    		if(balanceDouble < 0.01)
+    		{
+    			Toast.makeText(this, "Incorrect Balance ", Toast.LENGTH_LONG).show();
+                return;
+    		}
     		double interestDouble=Double.parseDouble(interest.getText().toString());
+    		if(interestDouble < 0.01)
+    		{
+    			Toast.makeText(this, "Incorrect Interest ", Toast.LENGTH_LONG).show();
+                return;
+    		}
     		Account account=new Account(accountName,balanceDouble,interestDouble);    		
     		if (AccountManager.addAccount(account)) {
     		    Toast.makeText(this, "Account Creation Successful", Toast.LENGTH_LONG).show();
     		    Animation.fade(new Fragments.AccountHomeFragment(), getFragmentManager(), R.id.container_account, true);
     		} else {
-    		    Toast.makeText(this, "Account Creation failed", Toast.LENGTH_LONG).show();
+    		    Toast.makeText(this, "Account Creation Failed", Toast.LENGTH_LONG).show();
     		}
 		}
 	}
@@ -176,6 +189,7 @@ public class AccountContainer extends Activity
     				return;
         		}
         		updateBalance();
+        		updateTransactionHistory();
         		alertDialog.dismiss();
             }
         });
@@ -258,6 +272,7 @@ public class AccountContainer extends Activity
     				return;
         		}
         		updateBalance();
+        		updateTransactionHistory();
     			alertDialog.dismiss();
             }
         });
@@ -280,6 +295,21 @@ public class AccountContainer extends Activity
     		text.setScaleY(1f);
     	}
     	text.setText(NumberFormat.getCurrencyInstance().format(AccountManager.getActiveAccount().getBalance()));
+    }
+    
+    private void updateTransactionHistory() {
+        
+        String[][] transactions = DBHandler.getTransactionHistory(AccountManager.getActiveAccount().getName());
+        String rows = "";
+        if (null != transactions) {
+            for (String[] transaction : transactions) {
+                rows += "\n\nAccount: " + transaction[0] + ", Amount: " + transaction[1] +
+                        ", Type: " + transaction[2] + ", Category: " + transaction[3] +
+                        ", Timestamp: " + transaction[4];
+            }
+        }
+        TextView reportText = (TextView) this.findViewById(R.id.report_text_view);
+        reportText.setText(rows);
     }
     
     public void addAccountButton(View view)
