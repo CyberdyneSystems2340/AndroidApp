@@ -10,25 +10,15 @@
 package com.cyberdynefinances.dbManagement;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.text.format.Time;
+import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBEntry;
 
 public class DBHandler {
-	private DBHelper dbHelper;
-	private SQLiteDatabase db;
-
+	DBHelper dbHelper;
 	public DBHandler() {
-		dbHelper = new DBHelper();
-	}
-	
-	public void open() throws SQLException {
-	    db = dbHelper.getWritableDatabase();
-	}
-	
-	public void close() {
-	    dbHelper.close();
+		dbHelper = new DBHelper(MyApplication.getAppContext());
 	}
     
     /**
@@ -37,7 +27,8 @@ public class DBHandler {
      * @return True if the user exists, false if not.
      */
     public boolean containsUser(String userID) {
-        try {           
+        try {
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
             Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME +
                 " WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID + "'",
                 null);
@@ -62,12 +53,13 @@ public class DBHandler {
 	 */
 	public boolean addUser(String userID, String password) {
 	    try {
-    		if (!containsUser(userID) && isValid(userID) && isValid(password)) {
-                ContentValues values = new ContentValues();
+    		if ( isValid(userID) && isValid(password) && !containsUser(userID)) {
+    		    SQLiteDatabase db = dbHelper.getWritableDatabase();
+    			ContentValues values = new ContentValues();
     			values.put(DBEntry.USER_COLUMN_NAME_ID, userID);
     			values.put(DBEntry.USER_COLUMN_NAME_PASSWORD, password);
-    			long i = db.insert(DBEntry.USER_TABLE_NAME, null, values);
-    			return i == -1;
+    			db.insert(DBEntry.USER_TABLE_NAME, null, values);
+    			return true;
     		}
 	    } catch (NullPointerException e) { e.printStackTrace(); }
 		return false;
@@ -82,6 +74,7 @@ public class DBHandler {
      */
 	public boolean changePassword(String userID, String password){
 	    try {
+	        SQLiteDatabase db = dbHelper.getWritableDatabase();
 	        ContentValues cv = new ContentValues();
 	        cv.put(DBEntry.USER_COLUMN_NAME_PASSWORD, password);
             db.update(DBEntry.USER_TABLE_NAME, cv,
@@ -103,6 +96,8 @@ public class DBHandler {
 	public String[] getUserInfo(String userID) {
 		String[] info = new String[3];
 		try {
+
+			SQLiteDatabase db = dbHelper.getReadableDatabase();
 			Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME +
 					" WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID +
 					"'", null);
@@ -139,6 +134,7 @@ public class DBHandler {
 	public String[][] getAllUsersInfo() {
 		String[][] users = null;
 		try {
+			SQLiteDatabase db = dbHelper.getReadableDatabase();
 			Cursor c = db.rawQuery("SELECT * FROM " + DBEntry.USER_TABLE_NAME,
 			        null);
 			if (null != c && 0 != c.getCount()) {
@@ -169,6 +165,8 @@ public class DBHandler {
 	        double interest) {
 		if (!containsAccount(newAccount)) {
 			try {
+
+				SQLiteDatabase db = dbHelper.getWritableDatabase();
 				ContentValues val = new ContentValues();
 				val.put(DBEntry.ACCOUNT_COLUMN_NAME_ID, newAccount);
 				val.put(DBEntry.USER_COLUMN_NAME_ID, userID);
@@ -193,6 +191,7 @@ public class DBHandler {
 	public String[] getAccountsForUser(String userID) {
 		String[] accounts = null;
 		try {
+			SQLiteDatabase db = dbHelper.getReadableDatabase();
 			Cursor c = db.rawQuery("SELECT "+DBEntry.ACCOUNT_COLUMN_NAME_ID +
 			        " FROM " + DBEntry.ACCOUNT_TABLE_NAME +
 					" WHERE " + DBEntry.USER_COLUMN_NAME_ID + " = '" + userID +
@@ -224,6 +223,8 @@ public class DBHandler {
 	public String[] getAccountInfo(String account){
 	    String[] info = null;
 	    try {
+
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
             Cursor c = db.rawQuery("SELECT * FROM " +
                     DBEntry.ACCOUNT_TABLE_NAME +
                     " WHERE " + DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" +
@@ -253,6 +254,8 @@ public class DBHandler {
 	 */
 	public boolean deleteAccount(String account) {
     	try {
+
+    	    SQLiteDatabase db = dbHelper.getWritableDatabase();
     	    db.delete(DBEntry.TRANSACTION_TABLE_NAME,
     	              DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + account + "'",
     	              null);
@@ -274,6 +277,8 @@ public class DBHandler {
 	 */
     public boolean deleteUser(String userID) {
         try {
+
+            SQLiteDatabase db = dbHelper.getWritableDatabase();
             String[] accounts = getAccountsForUser(userID);
             for (String account : accounts) {
                 deleteAccount(account);
@@ -303,11 +308,13 @@ public class DBHandler {
             String transactionType, String category) {
         double balance = Double.parseDouble(getAccountInfo(account)[2]);
         if (transactionType.equalsIgnoreCase("DEPOSIT")) {
-            return updateBalanceAndTransactionHistory(new ContentValues(),
+            return updateBalanceAndTransactionHistory(
+                    dbHelper.getWritableDatabase(),new ContentValues(),
                     account,balance,amount,"DEPOSIT",category);
         } 
         if (transactionType.equalsIgnoreCase("WITHDRAW")) {    
-            return updateBalanceAndTransactionHistory(new ContentValues(),
+            return updateBalanceAndTransactionHistory(
+                    dbHelper.getWritableDatabase(),new ContentValues(),
                     account,balance,-amount,"WITHDRAW",category);
         }       
         return false;
@@ -324,6 +331,7 @@ public class DBHandler {
     public String[][] getTransactionHistory(String account) {
         String[][] history = null;
         try {
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
             Cursor c = db.rawQuery("SELECT * FROM " +
                                    DBEntry.TRANSACTION_TABLE_NAME, null);
             if (null != c && 0 != c.getCount()) {
@@ -354,6 +362,8 @@ public class DBHandler {
     public String[] getTransactionInfo(String timeOfTransaction){
         String[] transaction = null;
         try {
+
+            SQLiteDatabase db = dbHelper.getReadableDatabase();
             Cursor c = db.rawQuery("SELECT * FROM " +
                     DBEntry.TRANSACTION_TABLE_NAME +
                     " WHERE " + DBEntry.TRANSACTION_COLUMN_NAME_TIMESTAMP +
@@ -382,6 +392,7 @@ public class DBHandler {
 	//This method checks to see if this account has already been 
 	private boolean containsAccount(String str) {
 	    try {
+	        SQLiteDatabase db = dbHelper.getReadableDatabase();
 		    Cursor c = db.rawQuery("SELECT * FROM " +
 		        DBEntry.ACCOUNT_TABLE_NAME + " WHERE " +
                 DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '" + str + "'", null);
@@ -395,8 +406,9 @@ public class DBHandler {
 	}
 	
 	//This method adds an amount to an account in the db.
-	private boolean updateBalanceAndTransactionHistory( ContentValues cv,
-	        String account, double balance, double amount, String type, String category) {
+	private boolean updateBalanceAndTransactionHistory(SQLiteDatabase db,
+	        ContentValues cv, String account, double balance, double amount,
+	        String type, String category) {
 	    try {
     	    cv.put(DBEntry.ACCOUNT_COLUMN_NAME_BALANCE, balance + amount);
             db.update(DBEntry.ACCOUNT_TABLE_NAME, cv,
