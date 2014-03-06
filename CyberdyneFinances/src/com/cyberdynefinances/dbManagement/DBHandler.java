@@ -16,7 +16,7 @@ import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBEntry;
 
 public class DBHandler {
-	DBHelper dbHelper;
+	private static DBHelper dbHelper;
 	public DBHandler() {
 		dbHelper = new DBHelper(MyApplication.getAppContext());
 	}
