@@ -19,9 +19,9 @@ public class LoginHandler
 	}
 
 	//Adds a new username and password combination to the database
-	public static void register(String username, String password)
+	public static boolean register(String username, String password)
 	{
-		dbHandler.addUser(username, password);
+		return dbHandler.addUser(username, password);
 	}
 
 	//Checks if the database contains the username
