@@ -53,7 +53,7 @@ public class DBHandler {
 	 */
 	public boolean addUser(String userID, String password) {
 	    try {
-    		if ( isValid(userID) && isValid(password) && !containsUser(userID)) {
+    		if ( isValid(userID) && isValid(password)) {
     		    SQLiteDatabase db = dbHelper.getWritableDatabase();
     			ContentValues values = new ContentValues();
     			values.put(DBEntry.USER_COLUMN_NAME_ID, userID);
