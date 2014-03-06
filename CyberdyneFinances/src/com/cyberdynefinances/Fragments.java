@@ -3,9 +3,13 @@ package com.cyberdynefinances;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import com.cyberdynefinances.dbManagement.DBHandler;
+
 import android.app.Fragment;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -145,6 +149,7 @@ public class Fragments
 					Double balance = AccountManager.getActiveAccount().getBalance();
 					View view = view1.getRootView();
 					TextView balanceText = (TextView) view.findViewById(R.id.account_balance);
+					TextView reportText = (TextView) view.findViewById(R.id.report_text_view);
 			    	if(AccountManager.getActiveAccount().getBalance()>=1000000000f) //textField only fits so many digits, scale the textField when that number is exceeded
 			    	{
 			    		balanceText.setScaleX(0.8f);
@@ -155,6 +160,18 @@ public class Fragments
 			    		balanceText.setScaleX(1f);
 			    		balanceText.setScaleY(1f);
 			    	}
+			    	String[][] transactions = DBHandler.getTransactionHistory(textField.getText().toString());
+			    	//Log.e("tag",textField.getText().toString());
+			        String rows = "";
+			        if (null != transactions) {
+			            for (String[] transaction : transactions) {
+			                rows += "\n\nAccount: " + transaction[0] + ", Amount: " + transaction[1] +
+			                        ", Type: " + transaction[2] + ", Category: " + transaction[3] +
+			                        ", Timestamp: " + transaction[4];
+			            }
+			        }
+			        //Log.e("tag",rows);
+			        reportText.setText(rows);
 					balanceText.setText(NumberFormat.getCurrencyInstance().format(balance));
 				}
 

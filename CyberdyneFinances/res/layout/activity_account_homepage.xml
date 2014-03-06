@@ -83,5 +83,17 @@
 	    android:layout_alignParentRight="true"
 	    android:text="@string/logout_text"
 	    android:textSize="8pt" />
+    <ScrollView
+            android:id="@+id/report_text_view_scroller"        
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_above="@+id/account_spinner"
+            android:layout_below="@+id/report_spinner" >       
+		<TextView
+		    android:id="@+id/report_text_view"
+		    android:layout_width="fill_parent"
+		    android:layout_height="wrap_content"
+		    android:text="@string/report_text_view" />
+	</ScrollView>
     
 </RelativeLayout>

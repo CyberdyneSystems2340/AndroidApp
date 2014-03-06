@@ -328,12 +328,12 @@ public class DBHandler {
      * The array is as follows: [0] - account, [1] - amount, [2] - type,
      *                          [3] - category, [4] - time stamp
      */
-    public String[][] getTransactionHistory(String account) {
+    public static String[][] getTransactionHistory(String account) {
         String[][] history = null;
         try {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             Cursor c = db.rawQuery("SELECT * FROM " +
-                                   DBEntry.TRANSACTION_TABLE_NAME, null);
+                                   DBEntry.TRANSACTION_TABLE_NAME +" WHERE "+DBEntry.ACCOUNT_COLUMN_NAME_ID + " = '"+account+"'", null);
             if (null != c && 0 != c.getCount()) {
                 c.moveToFirst();
                 int i = 0;
@@ -359,7 +359,7 @@ public class DBHandler {
      *  [3] - Category, [4] - Time stamp.
      *  Null if invalid time stamp.
      */
-    public String[] getTransactionInfo(String timeOfTransaction){
+    public static String[] getTransactionInfo(String timeOfTransaction){
         String[] transaction = null;
         try {
 
