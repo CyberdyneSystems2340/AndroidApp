@@ -32,20 +32,18 @@ public class DBTester extends Activity {
 
 	//This method tests reading all the user accounts stored.
 	private void readFromDB() {
-
-		DBHandler dbHandler = new DBHandler();
-		String[][] users = dbHandler.getAllUsersInfo();
+		String[][] users = DBHandler.getAllUsersInfo();
 		String rows = "", accountStr = "";
 		String[] accounts = null, accountInfo = null;
 		if (null != users) {
     		for (String[] user : users) {
     		    rows += "\nName: " + user[0] + ", Password: " + user[1] + ", Accounts: " + user[2];
     		    
-    		    accounts = dbHandler.getAccountsForUser(user[0]);
+    		    accounts = DBHandler.getAccountsForUser(user[0]);
     		    if(null != accounts) {
         		    for (String account: accounts) {
         		        
-        		        accountInfo = dbHandler.getAccountInfo(account);
+        		        accountInfo = DBHandler.getAccountInfo(account);
         		    
         		        accountStr += "\n Account: " + accountInfo[0] + ", Owner: " + accountInfo[1] +
         		                ", Balance: " + accountInfo[2] + ", Interest: " + accountInfo[3]; 
@@ -59,26 +57,23 @@ public class DBTester extends Activity {
 	}
 	
 	private void withdraw() {
-	    DBHandler dbHandler = new DBHandler();
 	    String account = (String)((TextView) findViewById(R.id.dbtest_account_text)).getText().toString();
         double amount = Double.parseDouble((String)((TextView) findViewById(R.id.dbtest_amount_text)).getText().toString());	    
-	    dbHandler.makeTransaction(account, amount, "WITHDRAW", "NONE");
+	    DBHandler.makeTransaction(account, amount, "WITHDRAW", "NONE");
 	    readTransaction();
 	}
 	
 	private void deposit() {
-	    DBHandler dbHandler = new DBHandler();
         String account = (String)((TextView) findViewById(R.id.dbtest_account_text)).getText().toString();
         double amount = Double.parseDouble((String)((TextView) findViewById(R.id.dbtest_amount_text)).getText().toString());     
-        dbHandler.makeTransaction(account, amount, "DEPOSIT", "NONE");
+        DBHandler.makeTransaction(account, amount, "DEPOSIT", "NONE");
         readTransaction();
 	}
 	
 	private void addAccount(){
-	    DBHandler dbHandler = new DBHandler();
 	    String userID = ((TextView) findViewById(R.id.dbtester_username_text)).getText().toString();
 	    String account = (String)((TextView) findViewById(R.id.dbtest_account_text)).getText().toString();
-	    dbHandler.addAccount(userID, account, 101, .03);
+	    DBHandler.addAccount(userID, account, 101, .03);
 	    readFromDB();
 	};
 	

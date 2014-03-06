@@ -63,7 +63,7 @@ public class DBHandler {
      * @return True if user was added successfully, false if user already exists
      *         or an error occurred.
      */
-    public boolean addUser(String userID, String password) {
+    public static boolean addUser(String userID, String password) {
         try {
             if (isValid(userID) && isValid(password)) {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
@@ -88,7 +88,7 @@ public class DBHandler {
      *            The new password to set for the user.
      * @return True if password change successful, false if not.
      */
-    public boolean changePassword(String userID, String password) {
+    public static boolean changePassword(String userID, String password) {
         try {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             ContentValues cv = new ContentValues();
@@ -112,7 +112,7 @@ public class DBHandler {
      *         returns null if user does not exist. Array order is such: [0] =
      *         userID, [1] = password, [2] = accounts.
      * */
-    public String[] getUserInfo(String userID) {
+    public static String[] getUserInfo(String userID) {
         String[] info = new String[3];
         try {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -150,7 +150,7 @@ public class DBHandler {
      *         array. Array is stored as such:[0] = userID, [1] = password, [3]
      *         = accounts.
      */
-    public String[][] getAllUsersInfo() {
+    public static String[][] getAllUsersInfo() {
         String[][] users = null;
         try {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -184,7 +184,7 @@ public class DBHandler {
      * @return True if the account was added, false if an error occurred, the
      *         account was already taken, or the userID was invalid.
      * */
-    public boolean addAccount(String userID, String newAccount, double balance,
+    public static boolean addAccount(String userID, String newAccount, double balance,
             double interest) {
         if (!containsAccount(newAccount)) {
             try {
@@ -209,7 +209,7 @@ public class DBHandler {
      * @param userID - The user id to check for accounts.
      * @return An array that holds the accounts for a specified user.
      */
-    public String[] getAccountsForUser(String userID) {
+    public static String[] getAccountsForUser(String userID) {
         String[] accounts = null;
         try {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
@@ -275,7 +275,7 @@ public class DBHandler {
      * @param account - The account to delete.
      * @return True if account deleted successfully, false if an error occurred.
      */
-    public boolean deleteAccount(String account) {
+    public static boolean deleteAccount(String account) {
         try {
             SQLiteDatabase db = dbHelper.getWritableDatabase();
             db.delete(DBFactory.TRANSACTION_TABLE_NAME,
@@ -300,7 +300,7 @@ public class DBHandler {
      * @return True if user was deleted, or was never present. False if an error
      *         occurred.
      */
-    public boolean deleteUser(String userID) {
+    public static boolean deleteUser(String userID) {
         try {
 
             SQLiteDatabase db = dbHelper.getWritableDatabase();
