@@ -52,11 +52,8 @@ public class DBHandler {
      * This method adds a user to the db. Both a userid and a password MUST be
      * supplied for a new user to be added.
      *
-     * @param userID
-     *            - The new user ID.
-     * @param password
-     *            - The new users password.
-     *
+     * @param userID - The new user ID.
+     * @param password - The new users password.
      * @return True if user was added successfully, false if user already exists
      *         or an error occurred.
      */
@@ -79,10 +76,8 @@ public class DBHandler {
     /**
      * This method allows the password of a specified user to be changed.
      *
-     * @param userID
-     *            The user id of the user to change the password.
-     * @param password
-     *            The new password to set for the user.
+     * @param userID - The user id of the user to change the password.
+     * @param password - The new password to set for the user.
      * @return True if password change successful, false if not.
      */
     public static boolean changePassword(String userID, String password) {
@@ -103,12 +98,11 @@ public class DBHandler {
      * This method retrieves a specified user's data from the users table. It
      * returns the userID, Password, and the Accounts for with this user.
      *
-     * @param userID
-     *            - The id of the user that you wish to get info about.
+     * @param userID - The id of the user that you wish to get info about.
      * @return An array containing the data about the user from the database,
      *         returns null if user does not exist. Array order is such: [0] =
      *         userID, [1] = password, [2] = accounts.
-     * */
+     */
     public static String[] getUserInfo(String userID) {
         String[] info = new String[3];
         try {
@@ -180,7 +174,7 @@ public class DBHandler {
      * @param interest - The interest for the account.
      * @return True if the account was added, false if an error occurred, the
      *         account was already taken, or the userID was invalid.
-     * */
+     */
     public static boolean addAccount(String userID, String newAccount, double balance,
             double interest) {
         if (!containsAccount(newAccount)) {
@@ -238,7 +232,7 @@ public class DBHandler {
      * @param account - The account to get the information for.
      * @return String array as such: [0] - account, [1] - owner, [2] - balance,
      *         [3] - interest. Null if account name invalid.
-     * */
+     */
     public static String[] getAccountInfo(String account) {
         String[] info = null;
         try {
@@ -292,10 +286,8 @@ public class DBHandler {
      * This method deletes a specified user from the database. It also removes
      * all the accounts associated to that user.
      * 
-     * @param userID
-     *            - The user to delete.
-     * @return True if user was deleted, or was never present. False if an error
-     *         occurred.
+     * @param userID - The user to delete.
+     * @return True if user was deleted, or was never present. False if an error occurred.
      */
     public static boolean deleteUser(String userID) {
         try {
@@ -320,17 +312,11 @@ public class DBHandler {
      * dictates if the money will be withdrawn or deposited. The category will
      * show what category this transaction fits under.
      * 
-     * @param account
-     *            - The account to make a transaction with.
-     * @param amount
-     *            - The amount of money to deposit or withdraw.
-     * @param transactionType
-     *            - The amount type, 'Deposit' or 'Withdraw', case doesn't
-     *            matter.
-     * @param category
-     *            - The category this transaction is associated with.
-     * @return True, if transaction was made, false if invalid transaction or an
-     *         error occurred.
+     * @param account - The account to make a transaction with.
+     * @param amount - The amount of money to deposit or withdraw.
+     * @param transactionType - The amount type, 'Deposit' or 'Withdraw', case doesn't matter.
+     * @param category - The category this transaction is associated with.
+     * @return True, if transaction was made, false if invalid transaction or an error occurred.
      */
     public static boolean makeTransaction(String account, double amount,
             String transactionType, String category) {
@@ -351,8 +337,7 @@ public class DBHandler {
     /**
      * This method returns the transaction history of a specified account.
      * 
-     * @param account
-     *            The account of which to grab the transaction history.
+     * @param account - The account of which to grab the transaction history.
      * @return A two-dimensional array where each row holds a transaction array.
      *         The array is as follows: [0] - account, [1] - amount, [2] - type,
      *         [3] - category, [4] - time stamp
@@ -386,8 +371,7 @@ public class DBHandler {
     /**
      * This method returns the transaction history of a specified time stamp.
      * 
-     * @param timeOfTransaction
-     *            - The time of the transaction to get.
+     * @param timeOfTransaction - The time of the transaction to get.
      * @return An array of this transaction, the array is as follows: [0] -
      *         Account, [1] - Amount, [2] - Type, [3] - Category, [4] - Time
      *         stamp. Null if invalid time stamp.
