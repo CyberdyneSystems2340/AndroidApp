@@ -133,7 +133,8 @@
             android:id="@+id/report_text_view_scroller"        
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_below="@+id/date_day_begin" >       
+            android:layout_below="@+id/date_day_begin"
+            android:layout_above="@+id/account_spinner" >       
 		<TextView
 		    android:id="@+id/report_text_view"
 		    android:layout_width="fill_parent"
