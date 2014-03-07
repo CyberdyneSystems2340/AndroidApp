@@ -48,6 +48,56 @@ public class Account
 		return "";
 	}
 	
+	protected String getSpendingReport(String dateStart, String dateEnd)
+	{
+		String[][] str = DBHandler.getTransactionHistory(accountName);
+		String subInc = "";	// Substring inclusive (Database: 01.05.2001)
+		String subExS = "";	// Substring exclusive Start (dateStart: 01.04.2000) 
+		String subExE = ""; // Substring exclusive End (dateEnd: 05.06.2002
+		String total = "";
+		for(int i = 0; i < str[4].length; i ++)
+		{
+			// Make sure it is a withdrawal
+			if(str[2][i].equals("Withdrawal"))
+			{
+				subExS = dateStart.substring(6, 0);
+				subExE = dateEnd.substring(6, 10);
+				subInc = str[4][i].substring(6, 10);
+				// If the year is within the dateStart and dateEnd, else continue
+				if((Double.parseDouble(subExS) <= Double.parseDouble(subInc)) &&
+						Double.parseDouble(subExE) >= Double.parseDouble(subInc))
+				{
+					subExS = dateStart.substring(0, 2);
+					subExE = dateEnd.substring(0, 2);
+					subInc = str[4][i].substring(0, 2);
+					// If the month is within the dateStart and DateEnd, else continue
+					if((Double.parseDouble(subExS) <= Double.parseDouble(subInc)) &&
+							Double.parseDouble(subExE) >= Double.parseDouble(subInc))
+					{
+						subExS = dateStart.substring(3, 5);
+						subExE = dateEnd.substring(3, 5);
+						subInc = str[4][i].substring(3, 5);
+						// If the day is within the dateStart and dateEnd, else continue
+						if((Double.parseDouble(subExS) <= Double.parseDouble(subInc)) &&
+								Double.parseDouble(subExE) >= Double.parseDouble(subInc))
+						{
+							total += str[4][i] + " ";
+						}
+						else
+							continue;
+					}
+					else
+						continue;
+				}
+				else
+					continue;
+			}
+			else
+				continue;
+		}
+		return total;
+	}
+	
 	protected String getAccountInfo()
 	{
 		String string = "";
