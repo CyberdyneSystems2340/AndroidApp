@@ -264,7 +264,7 @@ public class DBHandler {
     public static boolean deleteAccountsForUser(String userID) {
         String accounts[] = getAccountsForUser(userID);
         for (String account: accounts) {
-            if(!deleteAccount(account)) {
+            if (!deleteAccount(account)) {
                 return false;
             }
         }
@@ -307,7 +307,7 @@ public class DBHandler {
                     + equal + userID + apastrophy, null);
             return true;
         } catch (NullPointerException e) {
-            e.printStackTrace();
+            e.printStackTrace(); 
         }
         return false;
     }
@@ -326,22 +326,11 @@ public class DBHandler {
      */
     public static boolean makeTransaction(String account, double amount,
             String transactionType, String category) {
-        double balance = Double.parseDouble(getAccountInfo(account)[2]);
-        if (transactionType.equalsIgnoreCase(depositText)) {
-            return updateBalanceAndTransactionHistory(
-                    dbHelper.getWritableDatabase(), new ContentValues(),
-                    account, balance, amount, depositText, category);
-        }
-        if (transactionType.equalsIgnoreCase(withdrawText)) {
-            return updateBalanceAndTransactionHistory(
-                    dbHelper.getWritableDatabase(), new ContentValues(),
-                    account, balance, -amount, withdrawText, category);
-        }
-        return false;
+        return makeTransaction(account, amount, transactionType, category, "REALTIME");
     }
 
     /**
-     * This method makes a transaction with a specified account. The amount will
+     * This method makes a transaction with a specified account and date. The amount will
      * be either deducted or deposited to the account. The transactionType
      * dictates if the money will be withdrawn or deposited. The category will
      * show what category this transaction fits under.
@@ -353,7 +342,7 @@ public class DBHandler {
      * @param date - The date of the transaction, this is specified by the user.
      * @return True, if transaction was made, false if invalid transaction or an error occurred.
      */
-    public static boolean makeTransactionSpecDate(String account, double amount,
+    public static boolean makeTransaction(String account, double amount,
             String transactionType, String category, String date) {
         double balance = Double.parseDouble(getAccountInfo(account)[2]);
         if (transactionType.equalsIgnoreCase(depositText)) {
@@ -466,38 +455,17 @@ public class DBHandler {
         }
         return false;
     }
-
-    // This method adds an amount to an account in the db.
-    private static boolean updateBalanceAndTransactionHistory(SQLiteDatabase db,
-            ContentValues cv, String account, double balance, double amount,
-            String type, String category) {
-        try {
-            cv.put(DBFactory.ACCOUNT_COLUMN_NAME_BALANCE, balance + amount);
-            db.update(DBFactory.ACCOUNT_TABLE_NAME, cv,
-                    DBFactory.ACCOUNT_COLUMN_NAME_ID + equal + account + apastrophy,
-                    null);
-            ContentValues cv2 = new ContentValues();
-            cv2.put(DBFactory.ACCOUNT_COLUMN_NAME_ID, account);
-            cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_AMOUNT, amount);
-            cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_TYPE, type);
-            cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_CATEGORY, category);
-            Time time = new Time();
-            time.setToNow();
-            cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_TIMESTAMP,
-                    time.format("%d.%m.%Y %H:%M:%S"));
-            db.insert(DBFactory.TRANSACTION_TABLE_NAME,
-                    DBFactory.TRANSACTION_COLUMN_NAME_CATEGORY, cv2);
-            return true;
-        } catch (NullPointerException e) {
-            e.printStackTrace();
-        }
-        return false;
-    }
     
  // This method adds an amount to an account in the db.
     private static boolean updateBalanceAndTransactionHistory(SQLiteDatabase db,
             ContentValues cv, String account, double balance, double amount,
             String type, String category, String date) {
+        String timestamp = date;
+        if (date.equalsIgnoreCase("REALTIME")) {
+            Time time = new Time();
+            time.setToNow();
+            timestamp = time.format("%d.%m.%Y %H:%M:%S");
+        }
         try {
             cv.put(DBFactory.ACCOUNT_COLUMN_NAME_BALANCE, balance + amount);
             db.update(DBFactory.ACCOUNT_TABLE_NAME, cv,
@@ -508,7 +476,7 @@ public class DBHandler {
             cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_AMOUNT, amount);
             cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_TYPE, type);
             cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_CATEGORY, category);
-            cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_TIMESTAMP, date);
+            cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_TIMESTAMP, timestamp);
             db.insert(DBFactory.TRANSACTION_TABLE_NAME,
                     DBFactory.TRANSACTION_COLUMN_NAME_CATEGORY, cv2);
             return true;
