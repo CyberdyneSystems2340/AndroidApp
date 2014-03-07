@@ -144,7 +144,10 @@ public class DBHandler {
                 int i = 0;
                 users = new String[c.getCount()][];
                 do {
-                    users[i++] = getUserInfo(c.getString(0));
+                    String[] info = new String[c.getColumnCount()]; 
+                    info[0] = c.getString(0);
+                    info[1] = c.getString(1);
+                    users[i++] = info;
                 } while (c.moveToNext());
             }
             if (null != c) {
@@ -337,7 +340,6 @@ public class DBHandler {
         return false;
     }
 
-
     /**
      * This method makes a transaction with a specified account. The amount will
      * be either deducted or deposited to the account. The transactionType
@@ -388,7 +390,6 @@ public class DBHandler {
                 int i = 0;
                 history = new String[c.getCount()][];
                 do {
-                    c.moveToFirst();
                     String[] transaction = new String[c.getColumnCount()];
                     transaction[0] = c.getString(0);
                     transaction[1] = c.getString(1);
@@ -441,6 +442,7 @@ public class DBHandler {
         }
         return transaction;
     }
+
     // This method checks to see if a string is valid for being added to the db.
     private static boolean isValid(String str) {
         return (null != str && !str.isEmpty());
