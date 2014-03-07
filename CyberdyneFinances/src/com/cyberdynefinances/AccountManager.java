@@ -1,6 +1,9 @@
 package com.cyberdynefinances;
 
 import java.util.ArrayList;
+
+import android.text.format.Time;
+
 import com.cyberdynefinances.dbManagement.DBHandler;
 
 public class AccountManager
@@ -89,5 +92,29 @@ public class AccountManager
 	        activeAccount = acc;
 		}
 		return accountAdded;
+	}
+	
+	public static String getReport(String report, Time begin, Time end)
+	{
+	    String ret = "";
+	    
+	    if(report.equalsIgnoreCase("Transaction History"))
+	    {
+
+	    }
+	    else if(report.equalsIgnoreCase("Spending Category Report"))
+	    {
+	        //ret = getSpendingReport(begin, end);
+	    }
+	    else if(report.equalsIgnoreCase("Income Source Report"))
+        {
+            
+        }
+	    else if(report.equalsIgnoreCase("Cash Flow Report"))
+        {
+            
+        }
+
+	    return ret;
 	}
 }

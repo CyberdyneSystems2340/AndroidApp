@@ -202,29 +202,15 @@ public class Fragments
 			String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 			String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 			String[] years = {"2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014"};
-			ArrayAdapter month = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, months); 
-			ArrayAdapter day = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, days); 
-			ArrayAdapter year = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, years);
+			ArrayAdapter month = new ArrayAdapter(view.getContext(), R.layout.layout_date_spinner, months); 
+			ArrayAdapter day = new ArrayAdapter(view.getContext(), R.layout.layout_date_spinner, days); 
+			ArrayAdapter year = new ArrayAdapter(view.getContext(), R.layout.layout_date_spinner, years);
 			monthBegin.setAdapter(month);
 			dayBegin.setAdapter(day);
 			yearBegin.setAdapter(year);
 			monthEnd.setAdapter(month);
             dayEnd.setAdapter(day);
             yearEnd.setAdapter(year);
-		
-			class DateListener implements OnItemSelectedListener
-			{
-                @Override
-                public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3)
-                {
-                    View view = arg1.getRootView();
-                    
-                }
-
-                @Override
-                public void onNothingSelected(AdapterView<?> arg0) {}
-			}
-			monthBegin.setOnItemSelectedListener(new DateListener());
 			
 			return view;
 	    }

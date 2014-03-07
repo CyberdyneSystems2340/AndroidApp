@@ -59,7 +59,7 @@
 	    android:id="@+id/date_month_begin"
 	    android:layout_below="@+id/report_spinner"
 	    android:layout_alignParentLeft="true"
-	    android:layout_width="60dp"
+	    android:layout_width="46dp"
 	    android:layout_height="wrap_content"
 	    android:isScrollContainer="true"/>
 	
@@ -67,20 +67,20 @@
         android:id="@+id/date_day_begin"
         android:layout_below="@+id/report_spinner"
         android:layout_toRightOf="@+id/date_month_begin"
-        android:layout_width="40dp"
+        android:layout_width="35dp"
         android:layout_height="wrap_content"/>
 	
 	<Spinner
         android:id="@+id/date_year_begin"
         android:layout_below="@+id/report_spinner"
         android:layout_toRightOf="@+id/date_day_begin"
-        android:layout_width="60dp"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"/>
 	
 	<Spinner
         android:id="@+id/date_month_end"
         android:layout_below="@+id/report_spinner"
-        android:layout_width="60dp"
+        android:layout_width="46dp"
         android:layout_toLeftOf="@+id/date_day_end"
         android:layout_height="wrap_content"
         android:isScrollContainer="true" />
@@ -89,17 +89,28 @@
         android:id="@+id/date_day_end"
         android:layout_below="@+id/report_spinner"
         android:layout_toLeftOf="@+id/date_year_end"
-        android:layout_width="40dp"
+        android:layout_width="35dp"
         android:layout_height="wrap_content"
         android:isScrollContainer="true" />
     
     <Spinner
         android:id="@+id/date_year_end"
         android:layout_below="@+id/report_spinner"
-        android:layout_alignParentRight="true"
-        android:layout_width="60dp"
+        android:layout_toLeftOf="@+id/date_button"
+        android:layout_width="50dp"
         android:layout_height="wrap_content"
-        android:isScrollContainer="true" />"
+        android:isScrollContainer="true" />
+    
+    <Button
+        android:id="@+id/date_button"
+        android:layout_alignParentRight="true" 
+        android:layout_below="@+id/report_spinner"
+        android:text="Go"
+        android:textSize="6pt"
+        android:layout_width="wrap_content"
+        android:layout_height="34dp"
+        android:onClick="dateButtonClicked" />
+        "
 	
 	<Spinner 
 	    android:id="@+id/account_spinner"

@@ -2,6 +2,9 @@ package com.cyberdynefinances;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.cyberdynefinances.dbManagement.DBHandler;
 
@@ -10,6 +13,7 @@ import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
+import android.text.format.Time;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -312,8 +316,93 @@ public class AccountContainer extends Activity
         reportText.setText(rows);
     }
     
+    private void updateReportText(String text)
+    {
+        TextView reportText = (TextView) this.findViewById(R.id.report_text_view);
+        reportText.setText(text);
+    }
+    
     public void addAccountButton(View view)
     {
     	Animation.fade(new Fragments.AccountCreationFragment(), getFragmentManager(), R.id.container_account);
+    }
+    
+    public void dateButtonClicked(View view)
+    {
+        View root = (View) view.getParent();
+        String dayBegin = ((Spinner) root.findViewById(R.id.date_day_begin)).getSelectedItem().toString();
+        String monthBegin = ((Spinner) root.findViewById(R.id.date_month_begin)).getSelectedItem().toString();
+        String yearBegin = ((Spinner) root.findViewById(R.id.date_year_begin)).getSelectedItem().toString();
+        String dayEnd = ((Spinner) root.findViewById(R.id.date_day_end)).getSelectedItem().toString();
+        String monthEnd = ((Spinner) root.findViewById(R.id.date_month_end)).getSelectedItem().toString();
+        String yearEnd = ((Spinner) root.findViewById(R.id.date_year_end)).getSelectedItem().toString();
+        Map<String, Integer> monthMap = new HashMap<String,Integer>();
+        
+        String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+        int i=0;
+        for(String m:months)
+        {
+            monthMap.put(m, i++);
+        }
+        
+        int db = Integer.parseInt(dayBegin);
+        int mb = monthMap.get(monthBegin);
+        int yb = Integer.parseInt(yearBegin);
+        int de = Integer.parseInt(dayEnd);
+        int me = monthMap.get(monthEnd);
+        int ye = Integer.parseInt(yearEnd);
+        
+        ArrayList<String> longMonths = new ArrayList<String>();
+        String[] lm = {"Jan", "Mar", "May", "Jul", "Aug", "Oct", "Dec" };
+        for(String m: lm)
+        {
+            longMonths.add(m);
+        }
+        if(!longMonths.contains(monthBegin))
+        {
+            if(db > 30)
+            {
+                db = 30;
+            }
+        }
+        if(!longMonths.contains(monthEnd))
+        {
+            if(de > 30)
+            {
+                de = 30;
+            }
+        }
+        if(monthBegin.equals("Feb") && db > 28)
+        {
+            db = 28;
+        }
+        if(monthEnd.equals("Feb") && de > 28)
+        {
+            de = 28;
+        }
+        
+        Time begin = new Time();
+        begin.setToNow();
+        int sec = begin.second;
+        int min = begin.minute;
+        int hour = begin.hour;
+        begin.set(sec, min, hour, db, mb, yb);
+        Time end = new Time();
+        end.setToNow();
+        sec = end.second;
+        min = end.minute;
+        hour = end.hour;
+        end.set(sec, min, hour, de, me, ye);
+        
+        if(begin.after(end))
+        {
+            Toast.makeText(AccountContainer.this, "Invalid Date", Toast.LENGTH_LONG).show();
+            return;
+        }    
+        
+        String report = ((Spinner)root.findViewById(R.id.report_spinner)).getSelectedItem().toString();
+        //String text = AccountManager.getReport(report, begin, end);
+        //updateReportText(text)
+        
     }
 }
