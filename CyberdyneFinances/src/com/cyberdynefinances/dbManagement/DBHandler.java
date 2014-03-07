@@ -100,11 +100,11 @@ public class DBHandler {
      *
      * @param userID - The id of the user that you wish to get info about.
      * @return An array containing the data about the user from the database,
-     *         returns null if user does not exist. Array order is such: [0] =
-     *         userID, [1] = password, [2] = accounts.
+     *         returns null if user does not exist. Array order is such:
+     *         [0] = userID, [1] = password.
      */
     public static String[] getUserInfo(String userID) {
-        String[] info = new String[3];
+        String[] info = new String[2];
         try {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             Cursor c = db.rawQuery(selectAll + DBFactory.USER_TABLE_NAME
@@ -117,14 +117,6 @@ public class DBHandler {
             }
             if (null != c) {
                 c.close();
-            }
-            String[] accounts = getAccountsForUser(userID);
-            info[2] = "None";
-            if (null != accounts && 0 < accounts.length) {
-                info[2] = accounts[0];
-                for (int i = 1; i < accounts.length; i++) {
-                    info[2] += "_" + accounts[i];
-                }
             }
         } catch (NullPointerException e) {
             e.printStackTrace();
@@ -258,6 +250,23 @@ public class DBHandler {
         }
         return info;
     }
+    
+    /**
+     * Deletes a specified account from the database. Also, deletes all
+     * transaction history for that account.
+     *
+     * @param userID - The account to delete.
+     * @return True if account deleted successfully, false if an error occurred.
+     */
+    public static boolean deleteAccountsForUser(String userID) {
+        String accounts[] = getAccountsForUser(userID);
+        for (String account: accounts) {
+            if(!deleteAccount(account)) {
+                return false;
+            }
+        }
+        return true;
+    }
 
     /**
      * Deletes a specified account from the database. Also, deletes all
@@ -283,20 +292,14 @@ public class DBHandler {
     }
     
     /**
-     * This method deletes a specified user from the database. It also removes
-     * all the accounts associated to that user.
+     * This method deletes a specified user from the user table in database.
      * 
      * @param userID - The user to delete.
      * @return True if user was deleted, or was never present. False if an error occurred.
      */
     public static boolean deleteUser(String userID) {
         try {
-
             SQLiteDatabase db = dbHelper.getWritableDatabase();
-            String[] accounts = getAccountsForUser(userID);
-            for (String account : accounts) {
-                deleteAccount(account);
-            }
             db.delete(DBFactory.USER_TABLE_NAME, DBFactory.USER_COLUMN_NAME_ID
                     + equal + userID + apastrophy, null);
             return true;
@@ -330,6 +333,36 @@ public class DBHandler {
             return updateBalanceAndTransactionHistory(
                     dbHelper.getWritableDatabase(), new ContentValues(),
                     account, balance, -amount, withdrawText, category);
+        }
+        return false;
+    }
+
+
+    /**
+     * This method makes a transaction with a specified account. The amount will
+     * be either deducted or deposited to the account. The transactionType
+     * dictates if the money will be withdrawn or deposited. The category will
+     * show what category this transaction fits under.
+     * 
+     * @param account - The account to make a transaction with.
+     * @param amount - The amount of money to deposit or withdraw.
+     * @param transactionType - The amount type, 'Deposit' or 'Withdraw', case doesn't matter.
+     * @param category - The category this transaction is associated with.
+     * @param date - The date of the transaction, this is specified by the user.
+     * @return True, if transaction was made, false if invalid transaction or an error occurred.
+     */
+    public static boolean makeTransactionSpecDate(String account, double amount,
+            String transactionType, String category, String date) {
+        double balance = Double.parseDouble(getAccountInfo(account)[2]);
+        if (transactionType.equalsIgnoreCase(depositText)) {
+            return updateBalanceAndTransactionHistory(
+                    dbHelper.getWritableDatabase(), new ContentValues(),
+                    account, balance, amount, depositText, category, date);
+        }
+        if (transactionType.equalsIgnoreCase(withdrawText)) {
+            return updateBalanceAndTransactionHistory(
+                    dbHelper.getWritableDatabase(), new ContentValues(),
+                    account, balance, -amount, withdrawText, category, date);
         }
         return false;
     }
@@ -444,6 +477,30 @@ public class DBHandler {
             time.setToNow();
             cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_TIMESTAMP,
                     time.format("%d.%m.%Y %H:%M:%S"));
+            db.insert(DBFactory.TRANSACTION_TABLE_NAME,
+                    DBFactory.TRANSACTION_COLUMN_NAME_CATEGORY, cv2);
+            return true;
+        } catch (NullPointerException e) {
+            e.printStackTrace();
+        }
+        return false;
+    }
+    
+ // This method adds an amount to an account in the db.
+    private static boolean updateBalanceAndTransactionHistory(SQLiteDatabase db,
+            ContentValues cv, String account, double balance, double amount,
+            String type, String category, String date) {
+        try {
+            cv.put(DBFactory.ACCOUNT_COLUMN_NAME_BALANCE, balance + amount);
+            db.update(DBFactory.ACCOUNT_TABLE_NAME, cv,
+                    DBFactory.ACCOUNT_COLUMN_NAME_ID + equal + account + apastrophy,
+                    null);
+            ContentValues cv2 = new ContentValues();
+            cv2.put(DBFactory.ACCOUNT_COLUMN_NAME_ID, account);
+            cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_AMOUNT, amount);
+            cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_TYPE, type);
+            cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_CATEGORY, category);
+            cv2.put(DBFactory.TRANSACTION_COLUMN_NAME_TIMESTAMP, date);
             db.insert(DBFactory.TRANSACTION_TABLE_NAME,
                     DBFactory.TRANSACTION_COLUMN_NAME_CATEGORY, cv2);
             return true;
