@@ -11,6 +11,24 @@
         android:layout_height="wrap_content"
         android:text="@string/deposit"/>
     
+    <Spinner
+        android:id="@+id/day_spinner_deposit"
+        android:layout_width="15dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" />
+    
+    <Spinner
+        android:id="@+id/month_spinner_deposit"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/day_spinner_deposit" />
+    
+    <Spinner
+        android:id="@+id/year_spinner_deposit"
+        android:layout_width="30dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/day_spinner_deposit" />
+    
     <Spinner 
         android:id="@+id/deposit_dialog_menu" 
         android:layout_width="fill_parent"
