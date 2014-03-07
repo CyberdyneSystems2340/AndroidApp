@@ -20,6 +20,7 @@ public class DBHandler {
     private static DBHelper dbHelper = new DBHelper(MyApplication.getAppContext());
     private static String withdrawText = "WITHDRAW";
     private static String depositText = "DEPOSIT";
+    private static String realtimeText = "REALTIME";
     private static String equal = " = '";
     private static String where = " WHERE ";
     private static String selectAll = "SELECT * FROM ";
@@ -326,7 +327,7 @@ public class DBHandler {
      */
     public static boolean makeTransaction(String account, double amount,
             String transactionType, String category) {
-        return makeTransaction(account, amount, transactionType, category, "REALTIME");
+        return makeTransaction(account, amount, transactionType, category, realtimeText);
     }
 
     /**
@@ -461,7 +462,7 @@ public class DBHandler {
             ContentValues cv, String account, double balance, double amount,
             String type, String category, String date) {
         String timestamp = date;
-        if (date.equalsIgnoreCase("REALTIME")) {
+        if (date.equalsIgnoreCase(realtimeText)) {
             Time time = new Time();
             time.setToNow();
             timestamp = time.format("%d.%m.%Y %H:%M:%S");
