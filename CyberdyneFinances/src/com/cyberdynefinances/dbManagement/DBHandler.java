@@ -388,8 +388,14 @@ public class DBHandler {
                 int i = 0;
                 history = new String[c.getCount()][];
                 do {
-                    history[i++] = getTransactionInfo(c.getString(c
-                            .getColumnIndex("Timestamp")));
+                    c.moveToFirst();
+                    String[] transaction = new String[c.getColumnCount()];
+                    transaction[0] = c.getString(0);
+                    transaction[1] = c.getString(1);
+                    transaction[2] = c.getString(2);
+                    transaction[3] = c.getString(3);
+                    transaction[4] = c.getString(4);
+                    history[i++] = transaction;
                 } while (c.moveToNext());
             }
             if (null != c) {
