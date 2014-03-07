@@ -10,11 +10,15 @@ import android.view.Window;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class WelcomeContainer extends Activity
-{
-	//Called when this activity  is created sets up the fragmentManager and makes the Welcome Fragment the initial fragment to display
+/**
+ * @author Brian
+ * This is a container class for the welcome screen
+ */
+public class WelcomeContainer extends Activity{
+	//Called when this activity  is created sets up the fragmentManager and 
+	//makes the Welcome Fragment the initial fragment to display
 	@Override
-    protected void onCreate(Bundle savedInstanceState) 
+	protected final void onCreate(final Bundle savedInstanceState) 
 	{
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -28,7 +32,7 @@ public class WelcomeContainer extends Activity
     }
 
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) 
+	public final boolean onOptionsItemSelected(final MenuItem item) 
     {
         switch (item.getItemId()) 
         {
@@ -37,32 +41,37 @@ public class WelcomeContainer extends Activity
                 // See http://developer.android.com/design/patterns/navigation.html for more.
                 NavUtils.navigateUpTo(this, new Intent(this, WelcomeContainer.class));
                 return true;
+		default:
+			break;
         }
         return super.onOptionsItemSelected(item);
     }
     
     //Called when the app is closed to write out data that needs to be stored
     @Override
-    public void onStop()
+	public final void onStop()
     {
     	super.onStop();
     }
     
-    //Login button on the welcome screen
-    public void welcomeLoginClicked(View view)
+    /**
+     * Login button on the welcome screen.
+     * @param view usually "this".
+    */
+    public final void welcomeLoginClicked(final View view)
     {
     	Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome);
     }
     
     //Register button on the welcome screen
-    public void welcomeRegisterClicked(View view)
+    public final void welcomeRegisterClicked(final View view)
     {
     	Animation.fade(new Fragments.RegisterFragment(), getFragmentManager(), R.id.container_welcome);
     }
     
     //Login button on the login screen
     //Gets the text inside the text fields and calls a validation method in LoginHandler to then transition to the next screen or display an error notification
-    public void loginClicked(View view)
+    public final void loginClicked(final View view)
     {
     	View root = Fragments.LoginFragment.root;
     	EditText editText = (EditText) root.findViewById(R.id.usernameEditText);
@@ -91,7 +100,7 @@ public class WelcomeContainer extends Activity
     	}
     }
     
-    public void registerClicked(View view)
+    public final void registerClicked(final View view)
     {
     	View root2 = Fragments.RegisterFragment.root2;
     	EditText editText = (EditText) root2.findViewById(R.id.registerUsername);
