@@ -2,11 +2,12 @@ package com.cyberdynefinances;
 
 import java.util.ArrayList;
 
+import android.text.format.Time;
+
 import com.cyberdynefinances.dbManagement.DBHandler;
 
 public class Account 
 {
-	private static DBHandler dbHandler = new DBHandler();
 	private String accountName;
 	private double balance = 0.0;
 	private double interest = 0.0;
@@ -49,6 +50,77 @@ public class Account
 		return "";
 	}
 	
+	protected String getSpendingReport(Time dateStart, Time dateEnd)
+	{
+		String[][] str = DBHandler.getTransactionHistory(accountName);
+		String curr = "";
+		Time time = new Time();
+		int day = 0;
+		int month = 0;
+		int year = 0;
+		int sec = 0;
+		int min = 0;
+		int hour = 0;
+		// Comment stuff
+		for(int i = 0; i < str[4].length; i++)
+		{
+			curr = str[4][i];
+			day = Integer.parseInt(curr.substring(0, 2));
+			month = Integer.parseInt(curr.substring(3, 5));
+			year = Integer.parseInt(curr.substring(6, 10));
+			
+		}
+		return "";
+		/**
+		String[][] str = DBHandler.getTransactionHistory(accountName);
+		String subInc = "";	// Substring inclusive (Database: 01.05.2001)
+		String subExS = "";	// Substring exclusive Start (dateStart: 01.04.2000) 
+		String subExE = ""; // Substring exclusive End (dateEnd: 05.06.2002
+		String total = "";
+		for(int i = 0; i < str[4].length; i ++)
+		{
+			// Make sure it is a withdrawal
+			if(str[2][i].equals("Withdrawal"))
+			{
+				subExS = dateStart.substring(6, 0);
+				subExE = dateEnd.substring(6, 10);
+				subInc = str[4][i].substring(6, 10);
+				// If the year is within the dateStart and dateEnd, else continue
+				if((Double.parseDouble(subExS) <= Double.parseDouble(subInc)) &&
+						Double.parseDouble(subExE) >= Double.parseDouble(subInc))
+				{
+					subExS = dateStart.substring(0, 2);
+					subExE = dateEnd.substring(0, 2);
+					subInc = str[4][i].substring(0, 2);
+					// If the month is within the dateStart and DateEnd, else continue
+					if((Double.parseDouble(subExS) <= Double.parseDouble(subInc)) &&
+							Double.parseDouble(subExE) >= Double.parseDouble(subInc))
+					{
+						subExS = dateStart.substring(3, 5);
+						subExE = dateEnd.substring(3, 5);
+						subInc = str[4][i].substring(3, 5);
+						// If the day is within the dateStart and dateEnd, else continue
+						if((Double.parseDouble(subExS) <= Double.parseDouble(subInc)) &&
+								Double.parseDouble(subExE) >= Double.parseDouble(subInc))
+						{
+							total += str[4][i] + " ";
+						}
+						else
+							continue;
+					}
+					else
+						continue;
+				}
+				else
+					continue;
+			}
+			else
+				continue;
+		}
+		return total;
+		*/
+	}
+	
 	protected String getAccountInfo()
 	{
 		String string = "";
@@ -62,7 +134,7 @@ public class Account
 	
 	private void registerTransaction(String type, String category, double amount)
 	{
-		dbHandler.makeTransaction(accountName, amount, type, category);
+		DBHandler.makeTransaction(accountName, amount, type, category);
 		if(type.equalsIgnoreCase("deposit"))
 		{
 			if(!categoriesDeposit.contains(category))
