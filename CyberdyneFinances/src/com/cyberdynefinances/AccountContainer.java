@@ -218,10 +218,10 @@ public class AccountContainer extends Activity
 		s[cat.size()]="Other";
 		ArrayAdapter a = new ArrayAdapter(this, R.layout.layout_category_spinner, s);
 		menu.setAdapter(a);
-		/*
-		Spinner monthW = (Spinner) view.findViewById(R.id.month_spinner_deposit);
-        Spinner dayW = (Spinner) view.findViewById(R.id.day_spinner_deposit);
-        Spinner yearW = (Spinner) view.findViewById(R.id.year_spinner_deposit);
+		
+		Spinner monthW = (Spinner) dialog_layout.findViewById(R.id.month_spinner_deposit);
+        Spinner dayW = (Spinner) dialog_layout.findViewById(R.id.day_spinner_deposit);
+        Spinner yearW = (Spinner) dialog_layout.findViewById(R.id.year_spinner_deposit);
 		String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 		String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 		String[] years = {"2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014"};
@@ -231,7 +231,7 @@ public class AccountContainer extends Activity
 		monthW.setAdapter(month);
 		dayW.setAdapter(day);
 		yearW.setAdapter(year);
-		*/
+		
 		menu.setOnItemSelectedListener(new OnItemSelectedListener()
 		{
 			@Override
