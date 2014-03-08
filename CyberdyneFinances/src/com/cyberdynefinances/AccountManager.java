@@ -41,7 +41,8 @@ public class AccountManager
 		return activeAccount.withdraw(category, amount);
 	}
 	
-	public static String getSpendingReport(String dateStart, String dateEnd)
+	
+	public static String getSpendingReport(Time dateStart, Time dateEnd)
 	{
 		String total = "";
 		for(Account a : accountList)
@@ -50,6 +51,7 @@ public class AccountManager
 		}
 		return total;
 	}
+	
 	
 	public static void readAccounts()
 	{
