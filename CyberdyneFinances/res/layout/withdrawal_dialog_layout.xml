@@ -17,21 +17,21 @@
     
     <Spinner
         android:id="@+id/day_spinner_w"
-        android:layout_width="15dp"
+        android:layout_width="45dp"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_below="@+id/withdrawalTextView"/>
     
     <Spinner
         android:id="@+id/month_spinner_w"
-        android:layout_width="30dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_toLeftOf="@+id/day_spinner_w" 
         android:layout_below="@+id/withdrawalTextView"/>
     
     <Spinner
         android:id="@+id/year_spinner_w"
-        android:layout_width="30dp"
+        android:layout_width="60dp"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/day_spinner_w" 
         android:layout_below="@+id/withdrawalTextView"/>
