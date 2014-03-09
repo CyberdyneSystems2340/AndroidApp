@@ -2,19 +2,15 @@ package com.cyberdynefinances;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.cyberdynefinances.dbManagement.DBHandler;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.format.Time;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -132,9 +128,9 @@ public class AccountContainer extends Activity
 		ArrayAdapter a = new ArrayAdapter(this, R.layout.layout_category_spinner, s);
 		menu.setAdapter(a);
 		
-		Spinner monthW = (Spinner) dialog_layout.findViewById(R.id.month_spinner_w);
-        Spinner dayW = (Spinner) dialog_layout.findViewById(R.id.day_spinner_w);
-        Spinner yearW = (Spinner) dialog_layout.findViewById(R.id.year_spinner_w);
+		final Spinner monthW = (Spinner) dialog_layout.findViewById(R.id.month_spinner_w);
+        final Spinner dayW = (Spinner) dialog_layout.findViewById(R.id.day_spinner_w);
+        final Spinner yearW = (Spinner) dialog_layout.findViewById(R.id.year_spinner_w);
 		String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 		String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 		String[] years = {"2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014"};
@@ -193,7 +189,25 @@ public class AccountContainer extends Activity
 
         		if(amount>=0.01) //if amount is valid withdraw and notify user
         		{
-        			if(AccountManager.withdraw(category, amount))
+        		    Map<String, Integer> monthMap = new HashMap<String, Integer>();
+                    String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+                    int i=0;
+                    for(String m:months)
+                    {
+                        monthMap.put(m, i++);
+                    }
+                    String m = monthW.getSelectedItem().toString();
+                    String d = dayW.getSelectedItem().toString();
+                    String y = yearW.getSelectedItem().toString();
+                    Time date = new Time();
+                    //timestamp = time.format("%d.%m.%Y %H:%M:%S");
+                    date.setToNow();
+                    int sec = date.second;
+                    int min = date.minute;
+                    int hour = date.hour;
+                    date.set(sec, min, hour, Integer.parseInt(d), monthMap.get(m), Integer.parseInt(y));
+                    
+        			if(AccountManager.withdrawWithDate(category, amount, date.format("%d.%m.%Y %H:%M:%S")))
         				Toast.makeText(AccountContainer.this, "Withdrawal of "+NumberFormat.getCurrencyInstance().format(amount)+" Successful", Toast.LENGTH_LONG).show();
         			else
         			{
@@ -233,9 +247,9 @@ public class AccountContainer extends Activity
 		ArrayAdapter a = new ArrayAdapter(this, R.layout.layout_category_spinner, s);
 		menu.setAdapter(a);
 		
-		Spinner monthD = (Spinner) dialog_layout.findViewById(R.id.month_spinner_deposit);
-        Spinner dayD = (Spinner) dialog_layout.findViewById(R.id.day_spinner_deposit);
-        Spinner yearD = (Spinner) dialog_layout.findViewById(R.id.year_spinner_deposit);
+		final Spinner monthD = (Spinner) dialog_layout.findViewById(R.id.month_spinner_deposit);
+        final Spinner dayD = (Spinner) dialog_layout.findViewById(R.id.day_spinner_deposit);
+        final Spinner yearD = (Spinner) dialog_layout.findViewById(R.id.year_spinner_deposit);
 		String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
 		String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
 		String[] years = {"2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014"};
@@ -280,7 +294,6 @@ public class AccountContainer extends Activity
             public void onClick(View v)
             {
         		double amount = 0.0;
-        		Log.e("tag", text.getText().toString()+"");
         		if(!text.getText().toString().equals("") && !text.getText().toString().equals("."))
         			amount = Double.parseDouble(text.getText().toString());
         		
@@ -297,7 +310,25 @@ public class AccountContainer extends Activity
         		
         		if(amount>=0.01)
         		{
-        			AccountManager.deposit(category, amount);
+        		    Map<String, Integer> monthMap = new HashMap<String, Integer>();
+        		    String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+        	        int i=0;
+        	        for(String m:months)
+        	        {
+        	            monthMap.put(m, i++);
+        	        }
+        		    String m = monthD.getSelectedItem().toString();
+        		    String d = dayD.getSelectedItem().toString();
+        		    String y = yearD.getSelectedItem().toString();
+        		    Time date = new Time();
+        		    //timestamp = time.format("%d.%m.%Y %H:%M:%S");
+        	        date.setToNow();
+        	        int sec = date.second;
+        	        int min = date.minute;
+        	        int hour = date.hour;
+        	        date.set(sec, min, hour, Integer.parseInt(d), monthMap.get(m), Integer.parseInt(y));
+        		    
+        			AccountManager.depositWithDate(category, amount, date.format("%d.%m.%Y %H:%M:%S"));
         			Toast.makeText(AccountContainer.this, "Deposit of "+NumberFormat.getCurrencyInstance().format(amount)+" Successful", Toast.LENGTH_LONG).show();
         		}
         		else
@@ -431,8 +462,8 @@ public class AccountContainer extends Activity
         }    
         
         String report = ((Spinner)root.findViewById(R.id.report_spinner)).getSelectedItem().toString();
-        //String text = AccountManager.getReport(report, begin, end);
-        //updateReportText(text)
+        String text = AccountManager.getReport(report, begin, end);
+        updateReportText(text);
         
     }
 }

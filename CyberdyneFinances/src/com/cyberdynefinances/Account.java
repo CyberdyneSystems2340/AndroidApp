@@ -1,9 +1,7 @@
 package com.cyberdynefinances;
 
 import java.util.ArrayList;
-
 import android.text.format.Time;
-
 import com.cyberdynefinances.dbManagement.DBHandler;
 
 public class Account 
@@ -44,6 +42,23 @@ public class Account
 		registerTransaction("Deposit", category, amount);
 	}
 	
+	protected boolean withdrawWithDate(String category, double amount, String date)
+    {
+        //remove amount from balance and register the transaction
+        if(balance - amount < 0.00)
+            return false;
+        balance -= amount;
+        registerTransactionWithDate("Withdraw", category, amount, date);
+        return true;
+    }
+    
+    protected void depositWithDate(String category, double amount, String date)
+    {
+        //add amount to balance and register the transaction
+        balance += amount;
+        registerTransactionWithDate("Deposit", category, amount, date);
+    }
+	
 	private String getTransactionHist()
 	{
 		//read in strings from account file
@@ -77,6 +92,22 @@ public class Account
 		//writes the type, category, amount, and timestamp/date of the transaction to the database
 	}
 	
+	private void registerTransactionWithDate(String type, String category, double amount, String date)
+    {
+        DBHandler.makeTransaction(accountName, amount, type, category, date);
+        if(type.equalsIgnoreCase("deposit"))
+        {
+            if(!categoriesDeposit.contains(category))
+                categoriesDeposit.add(category);
+        }
+        else
+        {
+            if(!categoriesWithdraw.contains(category))
+                categoriesWithdraw.add(category);
+        }
+        //writes the type, category, amount, and timestamp/date of the transaction to the database
+    }
+	
 	protected String getSpendingReport(Time dateStart, Time dateEnd)
 	{
 		String[][] str = DBHandler.getTransactionHistory(accountName);
@@ -89,28 +120,27 @@ public class Account
 		int sec = 0;
 		int min = 0;
 		int hour = 0;
-		
-		for(int i = 0; i < str[4].length; i++)
+		for(int i = 0; i < str.length; i++)
 		{
-			if(str[2][i].equals("Withdrawal"))
+			if(str[i][2].equalsIgnoreCase("Withdraw"))
 			{
-				curr = str[4][i];
+				curr = str[i][4];
 				day = Integer.parseInt(curr.substring(0, 2));
 				month = Integer.parseInt(curr.substring(3, 5));
 				year = Integer.parseInt(curr.substring(6, 10));
 				hour = Integer.parseInt(curr.substring(11, 13));
 				min = Integer.parseInt(curr.substring(14,16));
 				sec = Integer.parseInt(curr.substring(17, 19));
-				time.set(sec, min, hour, day, month, year);
+				time.set(sec, min, hour, day, month-1, year); //months start at 00 = January
 				if(time.after(dateStart) && time.before(dateEnd))
 				{
-					totalRep = str[4][i] + " ";
+					totalRep += str[i][0] + " ";
+					totalRep += str[i][1] + " ";
+					totalRep += str[i][2] + " ";
+					totalRep += str[i][3] + " ";
+					totalRep += str[i][4] + "\n";
 				}
-				else
-					continue;
 			}
-			else 
-				continue;
 		}
 		return totalRep;
 	}

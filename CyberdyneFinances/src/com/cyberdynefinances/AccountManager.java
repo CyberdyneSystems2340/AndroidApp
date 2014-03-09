@@ -41,13 +41,23 @@ public class AccountManager
 		return activeAccount.withdraw(category, amount);
 	}
 	
+	public static void depositWithDate(String category, double amount, String date)
+    {
+        activeAccount.depositWithDate(category, amount, date);
+    }
+    
+    public static boolean withdrawWithDate(String category, double amount, String date)
+    {
+        return activeAccount.withdrawWithDate(category, amount, date);
+    }
+	
 	
 	public static String getSpendingReport(Time dateStart, Time dateEnd)
 	{
 		String total = "";
 		for(Account a : accountList)
 		{
-			total += a.getSpendingReport(dateStart, dateEnd) + " ";
+			total += a.getSpendingReport(dateStart, dateEnd) + "\n";
 		}
 		return total;
 	}
@@ -116,7 +126,7 @@ public class AccountManager
 	    }
 	    else if(report.equalsIgnoreCase("Spending Category Report"))
 	    {
-	        //ret = getSpendingReport(begin, end);
+	        ret = getSpendingReport(begin, end);
 	    }
 	    else if(report.equalsIgnoreCase("Income Source Report"))
         {
