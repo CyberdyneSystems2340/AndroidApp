@@ -57,7 +57,7 @@ public class AccountManager
 		String total = "";
 		for(Account a : accountList)
 		{
-			total += a.getSpendingReport(dateStart, dateEnd) + "\n";
+			total += a.getName()+"\n"+a.getSpendingReport(dateStart, dateEnd) + "\n";
 		}
 		return total;
 	}

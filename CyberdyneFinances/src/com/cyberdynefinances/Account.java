@@ -1,6 +1,11 @@
 package com.cyberdynefinances;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
 import android.text.format.Time;
 import com.cyberdynefinances.dbManagement.DBHandler;
 
@@ -113,6 +118,7 @@ public class Account
 		String[][] str = DBHandler.getTransactionHistory(accountName);
 		String curr = ""; // Current timeStamp
 		String totalRep = ""; // All the withdrawals within the given parameters
+		Map<String, Double> totalAmount = new HashMap<String, Double>();
 		Time time = new Time();	// Time Object
 		int day = 0;
 		int month = 0;
@@ -134,14 +140,22 @@ public class Account
 				time.set(sec, min, hour, day, month-1, year); //months start at 00 = January
 				if(time.after(dateStart) && time.before(dateEnd))
 				{
-					totalRep += str[i][0] + " ";
-					totalRep += str[i][1] + " ";
-					totalRep += str[i][2] + " ";
-					totalRep += str[i][3] + " ";
-					totalRep += str[i][4] + "\n";
+				    double curAmount = 0;
+				    if(totalAmount.get(str[i][3])!=null)
+				    {
+				        curAmount = totalAmount.get(str[i][3]);
+				    }
+					totalAmount.put(str[i][3], curAmount-Double.parseDouble(str[i][1]));
 				}
 			}
 		}
+		double total = 0;
+		for(Entry<String, Double> e : totalAmount.entrySet())
+		{
+		    totalRep += e.getKey()+" "+NumberFormat.getCurrencyInstance().format(e.getValue())+"\n";
+		    total-=e.getValue();
+		}
+		totalRep += "Total "+NumberFormat.getCurrencyInstance().format(total)+"\n";
 		return totalRep;
 	}
 	
