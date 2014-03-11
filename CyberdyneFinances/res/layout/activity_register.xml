@@ -44,6 +44,7 @@
         android:hint="@string/register_retypePassword"
         android:inputType="textPassword" />
 
+
     <Button
         android:id="@+id/RegisterButton"
         android:layout_width="wrap_content"

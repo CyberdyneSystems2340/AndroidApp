@@ -1,4 +1,4 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center_horizontal" 
@@ -7,14 +7,40 @@
     android:padding="10dp">
     
     <TextView
+        android:id="@+id/depositTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/deposit"/>
+        android:text="@string/deposit"
+        android:layout_alignParentTop="true"
+        android:layout_centerInParent="true"/>
+    
+    <Spinner
+        android:id="@+id/day_spinner_deposit"
+        android:layout_width="45dp"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/depositTextView"/>
+    
+    <Spinner
+        android:id="@+id/month_spinner_deposit"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@+id/day_spinner_deposit" 
+        android:layout_below="@+id/depositTextView"/>
+    
+    <Spinner
+        android:id="@+id/year_spinner_deposit"
+        android:layout_width="60dp"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/day_spinner_deposit" 
+        android:layout_below="@+id/depositTextView"/>
     
     <Spinner 
         android:id="@+id/deposit_dialog_menu" 
         android:layout_width="fill_parent"
-    	android:layout_height="wrap_content" />
+    	android:layout_height="wrap_content" 
+    	android:layout_below="@+id/day_spinner_deposit"
+    	android:layout_centerInParent="true"/>
     
     <EditText 
         android:visibility="gone"
@@ -22,7 +48,9 @@
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:ems="10"
-        android:hint="@string/other"/>
+        android:hint="@string/other"
+        android:layout_below="@+id/deposit_dialog_menu"
+        android:layout_centerInParent="true"/>
     
     <EditText 
         android:id="@+id/deposit_dialog_text" 
@@ -30,7 +58,9 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:hint="@string/input_amount"/>
+        android:hint="@string/input_amount"
+        android:layout_below="@+id/deposit_dialog_other"
+        android:layout_centerInParent="true"/>
     
 
     
@@ -39,6 +69,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="22dp"
-        android:text="@string/confirm"/>
+        android:text="@string/confirm"
+        android:layout_below="@+id/deposit_dialog_text"
+        android:layout_centerInParent="true"/>
 
-</LinearLayout>
+</RelativeLayout>

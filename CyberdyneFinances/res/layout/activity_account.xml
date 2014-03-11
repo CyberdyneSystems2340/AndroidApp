@@ -18,5 +18,5 @@
         android:layout_below="@+id/account_username"
         android:layout_centerInParent="true"
         android:text="" />
-
+    
 </RelativeLayout>

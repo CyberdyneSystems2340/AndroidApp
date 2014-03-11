@@ -14,7 +14,17 @@
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-    	android:alpha="0"
+        android:background="@drawable/register_button_icon"
         android:onClick="welcomeRegisterClicked" />
+    
+    <Button
+        android:id="@+id/testDbButton"
+        style="?android:attr/borderlessButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:clickable="false"
+        android:onClick="testDBClicked" />
 
 </RelativeLayout>

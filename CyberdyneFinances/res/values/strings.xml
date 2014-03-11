@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
     <string name="app_name">Cyberdyne Finances</string>
@@ -10,13 +11,20 @@
     <string name="password_text">Password</string>
     <string name="login_button">Login</string>
     <string name="title_activity_login">LoginActivity</string>
+    <string name="title_activity_dbtester_activity">Dbtester_activity</string>
+    <string name="test">Test</string>
+    <string name="title_activity_dbtester2">DBTester2</string>
+    <string name="title_activity_dbtester">DBTester</string>
+    <string name="accounts_text">Accounts</string>
 	<string name="register_balance">Balance</string>
 	<string name="register_interest">Interest Rate(%)</string>
 	<string name="register_retypePassword">Retype Password</string>
 	<string name="accountName">Account Name</string>
 	<string name="createAccount">Create</string>
+	<string name="transaction_amount_text">Amount</string>
+	<string name="transaction_button_text">Transaction</string>
 	<string name="input_amount">Input Amount</string>
-	<string name="withdrawal">Withdraw</string>
+	<string name="withdraw">Withdraw</string>
 	<string name="deposit">Deposit</string>
 	<string name="confirm">Confirm</string>
 	<string name="other">Other Category</string>
@@ -26,5 +34,6 @@
 	<string name="add_text">Add</string>
 	<string name="logout_text">Log Out</string>
 	<string name="zero_dollars_text">$0.00</string>
+	<string name="report_text_view">Report goes here</string>
 	
 </resources>

@@ -1,13 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cyberdynefinances"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
     <application
+        android:name="com.cyberdynefinances.MyApplication"
         android:allowBackup="true"
         android:icon="@drawable/icon"
         android:label="@string/app_name"
@@ -17,6 +19,7 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -52,14 +55,23 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.cyberdynefinances.WelcomeContainer" />
         </activity>
-               <activity
-            android:name="com.cyberdynefinances.AccountCreationActivity"
-            android:label="@string/title_activity_test"
-            android:parentActivityName="com.cyberdynefinances.AccountContainer" >
+        <activity
+            android:name="com.cyberdynefinances.DBTester"
+            android:label="@string/title_activity_login"
+            android:parentActivityName="com.cyberdynefinances.WelcomeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.cyberdynefinances.AccountContainer" />
+                android:value="com.cyberdynefinances.WelcomeContainer" />
         </activity>
+        <activity
+	       android:name="com.cyberdynefinances.AccountCreationActivity"
+	       android:label="@string/title_activity_test"
+	       android:parentActivityName="com.cyberdynefinances.AccountContainer" >
+	       <meta-data
+	       android:name="android.support.PARENT_ACTIVITY"
+	       android:value="com.cyberdynefinances.AccountContainer" />
+        </activity>
+        
     </application>
 
 </manifest>

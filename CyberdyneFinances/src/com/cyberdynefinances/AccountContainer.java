@@ -2,12 +2,15 @@ package com.cyberdynefinances;
 
 import java.text.NumberFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+import com.cyberdynefinances.dbManagement.DBHandler;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
-import android.util.Log;
+import android.text.format.Time;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
@@ -124,6 +127,20 @@ public class AccountContainer extends Activity
 		s[cat.size()]="Other";
 		ArrayAdapter a = new ArrayAdapter(this, R.layout.layout_category_spinner, s);
 		menu.setAdapter(a);
+		
+		final Spinner monthW = (Spinner) dialog_layout.findViewById(R.id.month_spinner_w);
+        final Spinner dayW = (Spinner) dialog_layout.findViewById(R.id.day_spinner_w);
+        final Spinner yearW = (Spinner) dialog_layout.findViewById(R.id.year_spinner_w);
+		String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+		String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+		String[] years = {"2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014"};
+		ArrayAdapter month = new ArrayAdapter(this, R.layout.layout_date_spinner, months); 
+		ArrayAdapter day = new ArrayAdapter(this, R.layout.layout_date_spinner, days); 
+		ArrayAdapter year = new ArrayAdapter(this, R.layout.layout_date_spinner, years);
+		monthW.setAdapter(month);
+		dayW.setAdapter(day);
+		yearW.setAdapter(year);
+		
 		menu.setOnItemSelectedListener(new OnItemSelectedListener() //Called when an item in the spinner is clicked
 		{
 			@Override
@@ -172,7 +189,25 @@ public class AccountContainer extends Activity
 
         		if(amount>=0.01) //if amount is valid withdraw and notify user
         		{
-        			if(AccountManager.withdraw(category, amount))
+        		    Map<String, Integer> monthMap = new HashMap<String, Integer>();
+                    String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+                    int i=0;
+                    for(String m:months)
+                    {
+                        monthMap.put(m, i++);
+                    }
+                    String m = monthW.getSelectedItem().toString();
+                    String d = dayW.getSelectedItem().toString();
+                    String y = yearW.getSelectedItem().toString();
+                    Time date = new Time();
+                    //timestamp = time.format("%d.%m.%Y %H:%M:%S");
+                    date.setToNow();
+                    int sec = date.second;
+                    int min = date.minute;
+                    int hour = date.hour;
+                    date.set(sec, min, hour, Integer.parseInt(d), monthMap.get(m), Integer.parseInt(y));
+                    
+        			if(AccountManager.withdrawWithDate(category, amount, date.format("%d.%m.%Y %H:%M:%S")))
         				Toast.makeText(AccountContainer.this, "Withdrawal of "+NumberFormat.getCurrencyInstance().format(amount)+" Successful", Toast.LENGTH_LONG).show();
         			else
         			{
@@ -186,6 +221,7 @@ public class AccountContainer extends Activity
     				return;
         		}
         		updateBalance();
+        		updateTransactionHistory();
         		alertDialog.dismiss();
             }
         });
@@ -210,6 +246,20 @@ public class AccountContainer extends Activity
 		s[cat.size()]="Other";
 		ArrayAdapter a = new ArrayAdapter(this, R.layout.layout_category_spinner, s);
 		menu.setAdapter(a);
+		
+		final Spinner monthD = (Spinner) dialog_layout.findViewById(R.id.month_spinner_deposit);
+        final Spinner dayD = (Spinner) dialog_layout.findViewById(R.id.day_spinner_deposit);
+        final Spinner yearD = (Spinner) dialog_layout.findViewById(R.id.year_spinner_deposit);
+		String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+		String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+		String[] years = {"2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014"};
+		ArrayAdapter month = new ArrayAdapter(this, R.layout.layout_date_spinner, months); 
+		ArrayAdapter day = new ArrayAdapter(this, R.layout.layout_date_spinner, days); 
+		ArrayAdapter year = new ArrayAdapter(this, R.layout.layout_date_spinner, years);
+		monthD.setAdapter(month);
+		dayD.setAdapter(day);
+		yearD.setAdapter(year);
+		
 		menu.setOnItemSelectedListener(new OnItemSelectedListener()
 		{
 			@Override
@@ -235,6 +285,8 @@ public class AccountContainer extends Activity
 			public void onNothingSelected(AdapterView<?> arg0) {}
 		});
 		
+		
+		
 		Button confirm = (Button) dialog_layout.findViewById(R.id.deposit_dialog_button);
 		confirm.setOnClickListener(new OnClickListener()
         {
@@ -242,7 +294,6 @@ public class AccountContainer extends Activity
             public void onClick(View v)
             {
         		double amount = 0.0;
-        		Log.e("tag", text.getText().toString()+"");
         		if(!text.getText().toString().equals("") && !text.getText().toString().equals("."))
         			amount = Double.parseDouble(text.getText().toString());
         		
@@ -259,7 +310,25 @@ public class AccountContainer extends Activity
         		
         		if(amount>=0.01)
         		{
-        			AccountManager.deposit(category, amount);
+        		    Map<String, Integer> monthMap = new HashMap<String, Integer>();
+        		    String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+        	        int i=0;
+        	        for(String m:months)
+        	        {
+        	            monthMap.put(m, i++);
+        	        }
+        		    String m = monthD.getSelectedItem().toString();
+        		    String d = dayD.getSelectedItem().toString();
+        		    String y = yearD.getSelectedItem().toString();
+        		    Time date = new Time();
+        		    //timestamp = time.format("%d.%m.%Y %H:%M:%S");
+        	        date.setToNow();
+        	        int sec = date.second;
+        	        int min = date.minute;
+        	        int hour = date.hour;
+        	        date.set(sec, min, hour, Integer.parseInt(d), monthMap.get(m), Integer.parseInt(y));
+        		    
+        			AccountManager.depositWithDate(category, amount, date.format("%d.%m.%Y %H:%M:%S"));
         			Toast.makeText(AccountContainer.this, "Deposit of "+NumberFormat.getCurrencyInstance().format(amount)+" Successful", Toast.LENGTH_LONG).show();
         		}
         		else
@@ -268,6 +337,7 @@ public class AccountContainer extends Activity
     				return;
         		}
         		updateBalance();
+        		updateTransactionHistory();
     			alertDialog.dismiss();
             }
         });
@@ -292,8 +362,108 @@ public class AccountContainer extends Activity
     	text.setText(NumberFormat.getCurrencyInstance().format(AccountManager.getActiveAccount().getBalance()));
     }
     
+    private void updateTransactionHistory() {
+        
+        String[][] transactions = DBHandler.getTransactionHistory(AccountManager.getActiveAccount().getName());
+        String rows = "";
+        if (null != transactions) {
+            for (String[] transaction : transactions) {
+                rows += "\n\nAccount: " + transaction[0] + ", Amount: " + transaction[1] +
+                        ", Type: " + transaction[2] + ", Category: " + transaction[3] +
+                        ", Timestamp: " + transaction[4];
+            }
+        }
+        TextView reportText = (TextView) this.findViewById(R.id.report_text_view);
+        reportText.setText(rows);
+    }
+    
+    private void updateReportText(String text)
+    {
+        TextView reportText = (TextView) this.findViewById(R.id.report_text_view);
+        reportText.setText(text);
+    }
+    
     public void addAccountButton(View view)
     {
     	Animation.fade(new Fragments.AccountCreationFragment(), getFragmentManager(), R.id.container_account);
+    }
+    
+    public void dateButtonClicked(View view)
+    {
+        View root = (View) view.getParent();
+        String dayBegin = ((Spinner) root.findViewById(R.id.date_day_begin)).getSelectedItem().toString();
+        String monthBegin = ((Spinner) root.findViewById(R.id.date_month_begin)).getSelectedItem().toString();
+        String yearBegin = ((Spinner) root.findViewById(R.id.date_year_begin)).getSelectedItem().toString();
+        String dayEnd = ((Spinner) root.findViewById(R.id.date_day_end)).getSelectedItem().toString();
+        String monthEnd = ((Spinner) root.findViewById(R.id.date_month_end)).getSelectedItem().toString();
+        String yearEnd = ((Spinner) root.findViewById(R.id.date_year_end)).getSelectedItem().toString();
+        Map<String, Integer> monthMap = new HashMap<String,Integer>();
+        
+        String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+        int i=0;
+        for(String m:months)
+        {
+            monthMap.put(m, i++);
+        }
+        
+        int db = Integer.parseInt(dayBegin);
+        int mb = monthMap.get(monthBegin);
+        int yb = Integer.parseInt(yearBegin);
+        int de = Integer.parseInt(dayEnd);
+        int me = monthMap.get(monthEnd);
+        int ye = Integer.parseInt(yearEnd);
+        
+        ArrayList<String> longMonths = new ArrayList<String>();
+        String[] lm = {"Jan", "Mar", "May", "Jul", "Aug", "Oct", "Dec" };
+        for(String m: lm)
+        {
+            longMonths.add(m);
+        }
+        if(!longMonths.contains(monthBegin))
+        {
+            if(db > 30)
+            {
+                db = 30;
+            }
+        }
+        if(!longMonths.contains(monthEnd))
+        {
+            if(de > 30)
+            {
+                de = 30;
+            }
+        }
+        if(monthBegin.equals("Feb") && db > 28)
+        {
+            db = 28;
+        }
+        if(monthEnd.equals("Feb") && de > 28)
+        {
+            de = 28;
+        }
+        
+        Time begin = new Time();
+        begin.setToNow();
+        int sec = begin.second;
+        int min = begin.minute;
+        int hour = begin.hour;
+        begin.set(sec, min, hour, db, mb, yb);
+        Time end = new Time();
+        end.setToNow();
+        sec = end.second;
+        min = end.minute;
+        hour = end.hour;
+        end.set(sec, min, hour, de, me, ye);
+        
+        if(begin.after(end))
+        {
+            Toast.makeText(AccountContainer.this, "Invalid Date", Toast.LENGTH_LONG).show();
+            return;
+        }    
+        
+        String report = ((Spinner)root.findViewById(R.id.report_spinner)).getSelectedItem().toString();
+        String text = AccountManager.getReport(report, begin, end);
+        updateReportText(text);
+        
     }
 }

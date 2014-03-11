@@ -3,6 +3,9 @@ package com.cyberdynefinances;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+
+import com.cyberdynefinances.dbManagement.DBHandler;
+
 import android.app.Fragment;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -54,12 +57,14 @@ public class Fragments
 	//Fragment for the register screen
 	public static class RegisterFragment extends Fragment 
 	{
-		public static View root2; // Copied Al >:D
+		public static View root;	
+
         @Override
+        //This method sets the current view to that of the registration activity for the user.
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
         {
-        	root2 = inflater.inflate(R.layout.activity_register, container, false);
-        	return root2;
+            root = inflater.inflate(R.layout.activity_register, container, false);
+            return root;
         }
         
         //clears the text fields when the fragment is paused
@@ -67,9 +72,9 @@ public class Fragments
         public void onPause()
         {
         	super.onPause();
-        	((EditText) root2.findViewById(R.id.registerUsername)).setText("");
-    		((EditText) root2.findViewById(R.id.registerPassword)).setText("");
-    		((EditText) root2.findViewById(R.id.registerPasswordVerification)).setText("");
+        	((EditText) root.findViewById(R.id.registerUsername)).setText("");
+    		((EditText) root.findViewById(R.id.registerPassword)).setText("");
+    		((EditText) root.findViewById(R.id.registerPasswordVerification)).setText("");
         }
     }
 	
@@ -143,6 +148,7 @@ public class Fragments
 					Double balance = AccountManager.getActiveAccount().getBalance();
 					View view = view1.getRootView();
 					TextView balanceText = (TextView) view.findViewById(R.id.account_balance);
+					TextView reportText = (TextView) view.findViewById(R.id.report_text_view);
 			    	if(AccountManager.getActiveAccount().getBalance()>=1000000000f) //textField only fits so many digits, scale the textField when that number is exceeded
 			    	{
 			    		balanceText.setScaleX(0.8f);
@@ -153,6 +159,18 @@ public class Fragments
 			    		balanceText.setScaleX(1f);
 			    		balanceText.setScaleY(1f);
 			    	}
+			    	String[][] transactions = DBHandler.getTransactionHistory(textField.getText().toString());
+			    	//Log.e("tag",textField.getText().toString());
+			        String rows = "";
+			        if (null != transactions) {
+			            for (String[] transaction : transactions) {
+			                rows += "\n\nAccount: " + transaction[0] + ", Amount: " + transaction[1] +
+			                        ", Type: " + transaction[2] + ", Category: " + transaction[3] +
+			                        ", Timestamp: " + transaction[4];
+			            }
+			        }
+			        //Log.e("tag",rows);
+			        reportText.setText(rows);
 					balanceText.setText(NumberFormat.getCurrencyInstance().format(balance));
 				}
 
@@ -173,6 +191,25 @@ public class Fragments
 	    		balanceText.setScaleY(1f);
 	    	}
 			balanceText.setText(NumberFormat.getCurrencyInstance().format(balance));
+			
+			Spinner monthBegin = (Spinner) view.findViewById(R.id.date_month_begin);
+			Spinner dayBegin = (Spinner) view.findViewById(R.id.date_day_begin);
+			Spinner yearBegin = (Spinner) view.findViewById(R.id.date_year_begin);
+			Spinner monthEnd = (Spinner) view.findViewById(R.id.date_month_end);
+            Spinner dayEnd = (Spinner) view.findViewById(R.id.date_day_end);
+            Spinner yearEnd = (Spinner) view.findViewById(R.id.date_year_end);
+			String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
+			String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
+			String[] years = {"2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014"};
+			ArrayAdapter month = new ArrayAdapter(view.getContext(), R.layout.layout_date_spinner, months); 
+			ArrayAdapter day = new ArrayAdapter(view.getContext(), R.layout.layout_date_spinner, days); 
+			ArrayAdapter year = new ArrayAdapter(view.getContext(), R.layout.layout_date_spinner, years);
+			monthBegin.setAdapter(month);
+			dayBegin.setAdapter(day);
+			yearBegin.setAdapter(year);
+			monthEnd.setAdapter(month);
+            dayEnd.setAdapter(day);
+            yearEnd.setAdapter(year);
 			
 			return view;
 	    }

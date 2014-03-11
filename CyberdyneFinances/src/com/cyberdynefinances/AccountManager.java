@@ -2,6 +2,8 @@ package com.cyberdynefinances;
 
 import java.util.ArrayList;
 
+import android.text.format.Time;
+
 import com.cyberdynefinances.dbManagement.DBHandler;
 
 public class AccountManager
@@ -39,6 +41,28 @@ public class AccountManager
 		return activeAccount.withdraw(category, amount);
 	}
 	
+	public static void depositWithDate(String category, double amount, String date)
+    {
+        activeAccount.depositWithDate(category, amount, date);
+    }
+    
+    public static boolean withdrawWithDate(String category, double amount, String date)
+    {
+        return activeAccount.withdrawWithDate(category, amount, date);
+    }
+	
+	
+	public static String getSpendingReport(Time dateStart, Time dateEnd)
+	{
+		String total = "";
+		for(Account a : accountList)
+		{
+			total += a.getName()+"\n"+a.getSpendingReport(dateStart, dateEnd) + "\n";
+		}
+		return total;
+	}
+	
+	
 	public static void readAccounts()
 	{
 	    try {
@@ -56,7 +80,7 @@ public class AccountManager
 	
 	public static void writeAccounts()
 	{
-		//writes all accounts in account list to the database including their lists of categories
+		//TODO:writes all accounts in account list to the database including their lists of categories
 	}
 	
 	public static ArrayList<Account> getAccountList()
@@ -90,5 +114,29 @@ public class AccountManager
 	        activeAccount = acc;
 		}
 		return accountAdded;
+	}
+	
+	public static String getReport(String report, Time begin, Time end)
+	{
+	    String ret = "";
+	    
+	    if(report.equalsIgnoreCase("Transaction History"))
+	    {
+
+	    }
+	    else if(report.equalsIgnoreCase("Spending Category Report"))
+	    {
+	        ret = getSpendingReport(begin, end);
+	    }
+	    else if(report.equalsIgnoreCase("Income Source Report"))
+        {
+            
+        }
+	    else if(report.equalsIgnoreCase("Cash Flow Report"))
+        {
+            
+        }
+
+	    return ret;
 	}
 }
