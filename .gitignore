@@ -17,8 +17,7 @@ gen/
 /R.java
 /gen/
 *.checkstyle
-CyberdyneFinances/*.checkstyle
-.checkstyle
+*/.checkstyle
 
 # External tool builders
 .externalToolBuilders/
