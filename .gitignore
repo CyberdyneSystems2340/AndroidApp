@@ -17,7 +17,7 @@ gen/
 /R.java
 /gen/
 *.checkstyle
-\.checkstyle
+*/.checkstyle
 
 # External tool builders
 .externalToolBuilders/
