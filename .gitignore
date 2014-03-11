@@ -20,6 +20,8 @@ gen/
 */.checkstyle
 *R.java
 */*/*/*/R.java
+*BuildConfig.java
+*/*/*/*/BuildConfig.java
 
 # External tool builders
 .externalToolBuilders/
