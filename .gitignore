@@ -16,6 +16,8 @@ local.properties
 gen/
 /R.java
 /gen/
+*.checkstyle
+.checkstyle
 
 # External tool builders
 .externalToolBuilders/
