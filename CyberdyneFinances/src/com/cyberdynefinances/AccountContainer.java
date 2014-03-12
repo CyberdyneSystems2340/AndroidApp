@@ -443,17 +443,9 @@ public class AccountContainer extends Activity
         }
         
         Time begin = new Time();
-        begin.setToNow();
-        int sec = begin.second;
-        int min = begin.minute;
-        int hour = begin.hour;
-        begin.set(sec, min, hour, db, mb, yb);
+        begin.set(0, 0, 0, db, mb, yb);
         Time end = new Time();
-        end.setToNow();
-        sec = end.second;
-        min = end.minute;
-        hour = end.hour;
-        end.set(sec, min, hour, de, me, ye);
+        end.set(59, 59, 23, de, me, ye);
         
         if(begin.after(end))
         {

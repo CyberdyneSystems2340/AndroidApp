@@ -117,7 +117,7 @@ public class Account
 	{
 		String[][] str = DBHandler.getTransactionHistory(accountName);
 		if (null == str) {
-		    return "";
+		    return "Total "+NumberFormat.getCurrencyInstance().format(0.0)+"\n";
 		}
 		String curr = ""; // Current timeStamp
 		String totalRep = ""; // All the withdrawals within the given parameters
