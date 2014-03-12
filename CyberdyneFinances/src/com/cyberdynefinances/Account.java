@@ -116,6 +116,9 @@ public class Account
 	protected String getSpendingReport(Time dateStart, Time dateEnd)
 	{
 		String[][] str = DBHandler.getTransactionHistory(accountName);
+		if (null == str) {
+		    return "";
+		}
 		String curr = ""; // Current timeStamp
 		String totalRep = ""; // All the withdrawals within the given parameters
 		Map<String, Double> totalAmount = new HashMap<String, Double>();
