@@ -2,6 +2,9 @@ package com.cyberdynefinances;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
@@ -140,8 +143,14 @@ public class WelcomeContainer extends Activity
     	{
             if (LoginHandler.register(newName, newPassword))
             {
+            	SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+    		    int iTmp = sp.load(WelcomeContainer.this, R.raw.coinflip, 1);
+    		    sp.play(iTmp, 1, 1, 0, 0, 1);
+    		    MediaPlayer mPlayer = MediaPlayer.create(WelcomeContainer.this, R.raw.coinflip); 
+    		    
                 Toast.makeText(this, "Registration Successful",Toast.LENGTH_LONG).show();// Yay! you are a user now!!!!!
                 Animation.fade(new Fragments.LoginFragment(), getFragmentManager(), R.id.container_welcome, true);
+                mPlayer.start();
             }
             else 
             {

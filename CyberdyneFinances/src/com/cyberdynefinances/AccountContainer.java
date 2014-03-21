@@ -8,6 +8,9 @@ import com.cyberdynefinances.dbManagement.DBHandler;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.media.SoundPool;
 import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.text.format.Time;
@@ -104,7 +107,20 @@ public class AccountContainer extends Activity
     		Account account=new Account(accountName,balanceDouble,interestDouble);    		
     		if (AccountManager.addAccount(account)) {
     		    Toast.makeText(this, "Account Creation Successful", Toast.LENGTH_LONG).show();
+    		    
+    		    /** This is a quick and easy way to create sound effects for our program.
+    		    Not much to it, just place and .wav sound in the res/raw folder and
+    		    R will create a variable for it in its class once you refresh it.
+    		    Then you change the R in these four lines and mPlayer.start() it when
+    		    you are ready to play it */
+    		    SoundPool sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+    		    int iTmp = sp.load(AccountContainer.this, R.raw.chaching, 1);
+    		    sp.play(iTmp, 1, 1, 0, 0, 1);
+    		    MediaPlayer mPlayer = MediaPlayer.create(AccountContainer.this, R.raw.chaching); // in 2nd param u have to pass your desired ringtone
+    		    
     		    Animation.fade(new Fragments.AccountHomeFragment(), getFragmentManager(), R.id.container_account, true);
+    		    
+    		    mPlayer.start(); // I had to make the player start after you fade or else it will interrupt the sound
     		} else {
     		    Toast.makeText(this, "Account Creation Failed", Toast.LENGTH_LONG).show();
     		}
