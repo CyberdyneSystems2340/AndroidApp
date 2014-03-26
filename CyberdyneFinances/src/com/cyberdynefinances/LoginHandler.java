@@ -4,10 +4,21 @@ import java.util.ArrayList;
 import java.util.Collections;
 import com.cyberdynefinances.dbManagement.DBHandler;
 
+/**
+ * Performs all operations involved in loging in a user. Including: validating username/password,
+ * adding new username/password, etc.
+ * @author Cyberdyne Finances
+ *
+ */
 public class LoginHandler {
     private static String admin = "admin";
 
-    // Compares the given username and password to that in the database
+    /**
+     * Compares the given username and password to that in the database.
+     * @param username
+     * @param password
+     * @return boolean
+     */
     public static boolean isValidLogin(String username, String password) {
         if (username.equals(admin) && password.equals("pass123")) {
             return true;
@@ -17,17 +28,29 @@ public class LoginHandler {
                 .hashCode() == password.hashCode());
     }
 
-    // Adds a new username and password combination to the database
+    /**
+     * Adds a new username and password combination to the database.
+     * @param username
+     * @param password
+     * @return boolean
+     */
     public static boolean register(String username, String password) {
         return DBHandler.addUser(username, password);
     }
 
-    // Checks if the database contains the username
+    /**
+     * Checks if the database contains the username.
+     * @param userName
+     * @return boolean
+     */
     public static boolean containsName(String userName) {
         return DBHandler.containsUser(userName);
     }
 
-    // This method now gets filled with all the username from the db.
+    /**
+     * Gets all the usernames from the db.
+     * @return ArrayList<String>
+     */
     public static ArrayList<String> getUsernames() {
         ArrayList<String> arr = new ArrayList<String>();
         String[][] allUsersInfo = DBHandler.getAllUsersInfo();
@@ -42,6 +65,10 @@ public class LoginHandler {
         return arr;
     }
 
+    /**
+     * Removes the user from the database.
+     * @param username
+     */
     public static void remove(String username) {
         DBHandler.deleteUser(username);
     }

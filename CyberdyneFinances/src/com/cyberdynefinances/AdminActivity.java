@@ -16,11 +16,21 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+/**
+ * A class that handles all actions performed by the admin account.
+ * 
+ * @author Cyberdyne Finances
+ *
+ */
 public class AdminActivity extends Activity {
     private static String yesText = "Yes";
     private static String noText = "No";
 
     @Override
+    /**
+     * Updates the View according to the saved instance state
+     * @param Bundle savedInstanceState
+     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -29,6 +39,11 @@ public class AdminActivity extends Activity {
     }
 
     @Override
+    /**
+     * responds to the item selected by the user
+     * @param MenuItem item
+     * @return boolean goHome
+     */
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -41,8 +56,10 @@ public class AdminActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    //updates the spinner of usernames
     @SuppressWarnings({ "rawtypes", "unchecked" })
+    /**
+     * updates the spinner of usernames
+     */
     private void updateView() {
         ArrayList<String> names = LoginHandler.getUsernames();
         Spinner s = (Spinner) this.findViewById(R.id.spinner);
@@ -56,7 +73,10 @@ public class AdminActivity extends Activity {
         s.setAdapter(a);
     }
 
-    //deletes the selected account
+     /**
+     * deletes the selected account.
+     * @param view
+     */
     public void delete(View view) {
         final View v = (View) view.getParent();
         new AlertDialog.Builder(this)
@@ -77,7 +97,10 @@ public class AdminActivity extends Activity {
                         }).setNegativeButton(noText, null).show();
     }
 
-    //resets the password of the selected account
+     /**
+     * resets the password of the selected account.
+     * @param view
+     */
     public void reset(View view) {
         final View v = (View) view.getParent();
         new AlertDialog.Builder(this)
