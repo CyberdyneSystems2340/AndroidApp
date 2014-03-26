@@ -61,9 +61,22 @@ public final class DBHelper extends SQLiteOpenHelper {
     private static final String SQL_DELETE_TRANSACTION_ENTRIES = DROPTABLE
             + DBReaderContract.DBFactory.TRANSACTION_TABLE_NAME;
 
+    /**
+     * The database version number. 
+     */
     public static final int DATABASE_VERSION = 1;
+    
+    /**
+     * The database name. 
+     */
     public static final String DATABASE_NAME = "CyberdyneFinancesDB";
 
+    /**
+     * This is the constructor that sets up the connection to the database,
+     *  when DBHelper is created.
+     *  
+     *  @param context - The context of the application.
+     */
     public DBHelper(Context context) {
         super(MyApplication.getAppContext(), DATABASE_NAME, null,
                 DATABASE_VERSION);
