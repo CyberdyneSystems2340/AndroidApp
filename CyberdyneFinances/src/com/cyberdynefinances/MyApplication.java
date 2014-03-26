@@ -11,14 +11,25 @@ package com.cyberdynefinances;
 import android.app.Application;
 import android.content.Context;
 //TODO JDoc all!
+// CHECKSTYLE:OFF
 public class MyApplication extends Application {
     private static Context context;
+// CHECKSTYLE: ON
 
+    /**
+     * This method is used on creation of the app.
+     * It sets the context of this class. 
+     */
     public void onCreate() {
         super.onCreate();
         MyApplication.context = getApplicationContext();
     }
 
+    /**
+     * This method returns the context of the application.
+     *  
+     * @return Context object of the application.
+     */
     public static Context getAppContext() {
         return MyApplication.context;
     }
