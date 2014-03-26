@@ -26,11 +26,6 @@ public class AccountManager
 		return owner;
 	}
 	
-	public static String getTransactionHist()
-	{
-		return activeAccount.getAccountInfo();
-	}
-	
 	public static void deposit(String category, double amount)
 	{
 		activeAccount.deposit(category, amount);

@@ -472,6 +472,5 @@ public class AccountContainer extends Activity
         String report = ((Spinner)root.findViewById(R.id.report_spinner)).getSelectedItem().toString();
         String text = AccountManager.getReport(report, begin, end);
         updateReportText(text);
-        
     }
 }

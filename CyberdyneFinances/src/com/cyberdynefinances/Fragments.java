@@ -78,16 +78,6 @@ public class Fragments
         }
     }
 	
-	//Fragment for testing purposes
-	public static class TestFragment extends Fragment 
-	{
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-        {
-        	return inflater.inflate(R.layout.activity_test, container, false);
-        }
-    }
-	
 	//Fragment for coin flip loading animation
 	public static class CoinflipFragment extends Fragment 
 	{
@@ -109,8 +99,7 @@ public class Fragments
 		@Override
 		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
 	    {
-			View root = inflater.inflate(R.layout.activity_account_creation, container, false);
-			return root;
+			return inflater.inflate(R.layout.activity_account_creation, container, false);
 	    }
 	}
 	
@@ -138,6 +127,7 @@ public class Fragments
 			ArrayAdapter a2 = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, accountSpinnerList); 
 			accountSpinner.setOnItemSelectedListener(new OnItemSelectedListener() 
 			{
+			    //when a different account is selected update neccessary things like balance and transaction history
 				@Override
 				public void onItemSelected(AdapterView<?> arg0, View view1,int arg2, long arg3) 
 				{
@@ -160,7 +150,6 @@ public class Fragments
 			    		balanceText.setScaleY(1f);
 			    	}
 			    	String[][] transactions = DBHandler.getTransactionHistory(textField.getText().toString());
-			    	//Log.e("tag",textField.getText().toString());
 			        String rows = "";
 			        if (null != transactions) {
 			            for (String[] transaction : transactions) {
@@ -169,7 +158,6 @@ public class Fragments
 			                        ", Timestamp: " + transaction[4];
 			            }
 			        }
-			        //Log.e("tag",rows);
 			        reportText.setText(rows);
 					balanceText.setText(NumberFormat.getCurrencyInstance().format(balance));
 				}

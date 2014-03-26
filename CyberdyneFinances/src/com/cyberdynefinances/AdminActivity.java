@@ -1,6 +1,9 @@
 package com.cyberdynefinances;
 
 import java.util.ArrayList;
+
+import com.cyberdynefinances.dbManagement.DBHandler;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -25,12 +28,6 @@ public class AdminActivity extends Activity {
         updateView();
     }
 
-    // Called when the app is closed to write out data that needs to be stored
-    @Override
-    public void onStop() {
-        super.onStop();
-    }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
@@ -44,6 +41,7 @@ public class AdminActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
+    //updates the spinner of usernames
     @SuppressWarnings({ "rawtypes", "unchecked" })
     private void updateView() {
         ArrayList<String> names = LoginHandler.getUsernames();
@@ -58,6 +56,7 @@ public class AdminActivity extends Activity {
         s.setAdapter(a);
     }
 
+    //deletes the selected account
     public void delete(View view) {
         final View v = (View) view.getParent();
         new AlertDialog.Builder(this)
@@ -78,6 +77,7 @@ public class AdminActivity extends Activity {
                         }).setNegativeButton(noText, null).show();
     }
 
+    //resets the password of the selected account
     public void reset(View view) {
         final View v = (View) view.getParent();
         new AlertDialog.Builder(this)
@@ -93,8 +93,7 @@ public class AdminActivity extends Activity {
                                 Spinner s = (Spinner) v
                                         .findViewById(R.id.spinner);
                                 String name = s.getSelectedItem().toString();
-                                LoginHandler.remove(name);
-                                LoginHandler.register(name, "pass123");
+                                DBHandler.changePassword(name, "pass123");
                                 AdminActivity.this.updateView();
                             }
                         }).setNegativeButton(noText, null).show();
