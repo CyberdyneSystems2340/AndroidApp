@@ -15,8 +15,8 @@ public class LoginHandler {
 
     /**
      * Compares the given username and password to that in the database.
-     * @param username
-     * @param password
+     * @param username - the users username
+     * @param password - the users password
      * @return boolean
      */
     public static boolean isValidLogin(String username, String password) {
@@ -30,8 +30,8 @@ public class LoginHandler {
 
     /**
      * Adds a new username and password combination to the database.
-     * @param username
-     * @param password
+     * @param username - the username to add to the database
+     * @param password - the password to add to the database
      * @return boolean
      */
     public static boolean register(String username, String password) {
@@ -40,7 +40,7 @@ public class LoginHandler {
 
     /**
      * Checks if the database contains the username.
-     * @param userName
+     * @param userName - the username to search for
      * @return boolean
      */
     public static boolean containsName(String userName) {
@@ -67,7 +67,7 @@ public class LoginHandler {
 
     /**
      * Removes the user from the database.
-     * @param username
+     * @param username - the username to remove
      */
     public static void remove(String username) {
         DBHandler.deleteUser(username);
