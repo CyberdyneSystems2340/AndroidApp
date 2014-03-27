@@ -29,7 +29,7 @@ public class AdminActivity extends Activity {
     @Override
     /**
      * Updates the View according to the saved instance state
-     * @param Bundle savedInstanceState
+     * @param Bundle savedInstanceState - the current state of the application
      */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,7 +41,7 @@ public class AdminActivity extends Activity {
     @Override
     /**
      * responds to the item selected by the user
-     * @param MenuItem item
+     * @param MenuItem item - the item selected
      * @return boolean goHome
      */
     public boolean onOptionsItemSelected(MenuItem item) {
@@ -75,7 +75,7 @@ public class AdminActivity extends Activity {
 
      /**
      * deletes the selected account.
-     * @param view
+     * @param view - the account to be deleted
      */
     public void delete(View view) {
         final View v = (View) view.getParent();
@@ -99,7 +99,7 @@ public class AdminActivity extends Activity {
 
      /**
      * resets the password of the selected account.
-     * @param view
+     * @param view - the account whose password will be reset
      */
     public void reset(View view) {
         final View v = (View) view.getParent();
