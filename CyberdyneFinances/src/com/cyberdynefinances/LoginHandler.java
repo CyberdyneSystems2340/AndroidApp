@@ -5,13 +5,15 @@ import java.util.Collections;
 import com.cyberdynefinances.dbManagement.DBHandler;
 
 /**
- * Performs all operations involved in loging in a user. Including: validating username/password,
+ * Performs all operations involved in logging in a user. Including: validating username/password,
  * adding new username/password, etc.
  * @author Cyberdyne Finances
  *
  */
 public class LoginHandler {
+    //CHECKSTYLE:OFF    suppress error of Missing Javadoc comment
     private static String admin = "admin";
+    //CHECKSTYLE:OFF
 
     /**
      * Compares the given username and password to that in the database.
@@ -41,7 +43,7 @@ public class LoginHandler {
     /**
      * Checks if the database contains the username.
      * @param userName - the username to search for
-     * @return boolean
+     * @return boolean - true if the database contains userName
      */
     public static boolean containsName(String userName) {
         return DBHandler.containsUser(userName);
@@ -49,7 +51,7 @@ public class LoginHandler {
 
     /**
      * Gets all the usernames from the db.
-     * @return ArrayList<String>
+     * @return ArrayList<String> - all the usernames in the database
      */
     public static ArrayList<String> getUsernames() {
         ArrayList<String> arr = new ArrayList<String>();

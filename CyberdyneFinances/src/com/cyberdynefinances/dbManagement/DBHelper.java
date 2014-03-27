@@ -1,11 +1,3 @@
-/**
- * This class is used be the DBHandler to interact with the database.
- * It sets up the tables for the database.
- * 
- * @author Robert
- * @version 3.14
- */
-
 package com.cyberdynefinances.dbManagement;
 
 import android.content.Context;
@@ -14,7 +6,13 @@ import android.database.sqlite.SQLiteOpenHelper;
 import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBFactory;
 
+/**
+ * This class is used be the DBHandler to interact with the database.
+ * It sets up the tables for the database.
+ * @author Cyberdyne Finances
+ */
 public final class DBHelper extends SQLiteOpenHelper {
+    //CHECKSTYLE:OFF    suppress error of Missing Javadoc comment
     private static final String OPARA = " (";
     private static final String CPARA = ")";
     private static final String COMMA = ",";
@@ -60,7 +58,7 @@ public final class DBHelper extends SQLiteOpenHelper {
             + DBReaderContract.DBFactory.ACCOUNT_TABLE_NAME;
     private static final String SQL_DELETE_TRANSACTION_ENTRIES = DROPTABLE
             + DBReaderContract.DBFactory.TRANSACTION_TABLE_NAME;
-
+    //CHECKSTYLE:ON
     /**
      * The database version number. 
      */

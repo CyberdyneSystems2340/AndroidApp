@@ -1,19 +1,19 @@
 package com.cyberdynefinances;
 
 import java.util.ArrayList;
-
 import android.text.format.Time;
-
 import com.cyberdynefinances.dbManagement.DBHandler;
-//TODO: Add file header Jdoc.
+
+/**
+ * Manages all accounts owned by a user. Is used to interact with accounts such as deposits, withdraws, and adding new accounts.
+ * @author Cyberdyne Finances
+ */
 public class AccountManager {
-    // interfaces with accounts and is the only thing that can because the
-    // Account class is protected
-    //TODO: Turn off Checkstyle for Javadoc here, reason is because these are private variables.
+    //CHECKSTYLE:OFF    suppress error of Missing Javadoc comment
     private static ArrayList<Account> accountList = new ArrayList<Account>();
     private static String owner;
     private static Account activeAccount = null;
-    //TODO: Turn Checkstyle back on for Javadoc here.
+    //CHECKSTYLE:ON
     /**
      * This method takes in a specific user name,
      *  sets it as the current owner of accounts,
@@ -24,7 +24,6 @@ public class AccountManager {
     public static void loadUser(String user) {
         owner = user;
         accountList.clear();
-        // activeAccount = null;
         readAccounts();
     }
     
@@ -94,8 +93,9 @@ public class AccountManager {
     public static String getSpendingReport(Time dateStart, Time dateEnd) {
         String total = "";
         for (Account a : accountList) {
-            //TODO: Check the following line to see if \n is needed!
+            //CHECKSTYLE:OFF    suppress error of String "\n" occurs 2 times in file
             total += a.getName() + "\n" + a.getSpendingReport(dateStart, dateEnd) + "\n";
+            //CHECKSTYLE:ON
         }
         return total;
     }
@@ -123,12 +123,7 @@ public class AccountManager {
             e.printStackTrace();
         }
     }
-/* We will not be using this as far as I know.
-    public static void writeAccounts() {
-        // TODO:writes all accounts in account list to the database including
-        // their lists of categories
-    }
-*/
+
     /**
      * This method returns and ArrayList of Account objects that represents
      * all the accounts in the collection currently. 

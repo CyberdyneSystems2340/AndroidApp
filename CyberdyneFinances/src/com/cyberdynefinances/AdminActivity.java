@@ -18,19 +18,15 @@ import android.widget.Spinner;
 
 /**
  * A class that handles all actions performed by the admin account.
- * 
  * @author Cyberdyne Finances
- *
  */
 public class AdminActivity extends Activity {
+    //CHECKSTYLE:OFF    suppress error of Missing Javadoc comment
     private static String yesText = "Yes";
     private static String noText = "No";
+    //CHECKSTYLE:ON
 
     @Override
-    /**
-     * Updates the View according to the saved instance state
-     * @param Bundle savedInstanceState - the current state of the application
-     */
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -39,11 +35,6 @@ public class AdminActivity extends Activity {
     }
 
     @Override
-    /**
-     * responds to the item selected by the user
-     * @param MenuItem item - the item selected
-     * @return boolean goHome
-     */
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case android.R.id.home:
@@ -56,9 +47,8 @@ public class AdminActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     /**
-     * updates the spinner of usernames
+     * updates the spinner of usernames.
      */
     private void updateView() {
         ArrayList<String> names = LoginHandler.getUsernames();
@@ -68,14 +58,13 @@ public class AdminActivity extends Activity {
         for (String name : names) {
             spinnerArray[i++] = name;
         }
-        ArrayAdapter a = new ArrayAdapter(this, R.layout.layout_spinner,
-                spinnerArray);
+        ArrayAdapter<?> a = new ArrayAdapter<Object>(this, R.layout.layout_spinner, spinnerArray);
         s.setAdapter(a);
     }
 
      /**
      * deletes the selected account.
-     * @param view - the account to be deleted
+     * @param view - the delete button's view
      */
     public void delete(View view) {
         final View v = (View) view.getParent();
@@ -99,7 +88,7 @@ public class AdminActivity extends Activity {
 
      /**
      * resets the password of the selected account.
-     * @param view - the account whose password will be reset
+     * @param view - the reset button's view
      */
     public void reset(View view) {
         final View v = (View) view.getParent();

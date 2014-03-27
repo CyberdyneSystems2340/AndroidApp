@@ -1,14 +1,11 @@
-/**
- * This method merely holds the table and column names for the database.
- * 
- * @author Robert
- * @version 3.14
- */
-
 package com.cyberdynefinances.dbManagement;
 
 import android.provider.BaseColumns;
-//TODO: Suppress JDoc CS warning.
+
+/**
+ * This method holds the table and column names for the database.
+ * @author Cyberdyne Finances
+ */
 public final class DBReaderContract {
 
     /**
