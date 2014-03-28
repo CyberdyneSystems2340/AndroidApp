@@ -19,7 +19,7 @@ public class LoginHandler {
      * Compares the given username and password to that in the database.
      * @param username - the users username
      * @param password - the users password
-     * @return boolean
+     * @return boolean - True if valid login, false otherwise
      */
     public static boolean isValidLogin(String username, String password) {
         if (username.equals(admin) && password.equals("pass123")) {
