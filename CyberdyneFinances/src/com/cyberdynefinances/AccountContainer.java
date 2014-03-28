@@ -203,7 +203,6 @@ public class AccountContainer extends Activity
 		}
 	}*/
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
     /**
      * Called when the withdraw button is clicked. Displays a dialog box to input withdraw information.
      * @param view The withdraw button's view
