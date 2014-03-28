@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 import com.cyberdynefinances.dbManagement.DBHandler;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphView.GraphViewData;
+import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.LineGraphView;
 
 import android.app.Fragment;
 import android.graphics.drawable.AnimationDrawable;
@@ -17,8 +21,10 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class Fragments 
 {
@@ -113,6 +119,57 @@ public class Fragments
 			return root;
 	    }
 	}
+	
+	
+	public static class GraphLayoutFragment extends Fragment
+	{
+		public static View root;
+		@Override
+		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+	    {
+			String[][] transactions = DBHandler.getTransactionHistory(AccountManager.getActiveAccount().getName());
+			root = inflater.inflate(R.layout.graph_layout, container, false);
+			String[] moneys = new String[transactions.length];
+			for(int i = 0; i < moneys.length; i++)
+			{
+				moneys[i] = transactions[i][1]; //Getting a deep copy of the array
+			}
+	
+			double sum = 0;
+			for(String i : moneys)
+			{
+				sum += Double.parseDouble(i);
+			}
+			
+			GraphView.GraphViewData[] data = new GraphView.GraphViewData[moneys.length];
+			String[] horzArr = new String[moneys.length];
+			
+			//data[0] = new GraphView.GraphViewData(0, 4000);//AccountManager.getActiveAccount().getBalance() - sum);
+					
+			for(int i = 0; i < data.length; i++)
+			{
+				//data[i] = new GraphView.GraphViewData(i, Math.sin(i));
+				data[i] = new GraphView.GraphViewData(i, Double.parseDouble(moneys[i]));
+				horzArr[i] = i + 1 + "";
+			}
+			
+			GraphViewSeries exampleSeries = new GraphViewSeries(data);
+			 
+			GraphView graphView = new LineGraphView(
+			      root.getContext() // context
+			      , "Transaction History" // heading
+			);
+			
+			graphView.setHorizontalLabels(horzArr);
+			graphView.setVerticalLabels(new String[] {"Top", sum/2 + "", "Bot"});
+			
+			graphView.addSeries(exampleSeries); // data
+			LinearLayout layout = (LinearLayout)root.findViewById(R.id.graph1); 
+			layout.addView(graphView); 
+            return root;
+	    }
+	}
+	
 	
 	public static class AccountHomeFragment extends Fragment
 	{

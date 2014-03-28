@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import com.cyberdynefinances.dbManagement.DBHandler;
+import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GraphViewSeries;
+import com.jjoe64.graphview.LineGraphView;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -22,6 +26,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -124,6 +129,53 @@ public class AccountContainer extends Activity
     		} else {
     		    Toast.makeText(this, "Account Creation Failed", Toast.LENGTH_LONG).show();
     		}
+		}
+	}
+	
+	/**
+	 * Creates a new page that will graph all the transactions made on a line graph.
+	 * If no transactions were made, then Toast will notify the user. The average of
+	 * the transactions made will be the y-axis midpoint.
+	 *
+	 * @param View object
+	 * @author Clayton Pierce
+	 */
+	public void buttonLineGraph(View view)
+	{
+		String[][] transactions = DBHandler.getTransactionHistory(AccountManager.getActiveAccount().getName());
+		if(transactions == null) // Check if a transaction is made
+		{
+			Toast.makeText(this, "No transactions made", Toast.LENGTH_LONG).show();
+		}
+		else
+		{
+			Animation.fade(new Fragments.GraphLayoutFragment(), getFragmentManager(), R.id.container_account, true);
+			//setContentView(R.id.graph1);
+			
+			
+			/**
+			GraphView.GraphViewData[] data = new GraphView.GraphViewData[50];
+			String[] horzArr = new String[] {"0", "3pi/2", "5pi/2", "7pi/2", "9pi/2", "11pi/2", "13pi/2", 
+											"15pi/2", "17/2", "19/2", "21/2"};
+			for(int i = 0; i < 50; i++)
+			{
+				data[i] = new GraphView.GraphViewData(i, Math.sin(i));
+			}
+			GraphViewSeries exampleSeries = new GraphViewSeries(data);
+			 
+			GraphView graphView = new LineGraphView(
+			      this // context
+			      , "Pi And Stuff" // heading
+			);
+			
+			graphView.setHorizontalLabels(horzArr);
+			graphView.setVerticalLabels(new String[] {"1", "0", "-1"});
+			
+			graphView.addSeries(exampleSeries); // data
+			 
+			LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
+			Toast.makeText(this, "success", Toast.LENGTH_LONG).show();
+			layout.addView(graphView); */
 		}
 	}
 	
