@@ -3,13 +3,7 @@ package com.cyberdynefinances;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-
 import com.cyberdynefinances.dbManagement.DBHandler;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GraphView.GraphViewData;
-import com.jjoe64.graphview.GraphViewSeries;
-import com.jjoe64.graphview.LineGraphView;
-
 import android.app.Fragment;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -109,7 +103,7 @@ public class Fragments
 	    }
 	}
 	
-	
+	/*
 	public static class GraphLayoutFragment extends Fragment
 	{
 		public static View root;
@@ -158,7 +152,7 @@ public class Fragments
             return root;
 	    }
 	}
-	
+	*/
 	
 	public static class AccountHomeFragment extends Fragment
 	{

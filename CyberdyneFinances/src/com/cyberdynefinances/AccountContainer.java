@@ -5,10 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import com.cyberdynefinances.dbManagement.DBHandler;
-import com.jjoe64.graphview.GraphView;
-import com.jjoe64.graphview.GraphViewSeries;
-import com.jjoe64.graphview.LineGraphView;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Intent;
@@ -26,7 +22,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -159,7 +154,7 @@ public class AccountContainer extends Activity
     }
     
 	
-<<<<<<< HEAD
+
 	/**
 	 * Creates a new page that will graph all the transactions made on a line graph.
 	 * If no transactions were made, then Toast will notify the user. The average of
@@ -168,6 +163,7 @@ public class AccountContainer extends Activity
 	 * @param View object
 	 * @author Clayton Pierce
 	 */
+    /*
 	public void buttonLineGraph(View view)
 	{
 		String[][] transactions = DBHandler.getTransactionHistory(AccountManager.getActiveAccount().getName());
@@ -203,18 +199,16 @@ public class AccountContainer extends Activity
 			 
 			LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
 			Toast.makeText(this, "success", Toast.LENGTH_LONG).show();
-			layout.addView(graphView); */
+			layout.addView(graphView); 
 		}
-	}
+	}*/
 	
 	@SuppressWarnings({ "unchecked", "rawtypes" })
-=======
     /**
      * Called when the withdraw button is clicked. Displays a dialog box to input withdraw information.
      * @param view The withdraw button's view
      */
     //CHECKSTYLE:OFF    suppresses error of NCSS for this method is 79
->>>>>>> a685780d0c6f6cfeb1e695ff79aebc9ea94d8d7f
     public void buttonWithdrawal(View view)
     //CHECKSTYLE:ON
     {
