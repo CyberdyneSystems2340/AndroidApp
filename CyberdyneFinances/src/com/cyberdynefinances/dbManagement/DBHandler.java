@@ -15,7 +15,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.format.Time;
 import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBFactory;
-//TODO: javadoc description of class
 /**
  * 
  * @author Cyberdyne Finances
