@@ -13,7 +13,7 @@ import com.cyberdynefinances.dbManagement.DBHandler;
 public class LoginHandler {
     //CHECKSTYLE:OFF    suppress error of Missing Javadoc comment
     private static String admin = "admin";
-    //CHECKSTYLE:OFF
+    //CHECKSTYLE:ON
 
     /**
      * Compares the given username and password to that in the database.
