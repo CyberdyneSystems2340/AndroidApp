@@ -5,12 +5,13 @@
     This configuration file was written by the eclipse-cs plugin configuration editor
 -->
 <!--
-    Checkstyle-Configuration: CS2340 Checks
+    Checkstyle-Configuration: CS2340
     Description: none
 -->
 <module name="Checker">
   <property name="severity" value="warning"/>
   <module name="TreeWalker">
+    <module name="FileContentsHolder"/>
     <module name="AnnotationUseStyle"/>
     <module name="AnnotationUseStyle"/>
     <module name="MissingDeprecated"/>
@@ -80,4 +81,5 @@
     <module name="OuterTypeFilename"/>
   </module>
   <module name="StrictDuplicateCode"/>
+  <module name="SuppressionCommentFilter"/>
 </module>

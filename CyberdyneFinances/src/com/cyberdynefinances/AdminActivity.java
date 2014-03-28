@@ -1,6 +1,9 @@
 package com.cyberdynefinances;
 
 import java.util.ArrayList;
+
+import com.cyberdynefinances.dbManagement.DBHandler;
+
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -13,9 +16,15 @@ import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
 
+/**
+ * A class that handles all actions performed by the admin account.
+ * @author Cyberdyne Finances
+ */
 public class AdminActivity extends Activity {
+    //CHECKSTYLE:OFF    suppress error of Missing Javadoc comment
     private static String yesText = "Yes";
     private static String noText = "No";
+    //CHECKSTYLE:ON
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,12 +32,6 @@ public class AdminActivity extends Activity {
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_admin);
         updateView();
-    }
-
-    // Called when the app is closed to write out data that needs to be stored
-    @Override
-    public void onStop() {
-        super.onStop();
     }
 
     @Override
@@ -44,7 +47,9 @@ public class AdminActivity extends Activity {
         return super.onOptionsItemSelected(item);
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
+    /**
+     * updates the spinner of usernames.
+     */
     private void updateView() {
         ArrayList<String> names = LoginHandler.getUsernames();
         Spinner s = (Spinner) this.findViewById(R.id.spinner);
@@ -53,11 +58,14 @@ public class AdminActivity extends Activity {
         for (String name : names) {
             spinnerArray[i++] = name;
         }
-        ArrayAdapter a = new ArrayAdapter(this, R.layout.layout_spinner,
-                spinnerArray);
+        ArrayAdapter<?> a = new ArrayAdapter<Object>(this, R.layout.layout_spinner, spinnerArray);
         s.setAdapter(a);
     }
 
+     /**
+     * deletes the selected account.
+     * @param view - the delete button's view
+     */
     public void delete(View view) {
         final View v = (View) view.getParent();
         new AlertDialog.Builder(this)
@@ -78,6 +86,10 @@ public class AdminActivity extends Activity {
                         }).setNegativeButton(noText, null).show();
     }
 
+     /**
+     * resets the password of the selected account.
+     * @param view - the reset button's view
+     */
     public void reset(View view) {
         final View v = (View) view.getParent();
         new AlertDialog.Builder(this)
@@ -93,8 +105,7 @@ public class AdminActivity extends Activity {
                                 Spinner s = (Spinner) v
                                         .findViewById(R.id.spinner);
                                 String name = s.getSelectedItem().toString();
-                                LoginHandler.remove(name);
-                                LoginHandler.register(name, "pass123");
+                                DBHandler.changePassword(name, "pass123");
                                 AdminActivity.this.updateView();
                             }
                         }).setNegativeButton(noText, null).show();

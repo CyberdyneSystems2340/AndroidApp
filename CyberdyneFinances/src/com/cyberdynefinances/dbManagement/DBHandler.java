@@ -15,8 +15,12 @@ import android.database.sqlite.SQLiteDatabase;
 import android.text.format.Time;
 import com.cyberdynefinances.MyApplication;
 import com.cyberdynefinances.dbManagement.DBReaderContract.DBFactory;
-
+/**
+ * 
+ * @author Cyberdyne Finances
+ */
 public class DBHandler {
+    //CHECKSTYLE:OFF    suppress error of Missing Javadoc comment
     private static DBHelper dbHelper = new DBHelper(MyApplication.getAppContext());
     private static String withdrawText = "WITHDRAW";
     private static String depositText = "DEPOSIT";
@@ -25,7 +29,8 @@ public class DBHandler {
     private static String where = " WHERE ";
     private static String selectAll = "SELECT * FROM ";
     private static String apastrophy = "'";
-
+    //CHECKSTYLE:ON
+    
     /**
      * This method checks to see if the user table contains the specified user.
      *
@@ -173,7 +178,7 @@ public class DBHandler {
      */
     public static boolean addAccount(String userID, String newAccount, double balance,
             double interest) {
-        if (!containsAccount(newAccount)) {
+        if (!containsAccount(newAccount) && null != userID && null != newAccount && balance >= 0 && interest >= 0) {
             try {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 ContentValues val = new ContentValues();
@@ -434,12 +439,16 @@ public class DBHandler {
     }
 
     // This method checks to see if a string is valid for being added to the db.
+    //CHECKSTYLE:OFF    suppress error of Missing Javadoc comment
     private static boolean isValid(String str) {
+    //CHECKSTYLE:ON
         return (null != str && !str.isEmpty());
     }
 
     // This method checks to see if this account has already been
+    //CHECKSTYLE:OFF    suppress error of Missing Javadoc comment
     private static boolean containsAccount(String str) {
+    //CHECKSTYLE:ON
         try {
             SQLiteDatabase db = dbHelper.getReadableDatabase();
             Cursor c = db
@@ -457,10 +466,12 @@ public class DBHandler {
         return false;
     }
     
- // This method adds an amount to an account in the db.
+    // This method adds an amount to an account in the db.
+    //CHECKSTYLE:OFF    suppress error of Missing Javadoc comment
     private static boolean updateBalanceAndTransactionHistory(SQLiteDatabase db,
             ContentValues cv, String account, double balance, double amount,
             String type, String category, String date) {
+    //CHECKSTYLE:ON
         String timestamp = date;
         if (date.equalsIgnoreCase(realtimeText)) {
             Time time = new Time();

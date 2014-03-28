@@ -51,17 +51,9 @@ public class WelcomeContainer extends Activity
         return super.onOptionsItemSelected(item);
     }
 
-    // Called when the app is closed to write out data that needs to be stored
-    @Override
-    public final void onStop() {
-        super.onStop();
-    }
-
     /**
      * Login button on the welcome screen.
-     * 
-     * @param view
-     *            usually "this".
+     * @param view The view relating to the login button
      */
     public final void welcomeLoginClicked(final View view) {
         Animation.fade(new Fragments.LoginFragment(), getFragmentManager(),
@@ -70,7 +62,7 @@ public class WelcomeContainer extends Activity
 
     /**
      * Register button on the welcome screen.
-     * @param view usually "this"
+     * @param view The view relating to the register button
     */
     public final void welcomeRegisterClicked(final View view) {
         Animation.fade(new Fragments.RegisterFragment(), getFragmentManager(),

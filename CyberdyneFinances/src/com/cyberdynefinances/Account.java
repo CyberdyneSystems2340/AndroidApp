@@ -64,23 +64,6 @@ public class Account
         registerTransactionWithDate("Deposit", category, amount, date);
     }
 	
-	private String getTransactionHist()
-	{
-		//read in strings from account file
-		return "";
-	}
-	
-	protected String getAccountInfo()
-	{
-		String string = "";
-		string += "Account Name: "+ accountName + "\n";
-		string += "Owner: " + AccountManager.getActiveUser() + "\n";
-		string += "Balance: " + balance + "\n";
-		string += "Interest: " + interest + "\n";
-		string += "Transaction History:\n" + getTransactionHist();
-		return string;
-	}
-	
 	private void registerTransaction(String type, String category, double amount)
 	{
 		DBHandler.makeTransaction(accountName, amount, type, category);
@@ -188,7 +171,7 @@ public class Account
 	@Override
 	public String toString()
 	{
-		return getAccountInfo();
+		return "Name: "+accountName+" Balance: "+balance;
 	}
 	
 }
