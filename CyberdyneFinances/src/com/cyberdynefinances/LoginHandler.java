@@ -34,7 +34,7 @@ public class LoginHandler {
      * Adds a new username and password combination to the database.
      * @param username - the username to add to the database
      * @param password - the password to add to the database
-     * @return boolean
+     * @return boolean - True if the user is successfully added, false otherwise
      */
     public static boolean register(String username, String password) {
         return DBHandler.addUser(username, password);
@@ -43,7 +43,7 @@ public class LoginHandler {
     /**
      * Checks if the database contains the username.
      * @param userName - the username to search for
-     * @return boolean - true if the database contains userName
+     * @return boolean - true if the database contains userName, false otherwise
      */
     public static boolean containsName(String userName) {
         return DBHandler.containsUser(userName);
@@ -51,7 +51,7 @@ public class LoginHandler {
 
     /**
      * Gets all the usernames from the db.
-     * @return ArrayList<String> - all the usernames in the database
+     * @return ArrayList<String> - A list of all the usernames in the database in alphabetical order
      */
     public static ArrayList<String> getUsernames() {
         ArrayList<String> arr = new ArrayList<String>();

@@ -16,8 +16,8 @@ local.properties
 gen/
 /R.java
 /gen/
-*.checkstyle
-*/.checkstyle
+#*.checkstyle
+#*/.checkstyle
 *R.java
 */*/*/*/R.java
 *BuildConfig.java
