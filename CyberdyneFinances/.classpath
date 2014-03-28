@@ -5,7 +5,11 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="src" path="gen"/>
+<<<<<<< HEAD
+	<classpathentry kind="src" path="libs/com/jjoe64"/>
+=======
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/3"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+>>>>>>> a685780d0c6f6cfeb1e695ff79aebc9ea94d8d7f
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>

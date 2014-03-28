@@ -148,7 +148,6 @@ public class WelcomeContainer extends Activity
             {
                 Toast.makeText(this, "Registration failed, please try again.",Toast.LENGTH_LONG).show();//Oops, something broke.
             }
-
     	}
     }
 }
