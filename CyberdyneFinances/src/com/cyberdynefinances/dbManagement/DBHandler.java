@@ -179,7 +179,7 @@ public class DBHandler {
      */
     public static boolean addAccount(String userID, String newAccount, double balance,
             double interest) {
-        if (!containsAccount(newAccount)) {
+        if (!containsAccount(newAccount) && null != userID && null != newAccount && balance >= 0 && interest >= 0) {
             try {
                 SQLiteDatabase db = dbHelper.getWritableDatabase();
                 ContentValues val = new ContentValues();
