@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import android.text.format.Time;
 import com.cyberdynefinances.dbManagement.DBHandler;
 
@@ -173,5 +172,4 @@ public class Account
 	{
 		return "Name: "+accountName+" Balance: "+balance;
 	}
-	
 }

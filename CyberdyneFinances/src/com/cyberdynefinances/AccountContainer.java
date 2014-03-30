@@ -152,8 +152,6 @@ public class AccountContainer extends Activity
             Toast.makeText(this, "Account Creation Failed", Toast.LENGTH_LONG).show();
         }
     }
-    
-	
 
 	/**
 	 * Creates a new page that will graph all the transactions made on a line graph.

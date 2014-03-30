@@ -15,10 +15,8 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 /**
  * This is the fragments class, here we separate the project into specific tasks!
  * 
@@ -202,18 +200,19 @@ public class Fragments
      * @author Cyberdyne Finances
      *
      */	
-	public static class AccountHomeFragment extends Fragment
-	{
-		@SuppressWarnings({ "unchecked", "rawtypes" })
-		@Override
-		public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
-	    {
-			View view = inflater.inflate(R.layout.activity_account_homepage, container, false);
-			ArrayList<Account> accountList = AccountManager.getAccountList(); //an arraylist of all accounts the current user has
+    public static class AccountHomeFragment extends Fragment
+    {
+        //CHECKSTYLE:OFF    suppress error NCSS is 67
+        @Override
+        //CHECKSTYLE:ON
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
+        {
+            View view = inflater.inflate(R.layout.activity_account_homepage, container, false);
+            ArrayList<Account> accountList = AccountManager.getAccountList(); //an arraylist of all accounts the current user has
 
             Spinner reportSpinner = (Spinner) view.findViewById(R.id.report_spinner);
             String[] reports = {"Transaction History", "Spending Category Report", "Income Source Report", "Cash Flow Report"};
-            ArrayAdapter a = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, reports); 
+            ArrayAdapter<?> a = new ArrayAdapter<Object>(view.getContext(), R.layout.layout_report_spinner, reports); 
             reportSpinner.setAdapter(a);
 			
             Spinner accountSpinner = (Spinner) view.findViewById(R.id.account_spinner); 
@@ -224,7 +223,7 @@ public class Fragments
                 accountSpinnerList[i] = accountList.get(i).getName();
             }
             Arrays.sort(accountSpinnerList);
-            ArrayAdapter a2 = new ArrayAdapter(view.getContext(), R.layout.layout_report_spinner, accountSpinnerList); 
+            ArrayAdapter<?> a2 = new ArrayAdapter<Object>(view.getContext(), R.layout.layout_report_spinner, accountSpinnerList); 
             accountSpinner.setOnItemSelectedListener(new OnItemSelectedListener() 
             {
 			    //when a different account is selected update neccessary things like balance and transaction history
@@ -294,9 +293,9 @@ public class Fragments
             String[] months = {"Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec" };
             String[] days = {"01", "02", "03", "04", "05", "06", "07", "08", "09", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"};
             String[] years = {"2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014"};
-            ArrayAdapter month = new ArrayAdapter(view.getContext(), R.layout.layout_date_spinner, months); 
-            ArrayAdapter day = new ArrayAdapter(view.getContext(), R.layout.layout_date_spinner, days); 
-            ArrayAdapter year = new ArrayAdapter(view.getContext(), R.layout.layout_date_spinner, years);
+            ArrayAdapter<?> month = new ArrayAdapter<Object>(view.getContext(), R.layout.layout_date_spinner, months); 
+            ArrayAdapter<?> day = new ArrayAdapter<Object>(view.getContext(), R.layout.layout_date_spinner, days); 
+            ArrayAdapter<?> year = new ArrayAdapter<Object>(view.getContext(), R.layout.layout_date_spinner, years);
             monthBegin.setAdapter(month);
             dayBegin.setAdapter(day);
             yearBegin.setAdapter(year);

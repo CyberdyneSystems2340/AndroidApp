@@ -2,6 +2,8 @@ package com.cyberdynefinances;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
+
 import com.cyberdynefinances.dbManagement.DBHandler;
 
 /**
@@ -17,8 +19,8 @@ public class LoginHandler {
 
     /**
      * Compares the given username and password to that in the database.
-     * @param username - the users username
-     * @param password - the users password
+     * @param username - the user's username
+     * @param password - the user's password
      * @return boolean - True if valid login, false otherwise
      */
     public static boolean isValidLogin(String username, String password) {
@@ -26,8 +28,7 @@ public class LoginHandler {
             return true;
         }
         String[] userInfo = DBHandler.getUserInfo(username);
-        return (DBHandler.containsUser(username) && null != userInfo && userInfo[1]
-                .hashCode() == password.hashCode());
+        return (DBHandler.containsUser(username) && null != userInfo && userInfo[1].hashCode() == password.hashCode()); //Checks if the username is in the database, there is non-null info relating to the username, and if the password provided matches that in the database
     }
 
     /**
@@ -42,19 +43,19 @@ public class LoginHandler {
 
     /**
      * Checks if the database contains the username.
-     * @param userName - the username to search for
+     * @param username - the username to search for in the database
      * @return boolean - true if the database contains userName, false otherwise
      */
-    public static boolean containsName(String userName) {
-        return DBHandler.containsUser(userName);
+    public static boolean containsName(String username) {
+        return DBHandler.containsUser(username);
     }
 
     /**
      * Gets all the usernames from the db.
      * @return ArrayList<String> - A list of all the usernames in the database in alphabetical order
      */
-    public static ArrayList<String> getUsernames() {
-        ArrayList<String> arr = new ArrayList<String>();
+    public static List<String> getUsernames() {
+        List<String> arr = new ArrayList<String>();
         String[][] allUsersInfo = DBHandler.getAllUsersInfo();
         for (String[] userInfo : allUsersInfo) {
             if (userInfo[0].equals(admin)) {

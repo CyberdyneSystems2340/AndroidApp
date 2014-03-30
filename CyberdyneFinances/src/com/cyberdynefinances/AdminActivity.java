@@ -1,9 +1,7 @@
 package com.cyberdynefinances;
 
-import java.util.ArrayList;
-
+import java.util.List;
 import com.cyberdynefinances.dbManagement.DBHandler;
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -51,7 +49,7 @@ public class AdminActivity extends Activity {
      * updates the spinner of usernames.
      */
     private void updateView() {
-        ArrayList<String> names = LoginHandler.getUsernames();
+        List<String> names = LoginHandler.getUsernames();
         Spinner s = (Spinner) this.findViewById(R.id.spinner);
         String[] spinnerArray = new String[names.size()];
         int i = 0;
