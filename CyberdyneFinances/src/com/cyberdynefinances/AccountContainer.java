@@ -152,8 +152,6 @@ public class AccountContainer extends Activity
             Toast.makeText(this, "Account Creation Failed", Toast.LENGTH_LONG).show();
         }
     }
-    
-	
 
 	/**
 	 * Creates a new page that will graph all the transactions made on a line graph.
@@ -203,7 +201,6 @@ public class AccountContainer extends Activity
 		}
 	}*/
 	
-	@SuppressWarnings({ "unchecked", "rawtypes" })
     /**
      * Called when the withdraw button is clicked. Displays a dialog box to input withdraw information.
      * @param view The withdraw button's view
