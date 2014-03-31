@@ -179,9 +179,9 @@ public class Account
         String[][] str = DBHandler.getTransactionHistory(accountName);
         if (null == str) 
         {
-            // CHECKSTYLE:OFF   Newline appears 3 times
+            //CHECKSTYLE:OFF    suppress error "/n" occurs 3 times in file
             return totalStr + NumberFormat.getCurrencyInstance().format(0.0) + "\n";
-            // CHECKSTYLE:ON
+            //CHECKSTYLE:ON
         }
         String curr = ""; // Current timeStamp
         String totalRep = ""; // All the withdrawals within the given parameters
