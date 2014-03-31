@@ -523,7 +523,7 @@ public class AccountContainer extends Activity
      */
     //CHECKSTYLE:OFF    suppresses error of Cyclomatic Complexity
     public void dateButtonClicked(View view)
-    //CHECKSTYLE:OFF
+    //CHECKSTYLE:ON
     {
         View root = (View) view.getParent();
         String dayBegin = ((Spinner) root.findViewById(R.id.date_day_begin)).getSelectedItem().toString();
