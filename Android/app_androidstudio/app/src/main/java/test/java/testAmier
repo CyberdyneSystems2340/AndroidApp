@@ -1,0 +1,26 @@
+package test.java;
+
+
+import android.test.ActivityUnitTestCase;
+import com.example.app.AccountRecord;
+
+import junit.framework.TestCase;
+
+public class testAmier extends TestCase {
+
+   /* public testAmier(){
+        super(AccountRecord.class);
+    }*/
+
+    public void test() throws Exception {
+        final int expected = 1;
+        final int reality = 5;
+        assertEquals(expected, reality);
+    }
+
+    public void testSomeMethodInClass() throws Exception {
+        final int expectedx = 1;
+        final int actual = 3;
+        assertEquals(expectedx, actual);
+    }
+}

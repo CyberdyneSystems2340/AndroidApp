@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">app</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="add_rm_accounts">+/- Accounts</string>
+    <string name="username">Username:</string>
+    <string name="sign_up_label">Register</string>
+    <string name="already_have_account">I already have an account</string>
+    <string name="password_label">Password:</string>
+    <string name="title_activity_login">Login</string>
+    <string name="title_activity_register">Register</string>
+    <string name="account_name_field">Account name:</string>
+    <string name="enter_account_name_field">Enter Account name</string>
+    <string name="submit">Submit</string>
+    <string name="refresh">Refresh</string>
+    <string name="add_account">New Account</string>
+    <string name="manage_accounts">Manage Accounts</string>
+    <string name="log_out">Log out</string>
+    <string name="log_in_button_text">Log in</string>
+    <string name="account_value">Account Value</string>
+    <string name="accountview_balance_label">Account Balance</string>
+    <string name="accountview_num_txns">Transactions</string>
+    <string name="new_transaction">New Transaction</string>
+    <string name="txncreate_txn_name_label">Transaction Name</string>
+    <string name="txncreate_txn_name">New Transaction (tap to edit)</string>
+    <string name="txncreate_value_label">Txn Value</string>
+    <string name="txncreate_date_label">Date</string>
+    <string name="txncreate_description_label">Description</string>
+    <string name="txncreate_button_save">Save</string>
+    <string name="txncreate_account_label">Account</string>
+    <string name="title_activity_account_report">AccountReportActivity</string>
+    <string name="title_activity_account_record">AccountRecordActivity</string>
+
+</resources>

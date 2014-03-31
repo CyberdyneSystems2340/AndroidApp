@@ -1,0 +1,63 @@
+<RelativeLayout
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Build Record"
+        android:id="@+id/build_record_button"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:onClick="onButtonClick"/>
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/editText_start_date"
+        android:layout_above="@+id/view2"
+        android:layout_toLeftOf="@+id/build_record_button"
+        android:textSize="12dp"
+        android:editable="true"
+        android:hint="Start: MM/dd/YYYY" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="date"
+        android:ems="10"
+        android:id="@+id/editText_end_date"
+        android:layout_above="@+id/view2"
+        android:layout_toRightOf="@+id/build_record_button"
+        android:textSize="12dp"
+        android:editable="true"
+        android:hint="End: MM/dd/YYYY" />
+
+    <View
+        android:layout_width="fill_parent"
+        android:layout_height="3dp"
+        android:background="@android:color/black"
+        android:id="@+id/view2"
+        android:layout_below="@+id/build_record_button"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text=""
+        android:id="@+id/built_record_label"
+        android:layout_alignTop="@+id/view2"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="false" />
+
+</RelativeLayout>
