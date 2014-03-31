@@ -268,7 +268,11 @@ public class DBHandler {
      * @return True if account deleted successfully, false if an error occurred.
      */
     public static boolean deleteAccountsForUser(String userID) {
-        String accounts[] = getAccountsForUser(userID);
+        String[] accounts = getAccountsForUser(userID);
+        if (accounts == null )
+        {
+            return true;
+        }
         for (String account: accounts) {
             if (!deleteAccount(account)) {
                 return false;
