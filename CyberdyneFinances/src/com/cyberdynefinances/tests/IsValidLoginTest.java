@@ -2,7 +2,6 @@ package com.cyberdynefinances.tests;
 
 import com.cyberdynefinances.LoginHandler;
 import com.cyberdynefinances.WelcomeContainer;
-import com.cyberdynefinances.dbManagement.DBHandler;
 import android.test.ActivityInstrumentationTestCase2;
 /**
  * A JUnit that tests the functionality of the isValidLogin method within
@@ -16,6 +15,7 @@ public class IsValidLoginTest extends ActivityInstrumentationTestCase2<WelcomeCo
 	/**
 	 * Constructor for test.
 	 */
+    @SuppressWarnings("deprecation")
     public IsValidLoginTest() {
         super("com.cyberdynefinances.WelcomContainer", WelcomeContainer.class);
     }
