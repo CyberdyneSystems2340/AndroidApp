@@ -211,7 +211,7 @@ public class Fragments
             ArrayList<Account> accountList = AccountManager.getAccountList(); //an arraylist of all accounts the current user has
 
             Spinner reportSpinner = (Spinner) view.findViewById(R.id.report_spinner);
-            String[] reports = {"Transaction History", "Spending Category Report", "Income Source Report", "Cash Flow Report"};
+            String[] reports = {"Transaction History", "Spending Category Report", "Income Source Report", "Cash Flow Report", "Account Listing Report"};
             ArrayAdapter<?> a = new ArrayAdapter<Object>(view.getContext(), R.layout.layout_report_spinner, reports); 
             reportSpinner.setAdapter(a);
 			

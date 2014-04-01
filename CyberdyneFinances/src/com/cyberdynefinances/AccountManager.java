@@ -185,19 +185,88 @@ public class AccountManager {
      * @param end - The end time to collect reports from.
      * @return A String of the report, each line is a transaction.
      */
-    public static String getReport(String report, Time begin, Time end) {
+    public static String getReport(String report, Time begin, Time end) 
+    {
         String ret = "";
-
-        if (report.equalsIgnoreCase("Transaction History")) {
-
-        } else if (report.equalsIgnoreCase("Spending Category Report")) {
+        Utils.formatPos.setNegativePrefix("");
+        if (report.equalsIgnoreCase("Transaction History")) 
+        {
+            ret = getTransactionHistory(begin, end);
+        } 
+        else if (report.equalsIgnoreCase("Spending Category Report")) 
+        {
             ret = getSpendingReport(begin, end);
-        } else if (report.equalsIgnoreCase("Income Source Report")) {
-
-        } else if (report.equalsIgnoreCase("Cash Flow Report")) {
-
+        } 
+        else if (report.equalsIgnoreCase("Income Source Report")) 
+        {
+            ret = getIncomeSourceReport(begin, end);
+        } 
+        else if (report.equalsIgnoreCase("Cash Flow Report")) 
+        {
+            ret = getCashFlowReport(begin, end);
         }
-
+        else if (report.equalsIgnoreCase("Account Listing Report"))
+        {
+            ret = getAccountListingReport();
+        }
         return ret;
+    }
+    
+    /**
+     * Generates the Account Listing Report.
+     * @return String of the account listing report
+     */
+    public static String getAccountListingReport() 
+    {
+        String total = "";
+        for (Account a : accountList) 
+        {
+            total += a.getName() + "\t" + Utils.formatPos.format(a.getBalance()) + "\n";
+        }
+        return total;
+    }
+    
+    /**
+     * Generates the Transaction History for an account.
+     * @param begin Beginning time to consider transactions
+     * @param end Ending time to consider transactions
+     * @return String of the transaction history
+     */
+    public static String getTransactionHistory(Time begin, Time end)
+    {
+        Account a = AccountManager.getActiveAccount();
+        return a.getName() + "\n" + a.getTransactionHistory(begin, end) + "\n";
+    }
+    
+    /**
+     * Generates the Income Source Report.
+     * @param begin Beginning time to consider transactions
+     * @param end Ending time to consider transactions
+     * @return String of the income source report
+     */
+    public static String getIncomeSourceReport(Time begin, Time end)
+    {
+        String total = "";
+        for (Account a : accountList) 
+        {
+            total += a.getName() + "\n" + a.getIncomeSourceReport(begin, end) + "\n";
+        }
+        return total;
+    }
+    
+    /**
+     * Generates the Cash Flow Report.
+     * @param begin Beginning time to consider transactions
+     * @param end Ending time to consider transactions
+     * @return String of the cash flow report
+     */
+    public static String getCashFlowReport(Time begin, Time end)
+    {
+        String total = "";
+        for (Account a : accountList) 
+        {
+            total += a.getName() + "\n" + a.getCashFlowReport(begin, end) + "\n\n";
+        }
+        return total;
     }
 }

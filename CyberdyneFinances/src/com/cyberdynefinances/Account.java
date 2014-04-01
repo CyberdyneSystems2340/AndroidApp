@@ -180,7 +180,7 @@ public class Account
         if (null == str) 
         {
             //CHECKSTYLE:OFF    suppress error "/n" occurs 3 times in file
-            return totalStr + NumberFormat.getCurrencyInstance().format(0.0) + "\n";
+            return totalStr + Utils.formatPos.format(0.0) + "\n";
             //CHECKSTYLE:ON
         }
         String curr = ""; // Current timeStamp
@@ -219,10 +219,175 @@ public class Account
         double total = 0;
         for (Entry<String, Double> e : totalAmount.entrySet())
         {
-            totalRep += e.getKey() + " " + NumberFormat.getCurrencyInstance().format(e.getValue()) + "\n";
+            //CHECKSTYLE:OFF    suppress String "\n" occurs multiple times in file
+            totalRep += e.getKey() + " " + Utils.formatPos.format(e.getValue()) + "\n";
+            //CHECKSTYLE:ON
             total -= e.getValue();
         }
-        totalRep += totalStr + NumberFormat.getCurrencyInstance().format(total) + "\n";
+ 
+        String formatted = Utils.formatPos.format(total);
+        totalRep += totalStr + formatted + "\n";
+        return totalRep;
+    }
+    
+    /**
+     * Generates the transaction history report between the given dates.
+     * @param begin Starting date
+     * @param end Ending date
+     * @return String of transaction history
+     */
+    protected String getTransactionHistory(Time begin, Time end)
+    {
+        String[][] str = DBHandler.getTransactionHistory(accountName);
+        if (null == str) 
+        {
+            //CHECKSTYLE:OFF    suppress error "/n" occurs 3 times in file
+            return totalStr + NumberFormat.getCurrencyInstance().format(0.0) + "\n";
+            //CHECKSTYLE:ON
+        }
+        String curr = ""; // Current timeStamp
+        String totalRep = ""; // All the withdrawals within the given parameters
+        Time time = new Time(); // Time Object
+        int day = 0;
+        int month = 0;
+        int year = 0;
+        int sec = 0;
+        int min = 0;
+        int hour = 0;
+        for (int i = 0; i < str.length; i++)
+        {
+            curr = str[i][4];
+            day = Integer.parseInt(curr.substring(0, 2));
+            month = Integer.parseInt(curr.substring(3, 5));
+            year = Integer.parseInt(curr.substring(6, 10));
+            hour = Integer.parseInt(curr.substring(11, 13));
+            min = Integer.parseInt(curr.substring(14, 16));
+            sec = Integer.parseInt(curr.substring(17, 19));
+            time.set(sec, min, hour, day, month - 1, year); //months start at 00 = January
+            if (time.after(begin) && time.before(end))
+            {
+                totalRep += Utils.months[time.month] + " " + time.monthDay + " " + time.year + " " + str[i][2] + " " + str[i][3] + " " 
+                                            + Utils.formatPos.format(Math.abs(Double.parseDouble(str[i][1]))) + "\n";
+            }
+            
+        }
+        return totalRep;
+    }
+    
+    /**
+     * Generates the cash flow report between the given dates.
+     * @param begin Starting date
+     * @param end Ending date
+     * @return String of cash flow
+     */
+    protected String getCashFlowReport(Time begin, Time end)
+    {
+        String[][] str = DBHandler.getTransactionHistory(accountName);
+        if (null == str) 
+        {
+            //CHECKSTYLE:OFF    suppress error "/n" occurs 3 times in file
+            return totalStr + NumberFormat.getCurrencyInstance().format(0.0) + "\n";
+            //CHECKSTYLE:ON
+        }
+        String curr = ""; // Current timeStamp
+        String totalRep = ""; // All the withdrawals within the given parameters
+        Time time = new Time(); // Time Object
+        int day = 0;
+        int month = 0;
+        int year = 0;
+        int sec = 0;
+        int min = 0;
+        int hour = 0;
+        double income = 0.0;
+        double expenses = 0.0;
+        for (int i = 0; i < str.length; i++)
+        {
+            curr = str[i][4];
+            day = Integer.parseInt(curr.substring(0, 2));
+            month = Integer.parseInt(curr.substring(3, 5));
+            year = Integer.parseInt(curr.substring(6, 10));
+            hour = Integer.parseInt(curr.substring(11, 13));
+            min = Integer.parseInt(curr.substring(14, 16));
+            sec = Integer.parseInt(curr.substring(17, 19));
+            time.set(sec, min, hour, day, month - 1, year); //months start at 00 = January
+            if (time.after(begin) && time.before(end))
+            {
+                double amount = Math.abs(Double.parseDouble(str[i][1]));;
+                if (str[i][2].equalsIgnoreCase(withdraw))
+                {
+                    expenses += amount;
+                }
+                else
+                {
+                    income += amount;
+                }
+            }
+        }
+        String formatted = Utils.formatWithNeg.format(income - expenses);
+        totalRep += "Income " + NumberFormat.getCurrencyInstance().format(income) 
+                + "\nExpenses " + NumberFormat.getCurrencyInstance().format(expenses) 
+                + "\nFlow " + formatted;
+        return totalRep;
+    }
+    
+    /**
+     * The report the return the total deposits between given dates.
+     * 
+     * @param dateStart - The begin date
+     * @param dateEnd - The end date
+     * @return - a String of the total report
+     */
+    protected String getIncomeSourceReport(Time dateStart, Time dateEnd)
+    {
+        String[][] str = DBHandler.getTransactionHistory(accountName);
+        if (null == str) 
+        {
+            //CHECKSTYLE:OFF    suppress error "/n" occurs 3 times in file
+            return totalStr + NumberFormat.getCurrencyInstance().format(0.0) + "\n";
+            //CHECKSTYLE:ON
+        }
+        String curr = ""; // Current timeStamp
+        String totalRep = ""; // All the withdrawals within the given parameters
+        Map<String, Double> totalAmount = new HashMap<String, Double>();
+        Time time = new Time(); // Time Object
+        int day = 0;
+        int month = 0;
+        int year = 0;
+        int sec = 0;
+        int min = 0;
+        int hour = 0;
+        for (int i = 0; i < str.length; i++)
+        {
+            if (str[i][2].equalsIgnoreCase(deposit))
+            {
+                curr = str[i][4];
+                day = Integer.parseInt(curr.substring(0, 2));
+                month = Integer.parseInt(curr.substring(3, 5));
+                year = Integer.parseInt(curr.substring(6, 10));
+                hour = Integer.parseInt(curr.substring(11, 13));
+                min = Integer.parseInt(curr.substring(14, 16));
+                sec = Integer.parseInt(curr.substring(17, 19));
+                time.set(sec, min, hour, day, month - 1, year); //months start at 00 = January
+                if (time.after(dateStart) && time.before(dateEnd))
+                {
+                    double curAmount = 0;
+                    if (totalAmount.get(str[i][3]) != null)
+                    {
+                        curAmount = totalAmount.get(str[i][3]);
+                    }
+                    totalAmount.put(str[i][3], curAmount - Double.parseDouble(str[i][1]));
+                }
+            }
+        }
+        double total = 0;
+        for (Entry<String, Double> e : totalAmount.entrySet())
+        {
+            totalRep += e.getKey() + " " + Utils.formatPos.format(e.getValue()) + "\n";
+            total -= e.getValue();
+        }
+ 
+        String formatted = Utils.formatPos.format(total);
+        totalRep += totalStr + formatted + "\n";
         return totalRep;
     }
 	
