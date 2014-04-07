@@ -37,6 +37,7 @@ public class AddUserTest extends ActivityInstrumentationTestCase2<WelcomeContain
      */
     public void testAddNullUser()
     {
+        // She sells seashells by the seashore....
         assertFalse(DBHandler.addUser(null, "pass123"));
         assertFalse(DBHandler.addUser("Test", null));
         assertFalse(DBHandler.addUser(null, null));
