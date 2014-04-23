@@ -4,6 +4,7 @@ import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import com.cyberdynefinances.dbManagement.DBHandler;
+import com.jjoe64.graphview.*;
 import android.app.Fragment;
 import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 /**
@@ -142,8 +144,6 @@ public class Fragments
         }
     }
 
-	
-	/*
 	public static class GraphLayoutFragment extends Fragment
 	{
 		public static View root;
@@ -192,7 +192,7 @@ public class Fragments
             return root;
 	    }
 	}
-	*/
+	
     /**
      * fragment that shows the screen for each user after login!
      * 

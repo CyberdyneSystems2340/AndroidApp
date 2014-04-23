@@ -161,7 +161,7 @@ public class AccountContainer extends Activity
 	 * @param View object
 	 * @author Clayton Pierce
 	 */
-    /*
+    
 	public void buttonLineGraph(View view)
 	{
 		String[][] transactions = DBHandler.getTransactionHistory(AccountManager.getActiveAccount().getName());
@@ -172,9 +172,7 @@ public class AccountContainer extends Activity
 		else
 		{
 			Animation.fade(new Fragments.GraphLayoutFragment(), getFragmentManager(), R.id.container_account, true);
-			//setContentView(R.id.graph1);
-			
-			
+		}
 			/**
 			GraphView.GraphViewData[] data = new GraphView.GraphViewData[50];
 			String[] horzArr = new String[] {"0", "3pi/2", "5pi/2", "7pi/2", "9pi/2", "11pi/2", "13pi/2", 
@@ -198,8 +196,8 @@ public class AccountContainer extends Activity
 			LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
 			Toast.makeText(this, "success", Toast.LENGTH_LONG).show();
 			layout.addView(graphView); 
-		}
-	}*/
+		}*/
+	}
 	
     /**
      * Called when the withdraw button is clicked. Displays a dialog box to input withdraw information.
