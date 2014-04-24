@@ -153,6 +153,11 @@ public class AccountContainer extends Activity
         }
     }
 
+    
+    public void buttonGraphBack(View view)
+    {
+    	Animation.fade(new Fragments.AccountHomeFragment(), getFragmentManager(), R.id.container_account, true);
+    }
 	/**
 	 * Creates a new page that will graph all the transactions made on a line graph.
 	 * If no transactions were made, then Toast will notify the user. The average of
@@ -173,30 +178,6 @@ public class AccountContainer extends Activity
 		{
 			Animation.fade(new Fragments.GraphLayoutFragment(), getFragmentManager(), R.id.container_account, true);
 		}
-			/**
-			GraphView.GraphViewData[] data = new GraphView.GraphViewData[50];
-			String[] horzArr = new String[] {"0", "3pi/2", "5pi/2", "7pi/2", "9pi/2", "11pi/2", "13pi/2", 
-											"15pi/2", "17/2", "19/2", "21/2"};
-			for(int i = 0; i < 50; i++)
-			{
-				data[i] = new GraphView.GraphViewData(i, Math.sin(i));
-			}
-			GraphViewSeries exampleSeries = new GraphViewSeries(data);
-			 
-			GraphView graphView = new LineGraphView(
-			      this // context
-			      , "Pi And Stuff" // heading
-			);
-			
-			graphView.setHorizontalLabels(horzArr);
-			graphView.setVerticalLabels(new String[] {"1", "0", "-1"});
-			
-			graphView.addSeries(exampleSeries); // data
-			 
-			LinearLayout layout = (LinearLayout) findViewById(R.id.graph1);
-			Toast.makeText(this, "success", Toast.LENGTH_LONG).show();
-			layout.addView(graphView); 
-		}*/
 	}
 	
     /**

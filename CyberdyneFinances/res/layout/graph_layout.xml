@@ -2,4 +2,13 @@
     android:id="@+id/graph1"
     android:layout_width="wrap_content"
     android:layout_height="250dip"
-    android:orientation="vertical" />
+    android:orientation="vertical" >
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="320dp"
+        android:layout_height="wrap_content"
+        android:onClick="buttonGraphBack"
+        android:text="@string/back_graph" />
+
+</LinearLayout>

@@ -36,5 +36,7 @@
 	<string name="zero_dollars_text">$0.00</string>
 	<string name="report_text_view">Report goes here</string>
 	<string name="graph_button">Graph</string>
+	<string name="graph_back"></string>
+	<string name="back_graph">Back</string>
 	
 </resources>

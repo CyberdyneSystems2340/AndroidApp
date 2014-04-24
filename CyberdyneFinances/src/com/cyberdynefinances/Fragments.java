@@ -160,8 +160,14 @@ public class Fragments
 			}
 	
 			double sum = 0;
+			double max = Double.parseDouble(moneys[0]);
+			double min = Double.parseDouble(moneys[0]);
 			for(String i : moneys)
 			{
+				if(Double.parseDouble(i) > max)
+					max = Double.parseDouble(i);
+				if(Double.parseDouble(i) < min)
+					min = Double.parseDouble(i);
 				sum += Double.parseDouble(i);
 			}
 			
@@ -172,7 +178,6 @@ public class Fragments
 					
 			for(int i = 0; i < data.length; i++)
 			{
-				//data[i] = new GraphView.GraphViewData(i, Math.sin(i));
 				data[i] = new GraphView.GraphViewData(i, Double.parseDouble(moneys[i]));
 				horzArr[i] = i + 1 + "";
 			}
@@ -185,7 +190,7 @@ public class Fragments
 			);
 			
 			graphView.setHorizontalLabels(horzArr);
-			graphView.setVerticalLabels(new String[] {"Top", sum/2 + "", "Bot"});
+			graphView.setVerticalLabels(new String[] {max+"", sum/2 + "", min+""});
 			
 			graphView.addSeries(exampleSeries); // data
 			LinearLayout layout = (LinearLayout)root.findViewById(R.id.graph1); 
