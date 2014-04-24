@@ -36,7 +36,7 @@ public class WelcomeContainer extends Activity
                 @Override
                 public void run() {
                     try {
-                        Thread.sleep(5100);
+                        Thread.sleep(3100);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
