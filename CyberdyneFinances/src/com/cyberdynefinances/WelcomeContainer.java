@@ -31,8 +31,26 @@ public class WelcomeContainer extends Activity
             getFragmentManager()
                     .beginTransaction()
                     .add(R.id.container_welcome,
-                            new Fragments.WelcomeFragment()).commit();
+                            new Fragments.CoinflipFragment()).commit();
+            new Thread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        Thread.sleep(5100);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Animation.fade(new Fragments.WelcomeFragment(), getFragmentManager(),
+                                    R.id.container_welcome);
+                        }
+                    });
+                }
+            }).start();
         }
+        
     }
 
     @Override

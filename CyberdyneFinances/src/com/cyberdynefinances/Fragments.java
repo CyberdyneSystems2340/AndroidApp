@@ -119,6 +119,7 @@ public class Fragments
         public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) 
         {
             View root = inflater.inflate(R.layout.activity_coinflip, container, false);
+            root.setBackgroundColor(0xFF333333);
             ImageView coinImage = (ImageView) root.findViewById(R.id.coinflip);
             coinImage.setBackgroundResource(R.anim.coinflip);
 
